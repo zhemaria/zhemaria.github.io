@@ -1,0 +1,30 @@
+<!-- =========================================================
+  TARJETA GENERADA AUTOMÁTICAMENTE — pega en index.html
+  del hub correspondiente, dentro de <div class="hub-grid">
+  ---------------------------------------------------------
+  Archivo: cl-el-articulo-i-de-la-const-td-2026-03-01.html
+  URL:     https://zhemaria.github.io/artes-del-lenguaje/comprension-lectora/cl-el-articulo-i-de-la-const-td-2026-03-01.html
+  Fecha:   2026-03-01
+  ========================================================= -->
+
+<a class="ejercicio-card"
+   href="https://zhemaria.github.io/artes-del-lenguaje/comprension-lectora/cl-el-articulo-i-de-la-const-td-2026-03-01.html"
+   target="_blank"
+   data-tipos="td"
+   data-nivel="avanzado">
+    <div class="card-header">
+        <span class="card-icon">📖</span>
+        <span class="card-titulo">El Artículo I de la Constitución de Estados Unidos</span>
+    </div>
+    <div class="card-body">
+        <p class="card-descripcion">Análisis del poder legislativo y la estructura del Congreso</p>
+        <div class="card-meta">
+                    <span class="tag tag-td">⭐ Todos los tipos</span>
+                    <span class="tag tag-avanzado">🎓 Avanzado</span>
+        </div>
+    </div>
+    <div class="card-footer">
+        <span class="card-fecha">📅 2026-03-01</span>
+        <span class="card-abrir">Abrir ejercicio →</span>
+    </div>
+</a>
