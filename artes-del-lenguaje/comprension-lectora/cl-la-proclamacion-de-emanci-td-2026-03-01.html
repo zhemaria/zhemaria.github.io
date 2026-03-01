@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Proclamación de Emancipación de 1863 — GEDparaHispanos.com</title>
+    <style>
+        /* === Fuentes === */
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700;900&display=swap');
+
+        /* === Reset y base === */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 19px;
+            line-height: 1.75;
+            color: #212529;
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+        }
+
+        /* === Contenedor principal === */
+        .quiz-container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 4px 20px rgba(13, 59, 102, 0.1);
+        }
+
+        /* === Encabezado === */
+        .quiz-site-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: linear-gradient(135deg, #0d3b66, #1a5490);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: #0d3b66;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+
+        .quiz-subtitulo {
+            color: #6b7280;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* === Texto de lectura o contexto === */
+        .quiz-texto-lectura {
+            background-color: #f0f9ff;
+            border: 2px solid #0d3b66;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.85;
+        }
+
+        .quiz-texto-lectura h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0d3b66;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-texto-lectura p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        .quiz-texto-lectura p:last-child { margin-bottom: 0; }
+
+        /* === Instrucciones === */
+        .quiz-instrucciones {
+            background-color: #fff8e1;
+            border-left: 5px solid #f59e0b;
+            padding: 0.9rem 1.2rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #78350f;
+            font-size: 0.95rem;
+        }
+
+        /* === Acordeón === */
+        details {
+            background-color: #f8f9fa;
+            border: 2px solid #0d3b66;
+            border-radius: 10px;
+            padding: 0;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: box-shadow 0.25s ease;
+        }
+
+        details:hover { box-shadow: 0 4px 12px rgba(13, 59, 102, 0.18); }
+
+        details[open] { background-color: #ffffff; }
+
+        summary {
+            background-color: #0d3b66;
+            color: #ffffff;
+            padding: 0.9em 1.4em;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.05em;
+            list-style: none;
+            transition: background-color 0.25s ease;
+            user-select: none;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+
+        summary::before {
+            content: '▶ ';
+            display: inline-block;
+            transition: transform 0.25s ease;
+            margin-right: 0.4em;
+        }
+
+        details[open] summary::before { transform: rotate(90deg); }
+
+        summary:hover { background-color: #1a5490; }
+
+        .details-contenido { padding: 1.25rem 1.5rem; }
+
+        /* Estado respondida correcta */
+        details.respondida-correcta { border-color: #16a34a; }
+        details.respondida-correcta summary { background-color: #16a34a; }
+        details.respondida-correcta summary:hover { background-color: #15803d; }
+
+        /* Estado respondida incorrecta */
+        details.respondida-incorrecta { border-color: #dc2626; }
+        details.respondida-incorrecta summary { background-color: #dc2626; }
+        details.respondida-incorrecta summary:hover { background-color: #b91c1c; }
+
+        /* === Opciones === */
+        .quiz-opciones {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6em;
+        }
+
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 0.8em;
+            padding: 0.8em 1em;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            background: white;
+        }
+
+        .quiz-option:hover { border-color: #1a5490; background: #f0f7ff; }
+        .quiz-option.selected { border-color: #1a5490; background: #e7f3ff; }
+
+        .quiz-option.correcta {
+            border-color: #22c55e;
+            background: #f0fdf4;
+        }
+
+        .quiz-option.incorrecta {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .quiz-option.disabled {
+            pointer-events: none;
+            opacity: 0.65;
+        }
+
+        .quiz-option.disabled.correcta { opacity: 1; }
+
+        .quiz-option-letter {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85em;
+            color: #374151;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-option.correcta .quiz-option-letter {
+            background: #22c55e;
+            color: white;
+        }
+
+        .quiz-option.incorrecta .quiz-option-letter {
+            background: #ef4444;
+            color: white;
+        }
+
+        .quiz-option-text {
+            flex: 1;
+            color: #374151;
+            font-size: 0.97em;
+        }
+
+        /* === Feedback === */
+        .quiz-feedback {
+            margin-top: 0.8em;
+            padding: 0.85em 1em;
+            border-radius: 8px;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .quiz-feedback.correcto {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+        }
+
+        .quiz-feedback.incorrecto {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        /* === Panel de puntuación === */
+        .quiz-score-panel {
+            background: linear-gradient(135deg, #0d3b66, #1a5490);
+            color: white;
+            border-radius: 14px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 8px 24px rgba(13, 59, 102, 0.3);
+        }
+
+        .quiz-score-panel h2 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-score-number {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin: 0.2em 0;
+            letter-spacing: -0.02em;
+        }
+
+        .quiz-score-bar-bg {
+            width: 100%;
+            max-width: 420px;
+            height: 14px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 7px;
+            margin: 1em auto;
+            overflow: hidden;
+        }
+
+        .quiz-score-bar-fill {
+            height: 100%;
+            background: #fbbf24;
+            border-radius: 7px;
+            transition: width 0.9s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .quiz-score-message {
+            font-size: 1.15em;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+
+        .quiz-btn-reiniciar {
+            margin-top: 1.25em;
+            padding: 0.8em 2.2em;
+            background: #fbbf24;
+            color: #0d3b66;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+
+        .quiz-btn-reiniciar:hover { background: #fcd34d; }
+
+        /* === Footer === */
+        .quiz-footer {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.78rem;
+            margin-top: 2.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .quiz-footer a { color: #0d3b66; text-decoration: none; font-weight: 600; }
+        .quiz-footer a:hover { text-decoration: underline; }
+
+        /* === Utilidad === */
+        .hidden { display: none !important; }
+
+        /* === Responsive === */
+        @media (max-width: 640px) {
+            body { padding: 0.75rem; }
+            .quiz-container { padding: 1.25rem 1rem; border-radius: 10px; }
+            h1 { font-size: 1.35rem; }
+            .quiz-score-number { font-size: 2.4rem; }
+            .quiz-option { padding: 0.65em 0.8em; }
+        }
+
+        @media print {
+            body { background: white; }
+            .quiz-container { box-shadow: none; }
+            .quiz-btn-reiniciar { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="quiz-container">
+
+    <div class="quiz-site-badge">🎓 GEDparaHispanos.com</div>
+
+    <h1>📖 La Proclamación de Emancipación de 1863</h1>
+    <p class="quiz-subtitulo">Un documento histórico que cambió el curso de la Guerra Civil estadounidense</p>
+
+    
+    <div class="quiz-texto-lectura">
+        <h2>📖 Texto de lectura</h2>
+        <p>La Proclamación de Emancipación, emitida por el presidente Abraham Lincoln el 1 de enero de 1863, fue uno de los documentos más significativos en la historia de Estados Unidos. Esta proclamación declaró libres a todos los esclavos en los estados rebeldes que aún estaban en guerra contra la Unión. Sin embargo, es importante entender que no liberó a todos los esclavos inmediatamente; solo se aplicó a aquellos en territorios controlados por la Confederación, no a los estados fronterizos leales a la Unión que aún permitían la esclavitud.</p>
+        <p>El contexto político y militar de 1863 fue crucial para esta decisión. Lincoln había estado bajo presión considerable de los abolicionistas y de algunos miembros de su propio partido para tomar medidas más decisivas contra la esclavitud. Al mismo tiempo, la guerra no estaba yendo bien para el Norte, y Lincoln necesitaba una estrategia que pudiera debilitar a la Confederación desde adentro. La proclamación también tenía un propósito diplomático importante: evitar que las potencias europeas, especialmente Gran Bretaña y Francia, reconocieran oficialmente a la Confederación como nación independiente.</p>
+        <p>Los efectos de la Proclamación fueron inmediatos y de largo alcance. Militarmente, permitió que aproximadamente 200,000 hombres afroamericanos se alistaran en el ejército de la Unión, proporcionando una ventaja numérica significativa. Socialmente, transformó la Guerra Civil de un conflicto principalmente sobre la preservación de la Unión en una guerra moral sobre la libertad y los derechos humanos. Sin embargo, la proclamación también generó controversia: muchos demócratas del Norte la criticaron, argumentando que excedía los poderes presidenciales durante tiempos de guerra.</p>
+        <p>A pesar de sus limitaciones legales, la Proclamación de Emancipación sentó las bases para la abolición completa de la esclavitud. Su impacto psicológico y simbólico fue enorme, dando esperanza a millones de personas esclavizadas y redefiniendo los objetivos de la guerra. Eventualmente, condujo a la aprobación de la Decimotercera Enmienda en 1865, que abolió oficialmente la esclavitud en todo Estados Unidos, completando el proceso que Lincoln había comenzado con su histórica proclamación.</p>
+    </div>
+
+    <div class="quiz-instrucciones">
+        Lee el texto sobre la Proclamación de Emancipación y responde las siguientes preguntas:
+    </div>
+
+    <div id="quizPreguntas">
+
+        <details class="quiz-pregunta" id="pregunta-0">
+            <summary>Pregunta 1 — ¿Cuál fue la idea principal detrás de la emisión de la Proclamación de Emancipación?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-0">
+                    
+            <div class="quiz-option" data-q="0" data-opt="0" onclick="seleccionarOpcion(this, 0, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Liberar inmediatamente a todos los esclavos en Estados Unidos</span>
+            </div>
+            <div class="quiz-option" data-q="0" data-opt="1" onclick="seleccionarOpcion(this, 0, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Debilitar militarmente a la Confederación y redefinir los objetivos de la guerra</span>
+            </div>
+            <div class="quiz-option" data-q="0" data-opt="2" onclick="seleccionarOpcion(this, 0, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Satisfacer únicamente las demandas de los abolicionistas</span>
+            </div>
+            <div class="quiz-option" data-q="0" data-opt="3" onclick="seleccionarOpcion(this, 0, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Establecer la igualdad racial completa en toda la nación</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-0"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-1">
+            <summary>Pregunta 2 — Basándose en el contexto descrito, ¿qué se puede inferir sobre la situación militar de la Unión en 1863?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-1">
+                    
+            <div class="quiz-option" data-q="1" data-opt="0" onclick="seleccionarOpcion(this, 1, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">La Unión estaba ganando fácilmente la guerra</span>
+            </div>
+            <div class="quiz-option" data-q="1" data-opt="1" onclick="seleccionarOpcion(this, 1, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">La guerra no estaba yendo bien para el Norte y necesitaba nuevas estrategias</span>
+            </div>
+            <div class="quiz-option" data-q="1" data-opt="2" onclick="seleccionarOpcion(this, 1, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">El ejército de la Unión era superior en número desde el inicio</span>
+            </div>
+            <div class="quiz-option" data-q="1" data-opt="3" onclick="seleccionarOpcion(this, 1, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">La Confederación estaba a punto de rendirse</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-1"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-2">
+            <summary>Pregunta 3 — ¿Cuál fue la principal causa que llevó a Lincoln a emitir la Proclamación en el momento específico de 1863?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-2">
+                    
+            <div class="quiz-option" data-q="2" data-opt="0" onclick="seleccionarOpcion(this, 2, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">La presión de los estados fronterizos</span>
+            </div>
+            <div class="quiz-option" data-q="2" data-opt="1" onclick="seleccionarOpcion(this, 2, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">La combinación de presión política interna y la necesidad de ventaja militar</span>
+            </div>
+            <div class="quiz-option" data-q="2" data-opt="2" onclick="seleccionarOpcion(this, 2, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Una orden directa del Congreso</span>
+            </div>
+            <div class="quiz-option" data-q="2" data-opt="3" onclick="seleccionarOpcion(this, 2, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">La victoria definitiva sobre la Confederación</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-2"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-3">
+            <summary>Pregunta 4 — ¿Qué efecto inmediato tuvo la Proclamación en las fuerzas militares de la Unión?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-3">
+                    
+            <div class="quiz-option" data-q="3" data-opt="0" onclick="seleccionarOpcion(this, 3, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Redujo el número de soldados disponibles</span>
+            </div>
+            <div class="quiz-option" data-q="3" data-opt="1" onclick="seleccionarOpcion(this, 3, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Permitió el alistamiento de aproximadamente 200,000 hombres afroamericanos</span>
+            </div>
+            <div class="quiz-option" data-q="3" data-opt="2" onclick="seleccionarOpcion(this, 3, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Causó deserciones masivas en el ejército del Norte</span>
+            </div>
+            <div class="quiz-option" data-q="3" data-opt="3" onclick="seleccionarOpcion(this, 3, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">No tuvo impacto militar significativo</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-3"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-4">
+            <summary>Pregunta 5 — ¿En qué se diferenciaba el alcance de la Proclamación de Emancipación de una abolición completa de la esclavitud?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-4">
+                    
+            <div class="quiz-option" data-q="4" data-opt="0" onclick="seleccionarOpcion(this, 4, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Solo se aplicaba a los estados fronterizos leales a la Unión</span>
+            </div>
+            <div class="quiz-option" data-q="4" data-opt="1" onclick="seleccionarOpcion(this, 4, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Solo liberaba a los esclavos en estados rebeldes, no en estados leales que permitían la esclavitud</span>
+            </div>
+            <div class="quiz-option" data-q="4" data-opt="2" onclick="seleccionarOpcion(this, 4, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Solo era válida durante los tiempos de guerra</span>
+            </div>
+            <div class="quiz-option" data-q="4" data-opt="3" onclick="seleccionarOpcion(this, 4, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Solo se aplicaba a los esclavos que se alistaran en el ejército</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-4"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-5">
+            <summary>Pregunta 6 — ¿Qué se puede inferir sobre la opinión pública en el Norte respecto a la Proclamación?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-5">
+                    
+            <div class="quiz-option" data-q="5" data-opt="0" onclick="seleccionarOpcion(this, 5, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Fue universalmente apoyada por todos los ciudadanos del Norte</span>
+            </div>
+            <div class="quiz-option" data-q="5" data-opt="1" onclick="seleccionarOpcion(this, 5, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Existía división de opiniones, con algunos demócratas oponiéndose</span>
+            </div>
+            <div class="quiz-option" data-q="5" data-opt="2" onclick="seleccionarOpcion(this, 5, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Solo los abolicionistas la apoyaron</span>
+            </div>
+            <div class="quiz-option" data-q="5" data-opt="3" onclick="seleccionarOpcion(this, 5, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Fue completamente rechazada por la mayoría</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-5"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-6">
+            <summary>Pregunta 7 — ¿Cómo se compara el propósito diplomático de la Proclamación con su propósito militar?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-6">
+                    
+            <div class="quiz-option" data-q="6" data-opt="0" onclick="seleccionarOpcion(this, 6, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Solo tenía propósito militar, sin consideraciones diplomáticas</span>
+            </div>
+            <div class="quiz-option" data-q="6" data-opt="1" onclick="seleccionarOpcion(this, 6, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Ambos buscaban debilitar a la Confederación: uno evitando apoyo europeo y otro ganando soldados</span>
+            </div>
+            <div class="quiz-option" data-q="6" data-opt="2" onclick="seleccionarOpcion(this, 6, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">El propósito diplomático era más importante que el militar</span>
+            </div>
+            <div class="quiz-option" data-q="6" data-opt="3" onclick="seleccionarOpcion(this, 6, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">No había conexión entre los objetivos diplomáticos y militares</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-6"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-7">
+            <summary>Pregunta 8 — Según el texto, ¿cuál es la idea principal sobre el legado a largo plazo de la Proclamación de Emancipación?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-7">
+                    
+            <div class="quiz-option" data-q="7" data-opt="0" onclick="seleccionarOpcion(this, 7, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Su único impacto fue militar durante la Guerra Civil</span>
+            </div>
+            <div class="quiz-option" data-q="7" data-opt="1" onclick="seleccionarOpcion(this, 7, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Sentó las bases para la abolición completa de la esclavitud y tuvo un impacto psicológico y simbólico enorme</span>
+            </div>
+            <div class="quiz-option" data-q="7" data-opt="2" onclick="seleccionarOpcion(this, 7, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Fue completamente reemplazada por la Decimotercera Enmienda</span>
+            </div>
+            <div class="quiz-option" data-q="7" data-opt="3" onclick="seleccionarOpcion(this, 7, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Solo afectó a los estados del Sur</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-7"></div>
+            </div>
+        </details>
+    </div>
+
+    <!-- Panel de puntuación -->
+    <div class="quiz-score-panel hidden" id="scorePanel">
+        <h2>📊 Resultado final</h2>
+        <div class="quiz-score-number" id="scoreNumber">0/8</div>
+        <div class="quiz-score-bar-bg">
+            <div class="quiz-score-bar-fill" id="scoreBar" style="width: 0%"></div>
+        </div>
+        <div class="quiz-score-message" id="scoreMessage"></div>
+        <div class="quiz-btn-reiniciar" onclick="reiniciarQuiz()">🔄 Reiniciar ejercicio</div>
+    </div>
+
+    <div class="quiz-footer">
+        Ejercicio generado para <a href="https://GEDparaHispanos.com" target="_blank">GEDparaHispanos.com</a>
+        — Preparación GED en español — Uso libre y gratuito
+    </div>
+
+</div>
+
+<script>
+    var respuestasCorrectas = [1,1,1,1,1,1,1,1];
+    var explicaciones = ['El texto indica que Lincoln tenía múltiples objetivos: debilitar a la Confederación, evitar el reconocimiento europeo de esta, y transformar la guerra en un conflicto moral sobre la libertad.','El texto menciona explícitamente que \'la guerra no estaba yendo bien para el Norte\' y que Lincoln necesitaba una estrategia para debilitar a la Confederación.','El texto explica que Lincoln estaba bajo presión de abolicionistas y su propio partido, mientras necesitaba debilitar militarmente a la Confederación y evitar el reconocimiento europeo de esta.','El texto específicamente menciona que la Proclamación \'permitió que aproximadamente 200,000 hombres afroamericanos se alistaran en el ejército de la Unión\'.','El texto claramente establece que la Proclamación \'solo se aplicó a aquellos en territorios controlados por la Confederación, no a los estados fronterizos leales a la Unión que aún permitían la esclavitud\'.','El texto menciona que \'muchos demócratas del Norte la criticaron, argumentando que excedía los poderes presidenciales\', lo que indica división de opiniones.','El texto muestra que tanto el objetivo diplomático (evitar reconocimiento europeo de la Confederación) como el militar (ganar 200,000 soldados) buscaban debilitar al enemigo.','El texto concluye enfatizando que \'sentó las bases para la abolición completa\' y tuvo un \'impacto psicológico y simbólico enorme\', conduciendo eventualmente a la Decimotercera Enmienda.'];
+    var totalPreguntas = 8;
+    var respondidas = 0;
+    var correctas = 0;
+
+    function seleccionarOpcion(el, qIdx, optIdx) {
+        var pregDiv = document.getElementById('pregunta-' + qIdx);
+        if (pregDiv.classList.contains('respondida-correcta') || pregDiv.classList.contains('respondida-incorrecta')) return;
+
+        var opciones = document.querySelectorAll('#opciones-' + qIdx + ' .quiz-option');
+        for (var i = 0; i < opciones.length; i++) {
+            opciones[i].classList.add('disabled');
+            opciones[i].classList.remove('selected');
+        }
+
+        var esCorrecta = optIdx === respuestasCorrectas[qIdx];
+        var feedbackDiv = document.getElementById('feedback-' + qIdx);
+
+        if (esCorrecta) {
+            el.classList.add('correcta');
+            pregDiv.classList.add('respondida-correcta');
+            feedbackDiv.className = 'quiz-feedback correcto';
+            feedbackDiv.innerHTML = '✅ <strong>¡Correcto!</strong> ' + explicaciones[qIdx];
+            correctas++;
+        } else {
+            el.classList.add('incorrecta');
+            pregDiv.classList.add('respondida-incorrecta');
+            opciones[respuestasCorrectas[qIdx]].classList.add('correcta');
+            feedbackDiv.className = 'quiz-feedback incorrecto';
+            feedbackDiv.innerHTML = '❌ <strong>Incorrecto.</strong> ' + explicaciones[qIdx];
+        }
+
+        feedbackDiv.classList.remove('hidden');
+
+        // Asegurar que el acordeón permanezca abierto
+        pregDiv.setAttribute('open', '');
+
+        respondidas++;
+        if (respondidas === totalPreguntas) mostrarPuntaje();
+    }
+
+    function mostrarPuntaje() {
+        var pct = Math.round((correctas / totalPreguntas) * 100);
+        document.getElementById('scoreNumber').textContent = correctas + '/' + totalPreguntas + ' (' + pct + '%)';
+        document.getElementById('scoreBar').style.width = pct + '%';
+
+        var msg = pct === 100  ? '🌟 ¡Perfecto! ¡Excelente trabajo!' :
+                  pct >= 80   ? '👏 ¡Muy bien! Sigue practicando.' :
+                  pct >= 60   ? '👍 Buen esfuerzo. Repasa los errores.' :
+                                '📚 Sigue practicando. ¡Tú puedes!';
+
+        document.getElementById('scoreMessage').textContent = msg;
+        document.getElementById('scorePanel').classList.remove('hidden');
+        document.getElementById('scorePanel').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function reiniciarQuiz() {
+        respondidas = 0;
+        correctas = 0;
+        document.getElementById('scorePanel').classList.add('hidden');
+
+        for (var i = 0; i < totalPreguntas; i++) {
+            var pregDiv = document.getElementById('pregunta-' + i);
+            pregDiv.classList.remove('respondida-correcta', 'respondida-incorrecta');
+            pregDiv.removeAttribute('open');
+
+            var opciones = document.querySelectorAll('#opciones-' + i + ' .quiz-option');
+            for (var j = 0; j < opciones.length; j++) {
+                opciones[j].classList.remove('disabled', 'selected', 'correcta', 'incorrecta');
+            }
+
+            var fb = document.getElementById('feedback-' + i);
+            fb.className = 'quiz-feedback hidden';
+            fb.innerHTML = '';
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>
