@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Pacto del Mayflower: Fundamento de la Democracia Americana — GEDparaHispanos.com</title>
+    <style>
+        /* === Fuentes === */
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700;900&display=swap');
+
+        /* === Reset y base === */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 19px;
+            line-height: 1.75;
+            color: #212529;
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+        }
+
+        /* === Contenedor principal === */
+        .quiz-container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 4px 20px rgba(13, 59, 102, 0.1);
+        }
+
+        /* === Encabezado === */
+        .quiz-site-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: linear-gradient(135deg, #0d3b66, #1a5490);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: #0d3b66;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+
+        .quiz-subtitulo {
+            color: #6b7280;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* === Texto de lectura o contexto === */
+        .quiz-texto-lectura {
+            background-color: #f0f9ff;
+            border: 2px solid #0d3b66;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.85;
+        }
+
+        .quiz-texto-lectura h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0d3b66;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-texto-lectura p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        .quiz-texto-lectura p:last-child { margin-bottom: 0; }
+
+        /* === Instrucciones === */
+        .quiz-instrucciones {
+            background-color: #fff8e1;
+            border-left: 5px solid #f59e0b;
+            padding: 0.9rem 1.2rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #78350f;
+            font-size: 0.95rem;
+        }
+
+        /* === Acordeón === */
+        details {
+            background-color: #f8f9fa;
+            border: 2px solid #0d3b66;
+            border-radius: 10px;
+            padding: 0;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: box-shadow 0.25s ease;
+        }
+
+        details:hover { box-shadow: 0 4px 12px rgba(13, 59, 102, 0.18); }
+
+        details[open] { background-color: #ffffff; }
+
+        summary {
+            background-color: #0d3b66;
+            color: #ffffff;
+            padding: 0.9em 1.4em;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.05em;
+            list-style: none;
+            transition: background-color 0.25s ease;
+            user-select: none;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+
+        summary::before {
+            content: '▶ ';
+            display: inline-block;
+            transition: transform 0.25s ease;
+            margin-right: 0.4em;
+        }
+
+        details[open] summary::before { transform: rotate(90deg); }
+
+        summary:hover { background-color: #1a5490; }
+
+        .details-contenido { padding: 1.25rem 1.5rem; }
+
+        /* Estado respondida correcta */
+        details.respondida-correcta { border-color: #16a34a; }
+        details.respondida-correcta summary { background-color: #16a34a; }
+        details.respondida-correcta summary:hover { background-color: #15803d; }
+
+        /* Estado respondida incorrecta */
+        details.respondida-incorrecta { border-color: #dc2626; }
+        details.respondida-incorrecta summary { background-color: #dc2626; }
+        details.respondida-incorrecta summary:hover { background-color: #b91c1c; }
+
+        /* === Opciones === */
+        .quiz-opciones {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6em;
+        }
+
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 0.8em;
+            padding: 0.8em 1em;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            background: white;
+        }
+
+        .quiz-option:hover { border-color: #1a5490; background: #f0f7ff; }
+        .quiz-option.selected { border-color: #1a5490; background: #e7f3ff; }
+
+        .quiz-option.correcta {
+            border-color: #22c55e;
+            background: #f0fdf4;
+        }
+
+        .quiz-option.incorrecta {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .quiz-option.disabled {
+            pointer-events: none;
+            opacity: 0.65;
+        }
+
+        .quiz-option.disabled.correcta { opacity: 1; }
+
+        .quiz-option-letter {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85em;
+            color: #374151;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-option.correcta .quiz-option-letter {
+            background: #22c55e;
+            color: white;
+        }
+
+        .quiz-option.incorrecta .quiz-option-letter {
+            background: #ef4444;
+            color: white;
+        }
+
+        .quiz-option-text {
+            flex: 1;
+            color: #374151;
+            font-size: 0.97em;
+        }
+
+        /* === Feedback === */
+        .quiz-feedback {
+            margin-top: 0.8em;
+            padding: 0.85em 1em;
+            border-radius: 8px;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .quiz-feedback.correcto {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+        }
+
+        .quiz-feedback.incorrecto {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        /* === Panel de puntuación === */
+        .quiz-score-panel {
+            background: linear-gradient(135deg, #0d3b66, #1a5490);
+            color: white;
+            border-radius: 14px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 8px 24px rgba(13, 59, 102, 0.3);
+        }
+
+        .quiz-score-panel h2 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-score-number {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin: 0.2em 0;
+            letter-spacing: -0.02em;
+        }
+
+        .quiz-score-bar-bg {
+            width: 100%;
+            max-width: 420px;
+            height: 14px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 7px;
+            margin: 1em auto;
+            overflow: hidden;
+        }
+
+        .quiz-score-bar-fill {
+            height: 100%;
+            background: #fbbf24;
+            border-radius: 7px;
+            transition: width 0.9s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .quiz-score-message {
+            font-size: 1.15em;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+
+        .quiz-btn-reiniciar {
+            margin-top: 1.25em;
+            padding: 0.8em 2.2em;
+            background: #fbbf24;
+            color: #0d3b66;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+
+        .quiz-btn-reiniciar:hover { background: #fcd34d; }
+
+        /* === Footer === */
+        .quiz-footer {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.78rem;
+            margin-top: 2.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .quiz-footer a { color: #0d3b66; text-decoration: none; font-weight: 600; }
+        .quiz-footer a:hover { text-decoration: underline; }
+
+        /* === Utilidad === */
+        .hidden { display: none !important; }
+
+        /* === Responsive === */
+        @media (max-width: 640px) {
+            body { padding: 0.75rem; }
+            .quiz-container { padding: 1.25rem 1rem; border-radius: 10px; }
+            h1 { font-size: 1.35rem; }
+            .quiz-score-number { font-size: 2.4rem; }
+            .quiz-option { padding: 0.65em 0.8em; }
+        }
+
+        @media print {
+            body { background: white; }
+            .quiz-container { box-shadow: none; }
+            .quiz-btn-reiniciar { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="quiz-container">
+
+    <div class="quiz-site-badge">🎓 GEDparaHispanos.com</div>
+
+    <h1>📖 El Pacto del Mayflower: Fundamento de la Democracia Americana</h1>
+    <p class="quiz-subtitulo">Análisis del primer documento de autogobierno en América del Norte</p>
+
+    
+    <div class="quiz-texto-lectura">
+        <h2>📖 Texto de lectura</h2>
+        <p>El 11 de noviembre de 1620, a bordo del barco Mayflower anclado en la bahía de Cape Cod, 41 hombres firmaron un documento que se convertiría en piedra angular de la democracia estadounidense. El Pacto del Mayflower no fue simplemente un acuerdo de supervivencia, sino una declaración revolucionaria de principios democráticos que establecía el concepto de gobierno por consentimiento de los gobernados. Los peregrinos, enfrentados a una situación desesperada en territorio desconocido y sin autoridad real británica presente, tomaron la decisión audaz de crear su propio marco de gobierno basado en la voluntad colectiva.</p>
+        <p>El documento establecía que los colonos se unían voluntariamente para formar una sociedad civil y prometían crear leyes justas e iguales para el bien común de la colonia. Esta noción de igualdad ante la ley y participación ciudadana en el gobierno contrastaba dramáticamente con los sistemas monárquicos absolutistas que dominaban Europa en esa época. El pacto también reflejaba la influencia de las creencias religiosas puritanas, que enfatizaban la importancia del pacto o convenio entre individuos y con Dios, trasladando estos conceptos teológicos al ámbito político y social.</p>
+        <p>La importancia histórica del Pacto del Mayflower trasciende su contexto inmediato de supervivencia colonial. Los principios establecidos en este breve documento influyeron profundamente en el desarrollo posterior de las instituciones democráticas americanas, desde las constituciones estatales hasta la Constitución federal de 1787. El concepto de que el poder político emana del pueblo y debe ejercerse para el beneficio común se convirtió en un pilar fundamental del pensamiento político estadounidense. Además, el pacto demostró que era posible establecer un gobierno legítimo sin la intervención directa de una autoridad real o imperial.</p>
+        <p>Sin embargo, es crucial reconocer las limitaciones del documento dentro de su contexto histórico. El pacto fue firmado exclusivamente por hombres blancos propietarios, excluyendo a mujeres, sirvientes contratados y, por supuesto, a los pueblos nativos americanos que ya habitaban la región. Esta exclusión selectiva reveló las contradicciones inherentes entre los ideales democráticos proclamados y las realidades sociales de la época, contradicciones que persistirían y evolucionarían a lo largo de la historia estadounidense, planteando preguntas fundamentales sobre quién tiene derecho a participar en el proceso democrático.</p>
+    </div>
+
+    <div class="quiz-instrucciones">
+        Lee el texto cuidadosamente y responde las preguntas basándote en la información presentada y en las inferencias que puedas hacer.
+    </div>
+
+    <div id="quizPreguntas">
+
+        <details class="quiz-pregunta" id="pregunta-0">
+            <summary>Pregunta 1 — ¿Qué se puede inferir sobre la situación de los peregrinos cuando decidieron redactar el Pacto del Mayflower?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-0">
+                    
+            <div class="quiz-option" data-q="0" data-opt="0" onclick="seleccionarOpcion(this, 0, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Tenían órdenes específicas del rey de Inglaterra para establecer un gobierno</span>
+            </div>
+            <div class="quiz-option" data-q="0" data-opt="1" onclick="seleccionarOpcion(this, 0, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Se encontraban en una situación de emergencia sin autoridad gubernamental establecida</span>
+            </div>
+            <div class="quiz-option" data-q="0" data-opt="2" onclick="seleccionarOpcion(this, 0, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Habían planificado desde Inglaterra crear este tipo de documento</span>
+            </div>
+            <div class="quiz-option" data-q="0" data-opt="3" onclick="seleccionarOpcion(this, 0, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Contaban con el apoyo de las autoridades coloniales británicas ya establecidas</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-0"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-1">
+            <summary>Pregunta 2 — Basándose en el texto, ¿qué se puede deducir sobre la relación entre las creencias religiosas puritanas y el Pacto del Mayflower?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-1">
+                    
+            <div class="quiz-option" data-q="1" data-opt="0" onclick="seleccionarOpcion(this, 1, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Las creencias religiosas fueron irrelevantes en la creación del pacto</span>
+            </div>
+            <div class="quiz-option" data-q="1" data-opt="1" onclick="seleccionarOpcion(this, 1, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Los conceptos teológicos puritanos sobre los pactos influyeron en la estructura política del documento</span>
+            </div>
+            <div class="quiz-option" data-q="1" data-opt="2" onclick="seleccionarOpcion(this, 1, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">El pacto se opuso completamente a las tradiciones religiosas</span>
+            </div>
+            <div class="quiz-option" data-q="1" data-opt="3" onclick="seleccionarOpcion(this, 1, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Las creencias puritanas impidieron la creación de un gobierno democrático</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-1"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-2">
+            <summary>Pregunta 3 — ¿Qué se puede inferir sobre el impacto a largo plazo del Pacto del Mayflower en el desarrollo político estadounidense?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-2">
+                    
+            <div class="quiz-option" data-q="2" data-opt="0" onclick="seleccionarOpcion(this, 2, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Tuvo influencia limitada solo en la colonia de Plymouth</span>
+            </div>
+            <div class="quiz-option" data-q="2" data-opt="1" onclick="seleccionarOpcion(this, 2, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Sus principios influyeron en el desarrollo de instituciones democráticas posteriores</span>
+            </div>
+            <div class="quiz-option" data-q="2" data-opt="2" onclick="seleccionarOpcion(this, 2, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Fue abandonado rápidamente por ser impractical</span>
+            </div>
+            <div class="quiz-option" data-q="2" data-opt="3" onclick="seleccionarOpcion(this, 2, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Solo afectó las decisiones religiosas de la colonia</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-2"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-3">
+            <summary>Pregunta 4 — Según el texto, ¿qué se puede deducir sobre las limitaciones del Pacto del Mayflower en términos de inclusión social?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-3">
+                    
+            <div class="quiz-option" data-q="3" data-opt="0" onclick="seleccionarOpcion(this, 3, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">El pacto incluía a todos los habitantes de la región por igual</span>
+            </div>
+            <div class="quiz-option" data-q="3" data-opt="1" onclick="seleccionarOpcion(this, 3, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Existía una contradicción entre los ideales democráticos y la realidad social excluyente</span>
+            </div>
+            <div class="quiz-option" data-q="3" data-opt="2" onclick="seleccionarOpcion(this, 3, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Las mujeres tenían los mismos derechos que los hombres en el pacto</span>
+            </div>
+            <div class="quiz-option" data-q="3" data-opt="3" onclick="seleccionarOpcion(this, 3, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Los pueblos nativos americanos participaron activamente en su redacción</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-3"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-4">
+            <summary>Pregunta 5 — ¿Qué se puede inferir sobre la innovación política que representó el Pacto del Mayflower en su época?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-4">
+                    
+            <div class="quiz-option" data-q="4" data-opt="0" onclick="seleccionarOpcion(this, 4, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Era una práctica común en todas las colonias europeas</span>
+            </div>
+            <div class="quiz-option" data-q="4" data-opt="1" onclick="seleccionarOpcion(this, 4, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Representó una ruptura radical con los sistemas monárquicos absolutistas europeos</span>
+            </div>
+            <div class="quiz-option" data-q="4" data-opt="2" onclick="seleccionarOpcion(this, 4, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Seguía exactamente los modelos políticos tradicionales de Inglaterra</span>
+            </div>
+            <div class="quiz-option" data-q="4" data-opt="3" onclick="seleccionarOpcion(this, 4, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">No contenía elementos novedosos para su tiempo</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-4"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-5">
+            <summary>Pregunta 6 — Basándose en la información presentada, ¿qué se puede deducir sobre la legitimidad del gobierno establecido por el Pacto del Mayflower?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-5">
+                    
+            <div class="quiz-option" data-q="5" data-opt="0" onclick="seleccionarOpcion(this, 5, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Dependía completamente de la aprobación real británica</span>
+            </div>
+            <div class="quiz-option" data-q="5" data-opt="1" onclick="seleccionarOpcion(this, 5, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Se basaba en el consentimiento y la voluntad de los participantes</span>
+            </div>
+            <div class="quiz-option" data-q="5" data-opt="2" onclick="seleccionarOpcion(this, 5, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Solo era válido mientras estuvieran en el barco</span>
+            </div>
+            <div class="quiz-option" data-q="5" data-opt="3" onclick="seleccionarOpcion(this, 5, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Requería la bendición de las autoridades religiosas europeas</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-5"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-6">
+            <summary>Pregunta 7 — ¿Qué se puede inferir sobre la motivación principal de los peregrinos para crear el Pacto del Mayflower?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-6">
+                    
+            <div class="quiz-option" data-q="6" data-opt="0" onclick="seleccionarOpcion(this, 6, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Querían desafiar abiertamente a la autoridad británica</span>
+            </div>
+            <div class="quiz-option" data-q="6" data-opt="1" onclick="seleccionarOpcion(this, 6, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Necesitaban establecer orden y gobierno para la supervivencia y el bien común</span>
+            </div>
+            <div class="quiz-option" data-q="6" data-opt="2" onclick="seleccionarOpcion(this, 6, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Buscaban crear un sistema comercial más eficiente</span>
+            </div>
+            <div class="quiz-option" data-q="6" data-opt="3" onclick="seleccionarOpcion(this, 6, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Pretendían establecer una teocracia pura</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-6"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-7">
+            <summary>Pregunta 8 — Según el análisis presentado, ¿qué se puede deducir sobre la naturaleza contradictoria de los principios democráticos tempranos en América?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-7">
+                    
+            <div class="quiz-option" data-q="7" data-opt="0" onclick="seleccionarOpcion(this, 7, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">No existían contradicciones en la aplicación de los principios democráticos</span>
+            </div>
+            <div class="quiz-option" data-q="7" data-opt="1" onclick="seleccionarOpcion(this, 7, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Los ideales de igualdad coexistían con prácticas excluyentes basadas en raza y género</span>
+            </div>
+            <div class="quiz-option" data-q="7" data-opt="2" onclick="seleccionarOpcion(this, 7, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Todos los grupos sociales tenían igual acceso a los derechos políticos</span>
+            </div>
+            <div class="quiz-option" data-q="7" data-opt="3" onclick="seleccionarOpcion(this, 7, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Las contradicciones se resolvieron completamente en el siglo XVII</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-7"></div>
+            </div>
+        </details>
+    </div>
+
+    <!-- Panel de puntuación -->
+    <div class="quiz-score-panel hidden" id="scorePanel">
+        <h2>📊 Resultado final</h2>
+        <div class="quiz-score-number" id="scoreNumber">0/8</div>
+        <div class="quiz-score-bar-bg">
+            <div class="quiz-score-bar-fill" id="scoreBar" style="width: 0%"></div>
+        </div>
+        <div class="quiz-score-message" id="scoreMessage"></div>
+        <div class="quiz-btn-reiniciar" onclick="reiniciarQuiz()">🔄 Reiniciar ejercicio</div>
+    </div>
+
+    <div class="quiz-footer">
+        Ejercicio generado para <a href="https://GEDparaHispanos.com" target="_blank">GEDparaHispanos.com</a>
+        — Preparación GED en español — Uso libre y gratuito
+    </div>
+
+</div>
+
+<script>
+    var respuestasCorrectas = [1,1,1,1,1,1,1,1];
+    var explicaciones = ['El texto indica que enfrentaban una situación desesperada sin autoridad real británica presente, lo que los llevó a tomar la decisión audaz de crear su propio marco de gobierno.','El texto explica que el pacto reflejaba la influencia de las creencias puritanas sobre los pactos o convenios, trasladando estos conceptos teológicos al ámbito político.','El texto establece que los principios del pacto influyeron profundamente en el desarrollo posterior de las instituciones democráticas americanas, incluyendo las constituciones estatales y federal.','El texto menciona que el pacto fue firmado exclusivamente por hombres blancos propietarios, excluyendo a otros grupos, lo que reveló contradicciones entre los ideales proclamados y las realidades sociales.','El texto indica que las nociones de igualdad ante la ley y participación ciudadana contrastaban dramáticamente con los sistemas monárquicos absolutistas que dominaban Europa.','El texto establece que el pacto fue una declaración del concepto de gobierno por consentimiento de los gobernados y que demostró que era posible establecer un gobierno legítimo sin intervención de autoridad real.','El texto indica que prometían crear leyes justas e iguales para el bien común de la colonia, enfrentando una situación desesperada que requería organización social.','El texto menciona explícitamente las contradicciones entre los ideales democráticos proclamados y las realidades sociales excluyentes, que persistirían a lo largo de la historia estadounidense.'];
+    var totalPreguntas = 8;
+    var respondidas = 0;
+    var correctas = 0;
+
+    function seleccionarOpcion(el, qIdx, optIdx) {
+        var pregDiv = document.getElementById('pregunta-' + qIdx);
+        if (pregDiv.classList.contains('respondida-correcta') || pregDiv.classList.contains('respondida-incorrecta')) return;
+
+        var opciones = document.querySelectorAll('#opciones-' + qIdx + ' .quiz-option');
+        for (var i = 0; i < opciones.length; i++) {
+            opciones[i].classList.add('disabled');
+            opciones[i].classList.remove('selected');
+        }
+
+        var esCorrecta = optIdx === respuestasCorrectas[qIdx];
+        var feedbackDiv = document.getElementById('feedback-' + qIdx);
+
+        if (esCorrecta) {
+            el.classList.add('correcta');
+            pregDiv.classList.add('respondida-correcta');
+            feedbackDiv.className = 'quiz-feedback correcto';
+            feedbackDiv.innerHTML = '✅ <strong>¡Correcto!</strong> ' + explicaciones[qIdx];
+            correctas++;
+        } else {
+            el.classList.add('incorrecta');
+            pregDiv.classList.add('respondida-incorrecta');
+            opciones[respuestasCorrectas[qIdx]].classList.add('correcta');
+            feedbackDiv.className = 'quiz-feedback incorrecto';
+            feedbackDiv.innerHTML = '❌ <strong>Incorrecto.</strong> ' + explicaciones[qIdx];
+        }
+
+        feedbackDiv.classList.remove('hidden');
+
+        // Asegurar que el acordeón permanezca abierto
+        pregDiv.setAttribute('open', '');
+
+        respondidas++;
+        if (respondidas === totalPreguntas) mostrarPuntaje();
+    }
+
+    function mostrarPuntaje() {
+        var pct = Math.round((correctas / totalPreguntas) * 100);
+        document.getElementById('scoreNumber').textContent = correctas + '/' + totalPreguntas + ' (' + pct + '%)';
+        document.getElementById('scoreBar').style.width = pct + '%';
+
+        var msg = pct === 100  ? '🌟 ¡Perfecto! ¡Excelente trabajo!' :
+                  pct >= 80   ? '👏 ¡Muy bien! Sigue practicando.' :
+                  pct >= 60   ? '👍 Buen esfuerzo. Repasa los errores.' :
+                                '📚 Sigue practicando. ¡Tú puedes!';
+
+        document.getElementById('scoreMessage').textContent = msg;
+        document.getElementById('scorePanel').classList.remove('hidden');
+        document.getElementById('scorePanel').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function reiniciarQuiz() {
+        respondidas = 0;
+        correctas = 0;
+        document.getElementById('scorePanel').classList.add('hidden');
+
+        for (var i = 0; i < totalPreguntas; i++) {
+            var pregDiv = document.getElementById('pregunta-' + i);
+            pregDiv.classList.remove('respondida-correcta', 'respondida-incorrecta');
+            pregDiv.removeAttribute('open');
+
+            var opciones = document.querySelectorAll('#opciones-' + i + ' .quiz-option');
+            for (var j = 0; j < opciones.length; j++) {
+                opciones[j].classList.remove('disabled', 'selected', 'correcta', 'incorrecta');
+            }
+
+            var fb = document.getElementById('feedback-' + i);
+            fb.className = 'quiz-feedback hidden';
+            fb.innerHTML = '';
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>
