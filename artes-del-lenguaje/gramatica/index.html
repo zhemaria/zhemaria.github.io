@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios de Gramática — GEDparaHispanos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700;900&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f0ff;
+            color: #1f2937;
+            padding: 1.25rem 1rem;
+            line-height: 1.5;
+        }
+
+        /* === Encabezado === */
+        .hub-header { text-align: center; margin-bottom: 1.25rem; }
+
+        .hub-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: linear-gradient(135deg, #5b21b6, #7c3aed);
+            color: white;
+            padding: 0.25rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .hub-header h1 { font-size: 1.5rem; font-weight: 900; color: #5b21b6; margin-bottom: 0.3rem; }
+        .hub-header p  { color: #6b7280; font-size: 0.88rem; max-width: 580px; margin: 0 auto; }
+
+        /* === Referencia rápida GED === */
+        .ged-ref {
+            max-width: 980px;
+            margin: 0 auto 1.1rem;
+            background: white;
+            border: 2px solid #ede9fe;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+        }
+
+        .ged-ref-titulo {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #5b21b6;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.5rem;
+        }
+
+        .ged-ref-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .ged-ref-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: #f5f3ff;
+            border: 1px solid #ede9fe;
+            border-radius: 8px;
+            padding: 0.3rem 0.65rem;
+            font-size: 0.75rem;
+            color: #374151;
+        }
+
+        .ged-ref-item strong { color: #5b21b6; }
+
+        /* === Filtros === */
+        .hub-filtros-wrap {
+            max-width: 980px;
+            margin: 0 auto 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .filtros-fila {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            align-items: center;
+        }
+
+        .filtros-etiqueta {
+            font-size: 0.73rem;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 0.15rem;
+            white-space: nowrap;
+            min-width: 52px;
+        }
+
+        .filtro-btn {
+            padding: 0.25rem 0.7rem;
+            border: 2px solid #7c3aed;
+            border-radius: 20px;
+            background: white;
+            color: #7c3aed;
+            font-size: 0.76rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.18s;
+            white-space: nowrap;
+        }
+
+        .filtro-btn:hover { background: #f5f0ff; }
+        .filtro-btn.tema-btn.activo   { background: #7c3aed; border-color: #7c3aed; color: white; }
+        .filtro-btn.nivel-btn.activo  { background: #059669; border-color: #059669; color: white; }
+        .filtro-btn.formato-btn.activo{ background: #0d3b66; border-color: #0d3b66; color: white; }
+
+        /* === Contador === */
+        .hub-contador {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.78rem;
+            margin-bottom: 0.65rem;
+        }
+
+        /* === Grid === */
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+            gap: 0.8rem;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        /* === Separador de sección === */
+        .seccion-titulo {
+            grid-column: 1 / -1;
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.5rem 0 0.1rem;
+            border-bottom: 2px solid #ede9fe;
+            margin-bottom: 0.1rem;
+        }
+
+        /* === Tarjeta compacta === */
+        .ejercicio-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.22s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ejercicio-card:hover {
+            border-color: #7c3aed;
+            box-shadow: 0 4px 14px rgba(124,58,237,0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Franja de color por tema gramatical */
+        .card-franja               { height: 4px; background: #7c3aed; }
+        .card-franja.concordancia  { background: linear-gradient(90deg,#dc2626,#ef4444); }
+        .card-franja.verbos        { background: linear-gradient(90deg,#059669,#10b981); }
+        .card-franja.sustantivos   { background: linear-gradient(90deg,#0d3b66,#1a5490); }
+        .card-franja.adjetivos     { background: linear-gradient(90deg,#d97706,#f59e0b); }
+        .card-franja.adverbios     { background: linear-gradient(90deg,#be185d,#ec4899); }
+        .card-franja.articulos     { background: linear-gradient(90deg,#0891b2,#06b6d4); }
+        .card-franja.pronombres    { background: linear-gradient(90deg,#7c3aed,#a855f7); }
+        .card-franja.estructura    { background: linear-gradient(90deg,#374151,#6b7280); }
+
+        .card-inner {
+            padding: 0.7rem 0.9rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .card-top { display: flex; align-items: flex-start; gap: 0.45rem; }
+        .card-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1.3; }
+
+        .card-titulo {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: #5b21b6;
+            line-height: 1.35;
+            flex: 1;
+        }
+
+        /* Badge de formato de ejercicio */
+        .badge-formato {
+            flex-shrink: 0;
+            padding: 0.12rem 0.45rem;
+            border-radius: 10px;
+            font-size: 0.66rem;
+            font-weight: 700;
+            white-space: nowrap;
+            align-self: flex-start;
+        }
+        .badge-formato.corregir   { background: #fee2e2; color: #991b1b; }
+        .badge-formato.completar  { background: #d1fae5; color: #065f46; }
+        .badge-formato.elegir     { background: #dbeafe; color: #1d4ed8; }
+        .badge-formato.mixto      { background: #fef3c7; color: #92400e; }
+
+        .card-descripcion { font-size: 0.78rem; color: #6b7280; line-height: 1.4; }
+
+        .card-meta { display: flex; flex-wrap: wrap; gap: 0.28rem; }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.12rem 0.45rem;
+            border-radius: 10px;
+            font-size: 0.68rem;
+            font-weight: 700;
+        }
+
+        /* Tags por tema */
+        .tag-concordancia { background: #fee2e2; color: #991b1b; }
+        .tag-verbos       { background: #d1fae5; color: #065f46; }
+        .tag-sustantivos  { background: #dbeafe; color: #1d4ed8; }
+        .tag-adjetivos    { background: #fef3c7; color: #92400e; }
+        .tag-adverbios    { background: #fce7f3; color: #9d174d; }
+        .tag-articulos    { background: #e0f2fe; color: #0369a1; }
+        .tag-pronombres   { background: #ede9fe; color: #5b21b6; }
+        .tag-estructura   { background: #f3f4f6; color: #374151; }
+        .tag-mixto        { background: #fef3c7; color: #92400e; }
+
+        /* Tags de nivel */
+        .tag-basico     { background: #dcfce7; color: #166534; }
+        .tag-intermedio { background: #dbeafe; color: #1e40af; }
+        .tag-avanzado   { background: #f3e8ff; color: #6b21a8; }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.45rem 0.9rem 0.6rem;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .card-fecha { font-size: 0.68rem; color: #9ca3af; }
+
+        .card-abrir {
+            padding: 0.25rem 0.7rem;
+            background: #7c3aed;
+            color: white;
+            border-radius: 6px;
+            font-size: 0.73rem;
+            font-weight: 700;
+            transition: background 0.18s;
+        }
+
+        .ejercicio-card:hover .card-abrir { background: #6d28d9; }
+
+        /* === Sin resultados === */
+        .sin-resultados {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.9rem;
+            padding: 2rem;
+            display: none;
+            grid-column: 1 / -1;
+        }
+
+        /* === Footer === */
+        .hub-footer {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.75rem;
+            margin-top: 1.5rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #e5e7eb;
+            max-width: 980px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hub-footer a { color: #7c3aed; text-decoration: none; font-weight: 700; }
+        .hub-footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 480px) {
+            .hub-header h1 { font-size: 1.2rem; }
+            .hub-grid { grid-template-columns: 1fr; }
+            .filtro-btn { font-size: 0.72rem; padding: 0.22rem 0.55rem; }
+            .ged-ref-grid { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ENCABEZADO -->
+<div class="hub-header">
+    <div class="hub-badge">🎓 GEDparaHispanos.com</div>
+    <h1>✏️ Ejercicios de Gramática</h1>
+    <p>Practica los temas gramaticales del examen GED en español. Corrige errores, completa oraciones y elige la mejor versión. Gratis y sin registro.</p>
+</div>
+
+<!-- REFERENCIA RÁPIDA GED -->
+<div class="ged-ref">
+    <div class="ged-ref-titulo">📋 Temas evaluados en el GED — Artes del Lenguaje</div>
+    <div class="ged-ref-grid">
+        <div class="ged-ref-item">🔴 <strong>Concordancia</strong> sujeto-verbo y sustantivo-adjetivo</div>
+        <div class="ged-ref-item">🟢 <strong>Verbos</strong> tiempos, modos y conjugación</div>
+        <div class="ged-ref-item">🔵 <strong>Sustantivos</strong> género, número y uso</div>
+        <div class="ged-ref-item">🟡 <strong>Adjetivos</strong> posición, grado y concordancia</div>
+        <div class="ged-ref-item">🌸 <strong>Adverbios</strong> tipos y posición correcta</div>
+        <div class="ged-ref-item">🔷 <strong>Artículos</strong> uso de al, del y contracciones</div>
+        <div class="ged-ref-item">🟣 <strong>Pronombres</strong> caso, referencia y concordancia</div>
+        <div class="ged-ref-item">⚫ <strong>Estructura</strong> oraciones completas y fragmentos</div>
+    </div>
+</div>
+
+<!-- FILTROS -->
+<div class="hub-filtros-wrap">
+
+    <div class="filtros-fila">
+        <span class="filtros-etiqueta">Tema:</span>
+        <div class="filtro-btn tema-btn activo" onclick="filtrar('tema','todos',this)">🗂️ Todos</div>
+        <div class="filtro-btn tema-btn" onclick="filtrar('tema','concordancia',this)">🔴 Concordancia</div>
+        <div class="filtro-btn tema-btn" onclick="filtrar('tema','verbos',this)">🟢 Verbos</div>
+        <div class="filtro-btn tema-btn" onclick="filtrar('tema','sustantivos',this)">🔵 Sustantivos</div>
+        <div class="filtro-btn tema-btn" onclick="filtrar('tema','adjetivos',this)">🟡 Adjetivos</div>
+        <div class="filtro-btn tema-btn" onclick="filtrar('tema','adverbios',this)">🌸 Adverbios</div>
+        <div class="filtro-btn tema-btn" onclick="filtrar('tema','articulos',this)">🔷 Artículos</div>
+        <div class="filtro-btn tema-btn" onclick="filtrar('tema','pronombres',this)">🟣 Pronombres</div>
+        <div class="filtro-btn tema-btn" onclick="filtrar('tema','estructura',this)">⚫ Estructura</div>
+        <div class="filtro-btn tema-btn" onclick="filtrar('tema','mixto',this)">⭐ Mixto</div>
+    </div>
+
+    <div class="filtros-fila">
+        <span class="filtros-etiqueta">Nivel:</span>
+        <div class="filtro-btn nivel-btn activo" onclick="filtrar('nivel','todos',this)">📚 Todos</div>
+        <div class="filtro-btn nivel-btn" onclick="filtrar('nivel','basico',this)">🟢 Básico</div>
+        <div class="filtro-btn nivel-btn" onclick="filtrar('nivel','intermedio',this)">📘 Intermedio</div>
+        <div class="filtro-btn nivel-btn" onclick="filtrar('nivel','avanzado',this)">🎓 Avanzado</div>
+    </div>
+
+    <div class="filtros-fila">
+        <span class="filtros-etiqueta">Formato:</span>
+        <div class="filtro-btn formato-btn activo" onclick="filtrar('formato','todos',this)">📄 Todos</div>
+        <div class="filtro-btn formato-btn" onclick="filtrar('formato','corregir',this)">🔴 Corregir errores</div>
+        <div class="filtro-btn formato-btn" onclick="filtrar('formato','completar',this)">🟢 Completar espacios</div>
+        <div class="filtro-btn formato-btn" onclick="filtrar('formato','elegir',this)">🔵 Elegir la mejor versión</div>
+        <div class="filtro-btn formato-btn" onclick="filtrar('formato','mixto',this)">⭐ Mixto</div>
+    </div>
+
+</div>
+
+<div class="hub-contador" id="contador"></div>
+
+<!-- GRID -->
+<div class="hub-grid" id="hubGrid">
+
+    <!-- ══════════════════════════════════════
+         CONCORDANCIA
+    ══════════════════════════════════════ -->
+    <div class="seccion-titulo" data-seccion="concordancia">🔴 Concordancia sujeto-verbo y sustantivo-adjetivo</div>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="concordancia"
+       data-nivel="basico"
+       data-formato="corregir">
+        <div class="card-franja concordancia"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🔴</span>
+                <span class="card-titulo">Concordancia sujeto-verbo: casos básicos</span>
+                <span class="badge-formato corregir">🔴 Corregir</span>
+            </div>
+            <p class="card-descripcion">Identifica y corrige errores de concordancia entre el sujeto y el verbo en oraciones simples.</p>
+            <div class="card-meta">
+                <span class="tag tag-concordancia">🔴 Concordancia</span>
+                <span class="tag tag-basico">🟢 Básico</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="concordancia"
+       data-nivel="intermedio"
+       data-formato="elegir">
+        <div class="card-franja concordancia"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🔴</span>
+                <span class="card-titulo">Concordancia sustantivo-adjetivo en contexto</span>
+                <span class="badge-formato elegir">🔵 Elegir</span>
+            </div>
+            <p class="card-descripcion">Elige la forma correcta del adjetivo que concuerda en género y número con el sustantivo.</p>
+            <div class="card-meta">
+                <span class="tag tag-concordancia">🔴 Concordancia</span>
+                <span class="tag tag-intermedio">📘 Intermedio</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <!-- ══════════════════════════════════════
+         VERBOS
+    ══════════════════════════════════════ -->
+    <div class="seccion-titulo" data-seccion="verbos">🟢 Verbos — tiempos, modos y conjugación</div>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="verbos"
+       data-nivel="basico"
+       data-formato="completar">
+        <div class="card-franja verbos"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🟢</span>
+                <span class="card-titulo">Tiempos verbales: presente, pasado y futuro</span>
+                <span class="badge-formato completar">🟢 Completar</span>
+            </div>
+            <p class="card-descripcion">Completa oraciones eligiendo el tiempo verbal correcto entre presente, pretérito e imperfecto.</p>
+            <div class="card-meta">
+                <span class="tag tag-verbos">🟢 Verbos</span>
+                <span class="tag tag-basico">🟢 Básico</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="verbos"
+       data-nivel="intermedio"
+       data-formato="elegir">
+        <div class="card-franja verbos"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🟢</span>
+                <span class="card-titulo">Ser vs. Estar: usos y diferencias</span>
+                <span class="badge-formato elegir">🔵 Elegir</span>
+            </div>
+            <p class="card-descripcion">Elige entre ser y estar según el contexto: características permanentes, estados temporales y localizaciones.</p>
+            <div class="card-meta">
+                <span class="tag tag-verbos">🟢 Verbos</span>
+                <span class="tag tag-intermedio">📘 Intermedio</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="verbos"
+       data-nivel="avanzado"
+       data-formato="corregir">
+        <div class="card-franja verbos"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🟢</span>
+                <span class="card-titulo">Subjuntivo vs. indicativo en oraciones complejas</span>
+                <span class="badge-formato corregir">🔴 Corregir</span>
+            </div>
+            <p class="card-descripcion">Identifica y corrige el uso incorrecto del modo subjuntivo en oraciones subordinadas.</p>
+            <div class="card-meta">
+                <span class="tag tag-verbos">🟢 Verbos</span>
+                <span class="tag tag-avanzado">🎓 Avanzado</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <!-- ══════════════════════════════════════
+         SUSTANTIVOS
+    ══════════════════════════════════════ -->
+    <div class="seccion-titulo" data-seccion="sustantivos">🔵 Sustantivos — género, número y uso</div>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="sustantivos"
+       data-nivel="basico"
+       data-formato="elegir">
+        <div class="card-franja sustantivos"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🔵</span>
+                <span class="card-titulo">Género y número de los sustantivos</span>
+                <span class="badge-formato elegir">🔵 Elegir</span>
+            </div>
+            <p class="card-descripcion">Identifica el género y número correcto de sustantivos comunes y sus formas plurales irregulares.</p>
+            <div class="card-meta">
+                <span class="tag tag-sustantivos">🔵 Sustantivos</span>
+                <span class="tag tag-basico">🟢 Básico</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="sustantivos"
+       data-nivel="intermedio"
+       data-formato="corregir">
+        <div class="card-franja sustantivos"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🔵</span>
+                <span class="card-titulo">Sustantivos propios y comunes: uso de mayúsculas</span>
+                <span class="badge-formato corregir">🔴 Corregir</span>
+            </div>
+            <p class="card-descripcion">Corrige el uso de mayúsculas en nombres propios, títulos, instituciones y lugares geográficos.</p>
+            <div class="card-meta">
+                <span class="tag tag-sustantivos">🔵 Sustantivos</span>
+                <span class="tag tag-intermedio">📘 Intermedio</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <!-- ══════════════════════════════════════
+         ADJETIVOS Y ADVERBIOS
+    ══════════════════════════════════════ -->
+    <div class="seccion-titulo" data-seccion="adjetivos">🟡 Adjetivos y adverbios — modificadores</div>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="adjetivos"
+       data-nivel="basico"
+       data-formato="elegir">
+        <div class="card-franja adjetivos"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🟡</span>
+                <span class="card-titulo">Adjetivos: posición y concordancia</span>
+                <span class="badge-formato elegir">🔵 Elegir</span>
+            </div>
+            <p class="card-descripcion">Elige la posición correcta del adjetivo y su concordancia con el sustantivo que modifica.</p>
+            <div class="card-meta">
+                <span class="tag tag-adjetivos">🟡 Adjetivos</span>
+                <span class="tag tag-basico">🟢 Básico</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="adverbios"
+       data-nivel="intermedio"
+       data-formato="corregir">
+        <div class="card-franja adverbios"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🌸</span>
+                <span class="card-titulo">Adjetivo vs. adverbio: ¿cuál usar?</span>
+                <span class="badge-formato corregir">🔴 Corregir</span>
+            </div>
+            <p class="card-descripcion">Corrige confusiones entre adjetivos y adverbios: "rápido" vs. "rápidamente", "bueno" vs. "bien".</p>
+            <div class="card-meta">
+                <span class="tag tag-adverbios">🌸 Adverbios</span>
+                <span class="tag tag-adjetivos">🟡 Adjetivos</span>
+                <span class="tag tag-intermedio">📘 Intermedio</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <!-- ══════════════════════════════════════
+         ARTÍCULOS Y PRONOMBRES
+    ══════════════════════════════════════ -->
+    <div class="seccion-titulo" data-seccion="articulos">🔷 Artículos y pronombres</div>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="articulos"
+       data-nivel="basico"
+       data-formato="completar">
+        <div class="card-franja articulos"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🔷</span>
+                <span class="card-titulo">Artículos definidos e indefinidos</span>
+                <span class="badge-formato completar">🟢 Completar</span>
+            </div>
+            <p class="card-descripcion">Completa oraciones con el artículo correcto: el, la, los, las, un, una, unos, unas, al, del.</p>
+            <div class="card-meta">
+                <span class="tag tag-articulos">🔷 Artículos</span>
+                <span class="tag tag-basico">🟢 Básico</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="pronombres"
+       data-nivel="intermedio"
+       data-formato="elegir">
+        <div class="card-franja pronombres"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🟣</span>
+                <span class="card-titulo">Pronombres personales: caso y referencia</span>
+                <span class="badge-formato elegir">🔵 Elegir</span>
+            </div>
+            <p class="card-descripcion">Elige el pronombre correcto según su función en la oración: sujeto, objeto directo e indirecto.</p>
+            <div class="card-meta">
+                <span class="tag tag-pronombres">🟣 Pronombres</span>
+                <span class="tag tag-intermedio">📘 Intermedio</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="pronombres"
+       data-nivel="avanzado"
+       data-formato="corregir">
+        <div class="card-franja pronombres"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🟣</span>
+                <span class="card-titulo">Pronombres relativos: que, quien, cual, cuyo</span>
+                <span class="badge-formato corregir">🔴 Corregir</span>
+            </div>
+            <p class="card-descripcion">Corrige el uso incorrecto de pronombres relativos en oraciones subordinadas adjetivales.</p>
+            <div class="card-meta">
+                <span class="tag tag-pronombres">🟣 Pronombres</span>
+                <span class="tag tag-avanzado">🎓 Avanzado</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <!-- ══════════════════════════════════════
+         ESTRUCTURA DE ORACIONES
+    ══════════════════════════════════════ -->
+    <div class="seccion-titulo" data-seccion="estructura">⚫ Estructura de oraciones</div>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="estructura"
+       data-nivel="intermedio"
+       data-formato="elegir">
+        <div class="card-franja estructura"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">⚫</span>
+                <span class="card-titulo">Oraciones completas vs. fragmentos</span>
+                <span class="badge-formato elegir">🔵 Elegir</span>
+            </div>
+            <p class="card-descripcion">Identifica qué grupo de palabras es una oración completa y cuál es un fragmento sin sujeto o verbo.</p>
+            <div class="card-meta">
+                <span class="tag tag-estructura">⚫ Estructura</span>
+                <span class="tag tag-intermedio">📘 Intermedio</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="estructura"
+       data-nivel="avanzado"
+       data-formato="corregir">
+        <div class="card-franja estructura"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">⚫</span>
+                <span class="card-titulo">Oraciones compuestas: unir ideas correctamente</span>
+                <span class="badge-formato corregir">🔴 Corregir</span>
+            </div>
+            <p class="card-descripcion">Corrige oraciones mal unidas usando conjunciones coordinantes y subordinantes apropiadas.</p>
+            <div class="card-meta">
+                <span class="tag tag-estructura">⚫ Estructura</span>
+                <span class="tag tag-avanzado">🎓 Avanzado</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <!-- ══════════════════════════════════════
+         MIXTOS
+    ══════════════════════════════════════ -->
+    <div class="seccion-titulo" data-seccion="mixto">⭐ Ejercicios mixtos — estilo GED</div>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="mixto"
+       data-nivel="intermedio"
+       data-formato="mixto">
+        <div class="card-franja"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">⭐</span>
+                <span class="card-titulo">Simulacro GED: gramática general — Nivel intermedio</span>
+                <span class="badge-formato mixto">⭐ Mixto</span>
+            </div>
+            <p class="card-descripcion">Ejercicio de repaso completo que combina concordancia, verbos, pronombres y estructura de oraciones al estilo GED.</p>
+            <div class="card-meta">
+                <span class="tag tag-mixto">⭐ Mixto</span>
+                <span class="tag tag-intermedio">📘 Intermedio</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <a class="ejercicio-card"
+       href="#"
+       target="_blank"
+       data-tema="mixto"
+       data-nivel="avanzado"
+       data-formato="mixto">
+        <div class="card-franja"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">⭐</span>
+                <span class="card-titulo">Simulacro GED: gramática general — Nivel avanzado</span>
+                <span class="badge-formato mixto">⭐ Mixto</span>
+            </div>
+            <p class="card-descripcion">Repaso avanzado que incluye subjuntivo, pronombres relativos, modificadores y oraciones complejas al estilo GED.</p>
+            <div class="card-meta">
+                <span class="tag tag-mixto">⭐ Mixto</span>
+                <span class="tag tag-avanzado">🎓 Avanzado</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 2026-03-02</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    <!-- INSERTA AQUÍ LAS NUEVAS TARJETAS -->
+
+    <!-- SIN RESULTADOS -->
+    <div class="sin-resultados" id="sinResultados">
+        😕 No hay ejercicios con esos filtros todavía. ¡Pronto habrá más!
+    </div>
+
+    <!-- ============================================================
+         PLANTILLA para agregar nuevos ejercicios:
+
+    <a class="ejercicio-card"
+       href="URL_EN_GITHUB"
+       target="_blank"
+       data-tema="concordancia"
+       data-nivel="intermedio"
+       data-formato="corregir">
+        <div class="card-franja concordancia"></div>
+        <div class="card-inner">
+            <div class="card-top">
+                <span class="card-icon">🔴</span>
+                <span class="card-titulo">Título del ejercicio</span>
+                <span class="badge-formato corregir">🔴 Corregir</span>
+            </div>
+            <p class="card-descripcion">Breve descripción.</p>
+            <div class="card-meta">
+                <span class="tag tag-concordancia">🔴 Concordancia</span>
+                <span class="tag tag-intermedio">📘 Intermedio</span>
+            </div>
+        </div>
+        <div class="card-footer">
+            <span class="card-fecha">📅 YYYY-MM-DD</span>
+            <span class="card-abrir">Abrir →</span>
+        </div>
+    </a>
+
+    Franjas disponibles: concordancia | verbos | sustantivos | adjetivos | adverbios | articulos | pronombres | estructura
+    Badges formato:  corregir | completar | elegir | mixto
+    Tags tema:       tag-concordancia | tag-verbos | tag-sustantivos | tag-adjetivos | tag-adverbios | tag-articulos | tag-pronombres | tag-estructura | tag-mixto
+    Tags nivel:      tag-basico | tag-intermedio | tag-avanzado
+    ============================================================ -->
+
+</div>
+
+<!-- FOOTER -->
+<div class="hub-footer">
+    <a href="https://GEDparaHispanos.com" target="_blank">GEDparaHispanos.com</a>
+    — Preparación GED en español — Acceso libre y gratuito
+</div>
+
+<script>
+    var filtroActivo = { tema: 'todos', nivel: 'todos', formato: 'todos' };
+
+    function filtrar(grupo, valor, btn) {
+        document.querySelectorAll('.' + grupo + '-btn').forEach(function(b) {
+            b.classList.remove('activo');
+        });
+        btn.classList.add('activo');
+        filtroActivo[grupo] = valor;
+        aplicarFiltros();
+    }
+
+    function aplicarFiltros() {
+        var cards = document.querySelectorAll('.ejercicio-card');
+        var visibles = 0;
+
+        cards.forEach(function(card) {
+            var tema   = card.getAttribute('data-tema')   || '';
+            var nivel  = card.getAttribute('data-nivel')  || '';
+            var formato = card.getAttribute('data-formato') || '';
+
+            var okTema   = filtroActivo.tema   === 'todos' || tema   === filtroActivo.tema;
+            var okNivel  = filtroActivo.nivel  === 'todos' || nivel  === filtroActivo.nivel;
+            var okFormato = filtroActivo.formato === 'todos' || formato === filtroActivo.formato;
+
+            var mostrar = okTema && okNivel && okFormato;
+            card.style.display = mostrar ? 'flex' : 'none';
+            if (mostrar) visibles++;
+        });
+
+        // Ocultar separadores de sección si no hay tarjetas visibles en esa sección
+        document.querySelectorAll('.seccion-titulo').forEach(function(sep) {
+            var siguiente = sep.nextElementSibling;
+            var hayVisible = false;
+            while (siguiente && !siguiente.classList.contains('seccion-titulo')) {
+                if (siguiente.classList.contains('ejercicio-card') &&
+                    siguiente.style.display !== 'none') {
+                    hayVisible = true;
+                    break;
+                }
+                siguiente = siguiente.nextElementSibling;
+            }
+            sep.style.display = hayVisible ? 'block' : 'none';
+        });
+
+        document.getElementById('contador').textContent =
+            visibles === 0 ? '' :
+            visibles === 1 ? '1 ejercicio disponible' :
+            visibles + ' ejercicios disponibles';
+
+        document.getElementById('sinResultados').style.display =
+            visibles === 0 ? 'block' : 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', aplicarFiltros);
+</script>
+
+</body>
+</html>
