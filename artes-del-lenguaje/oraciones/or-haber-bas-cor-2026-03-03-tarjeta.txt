@@ -1,0 +1,31 @@
+<!-- =========================================================
+  TARJETA — hub Ortografía
+  Archivo : or-haber-bas-cor-2026-03-03.html
+  URL     : https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-haber-bas-cor-2026-03-03.html
+  Nivel   : basico   Tema: haber   Formato: corregir
+  ========================================================= -->
+
+<a class="ejercicio-card"
+   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-haber-bas-cor-2026-03-03.html"
+   target="_blank"
+   data-tema="haber"
+   data-nivel="basico"
+   data-formato="corregir">
+    <div class="card-franja haber"></div>
+    <div class="card-inner">
+        <div class="card-top">
+            <span class="card-icon">★H</span>
+            <span class="card-titulo">Ejercicio de Ortografía Básica</span>
+            <span class="badge-formato corregir">🔴 Corregir</span>
+        </div>
+        <p class="card-descripcion">Práctica de escritura correcta en español</p>
+        <div class="card-meta">
+            <span class="tag tag-haber">★H Verbo haber</span>
+            <span class="tag tag-basico">🟢 Básico</span>
+        </div>
+    </div>
+    <div class="card-footer">
+        <span class="card-fecha">📅 2026-03-03</span>
+        <span class="card-abrir">Abrir →</span>
+    </div>
+</a>

@@ -1,0 +1,31 @@
+<!-- =========================================================
+  TARJETA — hub Ortografía
+  Archivo : or-acentuacion-avz-mix-2026-03-03.html
+  URL     : https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-avz-mix-2026-03-03.html
+  Nivel   : avanzado   Tema: acentuacion   Formato: mixto
+  ========================================================= -->
+
+<a class="ejercicio-card"
+   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-avz-mix-2026-03-03.html"
+   target="_blank"
+   data-tema="acentuacion"
+   data-nivel="avanzado"
+   data-formato="mixto">
+    <div class="card-franja acentuacion"></div>
+    <div class="card-inner">
+        <div class="card-top">
+            <span class="card-icon">´</span>
+            <span class="card-titulo">Acentuación Avanzada</span>
+            <span class="badge-formato mixto">⭐ Mixto</span>
+        </div>
+        <p class="card-descripcion">Domina las reglas de acentuación en contextos académicos y profesionales</p>
+        <div class="card-meta">
+            <span class="tag tag-acentuacion">´ Acentuación</span>
+            <span class="tag tag-avanzado">🎓 Avanzado</span>
+        </div>
+    </div>
+    <div class="card-footer">
+        <span class="card-fecha">📅 2026-03-03</span>
+        <span class="card-abrir">Abrir →</span>
+    </div>
+</a>

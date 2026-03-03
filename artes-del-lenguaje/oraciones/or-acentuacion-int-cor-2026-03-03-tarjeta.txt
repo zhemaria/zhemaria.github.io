@@ -1,0 +1,31 @@
+<!-- =========================================================
+  TARJETA — hub Ortografía
+  Archivo : or-acentuacion-int-cor-2026-03-03.html
+  URL     : https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-int-cor-2026-03-03.html
+  Nivel   : intermedio   Tema: acentuacion   Formato: corregir
+  ========================================================= -->
+
+<a class="ejercicio-card"
+   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-int-cor-2026-03-03.html"
+   target="_blank"
+   data-tema="acentuacion"
+   data-nivel="intermedio"
+   data-formato="corregir">
+    <div class="card-franja acentuacion"></div>
+    <div class="card-inner">
+        <div class="card-top">
+            <span class="card-icon">´</span>
+            <span class="card-titulo">Ejercicio de Acentuación</span>
+            <span class="badge-formato corregir">🔴 Corregir</span>
+        </div>
+        <p class="card-descripcion">Practica las reglas de acentuación en palabras agudas, graves, esdrújulas, hiatos, diptongos y acento diacrítico</p>
+        <div class="card-meta">
+            <span class="tag tag-acentuacion">´ Acentuación</span>
+            <span class="tag tag-intermedio">📘 Intermedio</span>
+        </div>
+    </div>
+    <div class="card-footer">
+        <span class="card-fecha">📅 2026-03-03</span>
+        <span class="card-abrir">Abrir →</span>
+    </div>
+</a>

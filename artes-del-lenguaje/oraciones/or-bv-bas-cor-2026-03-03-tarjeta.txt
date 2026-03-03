@@ -1,0 +1,31 @@
+<!-- =========================================================
+  TARJETA — hub Ortografía
+  Archivo : or-bv-bas-cor-2026-03-03.html
+  URL     : https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-bv-bas-cor-2026-03-03.html
+  Nivel   : basico   Tema: bv   Formato: corregir
+  ========================================================= -->
+
+<a class="ejercicio-card"
+   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-bv-bas-cor-2026-03-03.html"
+   target="_blank"
+   data-tema="bv"
+   data-nivel="basico"
+   data-formato="corregir">
+    <div class="card-franja bv"></div>
+    <div class="card-inner">
+        <div class="card-top">
+            <span class="card-icon">B/V</span>
+            <span class="card-titulo">Ortografía: Uso de B y V</span>
+            <span class="badge-formato corregir">🔴 Corregir</span>
+        </div>
+        <p class="card-descripcion">Practica las reglas de escritura con B y V</p>
+        <div class="card-meta">
+            <span class="tag tag-bv">B/V B y V</span>
+            <span class="tag tag-basico">🟢 Básico</span>
+        </div>
+    </div>
+    <div class="card-footer">
+        <span class="card-fecha">📅 2026-03-03</span>
+        <span class="card-abrir">Abrir →</span>
+    </div>
+</a>
