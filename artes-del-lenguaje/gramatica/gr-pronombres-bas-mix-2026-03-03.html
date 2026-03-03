@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uso de Pronombres en Contextos Cotidianos — GEDparaHispanos.com</title>
+    <style>
+        /* === Fuentes === */
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700;900&display=swap');
+
+        /* === Reset y base === */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 19px;
+            line-height: 1.75;
+            color: #212529;
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+        }
+
+        /* === Contenedor principal === */
+        .quiz-container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 4px 20px rgba(13, 59, 102, 0.1);
+        }
+
+        /* === Encabezado === */
+        .quiz-site-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: linear-gradient(135deg, #0d3b66, #1a5490);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: #0d3b66;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+
+        .quiz-subtitulo {
+            color: #6b7280;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* === Texto de lectura o contexto === */
+        .quiz-texto-lectura {
+            background-color: #f0f9ff;
+            border: 2px solid #0d3b66;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.85;
+        }
+
+        .quiz-texto-lectura h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0d3b66;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-texto-lectura p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        .quiz-texto-lectura p:last-child { margin-bottom: 0; }
+
+        /* === Instrucciones === */
+        .quiz-instrucciones {
+            background-color: #fff8e1;
+            border-left: 5px solid #f59e0b;
+            padding: 0.9rem 1.2rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #78350f;
+            font-size: 0.95rem;
+        }
+
+        /* === Acordeón === */
+        details {
+            background-color: #f8f9fa;
+            border: 2px solid #0d3b66;
+            border-radius: 10px;
+            padding: 0;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: box-shadow 0.25s ease;
+        }
+
+        details:hover { box-shadow: 0 4px 12px rgba(13, 59, 102, 0.18); }
+
+        details[open] { background-color: #ffffff; }
+
+        summary {
+            background-color: #0d3b66;
+            color: #ffffff;
+            padding: 0.9em 1.4em;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.05em;
+            list-style: none;
+            transition: background-color 0.25s ease;
+            user-select: none;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+
+        summary::before {
+            content: '▶ ';
+            display: inline-block;
+            transition: transform 0.25s ease;
+            margin-right: 0.4em;
+        }
+
+        details[open] summary::before { transform: rotate(90deg); }
+
+        summary:hover { background-color: #1a5490; }
+
+        .details-contenido { padding: 1.25rem 1.5rem; }
+
+        /* Estado respondida correcta */
+        details.respondida-correcta { border-color: #16a34a; }
+        details.respondida-correcta summary { background-color: #16a34a; }
+        details.respondida-correcta summary:hover { background-color: #15803d; }
+
+        /* Estado respondida incorrecta */
+        details.respondida-incorrecta { border-color: #dc2626; }
+        details.respondida-incorrecta summary { background-color: #dc2626; }
+        details.respondida-incorrecta summary:hover { background-color: #b91c1c; }
+
+        /* === Opciones === */
+        .quiz-opciones {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6em;
+        }
+
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 0.8em;
+            padding: 0.8em 1em;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            background: white;
+        }
+
+        .quiz-option:hover { border-color: #1a5490; background: #f0f7ff; }
+        .quiz-option.selected { border-color: #1a5490; background: #e7f3ff; }
+
+        .quiz-option.correcta {
+            border-color: #22c55e;
+            background: #f0fdf4;
+        }
+
+        .quiz-option.incorrecta {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .quiz-option.disabled {
+            pointer-events: none;
+            opacity: 0.65;
+        }
+
+        .quiz-option.disabled.correcta { opacity: 1; }
+
+        .quiz-option-letter {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85em;
+            color: #374151;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-option.correcta .quiz-option-letter {
+            background: #22c55e;
+            color: white;
+        }
+
+        .quiz-option.incorrecta .quiz-option-letter {
+            background: #ef4444;
+            color: white;
+        }
+
+        .quiz-option-text {
+            flex: 1;
+            color: #374151;
+            font-size: 0.97em;
+        }
+
+        /* === Feedback === */
+        .quiz-feedback {
+            margin-top: 0.8em;
+            padding: 0.85em 1em;
+            border-radius: 8px;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .quiz-feedback.correcto {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+        }
+
+        .quiz-feedback.incorrecto {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        /* === Panel de puntuación === */
+        .quiz-score-panel {
+            background: linear-gradient(135deg, #0d3b66, #1a5490);
+            color: white;
+            border-radius: 14px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 8px 24px rgba(13, 59, 102, 0.3);
+        }
+
+        .quiz-score-panel h2 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-score-number {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin: 0.2em 0;
+            letter-spacing: -0.02em;
+        }
+
+        .quiz-score-bar-bg {
+            width: 100%;
+            max-width: 420px;
+            height: 14px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 7px;
+            margin: 1em auto;
+            overflow: hidden;
+        }
+
+        .quiz-score-bar-fill {
+            height: 100%;
+            background: #fbbf24;
+            border-radius: 7px;
+            transition: width 0.9s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .quiz-score-message {
+            font-size: 1.15em;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+
+        .quiz-btn-reiniciar {
+            margin-top: 1.25em;
+            padding: 0.8em 2.2em;
+            background: #fbbf24;
+            color: #0d3b66;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+
+        .quiz-btn-reiniciar:hover { background: #fcd34d; }
+
+        /* === Footer === */
+        .quiz-footer {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.78rem;
+            margin-top: 2.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .quiz-footer a { color: #0d3b66; text-decoration: none; font-weight: 600; }
+        .quiz-footer a:hover { text-decoration: underline; }
+
+        /* === Utilidad === */
+        .hidden { display: none !important; }
+
+        /* === Responsive === */
+        @media (max-width: 640px) {
+            body { padding: 0.75rem; }
+            .quiz-container { padding: 1.25rem 1rem; border-radius: 10px; }
+            h1 { font-size: 1.35rem; }
+            .quiz-score-number { font-size: 2.4rem; }
+            .quiz-option { padding: 0.65em 0.8em; }
+        }
+
+        @media print {
+            body { background: white; }
+            .quiz-container { box-shadow: none; }
+            .quiz-btn-reiniciar { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="quiz-container">
+
+    <div class="quiz-site-badge">🎓 GEDparaHispanos.com</div>
+
+    <h1>✏️ Uso de Pronombres en Contextos Cotidianos</h1>
+    <p class="quiz-subtitulo">Identifica el pronombre correcto en situaciones de la vida diaria</p>
+
+    
+    <div class="quiz-texto-lectura">
+        <h2>📄 Texto de referencia</h2>
+        <p>María trabaja en una oficina pequeña con tres compañeros. Ella siempre llega temprano y organiza los documentos que necesitan para el día. Su jefe, quien es muy estricto, revisa todo el trabajo antes de enviarlo a los clientes. Los empleados tienen sus propias computadoras, pero esta que está en el escritorio principal es la más moderna. María piensa que su trabajo es importante y que ella puede ayudar mucho a la empresa.</p>
+    </div>
+
+    <div class="quiz-instrucciones">
+        Lee el texto y selecciona el pronombre correcto para cada oración.
+    </div>
+
+    <div id="quizPreguntas">
+
+        <details class="quiz-pregunta" id="pregunta-0">
+            <summary>Pregunta 1 — En la oración 'Ella siempre llega temprano', el pronombre 'Ella' se refiere a:</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-0">
+                    
+            <div class="quiz-option" data-q="0" data-opt="0" onclick="seleccionarOpcion(this, 0, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">la oficina</span>
+            </div>
+            <div class="quiz-option" data-q="0" data-opt="1" onclick="seleccionarOpcion(this, 0, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">María</span>
+            </div>
+            <div class="quiz-option" data-q="0" data-opt="2" onclick="seleccionarOpcion(this, 0, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">los compañeros</span>
+            </div>
+            <div class="quiz-option" data-q="0" data-opt="3" onclick="seleccionarOpcion(this, 0, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">las computadoras</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-0"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-1">
+            <summary>Pregunta 2 — ¿Cuál es el pronombre posesivo correcto para completar la oración: '_____ jefe es muy estricto'?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-1">
+                    
+            <div class="quiz-option" data-q="1" data-opt="0" onclick="seleccionarOpcion(this, 1, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Su</span>
+            </div>
+            <div class="quiz-option" data-q="1" data-opt="1" onclick="seleccionarOpcion(this, 1, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Sus</span>
+            </div>
+            <div class="quiz-option" data-q="1" data-opt="2" onclick="seleccionarOpcion(this, 1, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Suyo</span>
+            </div>
+            <div class="quiz-option" data-q="1" data-opt="3" onclick="seleccionarOpcion(this, 1, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Suya</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-1"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-2">
+            <summary>Pregunta 3 — En la frase 'esta que está en el escritorio', el pronombre demostrativo 'esta' se refiere a:</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-2">
+                    
+            <div class="quiz-option" data-q="2" data-opt="0" onclick="seleccionarOpcion(this, 2, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">la oficina</span>
+            </div>
+            <div class="quiz-option" data-q="2" data-opt="1" onclick="seleccionarOpcion(this, 2, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">la empresa</span>
+            </div>
+            <div class="quiz-option" data-q="2" data-opt="2" onclick="seleccionarOpcion(this, 2, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">la computadora</span>
+            </div>
+            <div class="quiz-option" data-q="2" data-opt="3" onclick="seleccionarOpcion(this, 2, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">la mesa</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-2"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-3">
+            <summary>Pregunta 4 — En 'Su jefe, quien es muy estricto', el pronombre relativo 'quien' introduce información sobre:</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-3">
+                    
+            <div class="quiz-option" data-q="3" data-opt="0" onclick="seleccionarOpcion(this, 3, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">María</span>
+            </div>
+            <div class="quiz-option" data-q="3" data-opt="1" onclick="seleccionarOpcion(this, 3, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">los empleados</span>
+            </div>
+            <div class="quiz-option" data-q="3" data-opt="2" onclick="seleccionarOpcion(this, 3, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">el jefe</span>
+            </div>
+            <div class="quiz-option" data-q="3" data-opt="3" onclick="seleccionarOpcion(this, 3, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">el trabajo</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-3"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-4">
+            <summary>Pregunta 5 — ¿Qué pronombre personal completaría correctamente: '_____ pueden ayudar mucho a la empresa'?</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-4">
+                    
+            <div class="quiz-option" data-q="4" data-opt="0" onclick="seleccionarOpcion(this, 4, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">Yo</span>
+            </div>
+            <div class="quiz-option" data-q="4" data-opt="1" onclick="seleccionarOpcion(this, 4, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">Tú</span>
+            </div>
+            <div class="quiz-option" data-q="4" data-opt="2" onclick="seleccionarOpcion(this, 4, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">Él</span>
+            </div>
+            <div class="quiz-option" data-q="4" data-opt="3" onclick="seleccionarOpcion(this, 4, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">Nosotros</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-4"></div>
+            </div>
+        </details>
+        <details class="quiz-pregunta" id="pregunta-5">
+            <summary>Pregunta 6 — En 'Los empleados tienen sus propias computadoras', el pronombre posesivo 'sus' indica:</summary>
+            <div class="details-contenido">
+                <div class="quiz-opciones" id="opciones-5">
+                    
+            <div class="quiz-option" data-q="5" data-opt="0" onclick="seleccionarOpcion(this, 5, 0)">
+                <span class="quiz-option-letter">A</span>
+                <span class="quiz-option-text">una computadora de María</span>
+            </div>
+            <div class="quiz-option" data-q="5" data-opt="1" onclick="seleccionarOpcion(this, 5, 1)">
+                <span class="quiz-option-letter">B</span>
+                <span class="quiz-option-text">varias computadoras de una persona</span>
+            </div>
+            <div class="quiz-option" data-q="5" data-opt="2" onclick="seleccionarOpcion(this, 5, 2)">
+                <span class="quiz-option-letter">C</span>
+                <span class="quiz-option-text">una computadora del jefe</span>
+            </div>
+            <div class="quiz-option" data-q="5" data-opt="3" onclick="seleccionarOpcion(this, 5, 3)">
+                <span class="quiz-option-letter">D</span>
+                <span class="quiz-option-text">varias computadoras de varias personas</span>
+            </div>
+                </div>
+                <div class="quiz-feedback hidden" id="feedback-5"></div>
+            </div>
+        </details>
+    </div>
+
+    <!-- Panel de puntuación -->
+    <div class="quiz-score-panel hidden" id="scorePanel">
+        <h2>📊 Resultado final</h2>
+        <div class="quiz-score-number" id="scoreNumber">0/6</div>
+        <div class="quiz-score-bar-bg">
+            <div class="quiz-score-bar-fill" id="scoreBar" style="width: 0%"></div>
+        </div>
+        <div class="quiz-score-message" id="scoreMessage"></div>
+        <div class="quiz-btn-reiniciar" onclick="reiniciarQuiz()">🔄 Reiniciar ejercicio</div>
+    </div>
+
+    <div class="quiz-footer">
+        Ejercicio generado para <a href="https://GEDparaHispanos.com" target="_blank">GEDparaHispanos.com</a>
+        — Preparación GED en español — Uso libre y gratuito
+    </div>
+
+</div>
+
+<script>
+    var respuestasCorrectas = [1,0,2,2,3,3];
+    var explicaciones = ['El pronombre personal \'Ella\' se refiere a María, quien es el sujeto femenino singular mencionado anteriormente.','Su es el pronombre posesivo correcto porque indica que el jefe pertenece a María (una sola persona).','El pronombre demostrativo \'esta\' se refiere a la computadora, indicando cuál específicamente está en el escritorio principal.','El pronombre relativo \'quien\' introduce información adicional sobre el jefe, conectando la descripción \'es muy estricto\'.','Nosotros es el pronombre personal plural que incluye a María y sus compañeros de trabajo.','Sus indica posesión plural: cada empleado (varias personas) tiene su propia computadora (varias computadoras).'];
+    var totalPreguntas = 6;
+    var respondidas = 0;
+    var correctas = 0;
+
+    function seleccionarOpcion(el, qIdx, optIdx) {
+        var pregDiv = document.getElementById('pregunta-' + qIdx);
+        if (pregDiv.classList.contains('respondida-correcta') || pregDiv.classList.contains('respondida-incorrecta')) return;
+
+        var opciones = document.querySelectorAll('#opciones-' + qIdx + ' .quiz-option');
+        for (var i = 0; i < opciones.length; i++) {
+            opciones[i].classList.add('disabled');
+            opciones[i].classList.remove('selected');
+        }
+
+        var esCorrecta = optIdx === respuestasCorrectas[qIdx];
+        var feedbackDiv = document.getElementById('feedback-' + qIdx);
+
+        if (esCorrecta) {
+            el.classList.add('correcta');
+            pregDiv.classList.add('respondida-correcta');
+            feedbackDiv.className = 'quiz-feedback correcto';
+            feedbackDiv.innerHTML = '✅ <strong>¡Correcto!</strong> ' + explicaciones[qIdx];
+            correctas++;
+        } else {
+            el.classList.add('incorrecta');
+            pregDiv.classList.add('respondida-incorrecta');
+            opciones[respuestasCorrectas[qIdx]].classList.add('correcta');
+            feedbackDiv.className = 'quiz-feedback incorrecto';
+            feedbackDiv.innerHTML = '❌ <strong>Incorrecto.</strong> ' + explicaciones[qIdx];
+        }
+
+        feedbackDiv.classList.remove('hidden');
+
+        // Asegurar que el acordeón permanezca abierto
+        pregDiv.setAttribute('open', '');
+
+        respondidas++;
+        if (respondidas === totalPreguntas) mostrarPuntaje();
+    }
+
+    function mostrarPuntaje() {
+        var pct = Math.round((correctas / totalPreguntas) * 100);
+        document.getElementById('scoreNumber').textContent = correctas + '/' + totalPreguntas + ' (' + pct + '%)';
+        document.getElementById('scoreBar').style.width = pct + '%';
+
+        var msg = pct === 100  ? '🌟 ¡Perfecto! ¡Excelente trabajo!' :
+                  pct >= 80   ? '👏 ¡Muy bien! Sigue practicando.' :
+                  pct >= 60   ? '👍 Buen esfuerzo. Repasa los errores.' :
+                                '📚 Sigue practicando. ¡Tú puedes!';
+
+        document.getElementById('scoreMessage').textContent = msg;
+        document.getElementById('scorePanel').classList.remove('hidden');
+        document.getElementById('scorePanel').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function reiniciarQuiz() {
+        respondidas = 0;
+        correctas = 0;
+        document.getElementById('scorePanel').classList.add('hidden');
+
+        for (var i = 0; i < totalPreguntas; i++) {
+            var pregDiv = document.getElementById('pregunta-' + i);
+            pregDiv.classList.remove('respondida-correcta', 'respondida-incorrecta');
+            pregDiv.removeAttribute('open');
+
+            var opciones = document.querySelectorAll('#opciones-' + i + ' .quiz-option');
+            for (var j = 0; j < opciones.length; j++) {
+                opciones[j].classList.remove('disabled', 'selected', 'correcta', 'incorrecta');
+            }
+
+            var fb = document.getElementById('feedback-' + i);
+            fb.className = 'quiz-feedback hidden';
+            fb.innerHTML = '';
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>
