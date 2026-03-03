@@ -1,900 +1,534 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicios de Ortografía — GEDparaHispanos</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios de Oraciones — GEDparaHispanos</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700;900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700;900&display=swap');
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0fdf4;
-            color: #1f2937;
-            padding: 1.25rem 1rem;
-            line-height: 1.5;
-        }
+      body {
+        font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f0fdf4;
+        color: #1f2937;
+        padding: 1.25rem 1rem;
+        line-height: 1.5;
+      }
 
-        .hub-header { text-align: center; margin-bottom: 1.25rem; }
+      /* === Encabezado === */
+      .hub-header { text-align: center; margin-bottom: 1.25rem; }
 
-        .hub-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: linear-gradient(135deg, #065f46, #059669);
-            color: white;
-            padding: 0.25rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
+      .hub-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: linear-gradient(135deg, #065f46, #059669);
+        color: white;
+        padding: 0.25rem 0.9rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
 
-        .hub-header h1 { font-size: 1.5rem; font-weight: 900; color: #065f46; margin-bottom: 0.3rem; }
-        .hub-header p  { color: #6b7280; font-size: 0.88rem; max-width: 580px; margin: 0 auto; }
+      .hub-header h1 {
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: #065f46;
+        margin-bottom: 0.3rem;
+      }
+      .hub-header p {
+        color: #6b7280;
+        font-size: 0.88rem;
+        max-width: 580px;
+        margin: 0 auto;
+      }
 
-        /* === Referencia rápida GED === */
-        .ged-ref {
-            max-width: 980px;
-            margin: 0 auto 1.1rem;
-            background: white;
-            border: 2px solid #d1fae5;
-            border-radius: 10px;
-            padding: 0.75rem 1rem;
-        }
+      /* === Referencia rápida GED === */
+      .ged-ref {
+        max-width: 980px;
+        margin: 0 auto 1.1rem;
+        background: white;
+        border: 2px solid #d1fae5;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+      }
+      .ged-ref-titulo {
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: #065f46;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.5rem;
+      }
+      .ged-ref-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+      .ged-ref-item {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        background: #f0fdf4;
+        border: 1px solid #d1fae5;
+        border-radius: 8px;
+        padding: 0.3rem 0.65rem;
+        font-size: 0.75rem;
+        color: #374151;
+      }
+      .ged-ref-item strong { color: #065f46; }
 
-        .ged-ref-titulo {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: #065f46;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-bottom: 0.5rem;
-        }
+      /* === Filtros === */
+      .hub-filtros-wrap {
+        max-width: 980px;
+        margin: 0 auto 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+      .filtros-fila { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+      .filtros-etiqueta {
+        font-size: 0.73rem;
+        font-weight: 700;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-right: 0.15rem;
+        white-space: nowrap;
+        min-width: 52px;
+      }
 
-        .ged-ref-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+      .filtro-btn {
+        padding: 0.25rem 0.7rem;
+        border: 2px solid #059669;
+        border-radius: 20px;
+        background: white;
+        color: #059669;
+        font-size: 0.76rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.18s;
+        white-space: nowrap;
+      }
+      .filtro-btn:hover { background: #f0fdf4; }
+      .filtro-btn.tema-btn.activo   { background: #059669; border-color: #059669; color: white; }
+      .filtro-btn.nivel-btn.activo  { background: #0369a1; border-color: #0369a1; color: white; }
+      .filtro-btn.formato-btn.activo{ background: #065f46; border-color: #065f46; color: white; }
 
-        .ged-ref-item {
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-            background: #f0fdf4;
-            border: 1px solid #d1fae5;
-            border-radius: 8px;
-            padding: 0.3rem 0.65rem;
-            font-size: 0.75rem;
-            color: #374151;
-        }
-        .ged-ref-item strong { color: #065f46; }
-        .ged-ref-item.destacado { border-color: #059669; background: #dcfce7; }
-        .ged-ref-item.destacado strong { color: #065f46; }
+      /* === Contador === */
+      .hub-contador {
+        text-align: center;
+        color: #9ca3af;
+        font-size: 0.78rem;
+        margin-bottom: 0.65rem;
+      }
 
-        /* === Filtros === */
-        .hub-filtros-wrap {
-            max-width: 980px;
-            margin: 0 auto 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.45rem;
-        }
+      /* === Grid === */
+      .hub-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+        gap: 0.8rem;
+        max-width: 980px;
+        margin: 0 auto;
+      }
 
-        .filtros-fila { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+      /* === Separador de sección === */
+      .seccion-titulo {
+        grid-column: 1 / -1;
+        font-size: 0.78rem;
+        font-weight: 800;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 0.5rem 0 0.1rem;
+        border-bottom: 2px solid #d1fae5;
+        margin-bottom: 0.1rem;
+      }
 
-        .filtros-etiqueta {
-            font-size: 0.73rem;
-            font-weight: 700;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-right: 0.15rem;
-            white-space: nowrap;
-            min-width: 52px;
-        }
+      /* === Tarjeta compacta === */
+      .ejercicio-card {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: all 0.22s ease;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+      }
+      .ejercicio-card:hover {
+        border-color: #059669;
+        box-shadow: 0 4px 14px rgba(5,150,105,0.15);
+        transform: translateY(-2px);
+      }
 
-        .filtro-btn {
-            padding: 0.25rem 0.7rem;
-            border: 2px solid #059669;
-            border-radius: 20px;
-            background: white;
-            color: #059669;
-            font-size: 0.76rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.18s;
-            white-space: nowrap;
-        }
+      /* Franjas de color por tema */
+      .card-franja               { height: 4px; background: #059669; }
+      .card-franja.sujeto_predicado { background: linear-gradient(90deg, #0369a1, #0ea5e9); }
+      .card-franja.tipos_oracion    { background: linear-gradient(90deg, #7c3aed, #a855f7); }
+      .card-franja.fragmentos       { background: linear-gradient(90deg, #dc2626, #ef4444); }
+      .card-franja.run_on           { background: linear-gradient(90deg, #d97706, #f59e0b); }
+      .card-franja.compuestas       { background: linear-gradient(90deg, #0891b2, #06b6d4); }
+      .card-franja.complejas        { background: linear-gradient(90deg, #065f46, #059669); }
+      .card-franja.clausulas        { background: linear-gradient(90deg, #be185d, #ec4899); }
+      .card-franja.mejoramiento     { background: linear-gradient(90deg, #374151, #6b7280); }
+      .card-franja.mixto            { background: linear-gradient(90deg, #065f46, #34d399); }
 
-        .filtro-btn:hover { background: #f0fdf4; }
-        .filtro-btn.tema-btn.activo   { background: #059669; border-color: #059669; color: white; }
-        .filtro-btn.nivel-btn.activo  { background: #0d3b66; border-color: #0d3b66; color: white; }
-        .filtro-btn.formato-btn.activo{ background: #7c3aed; border-color: #7c3aed; color: white; }
+      .card-inner {
+        padding: 0.7rem 0.9rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+      .card-top { display: flex; align-items: flex-start; gap: 0.45rem; }
+      .card-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1.3; }
+      .card-titulo {
+        font-weight: 700;
+        font-size: 0.88rem;
+        color: #065f46;
+        line-height: 1.35;
+        flex: 1;
+      }
 
-        .hub-contador {
-            text-align: center;
-            color: #9ca3af;
-            font-size: 0.78rem;
-            margin-bottom: 0.65rem;
-        }
+      /* Badge de formato */
+      .badge-formato {
+        flex-shrink: 0;
+        padding: 0.12rem 0.45rem;
+        border-radius: 10px;
+        font-size: 0.66rem;
+        font-weight: 700;
+        white-space: nowrap;
+        align-self: flex-start;
+      }
+      .badge-formato.identificar { background: #dbeafe; color: #1d4ed8; }
+      .badge-formato.corregir    { background: #fee2e2; color: #991b1b; }
+      .badge-formato.completar   { background: #d1fae5; color: #065f46; }
+      .badge-formato.elegir      { background: #ede9fe; color: #5b21b6; }
+      .badge-formato.mixto       { background: #fef3c7; color: #92400e; }
 
-        .hub-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
-            gap: 0.8rem;
-            max-width: 980px;
-            margin: 0 auto;
-        }
+      .card-descripcion { font-size: 0.78rem; color: #6b7280; line-height: 1.4; }
+      .card-meta { display: flex; flex-wrap: wrap; gap: 0.28rem; }
 
-        .seccion-titulo {
-            grid-column: 1 / -1;
-            font-size: 0.78rem;
-            font-weight: 800;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            padding: 0.5rem 0 0.1rem;
-            border-bottom: 2px solid #d1fae5;
-            margin-bottom: 0.1rem;
-        }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.12rem 0.45rem;
+        border-radius: 10px;
+        font-size: 0.68rem;
+        font-weight: 700;
+      }
 
-        /* === Tarjeta === */
-        .ejercicio-card {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.22s ease;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-        }
+      /* Tags por tema */
+      .tag-sujeto_predicado { background: #dbeafe; color: #1e40af; }
+      .tag-tipos_oracion    { background: #ede9fe; color: #5b21b6; }
+      .tag-fragmentos       { background: #fee2e2; color: #991b1b; }
+      .tag-run_on           { background: #fef3c7; color: #92400e; }
+      .tag-compuestas       { background: #e0f2fe; color: #0369a1; }
+      .tag-complejas        { background: #d1fae5; color: #065f46; }
+      .tag-clausulas        { background: #fce7f3; color: #9d174d; }
+      .tag-mejoramiento     { background: #f3f4f6; color: #374151; }
+      .tag-mixto            { background: #ecfdf5; color: #065f46; }
 
-        .ejercicio-card:hover {
-            border-color: #059669;
-            box-shadow: 0 4px 14px rgba(5,150,105,0.15);
-            transform: translateY(-2px);
-        }
+      /* Tags de nivel */
+      .tag-basico      { background: #dcfce7; color: #166534; }
+      .tag-intermedio  { background: #dbeafe; color: #1e40af; }
+      .tag-avanzado    { background: #f3e8ff; color: #6b21a8; }
 
-        /* Franjas de color por tema ortográfico */
-        .card-franja              { height: 4px; background: #059669; }
-        .card-franja.acentuacion  { background: linear-gradient(90deg,#dc2626,#ef4444); }
-        .card-franja.puntuacion   { background: linear-gradient(90deg,#0d3b66,#1a5490); }
-        .card-franja.mayusculas   { background: linear-gradient(90deg,#d97706,#f59e0b); }
-        .card-franja.bv           { background: linear-gradient(90deg,#7c3aed,#a855f7); }
-        .card-franja.csz          { background: linear-gradient(90deg,#be185d,#ec4899); }
-        .card-franja.h            { background: linear-gradient(90deg,#0891b2,#06b6d4); }
-        .card-franja.haber        { background: linear-gradient(90deg,#065f46,#059669); }
-        .card-franja.mixto        { background: linear-gradient(90deg,#374151,#6b7280); }
+      .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.45rem 0.9rem 0.6rem;
+        border-top: 1px solid #f3f4f6;
+      }
+      .card-fecha { font-size: 0.68rem; color: #9ca3af; }
+      .card-abrir {
+        padding: 0.25rem 0.7rem;
+        background: #059669;
+        color: white;
+        border-radius: 6px;
+        font-size: 0.73rem;
+        font-weight: 700;
+        transition: background 0.18s;
+      }
+      .ejercicio-card:hover .card-abrir { background: #047857; }
 
-        .card-inner {
-            padding: 0.7rem 0.9rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.45rem;
-        }
+      /* === Sin resultados === */
+      .sin-resultados {
+        text-align: center;
+        color: #9ca3af;
+        font-size: 0.9rem;
+        padding: 2rem;
+        display: none;
+        grid-column: 1 / -1;
+      }
 
-        .card-top { display: flex; align-items: flex-start; gap: 0.45rem; }
-        .card-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1.3; }
+      /* === Footer === */
+      .hub-footer {
+        text-align: center;
+        color: #9ca3af;
+        font-size: 0.75rem;
+        margin-top: 1.5rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid #e5e7eb;
+        max-width: 980px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hub-footer a { color: #065f46; text-decoration: none; font-weight: 700; }
+      .hub-footer a:hover { text-decoration: underline; }
 
-        .card-titulo {
-            font-weight: 700;
-            font-size: 0.88rem;
-            color: #065f46;
-            line-height: 1.35;
-            flex: 1;
-        }
-
-        .badge-formato {
-            flex-shrink: 0;
-            padding: 0.12rem 0.45rem;
-            border-radius: 10px;
-            font-size: 0.66rem;
-            font-weight: 700;
-            white-space: nowrap;
-            align-self: flex-start;
-        }
-        .badge-formato.corregir  { background: #fee2e2; color: #991b1b; }
-        .badge-formato.completar { background: #d1fae5; color: #065f46; }
-        .badge-formato.elegir    { background: #dbeafe; color: #1d4ed8; }
-        .badge-formato.mixto     { background: #fef3c7; color: #92400e; }
-
-        .card-descripcion { font-size: 0.78rem; color: #6b7280; line-height: 1.4; }
-
-        .card-meta { display: flex; flex-wrap: wrap; gap: 0.28rem; }
-
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.12rem 0.45rem;
-            border-radius: 10px;
-            font-size: 0.68rem;
-            font-weight: 700;
-        }
-
-        /* Tags por tema ortográfico */
-        .tag-acentuacion { background: #fee2e2; color: #991b1b; }
-        .tag-puntuacion  { background: #dbeafe; color: #1d4ed8; }
-        .tag-mayusculas  { background: #fef3c7; color: #92400e; }
-        .tag-bv          { background: #ede9fe; color: #5b21b6; }
-        .tag-csz         { background: #fce7f3; color: #9d174d; }
-        .tag-h           { background: #e0f2fe; color: #0369a1; }
-        .tag-haber       { background: #dcfce7; color: #065f46; }
-        .tag-mixto       { background: #f3f4f6; color: #374151; }
-
-        .tag-basico     { background: #dcfce7; color: #166534; }
-        .tag-intermedio { background: #dbeafe; color: #1e40af; }
-        .tag-avanzado   { background: #f3e8ff; color: #6b21a8; }
-
-        .card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.45rem 0.9rem 0.6rem;
-            border-top: 1px solid #f3f4f6;
-        }
-
-        .card-fecha { font-size: 0.68rem; color: #9ca3af; }
-
-        .card-abrir {
-            padding: 0.25rem 0.7rem;
-            background: #059669;
-            color: white;
-            border-radius: 6px;
-            font-size: 0.73rem;
-            font-weight: 700;
-            transition: background 0.18s;
-        }
-
-        .ejercicio-card:hover .card-abrir { background: #047857; }
-
-        .sin-resultados {
-            text-align: center;
-            color: #9ca3af;
-            font-size: 0.9rem;
-            padding: 2rem;
-            display: none;
-            grid-column: 1 / -1;
-        }
-
-        .hub-footer {
-            text-align: center;
-            color: #9ca3af;
-            font-size: 0.75rem;
-            margin-top: 1.5rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid #e5e7eb;
-            max-width: 980px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .hub-footer a { color: #059669; text-decoration: none; font-weight: 700; }
-        .hub-footer a:hover { text-decoration: underline; }
-
-        @media (max-width: 480px) {
-            .hub-header h1 { font-size: 1.2rem; }
-            .hub-grid { grid-template-columns: 1fr; }
-            .filtro-btn { font-size: 0.72rem; padding: 0.22rem 0.55rem; }
-        }
+      @media (max-width: 480px) {
+        .hub-header h1  { font-size: 1.2rem; }
+        .hub-grid       { grid-template-columns: 1fr; }
+        .filtro-btn     { font-size: 0.72rem; padding: 0.22rem 0.55rem; }
+        .ged-ref-grid   { flex-direction: column; }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
 
-<!-- ENCABEZADO -->
-<div class="hub-header">
-    <div class="hub-badge">🎓 GEDparaHispanos.com</div>
-    <h1>📝 Ejercicios de Ortografía</h1>
-    <p>Practica las reglas ortográficas del español evaluadas en el GED. Corrige, completa y elige la forma correcta. Gratis y sin registro.</p>
-</div>
-
-<!-- REFERENCIA RÁPIDA GED -->
-<div class="ged-ref">
-    <div class="ged-ref-titulo">📋 Temas ortográficos evaluados en el GED — Artes del Lenguaje</div>
-    <div class="ged-ref-grid">
-        <div class="ged-ref-item">🔴 <strong>Acentuación</strong> agudas, llanas, esdrújulas, tilde diacrítica</div>
-        <div class="ged-ref-item">🔵 <strong>Puntuación</strong> coma, punto, punto y coma, dos puntos</div>
-        <div class="ged-ref-item">🟡 <strong>Mayúsculas</strong> nombres propios, inicio de oración</div>
-        <div class="ged-ref-item">🟣 <strong>B y V</strong> reglas de uso y excepciones</div>
-        <div class="ged-ref-item">🌸 <strong>C, S, Z</strong> reglas y seseo hispanoamericano</div>
-        <div class="ged-ref-item">🔷 <strong>La H</strong> palabras con y sin H muda</div>
-        <div class="ged-ref-item destacado">★ <strong>Verbo haber</strong> hay/ahí/ay · haber/a ver · he/eh · hola/ola</div>
+    <!-- ENCABEZADO -->
+    <div class="hub-header">
+      <div class="hub-badge">🎓 GEDparaHispanos.com</div>
+      <h1>📝 Ejercicios de Oraciones</h1>
+      <p>Practica las partes y tipos de oración del examen GED en español. Identifica fragmentos, conecta ideas y mejora tu escritura. Gratis y sin registro.</p>
     </div>
-</div>
 
-<!-- FILTROS -->
-<div class="hub-filtros-wrap">
+    <!-- REFERENCIA RÁPIDA GED -->
+    <div class="ged-ref">
+      <div class="ged-ref-titulo">📋 Temas de oraciones evaluados en el GED — Artes del Lenguaje</div>
+      <div class="ged-ref-grid">
+        <div class="ged-ref-item">🔍 <strong>Sujeto y predicado</strong> quién y qué se dice</div>
+        <div class="ged-ref-item">📋 <strong>Tipos de oración</strong> declarativa, interrogativa, exclamativa, imperativa</div>
+        <div class="ged-ref-item">✂️ <strong>Fragmentos</strong> vs. oraciones completas</div>
+        <div class="ged-ref-item">⚠️ <strong>Run-on</strong> oraciones fusionadas sin puntuación</div>
+        <div class="ged-ref-item">🔗 <strong>Oraciones compuestas</strong> conectores coordinantes</div>
+        <div class="ged-ref-item">🧩 <strong>Oraciones complejas</strong> principal + subordinada</div>
+        <div class="ged-ref-item">📎 <strong>Cláusulas</strong> independientes y dependientes</div>
+        <div class="ged-ref-item">✏️ <strong>Mejoramiento</strong> reescribir con claridad</div>
+      </div>
+    </div>
 
-    <div class="filtros-fila">
+    <!-- FILTROS -->
+    <div class="hub-filtros-wrap">
+      <div class="filtros-fila">
         <span class="filtros-etiqueta">Tema:</span>
-        <div class="filtro-btn tema-btn activo" onclick="filtrar('tema','todos',this)">🗂️ Todos</div>
-        <div class="filtro-btn tema-btn" onclick="filtrar('tema','acentuacion',this)">🔴 Acentuación</div>
-        <div class="filtro-btn tema-btn" onclick="filtrar('tema','puntuacion',this)">🔵 Puntuación</div>
-        <div class="filtro-btn tema-btn" onclick="filtrar('tema','mayusculas',this)">🟡 Mayúsculas</div>
-        <div class="filtro-btn tema-btn" onclick="filtrar('tema','bv',this)">🟣 B y V</div>
-        <div class="filtro-btn tema-btn" onclick="filtrar('tema','csz',this)">🌸 C, S, Z</div>
-        <div class="filtro-btn tema-btn" onclick="filtrar('tema','h',this)">🔷 La H</div>
-        <div class="filtro-btn tema-btn" onclick="filtrar('tema','haber',this)">★ Verbo haber</div>
-        <div class="filtro-btn tema-btn" onclick="filtrar('tema','mixto',this)">⭐ Mixto</div>
-    </div>
+        <div class="filtro-btn tema-btn activo"       onclick="filtrar('tema','todos',this)">🗂️ Todos</div>
+        <div class="filtro-btn tema-btn"              onclick="filtrar('tema','sujeto_predicado',this)">🔍 Sujeto/predicado</div>
+        <div class="filtro-btn tema-btn"              onclick="filtrar('tema','tipos_oracion',this)">📋 Tipos</div>
+        <div class="filtro-btn tema-btn"              onclick="filtrar('tema','fragmentos',this)">✂️ Fragmentos</div>
+        <div class="filtro-btn tema-btn"              onclick="filtrar('tema','run_on',this)">⚠️ Run-on</div>
+        <div class="filtro-btn tema-btn"              onclick="filtrar('tema','compuestas',this)">🔗 Compuestas</div>
+        <div class="filtro-btn tema-btn"              onclick="filtrar('tema','complejas',this)">🧩 Complejas</div>
+        <div class="filtro-btn tema-btn"              onclick="filtrar('tema','clausulas',this)">📎 Cláusulas</div>
+        <div class="filtro-btn tema-btn"              onclick="filtrar('tema','mejoramiento',this)">✏️ Mejoramiento</div>
+        <div class="filtro-btn tema-btn"              onclick="filtrar('tema','mixto',this)">⭐ Mixto</div>
+      </div>
 
-    <div class="filtros-fila">
+      <div class="filtros-fila">
         <span class="filtros-etiqueta">Nivel:</span>
         <div class="filtro-btn nivel-btn activo" onclick="filtrar('nivel','todos',this)">📚 Todos</div>
-        <div class="filtro-btn nivel-btn" onclick="filtrar('nivel','basico',this)">🟢 Básico</div>
-        <div class="filtro-btn nivel-btn" onclick="filtrar('nivel','intermedio',this)">📘 Intermedio</div>
-        <div class="filtro-btn nivel-btn" onclick="filtrar('nivel','avanzado',this)">🎓 Avanzado</div>
-    </div>
+        <div class="filtro-btn nivel-btn"        onclick="filtrar('nivel','basico',this)">🟢 Básico</div>
+        <div class="filtro-btn nivel-btn"        onclick="filtrar('nivel','intermedio',this)">📘 Intermedio</div>
+        <div class="filtro-btn nivel-btn"        onclick="filtrar('nivel','avanzado',this)">🎓 Avanzado</div>
+      </div>
 
-    <div class="filtros-fila">
+      <div class="filtros-fila">
         <span class="filtros-etiqueta">Formato:</span>
         <div class="filtro-btn formato-btn activo" onclick="filtrar('formato','todos',this)">📄 Todos</div>
-        <div class="filtro-btn formato-btn" onclick="filtrar('formato','corregir',this)">🔴 Corregir errores</div>
-        <div class="filtro-btn formato-btn" onclick="filtrar('formato','completar',this)">🟢 Completar espacios</div>
-        <div class="filtro-btn formato-btn" onclick="filtrar('formato','elegir',this)">🔵 Elegir la mejor versión</div>
-        <div class="filtro-btn formato-btn" onclick="filtrar('formato','mixto',this)">⭐ Mixto</div>
+        <div class="filtro-btn formato-btn"        onclick="filtrar('formato','identificar',this)">🔍 Identificar</div>
+        <div class="filtro-btn formato-btn"        onclick="filtrar('formato','corregir',this)">🔴 Corregir</div>
+        <div class="filtro-btn formato-btn"        onclick="filtrar('formato','completar',this)">🟢 Completar</div>
+        <div class="filtro-btn formato-btn"        onclick="filtrar('formato','elegir',this)">🔵 Elegir versión</div>
+        <div class="filtro-btn formato-btn"        onclick="filtrar('formato','mixto',this)">⭐ Mixto</div>
+      </div>
     </div>
 
-</div>
+    <div class="hub-contador" id="contador"></div>
 
-<div class="hub-contador" id="contador"></div>
+    <!-- GRID DE EJERCICIOS -->
+    <div class="hub-grid" id="hubGrid">
 
-<!-- GRID -->
-<div class="hub-grid" id="hubGrid">
+      <!-- ══════════════════════════════════════
+           SUJETO Y PREDICADO
+      ══════════════════════════════════════ -->
+      <div class="seccion-titulo" data-seccion="sujeto_predicado">🔍 Sujeto y predicado — quién realiza la acción y qué se dice</div>
 
-    <!-- INSERTA AQUÍ LAS NUEVAS TARJETAS -->
+      <!-- INSERTA AQUÍ las tarjetas de sujeto_predicado -->
 
-    <!-- INSERTA AQUÍ LAS NUEVAS TARJETAS -->
+      <!-- ══════════════════════════════════════
+           TIPOS DE ORACIÓN
+      ══════════════════════════════════════ -->
+      <div class="seccion-titulo" data-seccion="tipos_oracion">📋 Tipos de oración — declarativa, interrogativa, exclamativa, imperativa</div>
 
-<div class="seccion-titulo" data-seccion="acentuacion">🔴 Acentuación</div>
-<!-- tarjetas de acentuación aquí -->
- <a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-bas-cor-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="basico"
-   data-formato="corregir">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Acentuación Correcta</span>
-            <span class="badge-formato corregir">🔴 Corregir</span>
-        </div>
-        <p class="card-descripcion">Practica las reglas de acentuación en español</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-basico">🟢 Básico</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-int-cor-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="intermedio"
-   data-formato="corregir">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Ejercicio de Acentuación</span>
-            <span class="badge-formato corregir">🔴 Corregir</span>
-        </div>
-        <p class="card-descripcion">Practica las reglas de acentuación en palabras agudas, graves, esdrújulas, hiatos, diptongos y acento diacrítico</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-intermedio">📘 Intermedio</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-avz-cor-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="avanzado"
-   data-formato="corregir">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Ortografía: Acentuación</span>
-            <span class="badge-formato corregir">🔴 Corregir</span>
-        </div>
-        <p class="card-descripcion">Practica las reglas de acentuación en palabras agudas, graves, esdrújulas y casos especiales</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-avanzado">🎓 Avanzado</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-bas-com-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="basico"
-   data-formato="completar">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Ejercicio de Acentuación</span>
-            <span class="badge-formato completar">🟢 Completar</span>
-        </div>
-        <p class="card-descripcion">Practica las reglas de acentuación en español</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-basico">🟢 Básico</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
+      <!-- INSERTA AQUÍ las tarjetas de tipos_oracion -->
 
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-int-com-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="intermedio"
-   data-formato="completar">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Ortografía: Acentuación y Reglas de Tildes</span>
-            <span class="badge-formato completar">🟢 Completar</span>
-        </div>
-        <p class="card-descripcion">Practica las reglas de acentuación en español</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-intermedio">📘 Intermedio</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-avz-com-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="avanzado"
-   data-formato="completar">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Acentuación: Reglas Ortográficas Avanzadas</span>
-            <span class="badge-formato completar">🟢 Completar</span>
-        </div>
-        <p class="card-descripcion">Practica las reglas de acentuación en contextos académicos y profesionales</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-avanzado">🎓 Avanzado</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-bas-ele-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="basico"
-   data-formato="elegir">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Ejercicio de Acentuación</span>
-            <span class="badge-formato elegir">🔵 Elegir</span>
-        </div>
-        <p class="card-descripcion">Practica las reglas de acentuación en español</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-basico">🟢 Básico</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-int-ele-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="intermedio"
-   data-formato="elegir">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Ejercicio de Acentuación</span>
-            <span class="badge-formato elegir">🔵 Elegir</span>
-        </div>
-        <p class="card-descripcion">Práctica con reglas de acentuación en contextos reales</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-intermedio">📘 Intermedio</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-avz-ele-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="avanzado"
-   data-formato="elegir">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Acentuación: Reglas Ortográficas Fundamentales</span>
-            <span class="badge-formato elegir">🔵 Elegir</span>
-        </div>
-        <p class="card-descripcion">Ejercicios de tildación en palabras agudas, graves, esdrújulas y casos especiales</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-avanzado">🎓 Avanzado</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-bas-mix-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="basico"
-   data-formato="mixto">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Práctica de Acentuación</span>
-            <span class="badge-formato mixto">⭐ Mixto</span>
-        </div>
-        <p class="card-descripcion">Ejercicios con palabras agudas, graves, esdrújulas y acentos especiales</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-basico">🟢 Básico</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-int-mix-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="intermedio"
-   data-formato="mixto">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Ejercicio de Acentuación</span>
-            <span class="badge-formato mixto">⭐ Mixto</span>
-        </div>
-        <p class="card-descripcion">Practica las reglas de acentuación en palabras agudas, graves, esdrújulas y casos especiales</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-intermedio">📘 Intermedio</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-acentuacion-avz-mix-2026-03-03.html"
-   target="_blank"
-   data-tema="acentuacion"
-   data-nivel="avanzado"
-   data-formato="mixto">
-    <div class="card-franja acentuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">´</span>
-            <span class="card-titulo">Acentuación Avanzada</span>
-            <span class="badge-formato mixto">⭐ Mixto</span>
-        </div>
-        <p class="card-descripcion">Domina las reglas de acentuación en contextos académicos y profesionales</p>
-        <div class="card-meta">
-            <span class="tag tag-acentuacion">´ Acentuación</span>
-            <span class="tag tag-avanzado">🎓 Avanzado</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
+      <!-- ══════════════════════════════════════
+           FRAGMENTOS
+      ══════════════════════════════════════ -->
+      <div class="seccion-titulo" data-seccion="fragmentos">✂️ Fragmentos vs. oraciones completas — identificar y corregir</div>
+
+      <!-- INSERTA AQUÍ las tarjetas de fragmentos -->
+
+      <!-- ══════════════════════════════════════
+           RUN-ON
+      ══════════════════════════════════════ -->
+      <div class="seccion-titulo" data-seccion="run_on">⚠️ Run-on — oraciones fusionadas sin puntuación correcta</div>
+
+      <!-- INSERTA AQUÍ las tarjetas de run_on -->
+
+      <!-- ══════════════════════════════════════
+           ORACIONES COMPUESTAS
+      ══════════════════════════════════════ -->
+      <div class="seccion-titulo" data-seccion="compuestas">🔗 Oraciones compuestas — conectores coordinantes</div>
+
+      <!-- INSERTA AQUÍ las tarjetas de compuestas -->
+
+      <!-- ══════════════════════════════════════
+           ORACIONES COMPLEJAS
+      ══════════════════════════════════════ -->
+      <div class="seccion-titulo" data-seccion="complejas">🧩 Oraciones complejas — principal + subordinada</div>
+
+      <!-- INSERTA AQUÍ las tarjetas de complejas -->
+
+      <!-- ══════════════════════════════════════
+           CLÁUSULAS
+      ══════════════════════════════════════ -->
+      <div class="seccion-titulo" data-seccion="clausulas">📎 Cláusulas independientes y dependientes</div>
+
+      <!-- INSERTA AQUÍ las tarjetas de clausulas -->
+
+      <!-- ══════════════════════════════════════
+           MEJORAMIENTO
+      ══════════════════════════════════════ -->
+      <div class="seccion-titulo" data-seccion="mejoramiento">✏️ Mejoramiento de oraciones — reescribir con claridad</div>
+
+      <!-- INSERTA AQUÍ las tarjetas de mejoramiento -->
+
+      <!-- ══════════════════════════════════════
+           MIXTOS
+      ══════════════════════════════════════ -->
+      <div class="seccion-titulo" data-seccion="mixto">⭐ Ejercicios mixtos — varios temas combinados</div>
+
+      <!-- INSERTA AQUÍ las tarjetas mixtas -->
 
 
-
-<div class="seccion-titulo" data-seccion="puntuacion">🔵 Puntuación</div>
-<!-- tarjetas de puntuación aquí -->
-
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-puntuacion-bas-cor-2026-03-03.html"
-   target="_blank"
-   data-tema="puntuacion"
-   data-nivel="basico"
-   data-formato="corregir">
-    <div class="card-franja puntuacion"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">,.:</span>
-            <span class="card-titulo">Ortografía: Puntuación y Mayúsculas</span>
-            <span class="badge-formato corregir">🔴 Corregir</span>
-        </div>
-        <p class="card-descripcion">Practica el uso correcto de signos de puntuación y mayúsculas</p>
-        <div class="card-meta">
-            <span class="tag tag-puntuacion">,.: Puntuación</span>
-            <span class="tag tag-basico">🟢 Básico</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-
-
-
-<div class="seccion-titulo" data-seccion="mayusculas">🟡 Mayúsculas</div>
-<!-- tarjetas de mayúsculas aquí -->
- <a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-mayusculas-bas-cor-2026-03-03.html"
-   target="_blank"
-   data-tema="mayusculas"
-   data-nivel="basico"
-   data-formato="corregir">
-    <div class="card-franja mayusculas"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">ABC</span>
-            <span class="card-titulo">Uso correcto de mayúsculas</span>
-            <span class="badge-formato corregir">🔴 Corregir</span>
-        </div>
-        <p class="card-descripcion">Practica las reglas de mayúsculas en oraciones</p>
-        <div class="card-meta">
-            <span class="tag tag-mayusculas">ABC Mayúsculas</span>
-            <span class="tag tag-basico">🟢 Básico</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-
-<div class="seccion-titulo" data-seccion="bv">🟣 B y V</div>
-<!-- tarjetas de b/v aquí -->
- <a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-bv-bas-cor-2026-03-03.html"
-   target="_blank"
-   data-tema="bv"
-   data-nivel="basico"
-   data-formato="corregir">
-    <div class="card-franja bv"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">B/V</span>
-            <span class="card-titulo">Ortografía: Uso de B y V</span>
-            <span class="badge-formato corregir">🔴 Corregir</span>
-        </div>
-        <p class="card-descripcion">Practica las reglas de escritura con B y V</p>
-        <div class="card-meta">
-            <span class="tag tag-bv">B/V B y V</span>
-            <span class="tag tag-basico">🟢 Básico</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-
-<div class="seccion-titulo" data-seccion="csz">🌸 C, S, Z</div>
-<!-- tarjetas de c/s/z aquí -->
- <a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-csz-bas-cor-2026-03-03.html"
-   target="_blank"
-   data-tema="csz"
-   data-nivel="basico"
-   data-formato="corregir">
-    <div class="card-franja csz"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">C/S/Z</span>
-            <span class="card-titulo">Ortografía: Uso correcto de C, S y Z</span>
-            <span class="badge-formato corregir">🔴 Corregir</span>
-        </div>
-        <p class="card-descripcion">Practica la escritura correcta de palabras con C, S y Z</p>
-        <div class="card-meta">
-            <span class="tag tag-csz">C/S/Z C, S, Z</span>
-            <span class="tag tag-basico">🟢 Básico</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-
-<div class="seccion-titulo" data-seccion="h">🔷 La H</div>
-<!-- tarjetas de la h aquí -->
-
-<div class="seccion-titulo" data-seccion="haber">★ El verbo haber</div>
-<!-- tarjetas de haber aquí -->
-<a class="ejercicio-card"
-   href="https://zhemaria.github.io/artes-del-lenguaje/ortografia/or-haber-bas-cor-2026-03-03.html"
-   target="_blank"
-   data-tema="haber"
-   data-nivel="basico"
-   data-formato="corregir">
-    <div class="card-franja haber"></div>
-    <div class="card-inner">
-        <div class="card-top">
-            <span class="card-icon">★H</span>
-            <span class="card-titulo">Ejercicio de Ortografía Básica</span>
-            <span class="badge-formato corregir">🔴 Corregir</span>
-        </div>
-        <p class="card-descripcion">Práctica de escritura correcta en español</p>
-        <div class="card-meta">
-            <span class="tag tag-haber">★H Verbo haber</span>
-            <span class="tag tag-basico">🟢 Básico</span>
-        </div>
-    </div>
-    <div class="card-footer">
-        <span class="card-fecha">📅 2026-03-03</span>
-        <span class="card-abrir">Abrir →</span>
-    </div>
-</a>
-
-
-
-
-
-
-<div class="seccion-titulo" data-seccion="mixto">⭐ Mixto</div>
-<!-- tarjetas mixtas aquí -->
-
-    <!-- SIN RESULTADOS -->
-    <div class="sin-resultados" id="sinResultados">
+      <!-- ══════════════════════════════════════
+           SIN RESULTADOS
+      ══════════════════════════════════════ -->
+      <div class="sin-resultados" id="sinResultados">
         😕 No hay ejercicios con esos filtros todavía. ¡Pronto habrá más!
+      </div>
+
+
+      <!-- ============================================================
+        PLANTILLA para agregar nuevos ejercicios:
+
+      <a class="ejercicio-card"
+         href="https://zhemaria.github.io/artes-del-lenguaje/oraciones/NOMBRE-ARCHIVO.html"
+         target="_blank"
+         data-tema="fragmentos"
+         data-nivel="intermedio"
+         data-formato="corregir">
+          <div class="card-franja fragmentos"></div>
+          <div class="card-inner">
+              <div class="card-top">
+                  <span class="card-icon">✂️</span>
+                  <span class="card-titulo">Título del ejercicio</span>
+                  <span class="badge-formato corregir">🔴 Corregir</span>
+              </div>
+              <p class="card-descripcion">Breve descripción del ejercicio.</p>
+              <div class="card-meta">
+                  <span class="tag tag-fragmentos">✂️ Fragmentos</span>
+                  <span class="tag tag-intermedio">📘 Intermedio</span>
+              </div>
+          </div>
+          <div class="card-footer">
+              <span class="card-fecha">📅 YYYY-MM-DD</span>
+              <span class="card-abrir">Abrir →</span>
+          </div>
+      </a>
+
+      data-tema values:
+        sujeto_predicado | tipos_oracion | fragmentos | run_on
+        compuestas | complejas | clausulas | mejoramiento | mixto
+
+      Franjas:  mismos valores que data-tema
+      Iconos:   🔍 📋 ✂️ ⚠️ 🔗 🧩 📎 ✏️ ⭐
+      Formatos: identificar | corregir | completar | elegir | mixto
+      Badges:   identificar=🔍  corregir=🔴  completar=🟢  elegir=🔵  mixto=⭐
+      Tags tema:  tag-sujeto_predicado | tag-tipos_oracion | tag-fragmentos | tag-run_on
+                  tag-compuestas | tag-complejas | tag-clausulas | tag-mejoramiento | tag-mixto
+      Tags nivel: tag-basico | tag-intermedio | tag-avanzado
+      ============================================================ -->
+
+    </div><!-- /hub-grid -->
+
+    <!-- FOOTER -->
+    <div class="hub-footer">
+      <a href="https://GEDparaHispanos.com" target="_blank">GEDparaHispanos.com</a>
+      — Preparación GED en español — Acceso libre y gratuito
     </div>
 
-    <!-- ============================================================
-         PLANTILLA para agregar nuevos ejercicios:
+    <script>
+      var filtroActivo = { tema: 'todos', nivel: 'todos', formato: 'todos' };
 
-    <a class="ejercicio-card"
-       href="URL_EN_GITHUB"
-       target="_blank"
-       data-tema="haber"
-       data-nivel="basico"
-       data-formato="completar">
-        <div class="card-franja haber"></div>
-        <div class="card-inner">
-            <div class="card-top">
-                <span class="card-icon">★</span>
-                <span class="card-titulo">Título del ejercicio</span>
-                <span class="badge-formato completar">🟢 Completar</span>
-            </div>
-            <p class="card-descripcion">Breve descripción.</p>
-            <div class="card-meta">
-                <span class="tag tag-haber">★ Verbo haber</span>
-                <span class="tag tag-basico">🟢 Básico</span>
-            </div>
-        </div>
-        <div class="card-footer">
-            <span class="card-fecha">📅 YYYY-MM-DD</span>
-            <span class="card-abrir">Abrir →</span>
-        </div>
-    </a>
-
-    Franjas:   acentuacion | puntuacion | mayusculas | bv | csz | h | haber | mixto
-    Badges:    corregir | completar | elegir | mixto
-    Tags tema: tag-acentuacion | tag-puntuacion | tag-mayusculas | tag-bv | tag-csz | tag-h | tag-haber | tag-mixto
-    Tags nivel: tag-basico | tag-intermedio | tag-avanzado
-    ============================================================ -->
-
-</div>
-
-<!-- FOOTER -->
-<div class="hub-footer">
-    <a href="https://GEDparaHispanos.com" target="_blank">GEDparaHispanos.com</a>
-    — Preparación GED en español — Acceso libre y gratuito
-</div>
-
-<script>
-    var filtroActivo = { tema: 'todos', nivel: 'todos', formato: 'todos' };
-
-    function filtrar(grupo, valor, btn) {
-        document.querySelectorAll('.' + grupo + '-btn').forEach(function(b) {
-            b.classList.remove('activo');
+      function filtrar(grupo, valor, btn) {
+        document.querySelectorAll('.' + grupo + '-btn').forEach(function (b) {
+          b.classList.remove('activo');
         });
         btn.classList.add('activo');
         filtroActivo[grupo] = valor;
         aplicarFiltros();
-    }
+      }
 
-    function aplicarFiltros() {
-        var cards = document.querySelectorAll('.ejercicio-card');
+      function aplicarFiltros() {
+        var cards    = document.querySelectorAll('.ejercicio-card');
         var visibles = 0;
 
-        cards.forEach(function(card) {
-            var tema    = card.getAttribute('data-tema')    || '';
-            var nivel   = card.getAttribute('data-nivel')   || '';
-            var formato = card.getAttribute('data-formato') || '';
+        cards.forEach(function (card) {
+          var tema    = card.getAttribute('data-tema')    || '';
+          var nivel   = card.getAttribute('data-nivel')   || '';
+          var formato = card.getAttribute('data-formato') || '';
 
-            var okTema   = filtroActivo.tema   === 'todos' || tema   === filtroActivo.tema;
-            var okNivel  = filtroActivo.nivel  === 'todos' || nivel  === filtroActivo.nivel;
-            var okFormato = filtroActivo.formato === 'todos' || formato === filtroActivo.formato;
+          var okTema    = filtroActivo.tema    === 'todos' || tema    === filtroActivo.tema;
+          var okNivel   = filtroActivo.nivel   === 'todos' || nivel   === filtroActivo.nivel;
+          var okFormato = filtroActivo.formato === 'todos' || formato === filtroActivo.formato;
 
-            var mostrar = okTema && okNivel && okFormato;
-            card.style.display = mostrar ? 'flex' : 'none';
-            if (mostrar) visibles++;
+          var mostrar = okTema && okNivel && okFormato;
+          card.style.display = mostrar ? 'flex' : 'none';
+          if (mostrar) visibles++;
         });
 
-        document.querySelectorAll('.seccion-titulo').forEach(function(sep) {
-            var siguiente = sep.nextElementSibling;
-            var hayVisible = false;
-            while (siguiente && !siguiente.classList.contains('seccion-titulo')) {
-                if (siguiente.classList.contains('ejercicio-card') &&
-                    siguiente.style.display !== 'none') {
-                    hayVisible = true;
-                    break;
-                }
-                siguiente = siguiente.nextElementSibling;
+        /* Ocultar separadores si no tienen tarjetas visibles debajo */
+        document.querySelectorAll('.seccion-titulo').forEach(function (sep) {
+          var siguiente = sep.nextElementSibling;
+          var hayVisible = false;
+          while (siguiente && !siguiente.classList.contains('seccion-titulo')) {
+            if (siguiente.classList.contains('ejercicio-card') &&
+                siguiente.style.display !== 'none') {
+              hayVisible = true;
+              break;
             }
-            sep.style.display = hayVisible ? 'block' : 'none';
+            siguiente = siguiente.nextElementSibling;
+          }
+          sep.style.display = hayVisible ? 'block' : 'none';
         });
 
         document.getElementById('contador').textContent =
-            visibles === 0 ? '' :
-            visibles === 1 ? '1 ejercicio disponible' :
-            visibles + ' ejercicios disponibles';
+          visibles === 0 ? '' :
+          visibles === 1 ? '1 ejercicio disponible' :
+          visibles + ' ejercicios disponibles';
 
         document.getElementById('sinResultados').style.display =
-            visibles === 0 ? 'block' : 'none';
-    }
+          visibles === 0 ? 'block' : 'none';
+      }
 
-    document.addEventListener('DOMContentLoaded', aplicarFiltros);
-</script>
-
-</body>
+      document.addEventListener('DOMContentLoaded', aplicarFiltros);
+    </script>
+  </body>
 </html>
-
