@@ -145,7 +145,7 @@
     #gameBoard {
       display: grid;
       grid-template-columns: 32px repeat(10, 1fr);
-      grid-template-rows: 32px repeat(10, 1fr);
+      grid-template-rows: repeat(10, 1fr) 32px;  /* X axis at bottom */
       gap: 2px;
       background: rgba(0,0,0,0.4);
       border: 1px solid rgba(0,255,136,0.25);
@@ -784,20 +784,24 @@ function placeShips() {
 function renderBoard() {
   var el = document.getElementById('gameBoard');
   el.innerHTML = '';
+  // rows 0–9 = game rows (Y=10 top → Y=1 bottom)
+  // row 10   = X axis (bottom)
+  // col 0    = Y axis (left)
   for (var row = 0; row <= 10; row++) {
     for (var col = 0; col <= 10; col++) {
       var cell = document.createElement('div');
       cell.className = 'cell';
-      if (row === 0 && col === 0) {
-        cell.classList.add('header');
-      } else if (row === 0) {
-        cell.classList.add('header'); cell.textContent = col;
+      if (row === 10 && col === 0) {
+        cell.classList.add('header');                        // bottom-left corner
+      } else if (row === 10) {
+        cell.classList.add('header'); cell.textContent = col; // X axis — bottom
       } else if (col === 0) {
-        cell.classList.add('header'); cell.textContent = row;
+        cell.classList.add('header'); cell.textContent = (10 - row); // Y increases upward
       } else {
+        var mathY = 10 - row;
         cell.classList.add('water');
-        cell.dataset.x = col; cell.dataset.y = row;
-        var entry = board[row][col];
+        cell.dataset.x = col; cell.dataset.y = mathY;
+        var entry = board[mathY][col];
         if (entry !== null) { cell.classList.add('has-ship'); cell.textContent = entry.ship.emoji; }
         cell.addEventListener('click', function() {
           var cx = parseInt(this.dataset.x), cy = parseInt(this.dataset.y);
