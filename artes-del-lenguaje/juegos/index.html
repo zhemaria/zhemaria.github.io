@@ -158,7 +158,7 @@
     #gameBoard {
       display: grid;
       grid-template-columns: 32px repeat(10, 1fr);
-      grid-template-rows: 32px repeat(10, 1fr);
+      grid-template-rows: repeat(10, 1fr) 32px;  /* eje X abajo */
       gap: 2px;
       background: rgba(0,0,0,0.4);
       border: 1px solid rgba(0,255,136,0.25);
@@ -1048,35 +1048,39 @@ function renderBoard() {
   var el = document.getElementById('gameBoard');
   el.innerHTML = '';
 
+  // row 0–9 = filas de juego (Y=10 arriba, Y=1 abajo)
+  // row 10   = eje X (abajo)
+  // col 0    = eje Y (izquierda)
+  // col 1–10 = columnas de juego (X)
+
   for (var row = 0; row <= 10; row++) {
     for (var col = 0; col <= 10; col++) {
 
       var cell = document.createElement('div');
       cell.className = 'cell';
 
-      if (row === 0 && col === 0) {
-        // Esquina vacía
+      if (row === 10 && col === 0) {
+        // Esquina inferior izquierda: vacía
         cell.classList.add('header');
-        cell.textContent = '';
 
-      } else if (row === 0) {
-        // Encabezado columna (X)
+      } else if (row === 10) {
+        // Eje X — abajo
         cell.classList.add('header');
         cell.textContent = col;
 
       } else if (col === 0) {
-        // Encabezado fila (Y)
+        // Eje Y — Y crece hacia arriba: fila 0 (top) = Y=10, fila 9 (bottom) = Y=1
         cell.classList.add('header');
-        cell.textContent = row;
+        cell.textContent = (10 - row);
 
       } else {
         // Celda de agua jugable
+        var mathY = 10 - row;   // Y matemático correcto
         cell.classList.add('water');
         cell.dataset.x = col;
-        cell.dataset.y = row;
+        cell.dataset.y = mathY;
 
-        // Mostrar barco si existe en esta celda
-        var entry = board[row][col];
+        var entry = board[mathY][col];
         if (entry !== null) {
           cell.classList.add('has-ship');
           cell.textContent = entry.ship.emoji;
@@ -1087,7 +1091,8 @@ function renderBoard() {
           var cy = parseInt(this.dataset.y);
           if (this.classList.contains('hit') ||
               this.classList.contains('miss') ||
-              this.classList.contains('sunk')) return;
+              this.classList.contains('sunk') ||
+              this.classList.contains('sinking')) return;
           document.getElementById('targetX').value = cx;
           document.getElementById('targetY').value = cy;
           fireShot();
