@@ -439,6 +439,15 @@
     }
     .btn-help:hover { border-color: var(--sonar-green); color: var(--sonar-green); }
 
+    .credit-line {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      margin-top: 10px;
+      opacity: 0.7;
+    }
+    .credit-line strong { color: var(--sonar-dim); }
+
     .victory-overlay {
       display: none; position: fixed; inset: 0;
       background: rgba(0,5,15,0.92); z-index: 100;
@@ -555,6 +564,7 @@
     </div>
     <p class="subtitle">Practice Coordinates · Sink the Enemy Fleet</p>
     <button class="btn-help" onclick="toggleHelp()" aria-label="Open instructions">❓ HOW TO PLAY</button>
+    <p class="credit-line">Developed by <strong>GEDparaHispanos.com — José M. Fernández</strong> · with Claude Sonnet</p>
   </header>
 
   <div class="stats-bar">
