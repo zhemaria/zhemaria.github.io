@@ -157,8 +157,8 @@
 
     #gameBoard {
       display: grid;
-      grid-template-columns: 32px repeat(10, 1fr);
-      grid-template-rows: repeat(10, 1fr) 32px;  /* eje X abajo */
+      grid-template-columns: 36px repeat(11, 1fr);
+      grid-template-rows: repeat(11, 1fr) 36px;  /* plano completo: -5 a 5 */
       gap: 2px;
       background: rgba(0,0,0,0.4);
       border: 1px solid rgba(0,255,136,0.25);
@@ -166,7 +166,28 @@
       padding: 8px;
       box-shadow: var(--border-glow), inset 0 0 30px rgba(0,0,0,0.5);
       width: 100%;
-      max-width: 520px;
+      max-width: 600px;
+    }
+
+    /* Celdas sobre los ejes (x=0 o y=0) */
+    /* Celdas jugables sobre el eje Y (columna X=0) y eje X (fila Y=0) */
+    .cell.on-axis {
+      background: rgba(255, 179, 0, 0.22);
+      border: 1px solid rgba(255,179,0,0.6);
+      box-shadow: inset 0 0 6px rgba(255,179,0,0.15);
+    }
+    .cell.on-axis:hover {
+      background: rgba(255, 179, 0, 0.35);
+      border-color: rgba(255,179,0,0.85);
+    }
+    /* Origen (0,0) */
+    .cell.origin {
+      background: rgba(255, 179, 0, 0.40);
+      border: 2px solid rgba(255,179,0,0.95);
+      box-shadow: inset 0 0 10px rgba(255,179,0,0.3), 0 0 8px rgba(255,179,0,0.4);
+    }
+    .cell.origin:hover {
+      background: rgba(255, 179, 0, 0.55);
     }
 
     .cell {
@@ -754,7 +775,7 @@
       <h1>Batalla Naval Cartesiana</h1>
       <span style="font-size:2rem;">🎯</span>
     </div>
-    <p class="subtitle">Practica coordenadas · Hunde la flota enemiga</p>
+    <p class="subtitle">Plano Cartesiano · 4 Cuadrantes · Valores Negativos y Positivos</p>
     <button class="btn-help" onclick="toggleHelp()" aria-label="Abrir instrucciones">❓ ¿CÓMO SE JUEGA?</button>
     <p class="credit-line">Desarrollado por <strong>GEDparaHispanos.com — José M. Fernández</strong> · con Claude Sonnet</p>
   </header>
@@ -802,12 +823,12 @@
         <div class="panel-body">
           <div class="coord-row">
             <span class="coord-label">X</span>
-            <input type="number" id="targetX" min="1" max="10" placeholder="1–10"
+            <input type="number" id="targetX" min="-5" max="5" placeholder="-5 a 5"
                    aria-label="Coordenada X del disparo">
           </div>
           <div class="coord-row">
             <span class="coord-label">Y</span>
-            <input type="number" id="targetY" min="1" max="10" placeholder="1–10"
+            <input type="number" id="targetY" min="-5" max="5" placeholder="-5 a 5"
                    aria-label="Coordenada Y del disparo">
           </div>
           <button class="btn-fire" id="btnFire" onclick="fireShot()">🔥 DISPARAR</button>
@@ -842,7 +863,7 @@
     </div>
     <div class="instr-card">
       <div class="instr-icon">📍</div>
-      <div class="instr-text"><strong>Coordenadas</strong><br>X = columna · Y = fila &nbsp;|&nbsp; <span class="coord-example">(1,1)</span> = arriba izq. &nbsp;<span class="coord-example">(10,10)</span> = abajo der.</div>
+      <div class="instr-text"><strong>Coordenadas</strong><br>X e Y van de <strong>-5 a 5</strong>. El origen <span class="coord-example">(0,0)</span> está en el centro. Hay valores negativos y positivos.</div>
     </div>
     <div class="instr-card">
       <div class="instr-icon">🔥</div>
@@ -866,16 +887,17 @@
     <div class="help-body">
       <h3>🎯 Objetivo</h3>
       Hundir los <span class="hl">7 barcos enemigos</span> usando coordenadas cartesianas.<br>
-      Los barcos son visibles — ¡practica ubicar los puntos correctamente!
+      Los barcos están visibles — ¡practica identificar pares ordenados con negativos!
 
-      <h3>📍 Las coordenadas</h3>
-      Cada celda del tablero tiene una coordenada <span class="ex">(X, Y)</span>:<br>
-      · <span class="hl">X</span> = número de la <strong>columna</strong> (eje horizontal, 1 a 10)<br>
-      · <span class="hl">Y</span> = número de la <strong>fila</strong> (eje vertical, 1 a 10)<br><br>
-      Ejemplo: el barco en columna 3, fila 5 → disparas a <span class="ex">(3, 5)</span>
+      <h3>📍 El plano de 4 cuadrantes</h3>
+      Cada celda tiene una coordenada <span class="ex">(X, Y)</span> donde X e Y van de <strong>-5 a 5</strong>:<br>
+      · <span class="hl">X</span> = eje horizontal (negativo ← | → positivo)<br>
+      · <span class="hl">Y</span> = eje vertical (negativo ↓ | ↑ positivo)<br>
+      · El <span class="hl">origen (0, 0)</span> está en el centro (celda verde)<br><br>
+      Ejemplo: barco en columna -3, fila 2 → disparas a <span class="ex">(-3, 2)</span>
 
       <h3>🔥 Cómo disparar</h3>
-      <strong>Opción A:</strong> Haz <span class="hl">clic directamente</span> sobre una celda del tablero.<br>
+      <strong>Opción A:</strong> Haz <span class="hl">clic directamente</span> sobre una celda.<br>
       <strong>Opción B:</strong> Escribe X e Y en el panel <em>"Control de fuego"</em> y pulsa <span class="ex">DISPARAR</span> o <span class="ex">Enter</span>.
 
       <h3>🚢 La flota enemiga</h3>
@@ -922,48 +944,25 @@ var SHIP_TYPES = [
 // ─── INICIALIZAR TABLERO ────────────────────────────────────────────────────
 function initBoard() {
   board = [];
-  for (var y = 0; y <= 10; y++) {
-    board[y] = [];
-    for (var x = 0; x <= 10; x++) {
-      board[y][x] = null;
-    }
+  // Índice: board[y+5][x+5]  →  cubre x,y ∈ [-5, 5]
+  for (var i = 0; i <= 10; i++) {
+    board[i] = [];
+    for (var j = 0; j <= 10; j++) board[i][j] = null;
   }
 }
 
-// ─── COLOCAR BARCOS EN FORMACIÓN DE ATAQUE ──────────────────────────────────
-//
-//  Formación táctica horizontal (proa apuntando a la derecha):
-//
-//   X:  1  2  3  4  5  6  7  8  9 10
-//       ← RETAGUARDIA ──── VANGUARDIA →
-//
-//  Portaaviones (4):  zona X 1-4,   fila aleatoria
-//  Crucero (3):       zona X 3-6,   fila aleatoria (separada del PA)
-//  Destructores (2):  zonas X 3-8,  filas separadas entre sí
-//  Remolcadores (1):  zona X 7-10,  filas extremas (vanguardia)
-//
-//  Regla de separación: ningún barco puede tener otro barco
-//  a menos de 1 celda de distancia (buffer de 1 alrededor).
-
-function cellFree(x, y) {
-  if (x < 1 || x > 10 || y < 1 || y > 10) return false;
-  return board[y][x] === null;
-}
-
-// Verifica que todas las celdas del barco + su buffer estén libres
+// ─── VERIFICAR COLOCACIÓN ─────────────────────────────────────────────────────
 function canPlace(startX, startY, size, horiz) {
   for (var j = 0; j < size; j++) {
     var cx = horiz ? startX + j : startX;
     var cy = horiz ? startY     : startY + j;
-    if (cx < 1 || cx > 10 || cy < 1 || cy > 10) return false;
-    if (board[cy][cx] !== null) return false;
-    // Buffer de 1 celda en todas direcciones
+    if (cx < -5 || cx > 5 || cy < -5 || cy > 5) return false;
+    if (board[cy+5][cx+5] !== null) return false;
     for (var dy = -1; dy <= 1; dy++) {
       for (var dx = -1; dx <= 1; dx++) {
-        var nx = cx + dx, ny = cy + dy;
-        if (nx >= 1 && nx <= 10 && ny >= 1 && ny <= 10) {
-          if (board[ny][nx] !== null) return false;
-        }
+        var nx = cx+dx, ny = cy+dy;
+        if (nx >= -5 && nx <= 5 && ny >= -5 && ny <= 5)
+          if (board[ny+5][nx+5] !== null) return false;
       }
     }
   }
@@ -971,116 +970,102 @@ function canPlace(startX, startY, size, horiz) {
 }
 
 function placeOneShip(type, n, xMin, xMax, yMin, yMax, forceHoriz) {
-  var horiz = (forceHoriz !== undefined) ? forceHoriz : (Math.random() < 0.8); // 80% horizontal
+  var horiz = (forceHoriz !== null && forceHoriz !== undefined) ? forceHoriz : (Math.random() < 0.7);
   var attempts = 0;
-  while (attempts < 300) {
-    var maxStartX = horiz ? Math.min(xMax, 11 - type.size) : xMax;
-    var maxStartY = horiz ? yMax : Math.min(yMax, 11 - type.size);
+  while (attempts < 400) {
+    var maxStartX = horiz ? Math.min(xMax, 6 - type.size) : xMax;
+    var maxStartY = horiz ? yMax : Math.min(yMax, 6 - type.size);
+    if (maxStartX < xMin || maxStartY < yMin) { attempts++; if (attempts%50===0) horiz=!horiz; continue; }
     var startX = xMin + Math.floor(Math.random() * (maxStartX - xMin + 1));
     var startY = yMin + Math.floor(Math.random() * (maxStartY - yMin + 1));
-    startX = Math.max(xMin, Math.min(maxStartX, startX));
-    startY = Math.max(yMin, Math.min(maxStartY, startY));
-
     if (canPlace(startX, startY, type.size, horiz)) {
       var ship = {
-        id:         type.id + '_' + n,
-        name:       type.name + ' ' + (n + 1),
-        emoji:      type.emoji,
-        size:       type.size,
-        coords:     [],
-        hitsOnShip: 0,
-        isSunk:     false
+        id: type.id + '_' + n, name: type.name + ' ' + (n+1),
+        emoji: type.emoji, size: type.size, coords: [], hitsOnShip: 0, isSunk: false
       };
       for (var j = 0; j < type.size; j++) {
-        var cx = horiz ? startX + j : startX;
-        var cy = horiz ? startY     : startY + j;
+        var cx = horiz ? startX+j : startX;
+        var cy = horiz ? startY   : startY+j;
         ship.coords.push([cx, cy]);
-        board[cy][cx] = { ship: ship, partIdx: j };
+        board[cy+5][cx+5] = { ship: ship, partIdx: j };
       }
       ships.push(ship);
       return true;
     }
     attempts++;
-    // Si falla mucho, alternar orientación
     if (attempts % 50 === 0) horiz = !horiz;
   }
-  return false; // fallback: no se pudo colocar con restricciones
+  return false;
 }
 
+// ─── FORMACIÓN EN LOS 4 CUADRANTES ───────────────────────────────────────────
 function placeShips() {
   ships = [];
+  var PA = SHIP_TYPES[3]; // portaaviones 4 celdas
+  var CR = SHIP_TYPES[2]; // crucero      3 celdas
+  var DE = SHIP_TYPES[1]; // destructor   2 celdas
+  var RE = SHIP_TYPES[0]; // remolcador   1 celda
 
-  // Barajar filas disponibles para dispersar verticalmente
-  var allRows = [1,2,3,4,5,6,7,8,9,10];
-  // Fisher-Yates shuffle
-  for (var i = allRows.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var tmp = allRows[i]; allRows[i] = allRows[j]; allRows[j] = tmp;
-  }
-
-  var PA = SHIP_TYPES[3]; // portaaviones size 4
-  var CR = SHIP_TYPES[2]; // crucero size 3
-  var DE = SHIP_TYPES[1]; // destructor size 2
-  var RE = SHIP_TYPES[0]; // remolcador size 1
-
-  // ── RETAGUARDIA: Portaaviones (zona izquierda, X 1-5)
-  placeOneShip(PA, 1, 1, 5, 1, 10, true);
-
-  // ── RETAGUARDIA-MEDIA: Crucero (zona X 2-6)
-  placeOneShip(CR, 1, 2, 6, 1, 10, true);
-
-  // ── LÍNEA MEDIA: 3 Destructores distribuidos por franjas verticales
-  // Franja superior  (Y 1-3)
-  placeOneShip(DE, 1, 3, 8, 1, 3, true);
-  // Franja central   (Y 4-7)
-  placeOneShip(DE, 2, 3, 8, 4, 7, true);
-  // Franja inferior  (Y 8-10)
-  placeOneShip(DE, 3, 3, 8, 8, 10, true);
-
-  // ── VANGUARDIA: 2 Remolcadores (zona derecha, X 7-10)
-  // Uno arriba, uno abajo
-  placeOneShip(RE, 1, 7, 10, 1, 4,  true);
-  placeOneShip(RE, 2, 7, 10, 7, 10, true);
+  placeOneShip(PA, 1, -5, -1, -5,  5, true);  // Portaaviones: Q2+Q3 (izquierda)
+  placeOneShip(CR, 1, -2,  2, -2,  2, null);  // Crucero: área central (cruza ejes)
+  placeOneShip(DE, 1,  1,  5,  1,  5, null);  // Destructor: Q1 (arriba-der.)
+  placeOneShip(DE, 2, -5, -1,  1,  5, null);  // Destructor: Q2 (arriba-izq.)
+  placeOneShip(DE, 3,  1,  5, -5, -1, null);  // Destructor: Q4 (abajo-der.)
+  placeOneShip(RE, 1,  2,  5,  2,  5, true);  // Remolcador: Q1
+  placeOneShip(RE, 2, -5, -2, -5, -2, true);  // Remolcador: Q3 (abajo-izq.)
 }
+
 
 // ─── RENDERIZAR TABLERO ──────────────────────────────────────────────────────
 function renderBoard() {
   var el = document.getElementById('gameBoard');
   el.innerHTML = '';
 
-  // row 0–9 = filas de juego (Y=10 arriba, Y=1 abajo)
-  // row 10   = eje X (abajo)
-  // col 0    = eje Y (izquierda)
-  // col 1–10 = columnas de juego (X)
+  // rows 0-10: Y = 5, 4, 3, ..., -5   (Y crece hacia arriba)
+  // row  11  : etiquetas eje X (abajo)
+  // col  0   : etiquetas eje Y (izquierda)
+  // cols 1-11: X = -5, -4, ..., 5
 
-  for (var row = 0; row <= 10; row++) {
-    for (var col = 0; col <= 10; col++) {
+  for (var row = 0; row <= 11; row++) {
+    for (var col = 0; col <= 11; col++) {
 
       var cell = document.createElement('div');
       cell.className = 'cell';
 
-      if (row === 10 && col === 0) {
+      if (row === 11 && col === 0) {
         // Esquina inferior izquierda: vacía
         cell.classList.add('header');
 
-      } else if (row === 10) {
-        // Eje X — abajo
+      } else if (row === 11) {
+        // Eje X abajo: X de -5 a 5
         cell.classList.add('header');
-        cell.textContent = col;
+        var xLbl = col - 6;
+        cell.textContent = xLbl;
+        if (xLbl === 0) cell.style.color = 'var(--amber)';
 
       } else if (col === 0) {
-        // Eje Y — Y crece hacia arriba: fila 0 (top) = Y=10, fila 9 (bottom) = Y=1
+        // Eje Y izquierda: Y de 5 (arriba) a -5 (abajo)
         cell.classList.add('header');
-        cell.textContent = (10 - row);
+        var yLbl = 5 - row;
+        cell.textContent = yLbl;
+        if (yLbl === 0) cell.style.color = 'var(--amber)';
 
       } else {
-        // Celda de agua jugable
-        var mathY = 10 - row;   // Y matemático correcto
+        var mathX = col - 6;   // -5 … 5
+        var mathY = 5 - row;   //  5 … -5
+
         cell.classList.add('water');
-        cell.dataset.x = col;
+        cell.dataset.x = mathX;
         cell.dataset.y = mathY;
 
-        var entry = board[mathY][col];
+        // Resaltar ejes y origen
+        if (mathX === 0 && mathY === 0) {
+          cell.classList.add('origin');
+        } else if (mathX === 0 || mathY === 0) {
+          cell.classList.add('on-axis');
+        }
+
+        var entry = board[mathY+5][mathX+5];
         if (entry !== null) {
           cell.classList.add('has-ship');
           cell.textContent = entry.ship.emoji;
@@ -1397,8 +1382,8 @@ function fireShot() {
   var x = parseInt(document.getElementById('targetX').value);
   var y = parseInt(document.getElementById('targetY').value);
 
-  if (isNaN(x) || isNaN(y) || x < 1 || x > 10 || y < 1 || y > 10) {
-    setStatus('⚠ Coordenadas inválidas. X e Y deben estar entre 1 y 10.', 'bad');
+  if (isNaN(x) || isNaN(y) || x < -5 || x > 5 || y < -5 || y > 5) {
+    setStatus('⚠ Coordenadas inválidas. X e Y deben estar entre -5 y 5.', 'bad');
     return;
   }
 
@@ -1412,7 +1397,7 @@ function fireShot() {
   shots++;
 
   var cell = document.querySelector('[data-x="' + x + '"][data-y="' + y + '"]');
-  var entry = board[y][x];
+  var entry = board[y+5][x+5];
 
   if (entry !== null) {
     // IMPACTO
