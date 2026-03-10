@@ -504,6 +504,28 @@
       box-shadow: 0 0 20px rgba(0,255,136,0.4);
     }
 
+    /* Celda en proceso de hundirse */
+    .cell.sinking {
+      font-size: clamp(0.9rem, 2.2vw, 1.2rem);
+      background: radial-gradient(circle, #7f2a00, #3d0000);
+      border: 1px solid #ff6600;
+      box-shadow: 0 0 8px rgba(255,100,0,0.7);
+      animation: flicker 0.2s infinite alternate;
+      cursor: default;
+    }
+
+    @keyframes flicker {
+      from { box-shadow: 0 0 6px rgba(255,100,0,0.6); }
+      to   { box-shadow: 0 0 14px rgba(255,160,0,0.9); }
+    }
+
+    /* Restos hundidos */
+    .cell.sunk {
+      font-size: clamp(0.7rem, 1.8vw, 1rem);
+      color: #3a5a6a;
+      opacity: 0.6;
+    }
+
     /* Celda con barco visible */
     .cell.has-ship {
       font-size: clamp(0.9rem, 2.2vw, 1.2rem);
@@ -1101,6 +1123,260 @@ function updateStats() {
   document.getElementById('accuracy').textContent = shots > 0 ? pct + '%' : '--%';
 }
 
+// ─── SONIDOS (Web Audio API — sin archivos externos) ─────────────────────────
+var audioCtx = null;
+
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 💧 FALLO: silbido de torpedo que cae en picado + PLOP de agua
+//    Sonido muy reconocible: "fiiuuu... plop"
+// ─────────────────────────────────────────────────────────────────────────────
+function soundMiss() {
+  try {
+    var ctx = getAudioCtx();
+    var t = ctx.currentTime;
+
+    // Silbido descendente (torpedo cayendo): 1800 Hz → 200 Hz en 0.5s
+    var whistle = ctx.createOscillator();
+    whistle.type = 'sine';
+    whistle.frequency.setValueAtTime(1800, t);
+    whistle.frequency.exponentialRampToValueAtTime(200, t + 0.5);
+
+    var wGain = ctx.createGain();
+    wGain.gain.setValueAtTime(0.0, t);
+    wGain.gain.linearRampToValueAtTime(0.35, t + 0.05);
+    wGain.gain.setValueAtTime(0.35, t + 0.45);
+    wGain.gain.linearRampToValueAtTime(0.0, t + 0.52);
+
+    whistle.connect(wGain);
+    wGain.connect(ctx.destination);
+    whistle.start(t);
+    whistle.stop(t + 0.55);
+
+    // PLOP: tono grave muy corto que cae rápido (impacto en agua)
+    var plop = ctx.createOscillator();
+    plop.type = 'sine';
+    plop.frequency.setValueAtTime(180, t + 0.52);
+    plop.frequency.exponentialRampToValueAtTime(40, t + 0.75);
+
+    var pGain = ctx.createGain();
+    pGain.gain.setValueAtTime(0.7, t + 0.52);
+    pGain.gain.exponentialRampToValueAtTime(0.001, t + 0.75);
+
+    plop.connect(pGain);
+    pGain.connect(ctx.destination);
+    plop.start(t + 0.52);
+    plop.stop(t + 0.78);
+
+    // Pequeño splash de agua (ruido bandpass agudo y breve)
+    var bSize = Math.floor(ctx.sampleRate * 0.12);
+    var bBuf  = ctx.createBuffer(1, bSize, ctx.sampleRate);
+    var bData = bBuf.getChannelData(0);
+    for (var i = 0; i < bSize; i++) bData[i] = Math.random() * 2 - 1;
+
+    var splash = ctx.createBufferSource();
+    splash.buffer = bBuf;
+
+    var sFilt = ctx.createBiquadFilter();
+    sFilt.type = 'bandpass';
+    sFilt.frequency.value = 3000;
+    sFilt.Q.value = 0.8;
+
+    var sGain = ctx.createGain();
+    sGain.gain.setValueAtTime(0.3, t + 0.52);
+    sGain.gain.exponentialRampToValueAtTime(0.001, t + 0.64);
+
+    splash.connect(sFilt);
+    sFilt.connect(sGain);
+    sGain.connect(ctx.destination);
+    splash.start(t + 0.52);
+    splash.stop(t + 0.65);
+
+  } catch(e) {}
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 💥 IMPACTO: chasquido metálico seco + boom corto
+//    Sonido brusco y percusivo: "CLANG-BOOM" — nada de silbidos
+// ─────────────────────────────────────────────────────────────────────────────
+function soundHit() {
+  try {
+    var ctx = getAudioCtx();
+    var t = ctx.currentTime;
+
+    // CLANG metálico: ruido blanco muy corto + filtro resonante agudo
+    var cSize = Math.floor(ctx.sampleRate * 0.05);
+    var cBuf  = ctx.createBuffer(1, cSize, ctx.sampleRate);
+    var cData = cBuf.getChannelData(0);
+    for (var i = 0; i < cSize; i++) cData[i] = Math.random() * 2 - 1;
+
+    var clang = ctx.createBufferSource();
+    clang.buffer = cBuf;
+
+    var cFilt = ctx.createBiquadFilter();
+    cFilt.type = 'peaking';
+    cFilt.frequency.value = 1200;
+    cFilt.Q.value = 8;
+    cFilt.gain.value = 20;
+
+    var cGain = ctx.createGain();
+    cGain.gain.setValueAtTime(1.0, t);
+    cGain.gain.exponentialRampToValueAtTime(0.001, t + 0.08);
+
+    clang.connect(cFilt);
+    cFilt.connect(cGain);
+    cGain.connect(ctx.destination);
+    clang.start(t);
+    clang.stop(t + 0.09);
+
+    // BOOM: oscilador cuadrado muy grave, ataque instantáneo, caída rápida
+    var boom = ctx.createOscillator();
+    boom.type = 'square';
+    boom.frequency.setValueAtTime(90, t + 0.02);
+    boom.frequency.exponentialRampToValueAtTime(35, t + 0.22);
+
+    var bGain = ctx.createGain();
+    bGain.gain.setValueAtTime(0.9, t + 0.02);
+    bGain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+
+    // Filtro lowpass para suavizar el square y hacerlo más "boom"
+    var bFilt = ctx.createBiquadFilter();
+    bFilt.type = 'lowpass';
+    bFilt.frequency.value = 200;
+
+    boom.connect(bFilt);
+    bFilt.connect(bGain);
+    bGain.connect(ctx.destination);
+    boom.start(t + 0.02);
+    boom.stop(t + 0.28);
+
+    // Cuerpo de la explosión: ruido marrón breve
+    var eSize = Math.floor(ctx.sampleRate * 0.2);
+    var eBuf  = ctx.createBuffer(1, eSize, ctx.sampleRate);
+    var eData = eBuf.getChannelData(0);
+    var last  = 0;
+    for (var i = 0; i < eSize; i++) {
+      var white = Math.random() * 2 - 1;
+      last = (last + 0.02 * white) / 1.02; // ruido marrón (integrado)
+      eData[i] = last * 8;
+    }
+
+    var explo = ctx.createBufferSource();
+    explo.buffer = eBuf;
+
+    var eFilt = ctx.createBiquadFilter();
+    eFilt.type = 'lowpass';
+    eFilt.frequency.value = 250;
+
+    var eGain = ctx.createGain();
+    eGain.gain.setValueAtTime(0.8, t + 0.02);
+    eGain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+
+    explo.connect(eFilt);
+    eFilt.connect(eGain);
+    eGain.connect(ctx.destination);
+    explo.start(t + 0.02);
+    explo.stop(t + 0.23);
+
+  } catch(e) {}
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 🔥 HUNDIDO: alarma de sirena + explosión larga + burbujeo de hundimiento
+//    Sonido épico en 3 fases: "WEE-WOO → BOOM → glug-glug-glug"
+// ─────────────────────────────────────────────────────────────────────────────
+function soundSunk() {
+  try {
+    var ctx = getAudioCtx();
+    var t = ctx.currentTime;
+
+    // FASE 1: Sirena corta (0 – 0.4s) — dos pulsos WEE-WOO
+    [0, 0.2].forEach(function(d) {
+      var siren = ctx.createOscillator();
+      siren.type = 'sawtooth';
+      siren.frequency.setValueAtTime(600, t + d);
+      siren.frequency.linearRampToValueAtTime(900, t + d + 0.1);
+      siren.frequency.linearRampToValueAtTime(600, t + d + 0.2);
+
+      var sirenGain = ctx.createGain();
+      sirenGain.gain.setValueAtTime(0.3, t + d);
+      sirenGain.gain.setValueAtTime(0.3, t + d + 0.18);
+      sirenGain.gain.linearRampToValueAtTime(0.0, t + d + 0.22);
+
+      siren.connect(sirenGain);
+      sirenGain.connect(ctx.destination);
+      siren.start(t + d);
+      siren.stop(t + d + 0.23);
+    });
+
+    // FASE 2: Gran explosión (0.4 – 0.9s)
+    var boomOsc = ctx.createOscillator();
+    boomOsc.type = 'sawtooth';
+    boomOsc.frequency.setValueAtTime(100, t + 0.42);
+    boomOsc.frequency.exponentialRampToValueAtTime(20, t + 0.9);
+
+    var boGain = ctx.createGain();
+    boGain.gain.setValueAtTime(1.0, t + 0.42);
+    boGain.gain.exponentialRampToValueAtTime(0.001, t + 0.9);
+
+    var boFilt = ctx.createBiquadFilter();
+    boFilt.type = 'lowpass';
+    boFilt.frequency.value = 180;
+
+    boomOsc.connect(boFilt);
+    boFilt.connect(boGain);
+    boGain.connect(ctx.destination);
+    boomOsc.start(t + 0.42);
+    boomOsc.stop(t + 0.92);
+
+    // Ruido de explosión grande
+    var nSize = Math.floor(ctx.sampleRate * 0.5);
+    var nBuf  = ctx.createBuffer(1, nSize, ctx.sampleRate);
+    var nData = nBuf.getChannelData(0);
+    for (var i = 0; i < nSize; i++) nData[i] = Math.random() * 2 - 1;
+
+    var nSrc = ctx.createBufferSource();
+    nSrc.buffer = nBuf;
+
+    var nFilt = ctx.createBiquadFilter();
+    nFilt.type = 'lowpass';
+    nFilt.frequency.value = 350;
+
+    var nGain = ctx.createGain();
+    nGain.gain.setValueAtTime(0.9, t + 0.42);
+    nGain.gain.exponentialRampToValueAtTime(0.001, t + 0.92);
+
+    nSrc.connect(nFilt);
+    nFilt.connect(nGain);
+    nGain.connect(ctx.destination);
+    nSrc.start(t + 0.42);
+    nSrc.stop(t + 0.93);
+
+    // FASE 3: Burbujeo de hundimiento (0.9 – 1.8s) — 5 burbujas graves
+    [0, 0.16, 0.30, 0.42, 0.52].forEach(function(d, idx) {
+      var freq = 120 - idx * 18; // cada burbuja más grave
+      var bub = ctx.createOscillator();
+      bub.type = 'sine';
+      bub.frequency.setValueAtTime(freq, t + 0.95 + d);
+      bub.frequency.exponentialRampToValueAtTime(freq * 0.4, t + 0.95 + d + 0.12);
+
+      var bubGain = ctx.createGain();
+      bubGain.gain.setValueAtTime(0.3 - idx * 0.04, t + 0.95 + d);
+      bubGain.gain.exponentialRampToValueAtTime(0.001, t + 0.95 + d + 0.14);
+
+      bub.connect(bubGain);
+      bubGain.connect(ctx.destination);
+      bub.start(t + 0.95 + d);
+      bub.stop(t + 0.95 + d + 0.16);
+    });
+
+  } catch(e) {}
+}
+
 // ─── DISPARAR ────────────────────────────────────────────────────────────────
 function fireShot() {
   var x = parseInt(document.getElementById('targetX').value);
@@ -1136,16 +1412,44 @@ function fireShot() {
       // BARCO HUNDIDO
       ship.isSunk = true;
       sunken++;
+      soundSunk();
 
-      // Marcar todas las celdas del barco como hundidas
+      // Fase 1 (0–400ms): todas las celdas muestran llamas 🔥
       for (var c = 0; c < ship.coords.length; c++) {
-        var sc = document.querySelector('[data-x="' + ship.coords[c][0] + '"][data-y="' + ship.coords[c][1] + '"]');
-        if (sc) {
-          sc.classList.remove('hit', 'water');
-          sc.classList.add('sunk');
-          sc.textContent = ship.emoji;
-        }
+        (function(coord) {
+          var sc = document.querySelector('[data-x="' + coord[0] + '"][data-y="' + coord[1] + '"]');
+          if (!sc) return;
+          sc.classList.remove('hit', 'water', 'has-ship');
+          sc.classList.add('sinking');
+          sc.textContent = '🔥';
+        })(ship.coords[c]);
       }
+
+      // Fase 2 (400–900ms): llamas + humo alternando 💨
+      var coords = ship.coords.slice();
+      var smokeInterval = setInterval(function() {
+        for (var c = 0; c < coords.length; c++) {
+          var sc = document.querySelector('[data-x="' + coords[c][0] + '"][data-y="' + coords[c][1] + '"]');
+          if (sc) sc.textContent = (sc.textContent === '🔥') ? '💨' : '🔥';
+        }
+      }, 120);
+
+      // Fase 3 (900ms): se hunde — celdas se vacían con fade a restos '〰'
+      setTimeout(function() {
+        clearInterval(smokeInterval);
+        for (var c = 0; c < coords.length; c++) {
+          (function(coord, idx) {
+            setTimeout(function() {
+              var sc = document.querySelector('[data-x="' + coord[0] + '"][data-y="' + coord[1] + '"]');
+              if (!sc) return;
+              sc.classList.remove('sinking');
+              sc.classList.add('sunk');
+              sc.textContent = '〰';        // restos en el agua
+            }, idx * 80);                  // cada celda se hunde escalonada
+          })(coords[c], c);
+        }
+      }, 900);
+
       setStatus('🔥 ¡' + ship.emoji + ' ' + ship.name + ' hundido!', 'bad');
 
       // Actualizar icono en flota
@@ -1153,6 +1457,7 @@ function fireShot() {
       if (fi) fi.className = 'fleet-item sunk-ship';
 
     } else {
+      soundHit();
       setStatus('💥 ¡Impacto en el ' + ship.emoji + ' ' + ship.name + '! (' + ship.hitsOnShip + '/' + ship.size + ')', 'bad');
       var fi = document.getElementById('fleet_' + ship.id);
       if (fi) {
@@ -1167,6 +1472,7 @@ function fireShot() {
 
   } else {
     // FALLO
+    soundMiss();
     cell.classList.remove('water');
     cell.classList.add('miss');
     cell.textContent = '💧';
