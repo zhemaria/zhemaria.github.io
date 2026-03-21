@@ -121,6 +121,7 @@
   .cat-btn[data-cat="numeros"].active   { background: var(--b); }
   .cat-btn[data-cat="familia"].active   { background: var(--o); }
   .cat-btn[data-cat="cuerpo"].active    { background: #FF6FB8; }
+  .cat-btn[data-cat="verbos"].active    { background: #00BFA5; }
 
   /* ── FLASHCARD ── */
   #repaso-view { width: 100%; max-width: 420px; }
@@ -375,7 +376,8 @@
 
 <header>
   <h1>🌟 Aprende Español</h1>
-  <p>Vocabulario con imágenes y sonido - José M. Fernández - Claude Sonnet 4.6</p>
+  <p>Vocabulario con imágenes y sonido<br>
+  Creado por José M. Fernández con Claude Sonnet 4.6</p>
 </header>
 
 <!-- Mode Toggle -->
@@ -392,6 +394,7 @@
   <button class="cat-btn" data-cat="numeros"   onclick="setCategory('numeros',this)">🔢 Números</button>
   <button class="cat-btn" data-cat="familia"   onclick="setCategory('familia',this)">👨‍👩‍👧 Familia</button>
   <button class="cat-btn" data-cat="cuerpo"    onclick="setCategory('cuerpo',this)">💪 Cuerpo</button>
+  <button class="cat-btn" data-cat="verbos"   onclick="setCategory('verbos',this)">🏃 Verbos</button>
 </div>
 
 <!-- ══ REPASO VIEW ══ -->
@@ -524,11 +527,32 @@ const vocab = {
     { e:'❤️', w:'corazón', a:'el', t:'heart' },
     { e:'👣', w:'dedos',   a:'los',t:'toes/fingers' },
   ],
+  verbos: [
+    { e:'🏃', w:'correr',  a:'', t:'to run' },
+    { e:'🚶', w:'caminar', a:'', t:'to walk' },
+    { e:'😴', w:'dormir',  a:'', t:'to sleep' },
+    { e:'🍽️', w:'comer',   a:'', t:'to eat' },
+    { e:'🥤', w:'beber',   a:'', t:'to drink' },
+    { e:'📖', w:'leer',    a:'', t:'to read' },
+    { e:'✏️', w:'escribir',a:'', t:'to write' },
+    { e:'🎤', w:'hablar',  a:'', t:'to speak' },
+    { e:'👂', w:'escuchar',a:'', t:'to listen' },
+    { e:'😄', w:'reír',    a:'', t:'to laugh' },
+    { e:'😭', w:'llorar',  a:'', t:'to cry' },
+    { e:'🎨', w:'dibujar', a:'', t:'to draw' },
+    { e:'⚽', w:'jugar',   a:'', t:'to play' },
+    { e:'🎵', w:'cantar',  a:'', t:'to sing' },
+    { e:'💃', w:'bailar',  a:'', t:'to dance' },
+    { e:'🤔', w:'pensar',  a:'', t:'to think' },
+    { e:'🤝', w:'ayudar',  a:'', t:'to help' },
+    { e:'❤️', w:'amar',    a:'', t:'to love' },
+  ],
 };
 
 const catColors = {
   animales:'#6BCB77', comida:'#FF6B6B', colores:'#C77DFF',
-  numeros:'#4D96FF',  familia:'#FF9F43', cuerpo:'#FF6FB8'
+  numeros:'#4D96FF',  familia:'#FF9F43', cuerpo:'#FF6FB8',
+  verbos:'#00BFA5'
 };
 
 // ══════════════════════════════════════
@@ -786,4 +810,3 @@ init();
 </script>
 </body>
 </html>
-
