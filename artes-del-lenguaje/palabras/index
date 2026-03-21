@@ -1,1 +1,789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aprende Español 🌟</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF8F0;
+    --card: #FFFFFF;
+    --text: #2D2D2D;
+    --muted: #888;
+    --r: #FF6B6B;
+    --y: #FFD93D;
+    --g: #6BCB77;
+    --b: #4D96FF;
+    --p: #C77DFF;
+    --o: #FF9F43;
+    --shadow: 0 8px 32px rgba(0,0,0,0.12);
+    --radius: 28px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px 40px;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,107,107,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, rgba(77,150,255,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(107,203,119,0.06) 0%, transparent 60%);
+  }
+
+  /* ── HEADER ── */
+  header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    background: linear-gradient(135deg, var(--r), var(--o), var(--y));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    letter-spacing: 1px;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  /* ── MODE TOGGLE ── */
+  .mode-toggle {
+    display: flex;
+    background: #e8e0f0;
+    border-radius: 50px;
+    padding: 4px;
+    margin-bottom: 20px;
+    gap: 4px;
+  }
+  .mode-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.25s;
+    background: transparent;
+    color: #777;
+  }
+  .mode-btn.active {
+    background: white;
+    color: var(--text);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  }
+
+  /* ── CATEGORIES ── */
+  .categories {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 24px;
+    max-width: 600px;
+  }
+  .cat-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    border: 3px solid transparent;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+    color: #555;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .cat-btn:hover { transform: translateY(-2px); }
+  .cat-btn.active {
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  }
+  .cat-btn[data-cat="animales"].active  { background: var(--g); }
+  .cat-btn[data-cat="comida"].active    { background: var(--r); }
+  .cat-btn[data-cat="colores"].active   { background: var(--p); }
+  .cat-btn[data-cat="numeros"].active   { background: var(--b); }
+  .cat-btn[data-cat="familia"].active   { background: var(--o); }
+  .cat-btn[data-cat="cuerpo"].active    { background: #FF6FB8; }
+
+  /* ── FLASHCARD ── */
+  #repaso-view { width: 100%; max-width: 420px; }
+
+  .card-container {
+    perspective: 1000px;
+    width: 100%;
+    aspect-ratio: 3/3.5;
+    max-height: 380px;
+    margin-bottom: 28px;
+    cursor: pointer;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .card-inner.flipped { transform: rotateY(180deg); }
+
+  .card-face {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    padding: 24px;
+  }
+  .card-front {
+    background: white;
+    border: 4px solid var(--active-color, #FFD93D);
+  }
+  .card-back {
+    background: linear-gradient(145deg, #f0faff, #e8f4ff);
+    border: 4px solid var(--b);
+    transform: rotateY(180deg);
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-emoji {
+    font-size: clamp(80px, 22vw, 130px);
+    line-height: 1;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+    transition: transform 0.2s;
+    user-select: none;
+  }
+  .card-emoji.bounce {
+    animation: bounce 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  }
+  @keyframes bounce {
+    0%,100% { transform: scale(1); }
+    30%      { transform: scale(1.25) rotate(-5deg); }
+    60%      { transform: scale(0.95) rotate(3deg); }
+    80%      { transform: scale(1.08); }
+  }
+
+  .card-hint {
+    font-size: 0.8rem;
+    color: #aaa;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 12px;
+  }
+  .card-word {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+    color: var(--text);
+    letter-spacing: 2px;
+    text-align: center;
+  }
+  .card-article {
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .card-translation {
+    font-size: 1.1rem;
+    color: #555;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* ── CONTROLS ── */
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .ctrl-btn {
+    font-size: 1.6rem;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: white;
+    box-shadow: var(--shadow);
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ctrl-btn:hover { transform: scale(1.1); }
+  .ctrl-btn:active { transform: scale(0.95); }
+  .speak-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--b), #6b9fff);
+    color: white;
+    box-shadow: 0 6px 20px rgba(77,150,255,0.4);
+  }
+  .speak-btn.speaking {
+    animation: pulse 0.7s infinite alternate;
+  }
+  @keyframes pulse {
+    from { box-shadow: 0 6px 20px rgba(77,150,255,0.4); }
+    to   { box-shadow: 0 6px 30px rgba(77,150,255,0.8), 0 0 0 8px rgba(77,150,255,0.15); }
+  }
+
+  /* Progress */
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .progress-bar {
+    width: 180px;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--g), #4DCF77);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+  }
+  .progress-text {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--muted);
+  }
+
+  /* Auto-speak toggle */
+  .auto-row {
+    text-align: center;
+    margin-top: 8px;
+  }
+  .auto-row label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #888;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .auto-row input { cursor: pointer; accent-color: var(--b); }
+
+  /* ── QUIZ MODE ── */
+  #quiz-view { width: 100%; max-width: 480px; display: none; }
+
+  .quiz-question {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 32px 24px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .quiz-emoji { font-size: 100px; line-height: 1; margin-bottom: 12px; }
+  .quiz-prompt {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .opt-btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    padding: 18px 12px;
+    border: 3px solid #e0e0e0;
+    border-radius: 18px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.18s;
+    color: var(--text);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+  }
+  .opt-btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+  .opt-btn.correct  { background: var(--g); border-color: #4ab55a; color: white; transform: scale(1.05); }
+  .opt-btn.wrong    { background: var(--r); border-color: #d94444; color: white; }
+  .opt-btn.missed   { background: #f0f0f0; border-color: #ccc; color: #aaa; }
+  .opt-btn:disabled { cursor: default; }
+
+  .quiz-score {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #555;
+    margin-bottom: 16px;
+  }
+  .quiz-score span { color: var(--g); font-size: 1.4rem; }
+
+  .next-quiz-btn {
+    width: 100%;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    padding: 16px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--y), var(--o));
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255,159,67,0.4);
+    transition: all 0.2s;
+    display: none;
+  }
+  .next-quiz-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,159,67,0.5); }
+
+  /* Celebration */
+  .celebration { font-size: 2rem; text-align: center; margin: 10px 0; min-height: 2.5rem; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 380px) {
+    .quiz-options { grid-template-columns: 1fr; }
+    .opt-btn { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌟 Aprende Español</h1>
+  <p>Vocabulario con imágenes y sonido - José M. Fernández - Claude Sonnet 4.6</p>
+</header>
+
+<!-- Mode Toggle -->
+<div class="mode-toggle">
+  <button class="mode-btn active" onclick="setMode('repaso')">📖 Repaso</button>
+  <button class="mode-btn"        onclick="setMode('quiz')">🎯 Quiz</button>
+</div>
+
+<!-- Categories -->
+<div class="categories">
+  <button class="cat-btn active" data-cat="animales" onclick="setCategory('animales',this)">🐾 Animales</button>
+  <button class="cat-btn" data-cat="comida"    onclick="setCategory('comida',this)">🍎 Comida</button>
+  <button class="cat-btn" data-cat="colores"   onclick="setCategory('colores',this)">🎨 Colores</button>
+  <button class="cat-btn" data-cat="numeros"   onclick="setCategory('numeros',this)">🔢 Números</button>
+  <button class="cat-btn" data-cat="familia"   onclick="setCategory('familia',this)">👨‍👩‍👧 Familia</button>
+  <button class="cat-btn" data-cat="cuerpo"    onclick="setCategory('cuerpo',this)">💪 Cuerpo</button>
+</div>
+
+<!-- ══ REPASO VIEW ══ -->
+<div id="repaso-view">
+  <div class="progress-row">
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+    <span class="progress-text" id="prog-text">1 / 10</span>
+  </div>
+
+  <div class="card-container" onclick="flipCard()">
+    <div class="card-inner" id="card-inner">
+      <div class="card-face card-front" id="card-front">
+        <div class="card-emoji" id="card-emoji">🐶</div>
+        <div class="card-hint">👆 Toca para ver</div>
+      </div>
+      <div class="card-face card-back" id="card-back">
+        <div class="card-emoji" id="card-emoji-back">🐶</div>
+        <div class="card-article" id="card-article">el</div>
+        <div class="card-word" id="card-word">perro</div>
+        <div class="card-translation" id="card-translation">dog</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="ctrl-btn" onclick="prevCard()" title="Anterior">◀</button>
+    <button class="ctrl-btn speak-btn" id="speak-btn" onclick="speakCurrent()" title="Escuchar">🔊</button>
+    <button class="ctrl-btn" onclick="nextCard()" title="Siguiente">▶</button>
+  </div>
+
+  <div class="auto-row">
+    <label>
+      <input type="checkbox" id="auto-speak" checked> Hablar automáticamente
+    </label>
+  </div>
+</div>
+
+<!-- ══ QUIZ VIEW ══ -->
+<div id="quiz-view">
+  <div class="quiz-score">Respuestas correctas: <span id="q-score">0</span></div>
+  <div class="quiz-question">
+    <div class="quiz-emoji" id="q-emoji">🐶</div>
+    <div class="quiz-prompt">¿Cómo se llama?</div>
+  </div>
+  <div class="quiz-options" id="q-options"></div>
+  <div class="celebration" id="celebration"></div>
+  <button class="next-quiz-btn" id="next-quiz-btn" onclick="nextQuiz()">Siguiente ▶</button>
+</div>
+
+<script>
+// ══════════════════════════════════════
+//  DATA
+// ══════════════════════════════════════
+const vocab = {
+  animales: [
+    { e:'🐶', w:'perro',    a:'el', t:'dog' },
+    { e:'🐱', w:'gato',     a:'el', t:'cat' },
+    { e:'🐮', w:'vaca',     a:'la', t:'cow' },
+    { e:'🐷', w:'cerdo',    a:'el', t:'pig' },
+    { e:'🐔', w:'gallina',  a:'la', t:'hen' },
+    { e:'🐟', w:'pez',      a:'el', t:'fish' },
+    { e:'🦁', w:'león',     a:'el', t:'lion' },
+    { e:'🐘', w:'elefante', a:'el', t:'elephant' },
+    { e:'🐰', w:'conejo',   a:'el', t:'rabbit' },
+    { e:'🐸', w:'rana',     a:'la', t:'frog' },
+    { e:'🦋', w:'mariposa', a:'la', t:'butterfly' },
+    { e:'🐦', w:'pájaro',   a:'el', t:'bird' },
+  ],
+  comida: [
+    { e:'🍎', w:'manzana',   a:'la', t:'apple' },
+    { e:'🍌', w:'plátano',   a:'el', t:'banana' },
+    { e:'🍊', w:'naranja',   a:'la', t:'orange' },
+    { e:'🍕', w:'pizza',     a:'la', t:'pizza' },
+    { e:'🍞', w:'pan',       a:'el', t:'bread' },
+    { e:'🥛', w:'leche',     a:'la', t:'milk' },
+    { e:'🍫', w:'chocolate', a:'el', t:'chocolate' },
+    { e:'🌮', w:'taco',      a:'el', t:'taco' },
+    { e:'🍓', w:'fresa',     a:'la', t:'strawberry' },
+    { e:'🥚', w:'huevo',     a:'el', t:'egg' },
+    { e:'🍦', w:'helado',    a:'el', t:'ice cream' },
+    { e:'🍰', w:'pastel',    a:'el', t:'cake' },
+  ],
+  colores: [
+    { e:'🔴', w:'rojo',       a:'', t:'red' },
+    { e:'🔵', w:'azul',       a:'', t:'blue' },
+    { e:'🟢', w:'verde',      a:'', t:'green' },
+    { e:'🟡', w:'amarillo',   a:'', t:'yellow' },
+    { e:'🟠', w:'anaranjado', a:'', t:'orange' },
+    { e:'🟣', w:'morado',     a:'', t:'purple' },
+    { e:'⚫', w:'negro',      a:'', t:'black' },
+    { e:'⚪', w:'blanco',     a:'', t:'white' },
+    { e:'🩷', w:'rosado',     a:'', t:'pink' },
+    { e:'🟤', w:'café',       a:'', t:'brown' },
+  ],
+  numeros: [
+    { e:'1️⃣',  w:'uno',   a:'', t:'one' },
+    { e:'2️⃣',  w:'dos',   a:'', t:'two' },
+    { e:'3️⃣',  w:'tres',  a:'', t:'three' },
+    { e:'4️⃣',  w:'cuatro',a:'', t:'four' },
+    { e:'5️⃣',  w:'cinco', a:'', t:'five' },
+    { e:'6️⃣',  w:'seis',  a:'', t:'six' },
+    { e:'7️⃣',  w:'siete', a:'', t:'seven' },
+    { e:'8️⃣',  w:'ocho',  a:'', t:'eight' },
+    { e:'9️⃣',  w:'nueve', a:'', t:'nine' },
+    { e:'🔟',  w:'diez',  a:'', t:'ten' },
+  ],
+  familia: [
+    { e:'👦', w:'niño',   a:'el', t:'boy' },
+    { e:'👧', w:'niña',   a:'la', t:'girl' },
+    { e:'👨', w:'papá',   a:'el', t:'dad' },
+    { e:'👩', w:'mamá',   a:'la', t:'mom' },
+    { e:'👴', w:'abuelo', a:'el', t:'grandfather' },
+    { e:'👵', w:'abuela', a:'la', t:'grandmother' },
+    { e:'👶', w:'bebé',   a:'el', t:'baby' },
+    { e:'🧒', w:'hermano',a:'el', t:'sibling' },
+    { e:'🐱', w:'mascota',a:'la', t:'pet' },
+    { e:'🏠', w:'casa',   a:'la', t:'house' },
+  ],
+  cuerpo: [
+    { e:'👁️', w:'ojo',     a:'el', t:'eye' },
+    { e:'👂', w:'oreja',   a:'la', t:'ear' },
+    { e:'👃', w:'nariz',   a:'la', t:'nose' },
+    { e:'👄', w:'boca',    a:'la', t:'mouth' },
+    { e:'🦷', w:'diente',  a:'el', t:'tooth' },
+    { e:'💪', w:'brazo',   a:'el', t:'arm' },
+    { e:'🦵', w:'pierna',  a:'la', t:'leg' },
+    { e:'🖐️', w:'mano',    a:'la', t:'hand' },
+    { e:'🦶', w:'pie',     a:'el', t:'foot' },
+    { e:'🧠', w:'cerebro', a:'el', t:'brain' },
+    { e:'❤️', w:'corazón', a:'el', t:'heart' },
+    { e:'👣', w:'dedos',   a:'los',t:'toes/fingers' },
+  ],
+};
+
+const catColors = {
+  animales:'#6BCB77', comida:'#FF6B6B', colores:'#C77DFF',
+  numeros:'#4D96FF',  familia:'#FF9F43', cuerpo:'#FF6FB8'
+};
+
+// ══════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════
+let currentCat  = 'animales';
+let currentItems = [];
+let currentIdx  = 0;
+let mode        = 'repaso';
+let isFlipped   = false;
+
+// Quiz state
+let quizScore   = 0;
+let quizAnswered = false;
+let quizCorrectIdx = 0;
+
+// ══════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════
+function init() {
+  setCategory('animales', document.querySelector('[data-cat="animales"]'));
+}
+
+function setCategory(cat, btn) {
+  currentCat = cat;
+  currentItems = shuffle([...vocab[cat]]);
+  currentIdx = 0;
+  isFlipped = false;
+
+  // Update active button
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Update card border color
+  document.querySelector('.card-front').style.borderColor = catColors[cat];
+
+  if (mode === 'repaso') {
+    updateCard();
+  } else {
+    quizScore = 0;
+    document.getElementById('q-score').textContent = '0';
+    loadQuiz();
+  }
+}
+
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.mode-btn').forEach((b,i) => {
+    b.classList.toggle('active', (i===0 && m==='repaso') || (i===1 && m==='quiz'));
+  });
+  document.getElementById('repaso-view').style.display = m === 'repaso' ? 'block' : 'none';
+  document.getElementById('quiz-view').style.display   = m === 'quiz'   ? 'block' : 'none';
+
+  if (m === 'repaso') {
+    currentItems = shuffle([...vocab[currentCat]]);
+    currentIdx = 0;
+    isFlipped = false;
+    updateCard();
+  } else {
+    quizScore = 0;
+    currentItems = shuffle([...vocab[currentCat]]);
+    currentIdx = 0;
+    document.getElementById('q-score').textContent = '0';
+    loadQuiz();
+  }
+}
+
+// ══════════════════════════════════════
+//  REPASO
+// ══════════════════════════════════════
+function updateCard() {
+  const item = currentItems[currentIdx];
+  if (!item) return;
+
+  // Reset flip
+  isFlipped = false;
+  const ci = document.getElementById('card-inner');
+  ci.classList.remove('flipped');
+
+  document.getElementById('card-emoji').textContent      = item.e;
+  document.getElementById('card-emoji-back').textContent = item.e;
+  document.getElementById('card-word').textContent       = item.w;
+  document.getElementById('card-article').textContent    = item.a ? item.a + ' — ' : '';
+  document.getElementById('card-translation').textContent = '🇺🇸 ' + item.t;
+
+  updateProgress();
+
+  if (document.getElementById('auto-speak').checked) {
+    setTimeout(() => speakWord(item.w), 300);
+  }
+}
+
+function flipCard() {
+  isFlipped = !isFlipped;
+  document.getElementById('card-inner').classList.toggle('flipped', isFlipped);
+  if (isFlipped) {
+    // Bounce the back emoji
+    const eb = document.getElementById('card-emoji-back');
+    eb.classList.remove('bounce');
+    void eb.offsetWidth;
+    eb.classList.add('bounce');
+    speakWord(currentItems[currentIdx].w);
+  }
+}
+
+function nextCard() {
+  currentIdx = (currentIdx + 1) % currentItems.length;
+  updateCard();
+}
+
+function prevCard() {
+  currentIdx = (currentIdx - 1 + currentItems.length) % currentItems.length;
+  updateCard();
+}
+
+function speakCurrent() {
+  const item = currentItems[currentIdx];
+  if (item) speakWord(item.w);
+}
+
+function updateProgress() {
+  const total = currentItems.length;
+  const pct   = ((currentIdx + 1) / total) * 100;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-text').textContent = `${currentIdx+1} / ${total}`;
+}
+
+// ══════════════════════════════════════
+//  QUIZ
+// ══════════════════════════════════════
+function loadQuiz() {
+  quizAnswered = false;
+  document.getElementById('celebration').textContent = '';
+  document.getElementById('next-quiz-btn').style.display = 'none';
+
+  const allItems = vocab[currentCat];
+  const item = currentItems[currentIdx % currentItems.length];
+  quizCorrectIdx = 0;
+
+  // 4 options: correct + 3 random wrong
+  const wrongs = shuffle(allItems.filter(x => x.w !== item.w)).slice(0, 3);
+  const options = shuffle([item, ...wrongs]);
+  quizCorrectIdx = options.findIndex(o => o.w === item.w);
+
+  document.getElementById('q-emoji').textContent = item.e;
+
+  const container = document.getElementById('q-options');
+  container.innerHTML = '';
+  options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt.w;
+    btn.onclick = () => answerQuiz(i, quizCorrectIdx, item.w);
+    container.appendChild(btn);
+  });
+
+  // Auto-speak in quiz
+  if (document.getElementById('auto-speak') && document.getElementById('auto-speak').checked) {
+    setTimeout(() => speakWord(item.w), 400);
+  }
+}
+
+function answerQuiz(chosen, correct, word) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach((b, i) => {
+    b.disabled = true;
+    if (i === correct) b.classList.add('correct');
+    else if (i === chosen && chosen !== correct) b.classList.add('wrong');
+    else b.classList.add('missed');
+  });
+
+  const cel = document.getElementById('celebration');
+  if (chosen === correct) {
+    quizScore++;
+    document.getElementById('q-score').textContent = quizScore;
+    const yays = ['🎉 ¡Excelente!','⭐ ¡Muy bien!','🏆 ¡Correcto!','🎊 ¡Bravo!','🌟 ¡Perfecto!'];
+    cel.textContent = yays[Math.floor(Math.random()*yays.length)];
+    speakWord(word);
+  } else {
+    cel.textContent = '💪 ¡Inténtalo de nuevo!';
+    speakWord(word);
+  }
+
+  document.getElementById('next-quiz-btn').style.display = 'block';
+  currentIdx++;
+  if (currentIdx >= currentItems.length) {
+    currentItems = shuffle([...vocab[currentCat]]);
+    currentIdx = 0;
+  }
+}
+
+function nextQuiz() {
+  loadQuiz();
+}
+
+// ══════════════════════════════════════
+//  SPEECH
+// ══════════════════════════════════════
+function speakWord(word) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+
+  const btn = document.getElementById('speak-btn');
+  if (btn) { btn.classList.add('speaking'); setTimeout(() => btn.classList.remove('speaking'), 1500); }
+
+  const u = new SpeechSynthesisUtterance(word);
+  u.lang  = 'es-US';
+  u.rate  = 0.75;
+  u.pitch = 1.1;
+  u.volume = 1;
+
+  // Try to find a Spanish voice
+  const voices = window.speechSynthesis.getVoices();
+  const esVoice = voices.find(v => v.lang.startsWith('es')) || null;
+  if (esVoice) u.voice = esVoice;
+
+  window.speechSynthesis.speak(u);
+
+  // Bounce front emoji too
+  const ef = document.getElementById('card-emoji');
+  if (ef && mode === 'repaso') {
+    ef.classList.remove('bounce');
+    void ef.offsetWidth;
+    ef.classList.add('bounce');
+  }
+}
+
+// ══════════════════════════════════════
+//  UTILS
+// ══════════════════════════════════════
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// Voices load async on some browsers
+window.speechSynthesis.onvoiceschanged = () => {};
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (mode !== 'repaso') return;
+  if (e.key === 'ArrowRight') nextCard();
+  if (e.key === 'ArrowLeft')  prevCard();
+  if (e.key === ' ')          { e.preventDefault(); speakCurrent(); }
+  if (e.key === 'Enter')      flipCard();
+});
+
+init();
+</script>
+</body>
+</html>
 
