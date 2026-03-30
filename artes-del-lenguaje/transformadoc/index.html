@@ -1,1 +1,3360 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TransformaDoc — Ecosistema de Conversión</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Nunito:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet" />
+
+    <style>
+      /* ========================================================
+   CSS CUSTOM PROPERTIES — Dark Editorial / Print Lab
+   ======================================================== */
+      :root {
+        --bg: #0c0b07;
+        --s1: #141310;
+        --s2: #1e1c16;
+        --s3: #28261e;
+        --s4: #322f26;
+        --border: #3a3826;
+        --border-hi: #6b5c20;
+        --gold: #d4a017;
+        --gold-lt: #f0c040;
+        --gold-dim: rgba(212, 160, 23, 0.1);
+        --gold-glow: rgba(212, 160, 23, 0.2);
+        --teal: #2dd4bf;
+        --teal-dim: rgba(45, 212, 191, 0.1);
+        --orange: #fb923c;
+        --blue: #60a5fa;
+        --green: #4ade80;
+        --red: #f87171;
+        --purple: #a78bfa;
+        --text: #f2edd8;
+        --text2: #b8b09a;
+        --text3: #7a7262;
+        --text4: #4a4840;
+        --success: #86efac;
+        --error: #fca5a5;
+        --r: 14px;
+        --rs: 8px;
+        --sh: 0 4px 24px rgba(0, 0, 0, 0.45);
+        --sh-lg: 0 12px 48px rgba(0, 0, 0, 0.65);
+      }
+
+      /* ========================================================
+   BASE RESET
+   ======================================================== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: 'Nunito', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Atmospheric background layers */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 900px 600px at 15% 5%, rgba(212, 160, 23, 0.05) 0%, transparent 65%), radial-gradient(ellipse 700px 500px at 85% 90%, rgba(45, 212, 191, 0.04) 0%, transparent 65%),
+          radial-gradient(ellipse 500px 400px at 50% 50%, rgba(251, 146, 60, 0.025) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+      }
+      /* Grain texture */
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.5;
+      }
+
+      .app {
+        position: relative;
+        z-index: 1;
+        max-width: 1380px;
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+
+      /* ========================================================
+   HEADER
+   ======================================================== */
+      header {
+        padding: 52px 0 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 44px;
+        position: relative;
+      }
+      header::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 160px;
+        height: 1px;
+        background: linear-gradient(90deg, var(--gold), transparent);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .logo-gem {
+        width: 58px;
+        height: 58px;
+        background: linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        box-shadow:
+          0 0 30px rgba(212, 160, 23, 0.35),
+          0 4px 12px rgba(0, 0, 0, 0.4);
+        flex-shrink: 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .logo-gem::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -30%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+        transform: skewX(-15deg);
+      }
+      .logo-words h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 2.1rem;
+        font-weight: 800;
+        color: var(--text);
+        letter-spacing: 0.02em;
+        line-height: 1;
+      }
+      .logo-words h1 span {
+        color: var(--gold);
+      }
+      .logo-words p {
+        font-size: 0.72rem;
+        color: var(--text3);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-top: 5px;
+      }
+
+      .hdr-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .hdr-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--s2);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        padding: 9px 20px;
+        font-size: 0.78rem;
+        color: var(--text2);
+      }
+      .hdr-badge .dot {
+        width: 8px;
+        height: 8px;
+        background: var(--gold);
+        border-radius: 50%;
+        animation: glow-pulse 2.2s ease infinite;
+      }
+      @keyframes glow-pulse {
+        0%,
+        100% {
+          box-shadow: 0 0 4px var(--gold);
+          opacity: 1;
+        }
+        50% {
+          box-shadow: 0 0 10px var(--gold);
+          opacity: 0.6;
+        }
+      }
+
+      /* ========================================================
+   FILTER BAR
+   ======================================================== */
+      .filter-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 36px;
+        flex-wrap: wrap;
+      }
+      .filter-label {
+        font-size: 0.7rem;
+        color: var(--text3);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin-right: 6px;
+        flex-shrink: 0;
+      }
+      .fbtn {
+        padding: 7px 18px;
+        border-radius: 100px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text2);
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        letter-spacing: 0.04em;
+      }
+      .fbtn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+      .fbtn.on {
+        background: var(--gold-dim);
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+
+      /* ========================================================
+   GRID HEADER
+   ======================================================== */
+      .grid-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 22px;
+      }
+      .grid-head h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.45rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .grid-head h2 em {
+        font-style: italic;
+        color: var(--gold);
+        font-weight: 400;
+        font-size: 1.1rem;
+        margin-left: 8px;
+      }
+      #visCount {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--text3);
+        background: var(--s2);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 4px 10px;
+      }
+
+      /* ========================================================
+   CONVERSION GRID
+   ======================================================== */
+      .cgrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 16px;
+        margin-bottom: 72px;
+      }
+
+      /* ========================================================
+   CONVERSION CARD
+   ======================================================== */
+      .ccard {
+        background: var(--s1);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 26px 24px;
+        cursor: pointer;
+        transition:
+          transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+          border-color 0.22s,
+          box-shadow 0.22s;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        animation: cardIn 0.45s ease both;
+      }
+      @keyframes cardIn {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .ccard::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--gold-dim);
+        opacity: 0;
+        transition: opacity 0.22s;
+        border-radius: var(--r);
+      }
+      .ccard:hover {
+        transform: translateY(-4px);
+        border-color: var(--border-hi);
+        box-shadow:
+          0 8px 36px rgba(212, 160, 23, 0.13),
+          0 0 0 1px rgba(212, 160, 23, 0.12);
+      }
+      .ccard:hover::before {
+        opacity: 1;
+      }
+      .ccard:active {
+        transform: translateY(-2px);
+      }
+
+      /* Card top row */
+      .ctop {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .cbadges {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .fmt {
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        border: 1px solid;
+      }
+      .c-arrow {
+        font-size: 1rem;
+        color: var(--text4);
+      }
+      .cico {
+        font-size: 2.1rem;
+        line-height: 1;
+        filter: saturate(0.85);
+      }
+
+      /* Card body */
+      .ctitle {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.18rem;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.2;
+      }
+      .cdesc {
+        font-size: 0.81rem;
+        color: var(--text2);
+        line-height: 1.65;
+        flex: 1;
+      }
+      .ctags {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+      .ctag {
+        padding: 3px 8px;
+        background: var(--s3);
+        border-radius: 4px;
+        font-size: 0.68rem;
+        color: var(--text3);
+        letter-spacing: 0.04em;
+      }
+
+      /* Card CTA */
+      .ccta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 14px;
+        border-top: 1px solid var(--border);
+        margin-top: auto;
+      }
+      .ccta-lbl {
+        font-size: 0.76rem;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+      .ccta-btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--gold-dim);
+        border: 1px solid var(--border-hi);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        color: var(--gold);
+        transition: all 0.2s;
+      }
+      .ccard:hover .ccta-btn {
+        background: var(--gold);
+        color: var(--bg);
+        transform: translateX(3px);
+      }
+
+      /* ── Format colour tokens ── */
+      .fmt-md {
+        background: rgba(74, 222, 128, 0.1);
+        color: #4ade80;
+        border-color: rgba(74, 222, 128, 0.28);
+      }
+      .fmt-html {
+        background: rgba(251, 146, 60, 0.1);
+        color: #fb923c;
+        border-color: rgba(251, 146, 60, 0.28);
+      }
+      .fmt-pdf {
+        background: rgba(248, 113, 113, 0.1);
+        color: #f87171;
+        border-color: rgba(248, 113, 113, 0.28);
+      }
+      .fmt-docx {
+        background: rgba(96, 165, 250, 0.1);
+        color: #60a5fa;
+        border-color: rgba(96, 165, 250, 0.28);
+      }
+      .fmt-txt {
+        background: rgba(167, 139, 250, 0.1);
+        color: #a78bfa;
+        border-color: rgba(167, 139, 250, 0.28);
+      }
+      .fmt-xlsx {
+        background: rgba(74, 222, 128, 0.1);
+        color: #4ade80;
+        border-color: rgba(74, 222, 128, 0.28);
+      }
+      .fmt-csv {
+        background: rgba(45, 212, 191, 0.1);
+        color: #2dd4bf;
+        border-color: rgba(45, 212, 191, 0.28);
+      }
+
+      /* ========================================================
+   MODAL OVERLAY
+   ======================================================== */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(4, 3, 1, 0.82);
+        backdrop-filter: blur(10px) saturate(0.6);
+        z-index: 200;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+      .overlay.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .mpanel {
+        background: var(--s1);
+        border: 1px solid var(--border);
+        border-top: 1px solid var(--border-hi);
+        border-radius: 20px 20px 0 0;
+        width: 100%;
+        max-width: 800px;
+        max-height: 92vh;
+        overflow-y: auto;
+        padding: 36px 40px 48px;
+        position: relative;
+        transform: translateY(110%);
+        transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .overlay.open .mpanel {
+        transform: translateY(0);
+      }
+
+      /* Panel handle */
+      .mhandle {
+        width: 44px;
+        height: 4px;
+        background: var(--border);
+        border-radius: 2px;
+        margin: 0 auto 30px;
+      }
+
+      /* Panel header */
+      .mhdr {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 28px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--border);
+      }
+      .mhdr-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .mhdr-ico {
+        font-size: 2.8rem;
+        line-height: 1;
+      }
+      .mhdr-info h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .mhdr-info p {
+        font-size: 0.82rem;
+        color: var(--text3);
+        margin-top: 6px;
+        max-width: 480px;
+        line-height: 1.6;
+      }
+      .mclose {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--s3);
+        border: 1px solid var(--border);
+        color: var(--text2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.05rem;
+        transition: all 0.18s;
+        flex-shrink: 0;
+        margin-top: 4px;
+      }
+      .mclose:hover {
+        background: var(--error);
+        color: #1a0000;
+        border-color: transparent;
+      }
+
+      /* ========================================================
+   INPUT TABS
+   ======================================================== */
+      .tabs {
+        display: flex;
+        gap: 4px;
+        background: var(--s2);
+        border: 1px solid var(--border);
+        border-radius: var(--rs);
+        padding: 4px;
+        margin-bottom: 20px;
+      }
+      .tab {
+        flex: 1;
+        padding: 11px 8px;
+        border-radius: 6px;
+        border: none;
+        background: transparent;
+        color: var(--text3);
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.18s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .tab.on {
+        background: var(--s3);
+        border: 1px solid var(--border);
+        color: var(--text);
+      }
+      .tab:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+      .tab:not(:disabled):hover:not(.on) {
+        color: var(--text2);
+      }
+
+      /* ========================================================
+   DROP ZONE
+   ======================================================== */
+      .dropzone {
+        border: 2px dashed var(--border);
+        border-radius: var(--r);
+        padding: 44px 24px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.22s;
+        background: var(--s2);
+        position: relative;
+        overflow: hidden;
+      }
+      .dropzone:hover,
+      .dropzone.hover {
+        border-color: var(--gold);
+        background: var(--gold-dim);
+      }
+      .dropzone input[type='file'] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+      }
+      .dz-ico {
+        font-size: 3.2rem;
+        margin-bottom: 14px;
+        display: block;
+        filter: grayscale(0.3);
+        transition: transform 0.2s;
+      }
+      .dropzone:hover .dz-ico {
+        transform: scale(1.05) translateY(-2px);
+      }
+      .dz-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 6px;
+      }
+      .dz-sub {
+        font-size: 0.78rem;
+        color: var(--text3);
+      }
+      .dz-ext {
+        display: inline-block;
+        margin-top: 10px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        color: var(--text4);
+        background: var(--s3);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 3px 8px;
+      }
+      .file-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+        background: var(--s3);
+        border: 1px solid var(--gold-dim);
+        border-radius: 100px;
+        padding: 7px 16px;
+        font-size: 0.8rem;
+        color: var(--text2);
+      }
+      .file-pill .pill-ico {
+        font-size: 1rem;
+      }
+      .file-pill.hidden,
+      .hidden {
+        display: none !important;
+      }
+
+      /* ========================================================
+   TEXT AREA
+   ======================================================== */
+      .ta-wrap {
+        position: relative;
+      }
+      textarea.itext {
+        width: 100%;
+        height: 220px;
+        background: var(--s2);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        color: var(--text);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.81rem;
+        line-height: 1.75;
+        padding: 20px 22px;
+        resize: vertical;
+        outline: none;
+        transition: border-color 0.18s;
+      }
+      textarea.itext:focus {
+        border-color: var(--gold);
+      }
+      textarea.itext::placeholder {
+        color: var(--text4);
+        font-family: 'Nunito', sans-serif;
+        font-style: italic;
+        font-size: 0.83rem;
+      }
+      .char-count {
+        position: absolute;
+        bottom: 10px;
+        right: 14px;
+        font-size: 0.68rem;
+        color: var(--text4);
+        font-family: 'JetBrains Mono', monospace;
+        pointer-events: none;
+      }
+
+      /* ========================================================
+   CONVERT BUTTON
+   ======================================================== */
+      .cvt-btn {
+        width: 100%;
+        padding: 18px 24px;
+        margin-top: 22px;
+        background: linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+        color: #0c0b07;
+        border: none;
+        border-radius: var(--r);
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        cursor: pointer;
+        transition: all 0.22s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+      .cvt-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -60%;
+        width: 40%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+        transform: skewX(-15deg);
+        transition: left 0.5s ease;
+      }
+      .cvt-btn:hover:not(:disabled)::before {
+        left: 120%;
+      }
+      .cvt-btn:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(212, 160, 23, 0.32);
+      }
+      .cvt-btn:active:not(:disabled) {
+        transform: translateY(0);
+      }
+      .cvt-btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      .spinner {
+        width: 22px;
+        height: 22px;
+        border: 2.5px solid rgba(0, 0, 0, 0.18);
+        border-top-color: #0c0b07;
+        border-radius: 50%;
+        animation: spin 0.75s linear infinite;
+        display: none;
+      }
+      .cvt-btn.loading .spinner {
+        display: block;
+      }
+      .cvt-btn.loading .btn-lbl {
+        display: none;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ========================================================
+   RESULT SECTION
+   ======================================================== */
+      .result {
+        margin-top: 24px;
+        padding: 24px;
+        background: var(--s2);
+        border: 1px solid rgba(134, 239, 172, 0.2);
+        border-radius: var(--r);
+        display: none;
+        animation: slideDown 0.28s ease both;
+      }
+      .result.vis {
+        display: block;
+      }
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .res-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .res-ico {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(134, 239, 172, 0.12);
+        border: 1px solid rgba(134, 239, 172, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+      .res-title {
+        font-weight: 700;
+        color: var(--success);
+        font-size: 0.95rem;
+      }
+      .res-meta {
+        font-size: 0.75rem;
+        color: var(--text3);
+        font-family: 'JetBrains Mono', monospace;
+        margin-top: 3px;
+      }
+      .dl-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 15px 20px;
+        background: rgba(134, 239, 172, 0.08);
+        border: 1px solid rgba(134, 239, 172, 0.25);
+        border-radius: var(--r);
+        color: var(--success);
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.18s;
+      }
+      .dl-btn:hover {
+        background: rgba(134, 239, 172, 0.16);
+        border-color: rgba(134, 239, 172, 0.5);
+        transform: translateY(-1px);
+      }
+
+      /* Preview container */
+      .preview-box {
+        margin-top: 16px;
+        background: var(--s3);
+        border: 1px solid var(--border);
+        border-radius: var(--rs);
+        padding: 16px;
+        max-height: 160px;
+        overflow: auto;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.73rem;
+        color: var(--text3);
+        line-height: 1.6;
+        white-space: pre-wrap;
+        word-break: break-all;
+        display: none;
+      }
+      .preview-box.vis {
+        display: block;
+      }
+      .preview-lbl {
+        font-size: 0.68rem;
+        color: var(--text4);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 8px;
+      }
+
+      /* Error */
+      .errmsg {
+        margin-top: 16px;
+        padding: 15px 18px;
+        background: rgba(252, 165, 165, 0.07);
+        border: 1px solid rgba(252, 165, 165, 0.22);
+        border-radius: var(--rs);
+        color: var(--error);
+        font-size: 0.84rem;
+        line-height: 1.5;
+        display: none;
+      }
+      .errmsg.vis {
+        display: block;
+      }
+
+      /* ========================================================
+   FOOTER
+   ======================================================== */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 28px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.74rem;
+        color: var(--text4);
+      }
+      footer strong {
+        color: var(--text3);
+      }
+      .foot-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      /* ========================================================
+   SCROLLBAR
+   ======================================================== */
+      ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--s1);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--s4);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--border-hi);
+      }
+
+      /* ========================================================
+   HELP PANEL
+   ======================================================== */
+      .help-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--s2);
+        border: 1px solid var(--border);
+        color: var(--text2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.05rem;
+        font-weight: 700;
+        transition: all 0.18s;
+        flex-shrink: 0;
+      }
+      .help-btn:hover {
+        background: var(--gold-dim);
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+
+      .help-scrim {
+        position: fixed;
+        inset: 0;
+        z-index: 299;
+        background: rgba(4, 3, 1, 0.55);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+      .help-scrim.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .help-drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(440px, 96vw);
+        background: var(--s1);
+        border-left: 1px solid var(--border-hi);
+        z-index: 300;
+        transform: translateX(110%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        box-shadow: -12px 0 48px rgba(0, 0, 0, 0.55);
+      }
+      .help-drawer.open {
+        transform: translateX(0);
+      }
+
+      .help-head {
+        padding: 26px 26px 18px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+      }
+      .help-head-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .help-head-ico {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--gold), var(--orange));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.35rem;
+        flex-shrink: 0;
+        box-shadow: 0 0 18px rgba(212, 160, 23, 0.25);
+      }
+      .help-head h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.1;
+      }
+      .help-head p {
+        font-size: 0.71rem;
+        color: var(--text3);
+        margin-top: 3px;
+        letter-spacing: 0.04em;
+      }
+      .help-close {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--s3);
+        border: 1px solid var(--border);
+        color: var(--text2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        transition: all 0.18s;
+        flex-shrink: 0;
+      }
+      .help-close:hover {
+        background: var(--error);
+        color: #1a0000;
+        border-color: transparent;
+      }
+
+      .help-body {
+        overflow-y: auto;
+        padding: 20px 26px 48px;
+        flex: 1;
+      }
+      .help-body::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .help-section {
+        margin-bottom: 26px;
+      }
+      .help-sec-title {
+        font-size: 0.66rem;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-weight: 700;
+        margin-bottom: 11px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .help-sec-title::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .help-route {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 9px 11px;
+        margin-bottom: 5px;
+        background: var(--s2);
+        border: 1px solid var(--border);
+        border-radius: var(--rs);
+        cursor: pointer;
+        transition: all 0.18s;
+      }
+      .help-route:hover {
+        border-color: var(--border-hi);
+        background: var(--gold-dim);
+      }
+      .help-route-badges {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex-shrink: 0;
+        padding-top: 3px;
+      }
+      .help-route-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .help-route-title {
+        font-size: 0.81rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 2px;
+      }
+      .help-route-desc {
+        font-size: 0.72rem;
+        color: var(--text3);
+        line-height: 1.5;
+      }
+
+      .help-steps {
+        counter-reset: step;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+      }
+      .help-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 10px 13px;
+        background: var(--s2);
+        border: 1px solid var(--border);
+        border-radius: var(--rs);
+      }
+      .help-step::before {
+        counter-increment: step;
+        content: counter(step);
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--gold-dim);
+        border: 1px solid var(--border-hi);
+        color: var(--gold);
+        font-size: 0.72rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-family: 'JetBrains Mono', monospace;
+        margin-top: 1px;
+      }
+      .help-step-txt {
+        font-size: 0.81rem;
+        color: var(--text2);
+        line-height: 1.6;
+      }
+      .help-step-txt strong {
+        color: var(--text);
+      }
+
+      .help-keys {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .help-key-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 12px;
+        background: var(--s2);
+        border: 1px solid var(--border);
+        border-radius: var(--rs);
+      }
+      .help-key-desc {
+        font-size: 0.79rem;
+        color: var(--text2);
+      }
+      kbd {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3px 9px;
+        background: var(--s4);
+        border: 1px solid var(--border-hi);
+        border-bottom: 2px solid var(--border-hi);
+        border-radius: 5px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.71rem;
+        color: var(--text2);
+        min-width: 28px;
+      }
+
+      .help-tip {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 13px;
+        background: var(--gold-dim);
+        border: 1px solid rgba(212, 160, 23, 0.2);
+        border-radius: var(--rs);
+        margin-bottom: 7px;
+        font-size: 0.79rem;
+        color: var(--text2);
+        line-height: 1.55;
+      }
+      .help-tip-ico {
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      .help-dua-box {
+        padding: 13px 15px;
+        background: rgba(74, 222, 128, 0.06);
+        border: 1px solid rgba(74, 222, 128, 0.2);
+        border-radius: var(--rs);
+        font-size: 0.78rem;
+        color: var(--text2);
+        line-height: 1.65;
+      }
+      .help-dua-box strong {
+        color: var(--success);
+      }
+      .help-dua-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 7px;
+        font-size: 0.76rem;
+      }
+      .help-dua-item::before {
+        content: '✓';
+        color: var(--success);
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+
+      /* ── Acordeón ── */
+      .acc-item {
+        border: 1px solid var(--border);
+        border-radius: var(--rs);
+        margin-bottom: 7px;
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+      .acc-item.open {
+        border-color: var(--border-hi);
+      }
+      .acc-btn {
+        width: 100%;
+        padding: 12px 14px;
+        background: var(--s2);
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.18s;
+      }
+      .acc-btn:hover {
+        background: var(--s3);
+      }
+      .acc-item.open .acc-btn {
+        background: var(--gold-dim);
+      }
+      .acc-btn-left {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .acc-ico {
+        font-size: 1rem;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+      .acc-lbl {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--text);
+        font-family: 'Nunito', sans-serif;
+      }
+      .acc-item.open .acc-lbl {
+        color: var(--gold);
+      }
+      .acc-arrow {
+        font-size: 0.75rem;
+        color: var(--text4);
+        transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        flex-shrink: 0;
+      }
+      .acc-item.open .acc-arrow {
+        transform: rotate(180deg);
+        color: var(--gold);
+      }
+      .acc-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .acc-item.open .acc-body {
+        max-height: 1200px;
+      }
+      .acc-inner {
+        padding: 14px 14px 16px;
+      }
+
+      /* ========================================================
+   RESPONSIVE
+   ======================================================== */
+      @media (max-width: 860px) {
+        .app {
+          padding: 0 16px;
+        }
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 18px;
+          padding: 32px 0 24px;
+        }
+        .mpanel {
+          padding: 24px 20px 40px;
+          max-height: 96vh;
+        }
+        .mhdr-info h2 {
+          font-size: 1.4rem;
+        }
+      }
+      @media (max-width: 600px) {
+        .cgrid {
+          grid-template-columns: 1fr;
+        }
+        .logo-words h1 {
+          font-size: 1.7rem;
+        }
+        .hdr-right {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <!-- ====================================================
+       HEADER
+       ==================================================== -->
+      <header>
+        <div class="logo">
+          <div class="logo-gem">⚗️</div>
+          <div class="logo-words">
+            <h1>
+              Transforma
+              <span>Doc</span>
+            </h1>
+            <p>Ecosistema de Conversión · 100 % en tu navegador</p>
+          </div>
+        </div>
+        <div class="hdr-right">
+          <div class="hdr-badge">
+            <span class="dot"></span>
+            Sin servidor · Sin nube · Sin límites
+          </div>
+          <button class="help-btn" id="helpBtn" title="Ayuda (tecla H)" aria-label="Abrir ayuda">?</button>
+        </div>
+      </header>
+
+      <!-- ====================================================
+       FILTER BAR
+       ==================================================== -->
+      <div class="filter-bar">
+        <span class="filter-label">Origen:</span>
+        <button class="fbtn on" data-f="all">Todos</button>
+        <button class="fbtn" data-f="md">Markdown</button>
+        <button class="fbtn" data-f="docx">Word</button>
+        <button class="fbtn" data-f="pdf">PDF</button>
+        <button class="fbtn" data-f="html">HTML</button>
+        <button class="fbtn" data-f="xlsx">Excel</button>
+        <button class="fbtn" data-f="csv">CSV</button>
+        <button class="fbtn" data-f="txt">Texto</button>
+      </div>
+
+      <!-- ====================================================
+       GRID HEADER
+       ==================================================== -->
+      <div class="grid-head">
+        <h2>
+          Conversiones disponibles
+          <em>— elige una</em>
+        </h2>
+        <span id="visCount">17 rutas</span>
+      </div>
+
+      <!-- ====================================================
+       CONVERSION GRID
+       ==================================================== -->
+      <main class="cgrid" id="cgrid"></main>
+
+      <!-- ====================================================
+       FOOTER
+       ==================================================== -->
+      <footer>
+        <span><strong>TransformaDoc | Todo procesado localmente | Tus documentos nunca abandonan tu dispositivo.</strong></span>
+        <span class="foot-right">
+          <span><strong>GEDparaHispanos.com | José M. Fernández [Zhema]</strong></span>
+        </span>
+      </footer>
+    </div>
+
+    <!-- ====================================================
+     HELP SCRIM + DRAWER
+     ==================================================== -->
+    <div class="help-scrim" id="helpScrim"></div>
+    <aside class="help-drawer" id="helpDrawer" role="dialog" aria-modal="true" aria-label="Ayuda de TransformaDoc">
+      <div class="help-head">
+        <div class="help-head-left">
+          <div class="help-head-ico">📖</div>
+          <div>
+            <h2>Ayuda</h2>
+            <p>TransformaDoc · 17 rutas · v2.0</p>
+          </div>
+        </div>
+        <button class="help-close" id="helpClose" title="Cerrar ayuda (Esc)">✕</button>
+      </div>
+
+      <div class="help-body">
+        <!-- ── Cómo usar ── -->
+        <div class="acc-item" id="acc0">
+          <button class="acc-btn" onclick="toggleAcc(0)" aria-expanded="false">
+            <span class="acc-btn-left">
+              <span class="acc-ico">🚀</span>
+              <span class="acc-lbl">Cómo usar</span>
+            </span>
+            <span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+              <div class="help-steps">
+                <div class="help-step">
+                  <div class="help-step-txt">
+                    <strong>Elige una ruta</strong>
+                    de conversión en la cuadrícula, o usa los filtros por formato de origen.
+                  </div>
+                </div>
+                <div class="help-step">
+                  <div class="help-step-txt">
+                    <strong>Sube un archivo</strong>
+                    arrastrándolo a la zona de carga, o haz clic para buscar.
+                  </div>
+                </div>
+                <div class="help-step">
+                  <div class="help-step-txt">
+                    <strong>O pega texto</strong>
+                    directamente en la pestaña "Pegar texto" — disponible en rutas de texto plano, Markdown y HTML.
+                  </div>
+                </div>
+                <div class="help-step">
+                  <div class="help-step-txt">
+                    Pulsa
+                    <strong>Convertir ahora</strong>
+                    . Todo ocurre en tu navegador, sin servidor.
+                  </div>
+                </div>
+                <div class="help-step">
+                  <div class="help-step-txt">
+                    Haz clic en
+                    <strong>Descargar archivo</strong>
+                    . Ningún dato sale de tu dispositivo.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── DUA — abierto por defecto ── -->
+        <div class="acc-item open" id="acc1">
+          <button class="acc-btn" onclick="toggleAcc(1)" aria-expanded="true">
+            <span class="acc-btn-left">
+              <span class="acc-ico">♿</span>
+              <span class="acc-lbl">Accesibilidad DUA · WCAG 2.1 AA</span>
+            </span>
+            <span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+              <div class="help-dua-box">
+                <strong>Todos los HTML generados incluyen:</strong>
+                <div class="help-dua-item">Contraste de texto verificado (mínimo 4.5:1, típico 14–18:1)</div>
+                <div class="help-dua-item">Fuente del sistema, 17 px mínimo, interlineado 1.78</div>
+                <div class="help-dua-item">Enlace "Saltar al contenido" para navegación por teclado</div>
+                <div class="help-dua-item">
+                  Semántica HTML5:
+                  <code style="background: #1e1c16; padding: 1px 5px; border-radius: 3px; font-size: 0.85em">&lt;main&gt;</code>
+                  ,
+                  <code style="background: #1e1c16; padding: 1px 5px; border-radius: 3px; font-size: 0.85em">&lt;header&gt;</code>
+                  ,
+                  <code style="background: #1e1c16; padding: 1px 5px; border-radius: 3px; font-size: 0.85em">&lt;footer&gt;</code>
+                  , roles ARIA
+                </div>
+                <div class="help-dua-item">
+                  Tablas con
+                  <code style="background: #1e1c16; padding: 1px 5px; border-radius: 3px; font-size: 0.85em">scope</code>
+                  ,
+                  <code style="background: #1e1c16; padding: 1px 5px; border-radius: 3px; font-size: 0.85em">caption</code>
+                  y encabezados accesibles
+                </div>
+                <div class="help-dua-item">Indicador de foco visible en todos los controles interactivos</div>
+                <div class="help-dua-item">
+                  Hoja de estilos
+                  <code style="background: #1e1c16; padding: 1px 5px; border-radius: 3px; font-size: 0.85em">@media print</code>
+                  optimizada
+                </div>
+                <div class="help-dua-item">Sello DUA al pie de cada documento generado</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Rutas ── -->
+        <div class="acc-item" id="acc2">
+          <button class="acc-btn" onclick="toggleAcc(2)" aria-expanded="false">
+            <span class="acc-btn-left">
+              <span class="acc-ico">⚗️</span>
+              <span class="acc-lbl">Las 17 rutas de conversión</span>
+            </span>
+            <span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+              <div id="helpRouteList"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Atajos ── -->
+        <div class="acc-item" id="acc3">
+          <button class="acc-btn" onclick="toggleAcc(3)" aria-expanded="false">
+            <span class="acc-btn-left">
+              <span class="acc-ico">⌨️</span>
+              <span class="acc-lbl">Atajos de teclado</span>
+            </span>
+            <span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+              <div class="help-keys">
+                <div class="help-key-row">
+                  <span class="help-key-desc">Abrir / cerrar ayuda</span>
+                  <kbd>H</kbd>
+                </div>
+                <div class="help-key-row">
+                  <span class="help-key-desc">Cerrar ventana activa</span>
+                  <kbd>Esc</kbd>
+                </div>
+                <div class="help-key-row">
+                  <span class="help-key-desc">Convertir (dentro del panel)</span>
+                  <kbd>Enter</kbd>
+                </div>
+                <div class="help-key-row">
+                  <span class="help-key-desc">Navegar controles</span>
+                  <kbd>Tab</kbd>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Tips ── -->
+        <div class="acc-item" id="acc4">
+          <button class="acc-btn" onclick="toggleAcc(4)" aria-expanded="false">
+            <span class="acc-btn-left">
+              <span class="acc-ico">💡</span>
+              <span class="acc-lbl">Consejos prácticos</span>
+            </span>
+            <span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+              <div class="help-tip">
+                <span class="help-tip-ico">💡</span>
+                <span>
+                  Los archivos
+                  <strong>DOCX</strong>
+                  grandes pueden tardar 5–10 segundos. Es normal — la librería trabaja sin servidor.
+                </span>
+              </div>
+              <div class="help-tip">
+                <span class="help-tip-ico">💡</span>
+                <span>
+                  Para
+                  <strong>PDF → Word / HTML</strong>
+                  , solo se extrae texto nativo. PDFs escaneados no tienen texto extraíble.
+                </span>
+              </div>
+              <div class="help-tip">
+                <span class="help-tip-ico">💡</span>
+                <span>
+                  En
+                  <strong>CSV → HTML</strong>
+                  puedes pegar datos directamente desde Excel: cópialos como texto separado por comas.
+                </span>
+              </div>
+              <div class="help-tip">
+                <span class="help-tip-ico">💡</span>
+                <span>
+                  Los HTML generados con DUA embebido
+                  <strong>funcionan sin conexión a internet</strong>
+                  .
+                </span>
+              </div>
+              <div class="help-tip">
+                <span class="help-tip-ico">💡</span>
+                <span>
+                  Usa
+                  <strong>HTML → Markdown</strong>
+                  para recuperar contenido hacia repositorios GitHub o blogs estáticos.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Librerías ── -->
+        <div class="acc-item" id="acc5">
+          <button class="acc-btn" onclick="toggleAcc(5)" aria-expanded="false">
+            <span class="acc-btn-left">
+              <span class="acc-ico">📦</span>
+              <span class="acc-lbl">Librerías utilizadas</span>
+            </span>
+            <span class="acc-arrow">▼</span>
+          </button>
+          <div class="acc-body">
+            <div class="acc-inner">
+              <div class="help-tip" style="flex-direction: column; gap: 5px">
+                <span style="font-size: 0.76rem; color: var(--text3); line-height: 2">
+                  <strong style="color: var(--text2)">marked.js</strong>
+                  — Markdown → HTML &nbsp;·&nbsp;
+                  <strong style="color: var(--text2)">html2pdf.js</strong>
+                  — Generación de PDF &nbsp;·&nbsp;
+                  <strong style="color: var(--text2)">mammoth.js</strong>
+                  — Lectura de DOCX &nbsp;·&nbsp;
+                  <strong style="color: var(--text2)">SheetJS</strong>
+                  — Lectura de Excel/CSV &nbsp;·&nbsp;
+                  <strong style="color: var(--text2)">pdf.js</strong>
+                  — Extracción de PDF &nbsp;·&nbsp;
+                  <strong style="color: var(--text2)">docx.js</strong>
+                  — Creación de DOCX &nbsp;·&nbsp;
+                  <strong style="color: var(--text2)">Turndown.js</strong>
+                  — HTML → Markdown
+                </span>
+                <span style="font-size: 0.72rem; color: var(--text4); margin-top: 4px">Todo código abierto · Procesado 100 % local en tu navegador</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /help-body -->
+    </aside>
+
+    <!-- ====================================================
+     MODAL
+     ==================================================== -->
+    <div class="overlay" id="overlay">
+      <div class="mpanel" id="mpanel">
+        <div class="mhandle"></div>
+
+        <!-- Panel header -->
+        <div class="mhdr">
+          <div class="mhdr-left">
+            <div class="mhdr-ico" id="mIco"></div>
+            <div class="mhdr-info">
+              <h2 id="mTitle"></h2>
+              <p id="mDesc"></p>
+            </div>
+          </div>
+          <button class="mclose" id="mClose" title="Cerrar (Esc)">✕</button>
+        </div>
+
+        <!-- Input tabs -->
+        <div class="tabs" id="itabs">
+          <button class="tab on" id="tabUp">📁 Subir archivo</button>
+          <button class="tab" id="tabTx">✏️ Pegar texto</button>
+        </div>
+
+        <!-- Upload panel -->
+        <div id="panelUp">
+          <div class="dropzone" id="dz">
+            <input type="file" id="fi" />
+            <span class="dz-ico">📂</span>
+            <div class="dz-title">Arrastra tu archivo aquí</div>
+            <div class="dz-sub">o haz clic para buscar</div>
+            <div class="dz-ext" id="dzExt">.md · .txt</div>
+            <div class="file-pill hidden" id="fpill">
+              <span class="pill-ico">📄</span>
+              <span id="fname">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text panel -->
+        <div id="panelTx" class="hidden">
+          <div class="ta-wrap">
+            <textarea class="itext" id="itext" placeholder="Pega aquí tu contenido…" spellcheck="false"></textarea>
+            <div class="char-count" id="charCount">0 caract.</div>
+          </div>
+        </div>
+
+        <!-- Convert button -->
+        <button class="cvt-btn" id="cvtBtn">
+          <span class="btn-lbl">⚗️ &nbsp;Convertir ahora</span>
+          <div class="spinner"></div>
+        </button>
+
+        <!-- Result -->
+        <div class="result" id="resSection">
+          <div class="res-head">
+            <div class="res-ico">✓</div>
+            <div>
+              <div class="res-title">¡Conversión exitosa!</div>
+              <div class="res-meta" id="resMeta">Listo para descargar</div>
+            </div>
+          </div>
+          <button class="dl-btn" id="dlBtn">⬇&nbsp; Descargar archivo</button>
+          <div id="previewBox" class="preview-box">
+            <div class="preview-lbl">Vista previa del contenido</div>
+            <div id="previewContent"></div>
+          </div>
+        </div>
+
+        <!-- Error -->
+        <div class="errmsg" id="errMsg"></div>
+      </div>
+    </div>
+
+    <!-- ====================================================
+     LIBRARIES (CDN)
+     ==================================================== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://unpkg.com/docx@7.8.2/build/index.umd.js"></script>
+    <script src="https://unpkg.com/turndown@7.1.2/dist/turndown.js"></script>
+
+    <!-- ====================================================
+     APPLICATION SCRIPT
+     ==================================================== -->
+    <script>
+      /* ──────────────────────────────────────────────────────
+   CONVERSION CATALOGUE
+   ────────────────────────────────────────────────────── */
+      const CATS = [
+        {
+          id: 'md-html',
+          from: 'md',
+          to: 'html',
+          ico: '🌐',
+          title: 'Markdown → HTML',
+          desc: 'Publica artículos, blogs y documentación web a partir de Markdown.',
+          tags: ['Blog', 'Docs', 'GitHub Pages'],
+          textOk: true,
+          ext: '.md,.txt',
+          ph: '# Mi Artículo\n\n## Introducción\n\nEscribe tu **Markdown** aquí...\n\n- Punto uno\n- Punto dos'
+        },
+        {
+          id: 'md-pdf',
+          from: 'md',
+          to: 'pdf',
+          ico: '📕',
+          title: 'Markdown → PDF',
+          desc: 'Genera manuales, ebooks e informes imprimibles desde Markdown.',
+          tags: ['Ebook', 'Manual', 'Informe'],
+          textOk: true,
+          ext: '.md,.txt',
+          ph: '# Manual de Usuario\n\n## Capítulo 1\n\nEscribe tu contenido Markdown aquí...'
+        },
+        {
+          id: 'md-docx',
+          from: 'md',
+          to: 'docx',
+          ico: '📘',
+          title: 'Markdown → Word',
+          desc: 'Exporta Markdown a documento Word listo para editar y colaborar.',
+          tags: ['Edición', 'Colaboración', 'Oficina'],
+          textOk: true,
+          ext: '.md,.txt',
+          ph: '# Documento\n\n## Sección 1\n\nContenido **importante** aquí...'
+        },
+        {
+          id: 'txt-pdf',
+          from: 'txt',
+          to: 'pdf',
+          ico: '🗒️',
+          title: 'Texto plano → PDF',
+          desc: 'Convierte archivos de texto simple en PDF listos para compartir.',
+          tags: ['Compartir', 'Archivo', 'Rápido'],
+          textOk: true,
+          ext: '.txt',
+          ph: 'Escribe o pega texto plano aquí.\nCada línea se convierte en un párrafo.\n\nPuedes incluir varias secciones.'
+        },
+        {
+          id: 'txt-html',
+          from: 'txt',
+          to: 'html',
+          ico: '📝',
+          title: 'Texto plano → HTML',
+          desc: 'Transforma texto sin formato en una página web limpia, con párrafos y tipografía legible.',
+          tags: ['Web', 'Publicar', 'Sencillo'],
+          textOk: true,
+          ext: '.txt',
+          ph: 'Escribe o pega tu texto aquí.\n\nCada bloque separado por línea en blanco se convierte en un párrafo HTML.\n\nIdeal para notas, borradores o contenido simple.'
+        },
+        {
+          id: 'docx-pdf',
+          from: 'docx',
+          to: 'pdf',
+          ico: '📤',
+          title: 'Word → PDF',
+          desc: 'Envío profesional con formato fijo: convierte .docx a PDF.',
+          tags: ['Profesional', 'Formato fijo', 'Envío'],
+          textOk: false,
+          ext: '.docx',
+          ph: null
+        },
+        {
+          id: 'docx-html',
+          from: 'docx',
+          to: 'html',
+          ico: '🔷',
+          title: 'Word → HTML',
+          desc: 'Publica documentos Word directamente en tu sitio web o CMS.',
+          tags: ['Web', 'Publicar', 'CMS'],
+          textOk: false,
+          ext: '.docx',
+          ph: null
+        },
+        {
+          id: 'pdf-docx',
+          from: 'pdf',
+          to: 'docx',
+          ico: '✏️',
+          title: 'PDF → Word',
+          desc: 'Extrae el texto de un PDF y crea un Word editable con estructura.',
+          tags: ['Editar', 'Recuperar', 'Extraer'],
+          textOk: false,
+          ext: '.pdf',
+          ph: null
+        },
+        {
+          id: 'pdf-html',
+          from: 'pdf',
+          to: 'html',
+          ico: '🔍',
+          title: 'PDF → HTML',
+          desc: 'Extrae el contenido de un PDF y lo convierte en página web navegable, con paginación preservada.',
+          tags: ['Web', 'Publicar', 'Extraer'],
+          textOk: false,
+          ext: '.pdf',
+          ph: null
+        },
+        {
+          id: 'html-pdf',
+          from: 'html',
+          to: 'pdf',
+          ico: '🖨️',
+          title: 'HTML → PDF',
+          desc: 'Guarda páginas web e informes HTML como PDF imprimibles.',
+          tags: ['Imprimir', 'Informe', 'Archivo'],
+          textOk: true,
+          ext: '.html,.htm',
+          ph: '<h1>Mi Reporte</h1>\n<p>Contenido de la <strong>página web</strong>...</p>\n<ul><li>Elemento 1</li></ul>'
+        },
+        {
+          id: 'html-docx',
+          from: 'html',
+          to: 'docx',
+          ico: '♻️',
+          title: 'HTML → Word',
+          desc: 'Reutiliza contenido web en la suite de oficina convirtiendo HTML a Word.',
+          tags: ['Reutilizar', 'Edición', 'Oficina'],
+          textOk: true,
+          ext: '.html,.htm',
+          ph: '<h1>Título</h1>\n<p>Párrafo con <strong>negrita</strong> y <em>cursiva</em>.</p>'
+        },
+        {
+          id: 'xlsx-pdf',
+          from: 'xlsx',
+          to: 'pdf',
+          ico: '📊',
+          title: 'Excel → PDF',
+          desc: 'Exporta hojas de cálculo a reportes y dashboards estáticos en PDF.',
+          tags: ['Reporte', 'Dashboard', 'Tablas'],
+          textOk: false,
+          ext: '.xlsx,.xls,.csv',
+          ph: null
+        },
+        {
+          id: 'xlsx-html',
+          from: 'xlsx',
+          to: 'html',
+          ico: '📋',
+          title: 'Excel → HTML',
+          desc: 'Publica tablas y hojas de Excel como páginas web interactivas.',
+          tags: ['Tablas', 'Web', 'Publicar'],
+          textOk: false,
+          ext: '.xlsx,.xls,.csv',
+          ph: null
+        },
+        {
+          id: 'csv-html',
+          from: 'csv',
+          to: 'html',
+          ico: '🗂️',
+          title: 'CSV → HTML',
+          desc: 'Convierte datos CSV en tabla web interactiva con búsqueda, ordenamiento por columna y paginación.',
+          tags: ['Tabla', 'Filtrar', 'Datos'],
+          textOk: true,
+          ext: '.csv',
+          ph: 'nombre,edad,ciudad\nAna,32,Madrid\nCarlos,27,Bogotá\nLuisa,45,Lima\nPedro,38,México'
+        },
+        {
+          id: 'csv-pdf',
+          from: 'csv',
+          to: 'pdf',
+          ico: '📑',
+          title: 'CSV → PDF',
+          desc: 'Exporta datos tabulares CSV a un informe PDF limpio con tabla formateada lista para imprimir.',
+          tags: ['Informe', 'Imprimir', 'Datos'],
+          textOk: true,
+          ext: '.csv',
+          ph: 'producto,precio,stock\nLápiz,0.50,200\nCuaderno,1.25,85\nBorrador,0.30,150'
+        },
+        {
+          id: 'txt-docx',
+          from: 'txt',
+          to: 'docx',
+          ico: '📄',
+          title: 'Texto plano → Word',
+          desc: 'Transforma texto sin formato en un documento Word estructurado, con párrafos y tipografía profesional.',
+          tags: ['Oficina', 'Edición', 'Formato'],
+          textOk: true,
+          ext: '.txt',
+          ph: 'Este es el primer párrafo del documento.\n\nAquí comienza el segundo párrafo.\n\nY este es el tercero, listo para editar en Word.'
+        },
+        {
+          id: 'html-md',
+          from: 'html',
+          to: 'md',
+          ico: '⬇️',
+          title: 'HTML → Markdown',
+          desc: 'Extrae el contenido de una página HTML y lo convierte a Markdown limpio, listo para repositorios o blogs.',
+          tags: ['GitHub', 'Blog', 'Contenido'],
+          textOk: true,
+          ext: '.html,.htm',
+          ph: '<h1>Mi artículo</h1>\n<p>Párrafo con <strong>negrita</strong> y <a href="#">enlace</a>.</p>\n<ul><li>Elemento uno</li><li>Elemento dos</li></ul>'
+        }
+      ];
+
+      /* ──────────────────────────────────────────────────────
+   APP STATE
+   ────────────────────────────────────────────────────── */
+      let current = null; // current CATS item
+      let curFile = null; // selected File
+      let curTab = 'up'; // 'up' | 'tx'
+      let curBlob = null; // result Blob
+      let curFname = ''; // result filename
+
+      /* ──────────────────────────────────────────────────────
+   RENDER CARDS
+   ────────────────────────────────────────────────────── */
+      function renderCards(filter = 'all') {
+        const grid = document.getElementById('cgrid');
+        const list = filter === 'all' ? CATS : CATS.filter(c => c.from === filter);
+        document.getElementById('visCount').textContent = `${list.length} ruta${list.length !== 1 ? 's' : ''}`;
+
+        grid.innerHTML = list
+          .map(
+            (c, i) => `
+    <div class="ccard" data-id="${c.id}" style="animation-delay:${i * 0.045}s">
+      <div class="ctop">
+        <div class="cbadges">
+          <span class="fmt fmt-${c.from}">${c.from.toUpperCase()}</span>
+          <span class="c-arrow">→</span>
+          <span class="fmt fmt-${c.to}">${c.to.toUpperCase()}</span>
+        </div>
+        <div class="cico">${c.ico}</div>
+      </div>
+      <div class="ctitle">${c.title}</div>
+      <div class="cdesc">${c.desc}</div>
+      <div class="ctags">${c.tags.map(t => `<span class="ctag">${t}</span>`).join('')}</div>
+      <div class="ccta">
+        <span class="ccta-lbl">Convertir</span>
+        <div class="ccta-btn">→</div>
+      </div>
+    </div>
+  `
+          )
+          .join('');
+
+        grid.querySelectorAll('.ccard').forEach(el => {
+          el.addEventListener('click', () => openModal(el.dataset.id));
+        });
+      }
+
+      /* ──────────────────────────────────────────────────────
+   MODAL
+   ────────────────────────────────────────────────────── */
+      function openModal(id) {
+        current = CATS.find(c => c.id === id);
+        if (!current) return;
+
+        // Reset
+        curFile = null;
+        curBlob = null;
+        curFname = '';
+        document.getElementById('fi').value = '';
+        document.getElementById('itext').value = '';
+        document.getElementById('fpill').classList.add('hidden');
+        document.getElementById('fname').textContent = '—';
+        hideResult();
+        hideErr();
+
+        // Populate header
+        document.getElementById('mIco').textContent = current.ico;
+        document.getElementById('mTitle').innerHTML = `<span class="fmt fmt-${current.from}">${current.from.toUpperCase()}</span>
+     <span style="color:var(--text4);font-family:'Nunito',sans-serif;font-size:1rem;font-weight:400">→</span>
+     <span class="fmt fmt-${current.to}">${current.to.toUpperCase()}</span>`;
+        document.getElementById('mDesc').textContent = current.desc;
+        document.getElementById('dzExt').textContent = current.ext;
+
+        // Textarea placeholder
+        if (current.ph) document.getElementById('itext').placeholder = current.ph;
+
+        // Tab logic
+        const tabTx = document.getElementById('tabTx');
+        tabTx.disabled = !current.textOk;
+        tabTx.title = current.textOk ? '' : 'Esta conversión requiere un archivo binario';
+        switchTab('up');
+
+        // Open
+        document.getElementById('overlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        document.getElementById('overlay').classList.remove('open');
+        document.body.style.overflow = '';
+        current = null;
+      }
+
+      function switchTab(t) {
+        curTab = t;
+        const isUp = t === 'up';
+        document.getElementById('panelUp').classList.toggle('hidden', !isUp);
+        document.getElementById('panelTx').classList.toggle('hidden', isUp);
+        document.getElementById('tabUp').classList.toggle('on', isUp);
+        document.getElementById('tabTx').classList.toggle('on', !isUp);
+      }
+
+      /* ──────────────────────────────────────────────────────
+   FILE HANDLING
+   ────────────────────────────────────────────────────── */
+      function setFile(f) {
+        if (!f) return;
+        curFile = f;
+        document.getElementById('fpill').classList.remove('hidden');
+        document.getElementById('fname').textContent = `${f.name}  (${fmtBytes(f.size)})`;
+      }
+
+      function fmtBytes(b) {
+        if (b < 1024) return b + ' B';
+        if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+        return (b / 1048576).toFixed(1) + ' MB';
+      }
+
+      function readText(f) {
+        return new Promise((res, rej) => {
+          const r = new FileReader();
+          r.onload = e => res(e.target.result);
+          r.onerror = () => rej(new Error('No se pudo leer el archivo'));
+          r.readAsText(f, 'UTF-8');
+        });
+      }
+
+      function readBuf(f) {
+        return new Promise((res, rej) => {
+          const r = new FileReader();
+          r.onload = e => res(e.target.result);
+          r.onerror = () => rej(new Error('No se pudo leer el archivo'));
+          r.readAsArrayBuffer(f);
+        });
+      }
+
+      /* ──────────────────────────────────────────────────────
+   DUA CSS — Diseño Universal para el Aprendizaje
+   WCAG 2.1 AA · Contraste verificado · Embebido
+   ────────────────────────────────────────────────────── */
+      const DUA_CSS = `
+/* === Variables DUA === */
+:root{
+  --dua-bg:#ffffff;        --dua-surface:#f4f6fa;    --dua-border:#c0c7d4;
+  --dua-text:#1a1a1a;      /* ratio 18.1:1 ✓ */
+  --dua-text2:#3a3a3a;     /* ratio 11.0:1 ✓ */
+  --dua-head:#0d2b4e;      /* ratio 14.8:1 ✓ */
+  --dua-link:#0055aa;      /* ratio  5.8:1 ✓ */
+  --dua-link-v:#6b21a8;    /* ratio  7.1:1 ✓ */
+  --dua-focus:#c94400;     /* ratio  4.9:1 ✓ */
+  --dua-th-bg:#0d2b4e;     --dua-th-fg:#ffffff;
+  --dua-tr-alt:#e8eef7;
+  --dua-code-bg:#f3f4f6;   --dua-quote-bd:#0055aa;
+  --dua-green-bg:#edf4e8;  --dua-green-bd:#5a9c2e;  --dua-green-tx:#2a560a;
+  --dua-font:system-ui,-apple-system,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --dua-mono:'Courier New',Courier,monospace;
+  --dua-r:8px; --dua-max:860px;
+}
+
+/* === Reset === */
+*,*::before,*::after{box-sizing:border-box;}
+img,video{max-width:100%;height:auto;}
+
+/* === Saltar al contenido (teclado) === */
+.dua-skip{
+  position:absolute;top:-44px;left:0;
+  background:var(--dua-focus);color:#fff;
+  padding:10px 20px;border-radius:0 0 8px 0;
+  font-size:.9rem;font-weight:700;text-decoration:none;
+  z-index:1000;transition:top .2s;
+}
+.dua-skip:focus{top:0;outline:3px solid #fff;outline-offset:2px;}
+
+/* === Cuerpo === */
+body{
+  font-family:var(--dua-font);
+  font-size:1.0625rem;    /* 17 px — mínimo DUA */
+  line-height:1.78;       /* ≥ 1.5 requerido */
+  color:var(--dua-text);
+  background:var(--dua-bg);
+  margin:0;padding:0;
+}
+
+/* === Contenedor principal === */
+.dua-wrap{max-width:var(--dua-max);margin:0 auto;padding:40px 28px 80px;}
+
+/* === Encabezados === */
+h1,h2,h3,h4,h5,h6{
+  font-family:var(--dua-font);color:var(--dua-head);
+  line-height:1.3;margin:0 0 .5em;font-weight:700;
+}
+h1{font-size:2rem;  margin-top:0;  padding-bottom:.35em;border-bottom:3px solid var(--dua-head);}
+h2{font-size:1.55rem;margin-top:2em;padding-bottom:.25em;border-bottom:1px solid var(--dua-border);}
+h3{font-size:1.25rem;margin-top:1.6em;}
+h4{font-size:1.1rem; margin-top:1.3em;}
+h5,h6{font-size:1rem;margin-top:1em;}
+
+/* === Párrafos === */
+p{margin:0 0 1.1em;}
+
+/* === Enlace === */
+a{color:var(--dua-link);text-decoration:underline;text-underline-offset:3px;}
+a:visited{color:var(--dua-link-v);}
+a:hover{text-decoration-thickness:2px;}
+a:focus{outline:3px solid var(--dua-focus);outline-offset:3px;border-radius:2px;}
+
+/* === Listas === */
+ul,ol{padding-left:2em;margin:.4em 0 1em;}
+li{margin-bottom:.4em;}
+li>ul,li>ol{margin-top:.3em;}
+
+/* === Tablas === */
+.dua-table-wrap{overflow-x:auto;margin:1.4em 0;border-radius:var(--dua-r);border:1px solid var(--dua-border);}
+table{border-collapse:collapse;width:100%;font-size:.95rem;}
+caption{
+  font-weight:700;color:var(--dua-head);
+  padding:10px 14px;text-align:left;
+  background:var(--dua-surface);border-bottom:1px solid var(--dua-border);
+}
+th{background:var(--dua-th-bg);color:var(--dua-th-fg);padding:11px 14px;text-align:left;font-weight:700;}
+th[scope=col]{border-right:1px solid rgba(255,255,255,.15);}
+th[scope=row]{background:var(--dua-surface);color:var(--dua-head);}
+td{padding:9px 14px;border-bottom:1px solid var(--dua-border);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:var(--dua-tr-alt);}
+tr:hover td{background:#d4e4f5;}
+
+/* === Código === */
+code{
+  font-family:var(--dua-mono);font-size:.9em;
+  background:var(--dua-code-bg);padding:.15em .45em;
+  border-radius:4px;border:1px solid var(--dua-border);
+}
+pre{
+  background:var(--dua-code-bg);border:1px solid var(--dua-border);
+  border-radius:var(--dua-r);padding:18px 20px;overflow-x:auto;tab-size:2;
+}
+pre code{background:none;border:none;padding:0;font-size:.88rem;line-height:1.65;}
+
+/* === Cita === */
+blockquote{
+  margin:1.2em 0;padding:.6em 1.4em;
+  border-left:5px solid var(--dua-quote-bd);
+  background:var(--dua-surface);
+  border-radius:0 var(--dua-r) var(--dua-r) 0;
+  color:var(--dua-text2);font-style:italic;
+}
+blockquote cite{display:block;margin-top:.5em;font-style:normal;font-size:.85rem;}
+
+/* === Separador === */
+hr{border:none;border-top:2px solid var(--dua-border);margin:2.2em 0;}
+
+/* === Foco global === */
+:focus-visible{outline:3px solid var(--dua-focus);outline-offset:3px;border-radius:2px;}
+
+/* === Sello DUA === */
+.dua-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 16px;margin-top:2em;
+  background:var(--dua-green-bg);border:1px solid var(--dua-green-bd);
+  border-radius:100px;
+  font-size:.76rem;font-weight:700;color:var(--dua-green-tx);
+  letter-spacing:.04em;
+}
+.dua-badge::before{content:'✓  ';}
+
+/* === Pie de página === */
+.dua-footer{
+  margin-top:3em;padding-top:1.2em;
+  border-top:1px solid var(--dua-border);
+  font-size:.78rem;color:#555;
+  display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+
+/* === Responsivo === */
+@media(max-width:640px){
+  .dua-wrap{padding:24px 16px 60px;}
+  h1{font-size:1.6rem;}h2{font-size:1.3rem;}
+  body{font-size:1rem;}
+}
+
+/* === Impresión === */
+@media print{
+  body{font-size:11pt;line-height:1.6;color:#000;background:#fff;}
+  .dua-skip,.dua-footer,nav{display:none!important;}
+  h1,h2,h3{page-break-after:avoid;color:#000;border-color:#000;}
+  table{page-break-inside:avoid;}
+  a{color:#000;}
+  a[href]::after{content:' (' attr(href) ')';font-size:.85em;}
+  .dua-wrap{max-width:none;padding:0;}
+}
+`;
+
+      /* ──────────────────────────────────────────────────────
+   HTML WRAPPER — con semántica DUA completa
+   ────────────────────────────────────────────────────── */
+      function wrapHtml(body, title = 'Documento') {
+        const now = new Date().toLocaleDateString('es-MX', {year: 'numeric', month: 'long', day: 'numeric'});
+        return `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="generator" content="TransformaDoc — GEDparaHispanos.com">
+<title>${title}</title>
+<style>${DUA_CSS}</style>
+</head>
+<body>
+<a class="dua-skip" href="#main">Ir al contenido principal</a>
+<main id="main" class="dua-wrap" role="main" aria-label="${title}">
+${body}
+<footer class="dua-footer" role="contentinfo">
+  <span class="dua-badge">Diseño Universal para el Aprendizaje (DUA) · WCAG 2.1 AA</span>
+  <span>Generado con <strong>TransformaDoc</strong> · ${now}</span>
+</footer>
+</main>
+</body>
+</html>`;
+      }
+
+      /* ──────────────────────────────────────────────────────
+   HTML → PDF  (html2pdf wrapper)
+   ────────────────────────────────────────────────────── */
+      function toPdfBlob(htmlContent) {
+        return new Promise((res, rej) => {
+          const div = document.createElement('div');
+          div.style.cssText =
+            'position:absolute;left:-9999px;top:0;width:820px;' + 'font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;background:#fff;' + 'padding:40px 44px;line-height:1.7;font-size:14px;';
+          div.innerHTML = htmlContent;
+          document.body.appendChild(div);
+
+          html2pdf()
+            .set({
+              margin: [14, 14, 14, 14],
+              filename: 'doc.pdf',
+              image: {type: 'jpeg', quality: 0.93},
+              html2canvas: {scale: 2, useCORS: true, logging: false, backgroundColor: '#ffffff'},
+              jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'}
+            })
+            .from(div)
+            .toPdf()
+            .output('blob')
+            .then(blob => {
+              document.body.removeChild(div);
+              res(blob);
+            })
+            .catch(err => {
+              if (document.body.contains(div)) document.body.removeChild(div);
+              rej(err);
+            });
+        });
+      }
+
+      /* ──────────────────────────────────────────────────────
+   HTML → DOCX  helpers
+   ────────────────────────────────────────────────────── */
+      function htmlToDocxChildren(html) {
+        const d = document.createElement('div');
+        d.innerHTML = html;
+        const out = [];
+
+        function textRuns(node) {
+          const runs = [];
+          node.childNodes.forEach(ch => {
+            const t = ch.textContent;
+            if (!t) return;
+            const tag = ch.tagName ? ch.tagName.toLowerCase() : '';
+            if (tag === 'strong' || tag === 'b') runs.push(new docx.TextRun({text: t, bold: true}));
+            else if (tag === 'em' || tag === 'i') runs.push(new docx.TextRun({text: t, italics: true}));
+            else if (tag === 'code') runs.push(new docx.TextRun({text: t, font: 'Courier New', size: 20}));
+            else if (tag === 'a') runs.push(new docx.TextRun({text: t, color: '0066CC'}));
+            else runs.push(new docx.TextRun(t));
+          });
+          return runs.length ? runs : [new docx.TextRun(node.textContent || '')];
+        }
+
+        function walk(node) {
+          if (node.nodeType === 3) {
+            const t = node.textContent.trim();
+            if (t)
+              out.push(
+                new docx.Paragraph({
+                  children: [new docx.TextRun(t)],
+                  spacing: {after: 160}
+                })
+              );
+            return;
+          }
+          if (node.nodeType !== 1) return;
+          const tag = node.tagName.toLowerCase();
+          const txt = node.textContent.trim();
+
+          if (tag === 'h1') out.push(new docx.Paragraph({text: txt, heading: docx.HeadingLevel.HEADING_1, spacing: {before: 400, after: 200}}));
+          else if (tag === 'h2') out.push(new docx.Paragraph({text: txt, heading: docx.HeadingLevel.HEADING_2, spacing: {before: 320, after: 160}}));
+          else if (tag === 'h3') out.push(new docx.Paragraph({text: txt, heading: docx.HeadingLevel.HEADING_3, spacing: {before: 240, after: 120}}));
+          else if (tag === 'p') {
+            const runs = textRuns(node);
+            if (runs.length) out.push(new docx.Paragraph({children: runs, spacing: {after: 160}}));
+          } else if (tag === 'li') {
+            out.push(
+              new docx.Paragraph({
+                children: [new docx.TextRun(txt)],
+                bullet: {level: 0},
+                spacing: {after: 100}
+              })
+            );
+          } else if (tag === 'ul' || tag === 'ol') node.childNodes.forEach(walk);
+          else if (tag === 'blockquote') {
+            out.push(
+              new docx.Paragraph({
+                children: [new docx.TextRun({text: txt, italics: true, color: '666666'})],
+                indent: {left: 720},
+                spacing: {after: 160}
+              })
+            );
+          } else if (tag === 'pre' || tag === 'code') {
+            txt.split('\n').forEach(line => {
+              out.push(
+                new docx.Paragraph({
+                  children: [new docx.TextRun({text: line || ' ', font: 'Courier New', size: 18})],
+                  spacing: {after: 60}
+                })
+              );
+            });
+          } else if (tag === 'hr') {
+            out.push(new docx.Paragraph({text: '', thematicBreak: true, spacing: {before: 200, after: 200}}));
+          } else if (tag !== 'script' && tag !== 'style' && tag !== 'head') {
+            node.childNodes.forEach(walk);
+          }
+        }
+
+        d.childNodes.forEach(walk);
+        if (!out.length) out.push(new docx.Paragraph({text: 'Documento vacío', spacing: {after: 200}}));
+        return out;
+      }
+
+      async function makeDocx(children, title = 'Documento') {
+        const doc = new docx.Document({
+          title,
+          creator: 'TransformaDoc — GEDparaHispanos.com',
+          styles: {
+            default: {
+              document: {
+                run: {font: 'Calibri', size: 24, color: '1A1A1A'}
+              }
+            }
+          },
+          sections: [
+            {
+              properties: {
+                page: {margin: {top: 1440, right: 1440, bottom: 1440, left: 1440}}
+              },
+              children
+            }
+          ]
+        });
+        return await docx.Packer.toBlob(doc);
+      }
+
+      /* ──────────────────────────────────────────────────────
+   EXCEL → HTML
+   ────────────────────────────────────────────────────── */
+      function xlsxToHtmlFull(wb, fname) {
+        const sheets = wb.SheetNames;
+        const now = new Date().toLocaleDateString('es-MX', {year: 'numeric', month: 'long', day: 'numeric'});
+        const tabsHtml = sheets
+          .map(
+            (n, i) =>
+              `<button id="stab${i}" onclick="show(${i})"
+             class="${i === 0 ? 'on' : ''}"
+             role="tab" aria-selected="${i === 0 ? 'true' : 'false'}"
+             aria-controls="s${i}">${n}</button>`
+          )
+          .join('');
+        const sheetsHtml = sheets
+          .map((n, i) => {
+            const rawHtml = XLSX.utils.sheet_to_html(wb.Sheets[n], {editable: false});
+            // Inject scope=col on th elements for accessibility
+            const accessible = rawHtml.replace(/<th>/g, '<th scope="col">');
+            return `<div id="s${i}" class="xl-sh" role="tabpanel" aria-labelledby="stab${i}"
+                 style="display:${i === 0 ? 'block' : 'none'}">${accessible}</div>`;
+          })
+          .join('');
+
+        return `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="generator" content="TransformaDoc — GEDparaHispanos.com">
+<title>${fname}</title>
+<style>
+${DUA_CSS}
+/* === Extensión Excel viewer === */
+body{background:var(--dua-surface);}
+.xl-header{
+  background:var(--dua-head);color:#fff;
+  padding:14px 24px;margin-bottom:0;
+}
+.xl-header h1{font-size:1rem;color:#fff;border:none;padding:0;margin:0;font-weight:600;}
+.dua-wrap{max-width:1200px;padding-top:24px;}
+.xl-tabs{
+  display:flex;gap:3px;flex-wrap:wrap;
+  margin-bottom:0;padding:0 0 0 0;
+}
+.xl-tabs button{
+  padding:9px 20px;background:var(--dua-surface);
+  border:1px solid var(--dua-border);border-bottom:2px solid transparent;
+  border-radius:7px 7px 0 0;cursor:pointer;
+  font-size:.85rem;font-family:var(--dua-font);
+  color:var(--dua-text2);transition:all .15s;
+}
+.xl-tabs button.on{
+  background:#fff;font-weight:700;color:var(--dua-head);
+  border-bottom-color:#fff;border-top:2px solid var(--dua-head);
+}
+.xl-tabs button:hover:not(.on){background:#e2e8f0;color:var(--dua-head);}
+.xl-tabs button:focus-visible{outline:3px solid var(--dua-focus);outline-offset:2px;}
+.xl-sh{
+  background:#fff;border:1px solid var(--dua-border);
+  border-radius:0 8px 8px 8px;padding:18px;overflow-x:auto;
+}
+table{border-collapse:collapse;font-size:.88rem;min-width:100%;}
+td,th{border:1px solid var(--dua-border);padding:7px 12px;white-space:nowrap;}
+th{background:var(--dua-th-bg);color:var(--dua-th-fg);font-weight:700;}
+tr:nth-child(even) td{background:var(--dua-tr-alt);}
+tr:hover td{background:#d4e4f5;}
+</style>
+</head>
+<body>
+<a class="dua-skip" href="#main">Ir al contenido principal</a>
+<div class="xl-header" role="banner">
+  <h1>📊 ${fname}</h1>
+</div>
+<main id="main" class="dua-wrap" role="main">
+  <div class="xl-tabs" role="tablist" aria-label="Hojas del libro">${tabsHtml}</div>
+  ${sheetsHtml}
+  <footer class="dua-footer" role="contentinfo">
+    <span class="dua-badge">Diseño Universal para el Aprendizaje (DUA) · WCAG 2.1 AA</span>
+    <span>Generado con <strong>TransformaDoc</strong> · ${now}</span>
+  </footer>
+</main>
+<script>
+function show(i){
+  document.querySelectorAll('.xl-sh').forEach((s,j)=>{
+    s.style.display=j===i?'block':'none';
+  });
+  document.querySelectorAll('.xl-tabs button').forEach((b,j)=>{
+    b.className=j===i?'on':'';
+    b.setAttribute('aria-selected',j===i?'true':'false');
+  });
+}
+<\/script>
+</body>
+</html>`;
+      }
+
+      function xlsxToSimpleHtml(wb) {
+        return wb.SheetNames.map(n => {
+          const h = XLSX.utils.sheet_to_html(wb.Sheets[n], {editable: false});
+          return `<h3 style="color:#333;margin:24px 0 8px;font-family:Arial">${n}</h3>${h}`;
+        }).join('');
+      }
+
+      /* ──────────────────────────────────────────────────────
+   CORE CONVERTERS
+   ────────────────────────────────────────────────────── */
+      const CONV = {
+        'md-html': async (inp, isFile) => {
+          const md = isFile ? await readText(inp) : inp;
+          const body = marked.parse(md);
+          const html = wrapHtml(body, 'Documento Markdown');
+          const fn = (isFile ? inp.name.replace(/\.[^.]+$/, '') : 'documento') + '.html';
+          return {blob: new Blob([html], {type: 'text/html;charset=utf-8'}), fn, preview: body.slice(0, 400)};
+        },
+
+        'md-pdf': async (inp, isFile) => {
+          const md = isFile ? await readText(inp) : inp;
+          const body = marked.parse(md);
+          const blob = await toPdfBlob(body);
+          const fn = (isFile ? inp.name.replace(/\.[^.]+$/, '') : 'documento') + '.pdf';
+          return {blob, fn};
+        },
+
+        'md-docx': async (inp, isFile) => {
+          const md = isFile ? await readText(inp) : inp;
+          const body = marked.parse(md);
+          const children = htmlToDocxChildren(body);
+          const blob = await makeDocx(children, 'Documento Markdown');
+          const fn = (isFile ? inp.name.replace(/\.[^.]+$/, '') : 'documento') + '.docx';
+          return {blob, fn};
+        },
+
+        'txt-pdf': async (inp, isFile) => {
+          const txt = isFile ? await readText(inp) : inp;
+          const esc = txt.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          const body = `<pre style="white-space:pre-wrap;font-family:Arial,sans-serif;
+                font-size:13.5px;line-height:1.85;color:#1a1a1a">${esc}</pre>`;
+          const blob = await toPdfBlob(body);
+          const fn = (isFile ? inp.name.replace(/\.[^.]+$/, '') : 'documento') + '.pdf';
+          return {blob, fn};
+        },
+
+        'txt-html': async (inp, isFile) => {
+          const txt = isFile ? await readText(inp) : inp;
+          // Split on blank lines → paragraphs; escape HTML entities
+          const paras = txt
+            .split(/\n{2,}/)
+            .map(block => block.trim())
+            .filter(Boolean)
+            .map(block => {
+              const esc = block.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+              return `<p>${esc}</p>`;
+            })
+            .join('\n');
+          const title = isFile ? inp.name.replace(/\.[^.]+$/, '') : 'Documento de texto';
+          const html = wrapHtml(`<h1>${title}</h1>\n${paras}`, title);
+          const fn = (isFile ? inp.name.replace(/\.[^.]+$/, '') : 'documento') + '.html';
+          return {blob: new Blob([html], {type: 'text/html;charset=utf-8'}), fn, preview: paras.slice(0, 400)};
+        },
+
+        'docx-pdf': async inp => {
+          const buf = await readBuf(inp);
+          const r = await mammoth.convertToHtml({arrayBuffer: buf});
+          const blob = await toPdfBlob(r.value);
+          const fn = inp.name.replace(/\.docx?$/i, '') + '.pdf';
+          return {blob, fn};
+        },
+
+        'docx-html': async inp => {
+          const buf = await readBuf(inp);
+          const r = await mammoth.convertToHtml({arrayBuffer: buf});
+          const html = wrapHtml(r.value, inp.name.replace(/\.docx?$/i, ''));
+          const fn = inp.name.replace(/\.docx?$/i, '') + '.html';
+          return {blob: new Blob([html], {type: 'text/html;charset=utf-8'}), fn, preview: r.value.slice(0, 400)};
+        },
+
+        'pdf-docx': async inp => {
+          if (typeof pdfjsLib === 'undefined') throw new Error('pdf.js no disponible. Intenta recargar la página.');
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+          const buf = await readBuf(inp);
+          const pdf = await pdfjsLib.getDocument({data: new Uint8Array(buf)}).promise;
+          const children = [];
+
+          children.push(
+            new docx.Paragraph({
+              text: inp.name.replace('.pdf', ''),
+              heading: docx.HeadingLevel.HEADING_1,
+              spacing: {after: 300}
+            })
+          );
+
+          for (let p = 1; p <= pdf.numPages; p++) {
+            const page = await pdf.getPage(p);
+            const tc = await page.getTextContent();
+            if (p > 1) {
+              children.push(
+                new docx.Paragraph({
+                  children: [
+                    new docx.TextRun({
+                      text: `━━ Página ${p} ━━`,
+                      bold: true,
+                      color: '888888'
+                    })
+                  ],
+                  spacing: {before: 400, after: 200}
+                })
+              );
+            }
+            let line = '',
+              lastY = null;
+            tc.items.forEach(item => {
+              if (!('str' in item)) return;
+              const y = item.transform ? item.transform[5] : 0;
+              if (lastY !== null && Math.abs(y - lastY) > 4) {
+                if (line.trim()) {
+                  children.push(
+                    new docx.Paragraph({
+                      children: [new docx.TextRun(line.trim())],
+                      spacing: {after: 100}
+                    })
+                  );
+                }
+                line = item.str;
+              } else {
+                line += item.str;
+              }
+              lastY = y;
+            });
+            if (line.trim())
+              children.push(
+                new docx.Paragraph({
+                  children: [new docx.TextRun(line.trim())],
+                  spacing: {after: 100}
+                })
+              );
+          }
+
+          const blob = await makeDocx(children, inp.name);
+          const fn = inp.name.replace(/\.pdf$/i, '') + '.docx';
+          return {blob, fn};
+        },
+
+        'pdf-html': async inp => {
+          if (typeof pdfjsLib === 'undefined') throw new Error('pdf.js no disponible. Intenta recargar la página.');
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+          const buf = await readBuf(inp);
+          const pdf = await pdfjsLib.getDocument({data: new Uint8Array(buf)}).promise;
+          const title = inp.name.replace(/\.pdf$/i, '');
+          let sectionsHtml = '';
+
+          for (let p = 1; p <= pdf.numPages; p++) {
+            const page = await pdf.getPage(p);
+            const tc = await page.getTextContent();
+            let pageText = '';
+            let line = '',
+              lastY = null;
+            tc.items.forEach(item => {
+              if (!('str' in item)) return;
+              const y = item.transform ? item.transform[5] : 0;
+              if (lastY !== null && Math.abs(y - lastY) > 4) {
+                if (line.trim()) {
+                  const esc = line.trim().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                  pageText += `<p>${esc}</p>\n`;
+                }
+                line = item.str;
+              } else {
+                line += item.str;
+              }
+              lastY = y;
+            });
+            if (line.trim()) {
+              const esc = line.trim().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+              pageText += `<p>${esc}</p>\n`;
+            }
+            sectionsHtml += `
+        <section class="pdf-page" id="p${p}" aria-label="Página ${p} de ${pdf.numPages}">
+          <div class="pdf-page-label">
+            <span>Página ${p}</span><span>de ${pdf.numPages}</span>
+          </div>
+          ${pageText || '<p class="dua-empty">[Página sin texto extraíble]</p>'}
+        </section>`;
+          }
+
+          const navLinks = Array.from({length: pdf.numPages}, (_, i) => `<a href="#p${i + 1}" aria-label="Ir a página ${i + 1}">${i + 1}</a>`).join('');
+
+          const now = new Date().toLocaleDateString('es-MX', {year: 'numeric', month: 'long', day: 'numeric'});
+          const fullHtml = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="generator" content="TransformaDoc — GEDparaHispanos.com">
+<title>${title}</title>
+<style>
+${DUA_CSS}
+/* === Extensión PDF-viewer === */
+body{background:#e8ecf2;}
+.dua-wrap{max-width:940px;}
+.pdf-header{
+  background:var(--dua-head);color:#fff;
+  padding:16px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+  position:sticky;top:0;z-index:10;
+  box-shadow:0 2px 12px rgba(0,0,0,.35);
+}
+.pdf-header h1{
+  font-size:1rem;margin:0;color:#fff;
+  border:none;padding:0;font-weight:600;
+}
+.pdf-nav{display:flex;gap:5px;flex-wrap:wrap;max-width:560px;}
+.pdf-nav a{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;background:rgba(255,255,255,.12);
+  border-radius:6px;color:#fff;text-decoration:none;font-size:.8rem;
+  transition:background .15s;border:1px solid rgba(255,255,255,.18);
+}
+.pdf-nav a:hover{background:rgba(255,255,255,.28);}
+.pdf-nav a:focus{outline:3px solid var(--dua-focus);outline-offset:2px;}
+.pdf-page{
+  background:#fff;border-radius:10px;
+  padding:36px 44px;margin-bottom:24px;
+  box-shadow:0 2px 14px rgba(0,0,0,.1);
+  scroll-margin-top:72px;
+  border:1px solid var(--dua-border);
+}
+.pdf-page-label{
+  font-size:.7rem;color:#888;text-transform:uppercase;
+  letter-spacing:.1em;margin-bottom:16px;
+  padding-bottom:10px;border-bottom:1px solid var(--dua-border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.pdf-page p{margin:.65em 0;line-height:1.78;font-size:.97rem;}
+p.dua-empty{color:#bbb;font-style:italic;}
+@media print{
+  .pdf-header{display:none;}
+  .pdf-page{box-shadow:none;border:1px solid #ccc;page-break-after:always;border-radius:0;}
+}
+</style>
+</head>
+<body>
+<a class="dua-skip" href="#main">Ir al contenido principal</a>
+<header class="pdf-header" role="banner">
+  <h1>📄 ${title}</h1>
+  <nav class="pdf-nav" aria-label="Navegación por páginas">${navLinks}</nav>
+</header>
+<main id="main" class="dua-wrap" role="main">
+${sectionsHtml}
+<footer class="dua-footer" role="contentinfo">
+  <span class="dua-badge">Diseño Universal para el Aprendizaje (DUA) · WCAG 2.1 AA</span>
+  <span>Generado con <strong>TransformaDoc</strong> · ${now}</span>
+</footer>
+</main>
+</body>
+</html>`;
+
+          const fn = inp.name.replace(/\.pdf$/i, '') + '.html';
+          return {blob: new Blob([fullHtml], {type: 'text/html;charset=utf-8'}), fn, preview: sectionsHtml.replace(/<[^>]+>/g, ' ').slice(0, 400)};
+        },
+
+        'html-pdf': async (inp, isFile) => {
+          let html = isFile ? await readText(inp) : inp;
+          const body = (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i) || [, ''])[1] || html;
+          const blob = await toPdfBlob(body);
+          const fn = (isFile ? inp.name.replace(/\.[^.]+$/, '') : 'pagina') + '.pdf';
+          return {blob, fn};
+        },
+
+        'html-docx': async (inp, isFile) => {
+          let html = isFile ? await readText(inp) : inp;
+          const body = (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i) || [, ''])[1] || html;
+          const children = htmlToDocxChildren(body);
+          const blob = await makeDocx(children, 'Página Web');
+          const fn = (isFile ? inp.name.replace(/\.[^.]+$/, '') : 'pagina') + '.docx';
+          return {blob, fn};
+        },
+
+        'xlsx-pdf': async inp => {
+          const buf = await readBuf(inp);
+          const wb = XLSX.read(buf, {type: 'arraybuffer'});
+          const tables = xlsxToSimpleHtml(wb);
+          const styled = `<style>
+      table{border-collapse:collapse;width:100%;margin-bottom:20px;font-size:11px;}
+      td,th{border:1px solid #aaa;padding:5px 9px;white-space:nowrap;}
+      th{background:#e8ecf0;font-weight:700;}
+      tr:nth-child(even)td{background:#f7f7f7;}
+      h3{font-family:Arial;color:#333;margin:20px 0 8px;font-size:13px;}
+      body{font-family:Arial,sans-serif;}
+    </style>
+    <h2 style="font-family:Arial;color:#111;font-size:16px;margin-bottom:16px">
+      📊 ${inp.name}
+    </h2>${tables}`;
+          const blob = await toPdfBlob(styled);
+          const fn = inp.name.replace(/\.[^.]+$/, '') + '.pdf';
+          return {blob, fn};
+        },
+
+        'xlsx-html': async inp => {
+          const buf = await readBuf(inp);
+          const wb = XLSX.read(buf, {type: 'arraybuffer'});
+          const html = xlsxToHtmlFull(wb, inp.name);
+          const fn = inp.name.replace(/\.[^.]+$/, '') + '.html';
+          return {blob: new Blob([html], {type: 'text/html;charset=utf-8'}), fn, preview: null};
+        },
+
+        'csv-html': async (inp, isFile) => {
+          const raw = isFile ? await readText(inp) : inp;
+          // Parse CSV manually (handles quoted fields)
+          function parseCSV(text) {
+            const rows = [];
+            text
+              .trim()
+              .split(/\r?\n/)
+              .forEach(line => {
+                const cols = [];
+                let cur = '';
+                let inQ = false;
+                for (let i = 0; i < line.length; i++) {
+                  const c = line[i];
+                  if (c === '"') {
+                    inQ = !inQ;
+                  } else if (c === ',' && !inQ) {
+                    cols.push(cur.trim());
+                    cur = '';
+                  } else cur += c;
+                }
+                cols.push(cur.trim());
+                rows.push(cols);
+              });
+            return rows;
+          }
+          const rows = parseCSV(raw);
+          if (rows.length < 2) throw new Error('El CSV necesita al menos una fila de encabezado y una de datos.');
+          const headers = rows[0];
+          const data = rows.slice(1);
+          const fname = isFile ? inp.name.replace(/\.[^.]+$/, '') : 'datos';
+
+          const thHtml = headers
+            .map(
+              (h, i) =>
+                `<th scope="col" onclick="sortBy(${i})" title="Ordenar por ${h}" tabindex="0"
+           onkeydown="if(event.key==='Enter'||event.key===' ')sortBy(${i})">
+         ${h.replace(/</g, '&lt;')} <span class="arr" id="arr${i}" aria-hidden="true">⇅</span>
+       </th>`
+            )
+            .join('');
+          const tbodyHtml = data.map(r => `<tr>${r.map(c => `<td>${(c || '').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</td>`).join('')}</tr>`).join('\n');
+
+          const now = new Date().toLocaleDateString('es-MX', {year: 'numeric', month: 'long', day: 'numeric'});
+          const fullHtml = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="generator" content="TransformaDoc — GEDparaHispanos.com">
+<title>${fname}</title>
+<style>
+${DUA_CSS}
+/* === Extensión tabla CSV === */
+body{background:var(--dua-surface);}
+.csv-header{
+  background:var(--dua-head);color:#fff;
+  padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;
+  position:sticky;top:0;z-index:10;
+  box-shadow:0 2px 10px rgba(0,0,0,.3);
+}
+.csv-header h1{font-size:1rem;margin:0;color:#fff;border:none;padding:0;font-weight:600;}
+.csv-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.csv-search{
+  padding:8px 14px;border-radius:6px;border:2px solid rgba(255,255,255,.3);
+  font-size:.88rem;background:rgba(255,255,255,.12);
+  color:#fff;outline:none;width:230px;font-family:var(--dua-font);
+  transition:border-color .18s;
+}
+.csv-search::placeholder{color:rgba(255,255,255,.55);}
+.csv-search:focus{border-color:var(--dua-focus);background:rgba(255,255,255,.2);}
+.csv-info{font-size:.76rem;opacity:.75;white-space:nowrap;}
+.dua-wrap{max-width:1100px;}
+.csv-box{
+  background:#fff;border-radius:10px;
+  overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.09);
+  border:1px solid var(--dua-border);
+}
+table{border-collapse:collapse;width:100%;font-size:.88rem;}
+thead{background:var(--dua-head);position:sticky;top:0;}
+th{
+  padding:12px 15px;text-align:left;cursor:pointer;white-space:nowrap;
+  user-select:none;transition:background .15s;color:#fff;font-weight:700;
+  border-right:1px solid rgba(255,255,255,.12);
+}
+th:last-child{border-right:none;}
+th:hover,th:focus{background:#163d6e;outline:none;}
+th:focus-visible{outline:3px solid var(--dua-focus);outline-offset:-3px;}
+.arr{opacity:.55;font-size:.72rem;margin-left:5px;}
+td{padding:9px 15px;border-bottom:1px solid var(--dua-border);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:var(--dua-tr-alt);}
+tr:hover td{background:#d4e4f5;}
+tr.dua-hidden{display:none;}
+.csv-empty{text-align:center;color:#999;padding:40px;font-style:italic;}
+.csv-pgn{
+  display:flex;gap:5px;justify-content:center;
+  padding:14px;flex-wrap:wrap;border-top:1px solid var(--dua-border);
+}
+.csv-pgn button{
+  padding:7px 14px;border:1px solid var(--dua-border);
+  background:#fff;border-radius:6px;
+  cursor:pointer;font-size:.82rem;
+  font-family:var(--dua-font);transition:all .15s;
+  color:var(--dua-text);
+}
+.csv-pgn button.on{background:var(--dua-head);color:#fff;border-color:var(--dua-head);}
+.csv-pgn button:hover:not(.on){background:var(--dua-surface);}
+.csv-pgn button:focus-visible{outline:3px solid var(--dua-focus);outline-offset:2px;}
+</style>
+</head>
+<body>
+<a class="dua-skip" href="#main">Ir al contenido principal</a>
+<header class="csv-header" role="banner">
+  <h1>📊 ${fname}.csv</h1>
+  <div class="csv-controls">
+    <label for="srch" class="dua-skip" style="position:static;top:auto;background:transparent;color:#fff;padding:0;">Buscar:</label>
+    <input type="search" id="srch" class="csv-search"
+           placeholder="🔍  Buscar en la tabla…"
+           aria-label="Buscar en la tabla" oninput="applyFilter()">
+    <span class="csv-info" id="info" aria-live="polite"></span>
+  </div>
+</header>
+<main id="main" class="dua-wrap" role="main">
+  <div class="csv-box">
+    <table id="tbl" aria-label="Datos del archivo ${fname}.csv">
+      <caption class="dua-skip" style="position:static;top:auto;background:transparent;color:var(--dua-head);">
+        Tabla de datos: ${fname}
+      </caption>
+      <thead><tr>${thHtml}</tr></thead>
+      <tbody id="tbody">${tbodyHtml}</tbody>
+    </table>
+    <div id="emptyMsg" class="csv-empty" style="display:none" role="status">
+      Sin resultados para esa búsqueda.
+    </div>
+    <div class="csv-pgn" id="pgn" role="navigation" aria-label="Páginas de la tabla"></div>
+  </div>
+  <footer class="dua-footer" role="contentinfo">
+    <span class="dua-badge">Diseño Universal para el Aprendizaje (DUA) · WCAG 2.1 AA</span>
+    <span>Generado con <strong>TransformaDoc</strong> · ${now}</span>
+  </footer>
+</main>
+<script>
+const PER=20;let page=1;let sortCol=-1;let sortAsc=true;
+const tbody=document.getElementById('tbody');
+const allRows=()=>Array.from(tbody.querySelectorAll('tr'));
+
+function applyFilter(){
+  const q=document.getElementById('srch').value.toLowerCase();
+  allRows().forEach(r=>{
+    r.classList.toggle('dua-hidden',q&&!r.textContent.toLowerCase().includes(q));
+  });
+  page=1;paginate();
+}
+
+function sortBy(col){
+  if(sortCol===col)sortAsc=!sortAsc; else{sortCol=col;sortAsc=true;}
+  document.querySelectorAll('.arr').forEach((a,i)=>{
+    a.textContent=i===col?(sortAsc?'↑':'↓'):'⇅';
+    a.style.opacity=i===col?'1':'.55';
+  });
+  const rows=allRows();
+  rows.sort((a,b)=>{
+    const va=a.cells[col]?.textContent.trim()||'';
+    const vb=b.cells[col]?.textContent.trim()||'';
+    const na=parseFloat(va),nb=parseFloat(vb);
+    const cmp=(!isNaN(na)&&!isNaN(nb))?(na-nb):va.localeCompare(vb,'es');
+    return sortAsc?cmp:-cmp;
+  });
+  rows.forEach(r=>tbody.appendChild(r));
+  page=1;paginate();
+}
+
+function paginate(){
+  const vis=allRows().filter(r=>!r.classList.contains('dua-hidden'));
+  const pages=Math.ceil(vis.length/PER)||1;
+  if(page>pages)page=pages;
+  vis.forEach((r,i)=>r.style.display=(i>=(page-1)*PER&&i<page*PER)?'':'none');
+  document.getElementById('info').textContent=vis.length+' fila'+(vis.length!==1?'s':'');
+  document.getElementById('emptyMsg').style.display=vis.length?'none':'block';
+  const pgn=document.getElementById('pgn');
+  if(pages<=1){pgn.innerHTML='';return;}
+  pgn.innerHTML=Array.from({length:pages},(_,i)=>
+    \`<button class="\${i+1===page?'on':''}" onclick="goPage(\${i+1})"
+             aria-label="Página \${i+1}" \${i+1===page?'aria-current="page"':''}>\${i+1}</button>\`
+  ).join('');
+}
+function goPage(p){page=p;paginate();}
+paginate();
+<\/script>
+</body>
+</html>`;
+          const fn = fname + '.html';
+          return {blob: new Blob([fullHtml], {type: 'text/html;charset=utf-8'}), fn, preview: null};
+        },
+
+        'csv-pdf': async (inp, isFile) => {
+          const raw = isFile ? await readText(inp) : inp;
+          function parseCSV(text) {
+            const rows = [];
+            text
+              .trim()
+              .split(/\r?\n/)
+              .forEach(line => {
+                const cols = [];
+                let cur = '';
+                let inQ = false;
+                for (let i = 0; i < line.length; i++) {
+                  const c = line[i];
+                  if (c === '"') {
+                    inQ = !inQ;
+                  } else if (c === ',' && !inQ) {
+                    cols.push(cur.trim());
+                    cur = '';
+                  } else cur += c;
+                }
+                cols.push(cur.trim());
+                rows.push(cols);
+              });
+            return rows;
+          }
+          const rows = parseCSV(raw);
+          if (rows.length < 1) throw new Error('CSV vacío o no válido.');
+          const [head, ...body] = rows;
+          const fname = isFile ? inp.name.replace(/\.[^.]+$/, '') : 'datos';
+          const esc = s => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          const thead = `<tr>${head.map(h => `<th>${esc(h)}</th>`).join('')}</tr>`;
+          const tbody = body.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('');
+          const styled = `
+      <style>
+        body{font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;}
+        h2{font-size:15px;margin-bottom:14px;color:#1e3a5f;}
+        table{border-collapse:collapse;width:100%;font-size:11px;}
+        th{background:#1e3a5f;color:#fff;padding:8px 10px;text-align:left;font-weight:600;}
+        td{border:1px solid #dde0e8;padding:6px 10px;}
+        tr:nth-child(even) td{background:#f5f7fb;}
+        tr:first-child td{border-top:none;}
+      </style>
+      <h2>📊 ${fname}</h2>
+      <table><thead>${thead}</thead><tbody>${tbody}</tbody></table>`;
+          const blob = await toPdfBlob(styled);
+          const fn = fname + '.pdf';
+          return {blob, fn};
+        },
+
+        'txt-docx': async (inp, isFile) => {
+          const txt = isFile ? await readText(inp) : inp;
+          const fname = isFile ? inp.name.replace(/\.[^.]+$/, '') : 'documento';
+          const children = [];
+          children.push(
+            new docx.Paragraph({
+              text: fname,
+              heading: docx.HeadingLevel.HEADING_1,
+              spacing: {after: 300}
+            })
+          );
+          txt
+            .split(/\n{2,}/)
+            .map(b => b.trim())
+            .filter(Boolean)
+            .forEach(block => {
+              block.split(/\n/).forEach(line => {
+                const t = line.trim();
+                if (t)
+                  children.push(
+                    new docx.Paragraph({
+                      children: [new docx.TextRun(t)],
+                      spacing: {after: 160}
+                    })
+                  );
+              });
+              children.push(new docx.Paragraph({text: '', spacing: {after: 80}}));
+            });
+          const blob = await makeDocx(children, fname);
+          const fn = fname + '.docx';
+          return {blob, fn};
+        },
+
+        'html-md': async (inp, isFile) => {
+          if (typeof TurndownService === 'undefined') throw new Error('Turndown no cargó. Verifica tu conexión y recarga la página.');
+          let html = isFile ? await readText(inp) : inp;
+          const body = (html.match(/<body[^>]*>([\s\S]*?)<\/body>/i) || [, ''])[1] || html;
+          const td = new TurndownService({
+            headingStyle: 'atx',
+            codeBlockStyle: 'fenced',
+            bulletListMarker: '-'
+          });
+          const md = td.turndown(body);
+          const fn = (isFile ? inp.name.replace(/\.[^.]+$/, '') : 'pagina') + '.md';
+          return {blob: new Blob([md], {type: 'text/markdown;charset=utf-8'}), fn, preview: md.slice(0, 400)};
+        }
+      };
+
+      /* ──────────────────────────────────────────────────────
+   UI HELPERS
+   ────────────────────────────────────────────────────── */
+      function hideResult() {
+        document.getElementById('resSection').classList.remove('vis');
+        document.getElementById('previewBox').classList.remove('vis');
+      }
+      function hideErr() {
+        const e = document.getElementById('errMsg');
+        e.classList.remove('vis');
+        e.textContent = '';
+      }
+      function showErr(msg) {
+        const e = document.getElementById('errMsg');
+        e.innerHTML = '⚠ &nbsp;' + msg;
+        e.classList.add('vis');
+        e.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+      }
+      function showResult(r) {
+        curBlob = r.blob;
+        curFname = r.fn;
+        document.getElementById('resMeta').textContent = `${r.fn}  ·  ${fmtBytes(r.blob.size)}`;
+        if (r.preview) {
+          document.getElementById('previewContent').textContent = r.preview + '…';
+          document.getElementById('previewBox').classList.add('vis');
+        }
+        document.getElementById('resSection').classList.add('vis');
+        document.getElementById('resSection').scrollIntoView({behavior: 'smooth', block: 'nearest'});
+      }
+
+      /* ──────────────────────────────────────────────────────
+   CONVERT
+   ────────────────────────────────────────────────────── */
+      async function doConvert() {
+        if (!current) return;
+        hideResult();
+        hideErr();
+
+        const isFile = curTab === 'up';
+        const inp = isFile ? curFile : document.getElementById('itext').value.trim();
+
+        if (isFile && !curFile) {
+          showErr('Selecciona un archivo primero.');
+          return;
+        }
+        if (!isFile && !inp) {
+          showErr('Pega o escribe el contenido antes de convertir.');
+          return;
+        }
+
+        const btn = document.getElementById('cvtBtn');
+        btn.disabled = true;
+        btn.classList.add('loading');
+
+        try {
+          const fn = CONV[current.id];
+          if (!fn) throw new Error('Conversión no implementada.');
+          const result = isFile ? await fn(inp, true) : await fn(inp, false);
+          showResult(result);
+        } catch (err) {
+          console.error(err);
+          showErr(err.message || 'Error desconocido durante la conversión.');
+        } finally {
+          btn.disabled = false;
+          btn.classList.remove('loading');
+        }
+      }
+
+      /* ──────────────────────────────────────────────────────
+   INIT & EVENT LISTENERS
+   ────────────────────────────────────────────────────── */
+      /* ──────────────────────────────────────────────────────
+   ACORDEÓN DE AYUDA — scope global (requerido por onclick)
+   ────────────────────────────────────────────────────── */
+      function toggleAcc(i) {
+        const item = document.getElementById('acc' + i);
+        const btn = item.querySelector('.acc-btn');
+        const isOpen = item.classList.contains('open');
+        item.classList.toggle('open', !isOpen);
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        /* Render initial cards */
+        renderCards('all');
+
+        /* Filter buttons */
+        document.querySelectorAll('.fbtn').forEach(b => {
+          b.addEventListener('click', () => {
+            document.querySelectorAll('.fbtn').forEach(x => x.classList.remove('on'));
+            b.classList.add('on');
+            renderCards(b.dataset.f);
+          });
+        });
+
+        /* ── Help panel ── */
+        function buildHelpRoutes() {
+          const list = document.getElementById('helpRouteList');
+          if (!list) return;
+          list.innerHTML = CATS.map(
+            c => `
+      <div class="help-route" onclick="openModal('${c.id}');closeHelp();">
+        <div class="help-route-badges">
+          <span class="fmt fmt-${c.from}" style="font-size:.65rem;padding:3px 7px">${c.from.toUpperCase()}</span>
+          <span style="color:var(--text4);font-size:.75rem">→</span>
+          <span class="fmt fmt-${c.to}"   style="font-size:.65rem;padding:3px 7px">${c.to.toUpperCase()}</span>
+        </div>
+        <div class="help-route-body">
+          <div class="help-route-title">${c.ico} ${c.title}</div>
+          <div class="help-route-desc">${c.desc}</div>
+        </div>
+      </div>
+    `
+          ).join('');
+        }
+        buildHelpRoutes();
+
+        function openHelp() {
+          document.getElementById('helpDrawer').classList.add('open');
+          document.getElementById('helpScrim').classList.add('open');
+          document.body.style.overflow = 'hidden';
+          document.getElementById('helpClose').focus();
+        }
+        function closeHelp() {
+          document.getElementById('helpDrawer').classList.remove('open');
+          document.getElementById('helpScrim').classList.remove('open');
+          document.body.style.overflow = '';
+        }
+
+        document.getElementById('helpBtn').addEventListener('click', openHelp);
+        document.getElementById('helpClose').addEventListener('click', closeHelp);
+        document.getElementById('helpScrim').addEventListener('click', closeHelp);
+
+        /* Keyboard shortcuts */
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape') {
+            closeHelp();
+            closeModal();
+          }
+          // H key opens help only when no modal/input is active
+          if (e.key === 'h' || e.key === 'H') {
+            const tag = document.activeElement.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+            if (!document.getElementById('overlay').classList.contains('open')) {
+              const hd = document.getElementById('helpDrawer');
+              hd.classList.contains('open') ? closeHelp() : openHelp();
+            }
+          }
+        });
+
+        /* Tabs */
+        document.getElementById('tabUp').addEventListener('click', () => switchTab('up'));
+        document.getElementById('tabTx').addEventListener('click', () => {
+          if (!document.getElementById('tabTx').disabled) switchTab('tx');
+        });
+
+        /* File input */
+        document.getElementById('fi').addEventListener('change', e => setFile(e.target.files[0]));
+
+        /* Drag & drop */
+        const dz = document.getElementById('dz');
+        dz.addEventListener('dragover', e => {
+          e.preventDefault();
+          dz.classList.add('hover');
+        });
+        dz.addEventListener('dragleave', () => dz.classList.remove('hover'));
+        dz.addEventListener('drop', e => {
+          e.preventDefault();
+          dz.classList.remove('hover');
+          setFile(e.dataTransfer.files[0]);
+        });
+
+        /* Char counter */
+        document.getElementById('itext').addEventListener('input', function () {
+          document.getElementById('charCount').textContent = this.value.length.toLocaleString('es') + ' caract.';
+        });
+
+        /* Convert */
+        document.getElementById('cvtBtn').addEventListener('click', doConvert);
+
+        /* Download */
+        document.getElementById('dlBtn').addEventListener('click', () => {
+          if (!curBlob) return;
+          const url = URL.createObjectURL(curBlob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = curFname;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(() => URL.revokeObjectURL(url), 2000);
+        });
+      });
+    </script>
+  </body>
+</html>
 
