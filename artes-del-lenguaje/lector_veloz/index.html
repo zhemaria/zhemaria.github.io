@@ -1,1120 +1,1421 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LectorVeloz – Práctica de Lectura para el GED</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink:     #1a1208;
-    --paper:   #fdf6e8;
-    --amber:   #c8790a;
-    --amber2:  #e8970e;
-    --red:     #c0392b;
-    --green:   #1e7a46;
-    --muted:   #7a6a50;
-    --border:  #d4b896;
-    --shadow:  rgba(30,18,0,.12);
-    --card-bg: #fffdf5;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LectorVeloz – Práctica de Lectura para el GED</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #1a1208;
+        --paper: #fdf6e8;
+        --amber: #c8790a;
+        --amber2: #e8970e;
+        --red: #c0392b;
+        --green: #1e7a46;
+        --muted: #7a6a50;
+        --border: #d4b896;
+        --shadow: rgba(30, 18, 0, 0.12);
+        --card-bg: #fffdf5;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-  body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    background: var(--paper);
-    color: var(--ink);
-    min-height: 100vh;
-    background-image:
-      radial-gradient(ellipse 60% 40% at 10% 90%, #f5e4c0 0%, transparent 60%),
-      radial-gradient(ellipse 50% 30% at 90% 10%, #fce8c0 0%, transparent 50%);
-  }
+      body {
+        font-family: 'Source Serif 4', Georgia, serif;
+        background: var(--paper);
+        color: var(--ink);
+        min-height: 100vh;
+        background-image: radial-gradient(ellipse 60% 40% at 10% 90%, #f5e4c0 0%, transparent 60%), radial-gradient(ellipse 50% 30% at 90% 10%, #fce8c0 0%, transparent 50%);
+      }
 
-  /* ── SCREENS ─────────────────────────────────── */
-  .screen { display: none; padding: 24px 16px; max-width: 760px; margin: 0 auto; }
-  .screen.active { display: block; }
+      /* ── SCREENS ─────────────────────────────────── */
+      .screen {
+        display: none;
+        padding: 12px 8px;
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .screen.active {
+        display: block;
+      }
 
-  /* ── HEADER ──────────────────────────────────── */
-  .app-header {
-    text-align: center;
-    padding: 36px 16px 20px;
-    border-bottom: 2px solid var(--border);
-    margin-bottom: 28px;
-  }
-  .app-header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 6vw, 3.2rem);
-    font-weight: 900;
-    color: var(--amber);
-    letter-spacing: -.02em;
-    line-height: 1;
-  }
-  .app-header h1 span { color: var(--ink); }
-  .app-header p {
-    margin-top: 8px;
-    color: var(--muted);
-    font-size: .95rem;
-    font-style: italic;
-  }
+      /* ── HEADER ──────────────────────────────────── */
+      .app-header {
+        text-align: center;
+        padding: 24px 8px 10px;
+        border-bottom: 2px solid var(--border);
+        margin-bottom: 14px;
+      }
+      .app-header h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2rem, 6vw, 3.2rem);
+        font-weight: 900;
+        color: var(--amber);
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+      .app-header h1 span {
+        color: var(--ink);
+      }
+      .app-header p {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-style: italic;
+      }
 
-  /* ── MENU ────────────────────────────────────── */
-  .menu-grid {
-    display: grid;
-    gap: 14px;
-    margin-bottom: 28px;
-  }
-  .text-card {
-    background: var(--card-bg);
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    padding: 18px 20px;
-    cursor: pointer;
-    transition: border-color .2s, transform .15s, box-shadow .2s;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .text-card:hover { border-color: var(--amber); transform: translateY(-2px); box-shadow: 0 6px 20px var(--shadow); }
-  .text-card.selected { border-color: var(--amber); background: #fff8ea; box-shadow: 0 0 0 3px #e8970e44; }
-  .card-icon { font-size: 2rem; flex-shrink: 0; }
-  .card-info h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; }
-  .card-info p  { font-size: .82rem; color: var(--muted); margin-top: 3px; }
+      /* ── MENU ────────────────────────────────────── */
+      .menu-grid {
+        display: grid;
+        gap: 14px;
+        margin-bottom: 10px;
+      }
+      .text-card {
+        background: var(--card-bg);
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        padding: 10px 10px;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          transform 0.15s,
+          box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .text-card:hover {
+        border-color: var(--amber);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px var(--shadow);
+      }
+      .text-card.selected {
+        border-color: var(--amber);
+        background: #fff8ea;
+        box-shadow: 0 0 0 3px #e8970e44;
+      }
+      .card-icon {
+        font-size: 2rem;
+        flex-shrink: 0;
+      }
+      .card-info h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+      .card-info p {
+        font-size: 0.82rem;
+        color: var(--muted);
+        margin-top: 3px;
+      }
 
-  .info-row {
-    background: #fff8ea;
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 18px;
-    margin-bottom: 24px;
-    font-size: .88rem;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-  .info-row strong { color: var(--ink); }
+      .info-row {
+        background: #fff8ea;
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        padding: 7px 9px;
+        margin-bottom: 24px;
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .info-row strong {
+        color: var(--ink);
+      }
 
-  /* PPM CLASSIFICATION TABLE */
-  .ppm-section { margin-bottom: 28px; }
-  .ppm-section h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    margin-bottom: 12px;
-    color: var(--amber);
-  }
-  .ppm-avg-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    background: var(--card-bg);
-    border: 3px solid var(--amber);
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 16px var(--shadow);
-  }
-  .ppm-big {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    font-weight: 900;
-    color: var(--amber);
-    line-height: 1;
-  }
-  .ppm-big-label { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
-  .ppm-level-badge {
-    display: inline-block;
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: .9rem;
-    text-align: center;
-  }
-  .level-remedial  { background: #fdf0ee; color: var(--red);   border: 2px solid var(--red); }
-  .level-funcional { background: #fff8ea; color: #b36b00;      border: 2px solid #e8970e; }
-  .level-optimo    { background: #eafaf1; color: var(--green);  border: 2px solid var(--green); }
-  .level-avanzado  { background: #eaf4fb; color: #1a5276;       border: 2px solid #2980b9; }
-  .level-skimming  { background: #f5f5f5; color: #555;          border: 2px solid #aaa; }
-  .ppm-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: .82rem;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 2px solid var(--border);
-  }
-  .ppm-table th {
-    background: var(--ink);
-    color: #fff;
-    padding: 8px 10px;
-    text-align: left;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: .8rem;
-  }
-  .ppm-table td {
-    padding: 8px 10px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: middle;
-  }
-  .ppm-table tr:last-child td { border-bottom: none; }
-  .ppm-table tr.highlight-row td { font-weight: 700; }
-  .ppm-table tr.highlight-row td:first-child { border-left: 4px solid var(--amber); }
+      /* PPM CLASSIFICATION TABLE */
+      .ppm-section {
+        margin-bottom: 28px;
+      }
+      .ppm-section h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+        color: var(--amber);
+      }
+      .ppm-avg-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        background: var(--card-bg);
+        border: 3px solid var(--amber);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-bottom: 16px;
+        box-shadow: 0 4px 16px var(--shadow);
+      }
+      .ppm-big {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: var(--amber);
+        line-height: 1;
+      }
+      .ppm-big-label {
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+      }
+      .ppm-level-badge {
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      .level-remedial {
+        background: #fdf0ee;
+        color: var(--red);
+        border: 2px solid var(--red);
+      }
+      .level-funcional {
+        background: #fff8ea;
+        color: #b36b00;
+        border: 2px solid #e8970e;
+      }
+      .level-optimo {
+        background: #eafaf1;
+        color: var(--green);
+        border: 2px solid var(--green);
+      }
+      .level-avanzado {
+        background: #eaf4fb;
+        color: #1a5276;
+        border: 2px solid #2980b9;
+      }
+      .level-skimming {
+        background: #f5f5f5;
+        color: #555;
+        border: 2px solid #aaa;
+      }
+      .ppm-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.82rem;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 2px solid var(--border);
+      }
+      .ppm-table th {
+        background: var(--ink);
+        color: #fff;
+        padding: 8px 10px;
+        text-align: left;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 0.8rem;
+      }
+      .ppm-table td {
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: middle;
+      }
+      .ppm-table tr:last-child td {
+        border-bottom: none;
+      }
+      .ppm-table tr.highlight-row td {
+        font-weight: 700;
+      }
+      .ppm-table tr.highlight-row td:first-child {
+        border-left: 4px solid var(--amber);
+      }
 
-  .btn-start {
-    display: block;
-    width: 100%;
-    background: var(--amber);
-    color: #fff;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border: none;
-    border-radius: 10px;
-    padding: 16px;
-    cursor: pointer;
-    letter-spacing: .04em;
-    transition: background .2s, transform .15s;
-    box-shadow: 0 4px 16px rgba(200,121,10,.3);
-  }
-  .btn-start:hover:not(:disabled) { background: var(--amber2); transform: translateY(-2px); }
-  .btn-start:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; }
+      .btn-start {
+        display: block;
+        width: 100%;
+        background: var(--amber);
+        color: #fff;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 10px;
+        padding: 16px;
+        cursor: pointer;
+        letter-spacing: 0.04em;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+        box-shadow: 0 4px 16px rgba(200, 121, 10, 0.3);
+      }
+      .btn-start:hover:not(:disabled) {
+        background: var(--amber2);
+        transform: translateY(-2px);
+      }
+      .btn-start:disabled {
+        background: #ccc;
+        box-shadow: none;
+        cursor: not-allowed;
+      }
 
-  /* ── READING SCREEN ──────────────────────────── */
-  .reading-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .reading-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--muted);
-  }
-  .part-badge {
-    background: var(--ink);
-    color: #fff;
-    border-radius: 20px;
-    padding: 4px 14px;
-    font-size: .8rem;
-    font-weight: 600;
-    letter-spacing: .08em;
-  }
+      /* ── READING SCREEN ──────────────────────────── */
+      .reading-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .reading-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--muted);
+        flex: 1;
+      }
+      .part-badge {
+        background: var(--ink);
+        color: #fff;
+        border-radius: 20px;
+        padding: 4px 14px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        flex-shrink: 0;
+      }
 
-  /* TIMER RING */
-  .timer-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 22px;
-  }
-  .timer-ring-container { position: relative; width: 90px; height: 90px; }
-  .timer-ring-container svg { transform: rotate(-90deg); }
-  .timer-ring-bg { fill: none; stroke: var(--border); stroke-width: 7; }
-  .timer-ring-progress {
-    fill: none;
-    stroke: var(--amber);
-    stroke-width: 7;
-    stroke-linecap: round;
-    transition: stroke-dashoffset .9s linear, stroke .3s;
-  }
-  .timer-number {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: var(--ink);
-  }
-  .timer-label { font-size: .75rem; color: var(--muted); margin-top: 4px; letter-spacing: .06em; text-transform: uppercase; }
+      /* TIMER RING — inline en reading-meta */
+      .timer-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .timer-ring-container {
+        position: relative;
+        width: 62px;
+        height: 62px;
+      }
+      .timer-ring-container svg {
+        transform: rotate(-90deg);
+      }
+      .timer-ring-bg {
+        fill: none;
+        stroke: var(--border);
+        stroke-width: 7;
+      }
+      .timer-ring-progress {
+        fill: none;
+        stroke: var(--amber);
+        stroke-width: 7;
+        stroke-linecap: round;
+        transition:
+          stroke-dashoffset 0.9s linear,
+          stroke 0.3s;
+      }
+      .timer-number {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.15rem;
+        font-weight: 900;
+        color: var(--ink);
+      }
+      .timer-label {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 4px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
 
-  /* PROGRESS BAR */
-  .progress-bar-wrap { margin-bottom: 18px; }
-  .progress-bar-track {
-    height: 6px;
-    background: var(--border);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .progress-bar-fill {
-    height: 100%;
-    background: var(--amber);
-    border-radius: 3px;
-    transition: width .4s ease;
-  }
-  .progress-label {
-    font-size: .75rem;
-    color: var(--muted);
-    text-align: right;
-    margin-top: 4px;
-  }
+      /* PROGRESS BAR */
+      .progress-bar-wrap {
+        margin-bottom: 18px;
+      }
+      .progress-bar-track {
+        height: 6px;
+        background: var(--border);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        background: var(--amber);
+        border-radius: 3px;
+        transition: width 0.4s ease;
+      }
+      .progress-label {
+        font-size: 0.75rem;
+        color: var(--muted);
+        text-align: right;
+        margin-top: 4px;
+      }
 
-  /* TEXT FRAGMENT */
-  .fragment-box {
-    background: var(--card-bg);
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    padding: 24px 28px;
-    margin-bottom: 24px;
-    font-size: 1.05rem;
-    line-height: 1.75;
-    box-shadow: 0 3px 14px var(--shadow);
-    min-height: 130px;
-  }
-  .fragment-box .fragment-lead {
-    font-size: .72rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    font-style: normal;
-    display: block;
-    margin-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 8px;
-  }
+      /* TEXT FRAGMENT */
+      .fragment-box {
+        background: var(--card-bg);
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+        font-size: 1.05rem;
+        line-height: 1.75;
+        box-shadow: 0 3px 14px var(--shadow);
+        min-height: 130px;
+      }
+      .fragment-box .fragment-lead {
+        font-size: 0.72rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-style: normal;
+        display: block;
+        margin-bottom: 10px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 8px;
+      }
 
-  /* QUESTION */
-  .question-box { margin-bottom: 20px; }
-  .question-text {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 14px;
-    line-height: 1.5;
-    padding: 12px 16px;
-    background: #fff8ea;
-    border-left: 4px solid var(--amber);
-    border-radius: 0 8px 8px 0;
-  }
-  .options-list { list-style: none; display: grid; gap: 9px; }
-  .option-item {
-    background: var(--card-bg);
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    padding: 11px 16px;
-    cursor: pointer;
-    transition: border-color .15s, background .15s, transform .1s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: .95rem;
-    line-height: 1.4;
-  }
-  .option-item:hover:not(.disabled) { border-color: var(--amber); background: #fff8ea; transform: translateX(3px); }
-  .option-letter {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--border);
-    color: var(--ink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: .85rem;
-    flex-shrink: 0;
-    transition: background .15s, color .15s;
-  }
-  .option-item.correct { background: #eafaf1; border-color: var(--green); }
-  .option-item.correct .option-letter { background: var(--green); color: #fff; }
-  .option-item.wrong   { background: #fdf0ee; border-color: var(--red); }
-  .option-item.wrong .option-letter { background: var(--red); color: #fff; }
-  .option-item.disabled { cursor: default; }
-  .option-item.reveal-correct { background: #eafaf1; border-color: var(--green); }
-  .option-item.reveal-correct .option-letter { background: var(--green); color: #fff; }
+      /* QUESTION */
+      .question-box {
+        margin-bottom: 20px;
+      }
+      .question-text {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        line-height: 1.5;
+        padding: 10px 8px;
+        background: #fff8ea;
+        border-left: 4px solid var(--amber);
+        border-radius: 0 8px 8px 0;
+      }
+      .options-list {
+        list-style: none;
+        display: grid;
+        gap: 5px;
+      }
+      .option-item {
+        background: var(--card-bg);
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        padding: 11px 16px;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          transform 0.1s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+      .option-item:hover:not(.disabled) {
+        border-color: var(--amber);
+        background: #fff8ea;
+        transform: translateX(3px);
+      }
+      .option-letter {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--border);
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+        transition:
+          background 0.15s,
+          color 0.15s;
+      }
+      .option-item.correct {
+        background: #eafaf1;
+        border-color: var(--green);
+      }
+      .option-item.correct .option-letter {
+        background: var(--green);
+        color: #fff;
+      }
+      .option-item.wrong {
+        background: #fdf0ee;
+        border-color: var(--red);
+      }
+      .option-item.wrong .option-letter {
+        background: var(--red);
+        color: #fff;
+      }
+      .option-item.disabled {
+        cursor: default;
+      }
+      .option-item.reveal-correct {
+        background: #eafaf1;
+        border-color: var(--green);
+      }
+      .option-item.reveal-correct .option-letter {
+        background: var(--green);
+        color: #fff;
+      }
 
-  /* FEEDBACK BAR */
-  .feedback-bar {
-    border-radius: 8px;
-    padding: 12px 18px;
-    margin-bottom: 16px;
-    font-size: .95rem;
-    font-weight: 600;
-    display: none;
-    align-items: center;
-    gap: 10px;
-  }
-  .feedback-bar.show { display: flex; }
-  .feedback-bar.ok  { background: #eafaf1; border: 2px solid var(--green); color: var(--green); }
-  .feedback-bar.bad { background: #fdf0ee; border: 2px solid var(--red);   color: var(--red);   }
-  .feedback-bar.skip{ background: #fdf6e8; border: 2px solid var(--muted); color: var(--muted); }
+      /* FEEDBACK BAR */
+      .feedback-bar {
+        border-radius: 8px;
+        padding: 12px 18px;
+        margin-bottom: 16px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        display: none;
+        align-items: center;
+        gap: 10px;
+      }
+      .feedback-bar.show {
+        display: flex;
+      }
+      .feedback-bar.ok {
+        background: #eafaf1;
+        border: 2px solid var(--green);
+        color: var(--green);
+      }
+      .feedback-bar.bad {
+        background: #fdf0ee;
+        border: 2px solid var(--red);
+        color: var(--red);
+      }
+      .feedback-bar.skip {
+        background: #fdf6e8;
+        border: 2px solid var(--muted);
+        color: var(--muted);
+      }
 
-  /* NEXT / SKIP BUTTONS */
-  .action-row { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn-next {
-    flex: 1;
-    background: var(--ink);
-    color: #fff;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    border: none;
-    border-radius: 8px;
-    padding: 13px;
-    cursor: pointer;
-    transition: background .2s;
-    display: none;
-  }
-  .btn-next.show { display: block; }
-  .btn-next:hover { background: #333; }
-  .btn-skip {
-    background: none;
-    border: 2px solid var(--border);
-    color: var(--muted);
-    font-family: inherit;
-    font-size: .85rem;
-    border-radius: 8px;
-    padding: 10px 18px;
-    cursor: pointer;
-    transition: border-color .15s, color .15s;
-  }
-  .btn-skip:hover { border-color: var(--muted); color: var(--ink); }
+      /* NEXT / SKIP BUTTONS */
+      .action-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .btn-next {
+        flex: 1;
+        background: var(--ink);
+        color: #fff;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        padding: 13px;
+        cursor: pointer;
+        transition: background 0.2s;
+        display: none;
+      }
+      .btn-next.show {
+        display: block;
+      }
+      .btn-next:hover {
+        background: #333;
+      }
+      .btn-skip {
+        background: none;
+        border: 2px solid var(--border);
+        color: var(--muted);
+        font-family: inherit;
+        font-size: 0.85rem;
+        border-radius: 8px;
+        padding: 10px 18px;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          color 0.15s;
+      }
+      .btn-skip:hover {
+        border-color: var(--muted);
+        color: var(--ink);
+      }
 
-  /* ── RESULTS SCREEN ─────────────────────────── */
-  .results-header {
-    text-align: center;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .results-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--amber);
-    margin-bottom: 3px;
-  }
-  .score-circle {
-    width: 82px;
-    height: 82px;
-    border-radius: 50%;
-    background: var(--card-bg);
-    border: 4px solid var(--amber);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 3px 12px var(--shadow);
-  }
-  .score-circle .score-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.7rem;
-    font-weight: 900;
-    line-height: 1;
-    color: var(--amber);
-  }
-  .score-circle .score-denom { font-size: .75rem; color: var(--muted); }
-  .results-detail { display: grid; gap: 8px; margin-bottom: 16px; }
+      /* ── RESULTS SCREEN ─────────────────────────── */
+      .results-header {
+        text-align: center;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .results-header h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: var(--amber);
+        margin-bottom: 3px;
+      }
+      .score-circle {
+        width: 82px;
+        height: 82px;
+        border-radius: 50%;
+        background: var(--card-bg);
+        border: 4px solid var(--amber);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 3px 12px var(--shadow);
+      }
+      .score-circle .score-num {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.7rem;
+        font-weight: 900;
+        line-height: 1;
+        color: var(--amber);
+      }
+      .score-circle .score-denom {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+      .results-detail {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
 
-  /* TÉCNICAS TABLE */
-  .tecnicas-section { margin-bottom: 18px; }
-  .tecnicas-section h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  .tecnicas-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: .8rem;
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .tecnicas-table th {
-    background: var(--ink);
-    color: #fff;
-    padding: 7px 10px;
-    text-align: left;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: .78rem;
-  }
-  .tecnicas-table td {
-    padding: 8px 10px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-    line-height: 1.45;
-  }
-  .tecnicas-table tr:last-child td { border-bottom: none; }
-  .tecnicas-table tr:nth-child(even) td { background: #fdf6e8; }
-  .tecnicas-table td:first-child { font-weight: 700; color: var(--amber); white-space: nowrap; }
-  .result-row {
-    background: var(--card-bg);
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-  }
-  .result-row .rr-part { font-size: .82rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
-  .result-row .rr-q    { font-size: .9rem; flex: 1; line-height: 1.4; }
-  .result-row .rr-status { font-size: 1.2rem; flex-shrink: 0; }
-  .result-row .rr-skipped { font-size: .8rem; color: var(--muted); font-style: italic; }
-  .message-box {
-    background: #fff8ea;
-    border: 2px solid var(--border);
-    border-radius: 10px;
-    padding: 18px 20px;
-    text-align: center;
-    font-size: .95rem;
-    line-height: 1.6;
-    margin-bottom: 24px;
-    color: var(--muted);
-  }
-  .btn-again {
-    display: block;
-    width: 100%;
-    background: var(--amber);
-    color: #fff;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border: none;
-    border-radius: 10px;
-    padding: 11px;
-    cursor: pointer;
-    margin-bottom: 8px;
-    transition: background .2s;
-  }
-  .btn-again:hover { background: var(--amber2); }
-  .btn-menu {
-    display: block;
-    width: 100%;
-    background: none;
-    border: 2px solid var(--border);
-    color: var(--ink);
-    font-family: inherit;
-    font-size: .95rem;
-    border-radius: 10px;
-    padding: 13px;
-    cursor: pointer;
-    transition: border-color .15s;
-  }
-  .btn-menu:hover { border-color: var(--ink); }
+      /* TÉCNICAS TABLE */
+      .tecnicas-section {
+        margin-bottom: 18px;
+      }
+      .tecnicas-section h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.05rem;
+        color: var(--ink);
+        margin-bottom: 10px;
+      }
+      .tecnicas-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .tecnicas-table th {
+        background: var(--ink);
+        color: #fff;
+        padding: 7px 10px;
+        text-align: left;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 0.78rem;
+      }
+      .tecnicas-table td {
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+        line-height: 1.45;
+      }
+      .tecnicas-table tr:last-child td {
+        border-bottom: none;
+      }
+      .tecnicas-table tr:nth-child(even) td {
+        background: #fdf6e8;
+      }
+      .tecnicas-table td:first-child {
+        font-weight: 700;
+        color: var(--amber);
+        white-space: nowrap;
+      }
+      .result-row {
+        background: var(--card-bg);
+        border: 2px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .result-row .rr-part {
+        font-size: 0.82rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+      }
+      .result-row .rr-q {
+        font-size: 0.9rem;
+        flex: 1;
+        line-height: 1.4;
+      }
+      .result-row .rr-status {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
+      .result-row .rr-skipped {
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-style: italic;
+      }
+      .message-box {
+        background: #fff8ea;
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        padding: 18px 20px;
+        text-align: center;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 24px;
+        color: var(--muted);
+      }
+      .btn-again {
+        display: block;
+        width: 100%;
+        background: var(--amber);
+        color: #fff;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 10px;
+        padding: 11px;
+        cursor: pointer;
+        margin-bottom: 8px;
+        transition: background 0.2s;
+      }
+      .btn-again:hover {
+        background: var(--amber2);
+      }
+      .btn-menu {
+        display: block;
+        width: 100%;
+        background: none;
+        border: 2px solid var(--border);
+        color: var(--ink);
+        font-family: inherit;
+        font-size: 0.95rem;
+        border-radius: 10px;
+        padding: 13px;
+        cursor: pointer;
+        transition: border-color 0.15s;
+      }
+      .btn-menu:hover {
+        border-color: var(--ink);
+      }
 
-  @media (max-width: 480px) {
-    .fragment-box { padding: 16px 18px; font-size: .97rem; }
-    .app-header h1 { font-size: 1.8rem; }
-  }
-</style>
-</head>
-<body>
-
-<!-- ═══════════════════════════════════════════════
+      @media (max-width: 480px) {
+        .fragment-box {
+          padding: 16px 18px;
+          font-size: 0.97rem;
+        }
+        .app-header h1 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ═══════════════════════════════════════════════
      SCREEN 1: MENÚ
 ═══════════════════════════════════════════════ -->
-<div id="screen-menu" class="screen active">
-  <div class="app-header">
-    <h1>Lector<span>Veloz</span></h1>
-    <p>Práctica de velocidad lectora para el GED · GEDparaHispanos.com<br>Creado por José M. Fernández con Claude Sonnet 4.6</p>
-  </div>
+    <div id="screen-menu" class="screen active">
+      <div class="app-header">
+        <h1>
+          Lector
+          <span>Veloz</span>
+        </h1>
+        <p>Práctica de velocidad lectora para el GED · GEDparaHispanos.com</p>
+      </div>
 
-  <p style="font-size:.92rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">
-    Elige un texto y un tiempo por fragmento. Lee cada parte y responde la pregunta
-    antes de que se acabe el tiempo. El sistema avanza automáticamente. ¡Vamos!
-  </p>
+      <p style="font-size: 0.92rem; color: var(--muted); margin-bottom: 16px; line-height: 1.6">
+        Elige un texto y un tiempo por fragmento. Lee cada parte y responde la pregunta antes de que se acabe el tiempo. El sistema avanza automáticamente. ¡Vamos!
+      </p>
 
-  <div class="menu-grid" id="textCards"></div>
+      <div class="menu-grid" id="textCards"></div>
 
-  <div class="info-row">
-    ⏱ <strong>Tiempo automático por fragmento:</strong> El sistema calcula el tiempo disponible
-    según el número de palabras de cada fragmento, usando como base la velocidad de
-    <strong>100 PPM</strong> (umbral mínimo según la investigación sobre el GED).
-    Al final verás en qué rango de velocidad lectora te encuentras.
-  </div>
+      <div class="info-row">
+        ⏱
+        <strong>Tiempo automático por fragmento:</strong>
+        El sistema calcula el tiempo disponible según el número de palabras de cada fragmento, usando como base la velocidad de
+        <strong>100 PPM</strong>
+        (umbral mínimo según la investigación sobre el GED). Al final verás en qué rango de velocidad lectora te encuentras.
+      </div>
 
-  <button class="btn-start" id="btnStart" disabled>Selecciona un texto para comenzar</button>
-</div>
+      <button class="btn-start" id="btnStart" disabled>Selecciona un texto para comenzar</button>
+    </div>
 
-<!-- ═══════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════
      SCREEN 2: LECTURA
 ═══════════════════════════════════════════════ -->
-<div id="screen-reading" class="screen">
-  <div class="app-header" style="padding:18px 16px 14px;">
-    <h1>Lector<span>Veloz</span></h1>
-  </div>
+    <div id="screen-reading" class="screen">
+      <div class="app-header" style="padding: 18px 16px 14px">
+        <h1>
+          Lector
+          <span>Veloz</span>
+        </h1>
+      </div>
 
-  <div class="reading-meta">
-    <div class="reading-title" id="readingTitle">—</div>
-    <div class="part-badge" id="partBadge">Parte 1 / 4</div>
-  </div>
+      <div class="reading-meta">
+        <div class="reading-title" id="readingTitle">—</div>
+        <div class="timer-wrap">
+          <div class="timer-ring-container">
+            <svg viewBox="0 0 62 62" width="62" height="62">
+              <circle class="timer-ring-bg" cx="31" cy="31" r="25" />
+              <circle class="timer-ring-progress" id="timerRing" cx="31" cy="31" r="25" stroke-dasharray="157" stroke-dashoffset="0" />
+            </svg>
+            <div class="timer-number" id="timerNumber">
+              60
+              <span style="font-size: 0.55em; font-weight: 600; color: var(--muted)">s</span>
+            </div>
+          </div>
+        </div>
+        <div class="part-badge" id="partBadge">Parte 1 / 4</div>
+      </div>
 
-  <div class="progress-bar-wrap">
-    <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
-    <div class="progress-label" id="progressLabel">0 de 4 completados</div>
-  </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill" style="width: 0%"></div></div>
+        <div class="progress-label" id="progressLabel">0 de 4 completados</div>
+      </div>
 
-  <div class="timer-wrap">
-    <div class="timer-ring-container">
-      <svg viewBox="0 0 90 90" width="90" height="90">
-        <circle class="timer-ring-bg" cx="45" cy="45" r="37"/>
-        <circle class="timer-ring-progress" id="timerRing" cx="45" cy="45" r="37"
-                stroke-dasharray="232.5" stroke-dashoffset="0"/>
-      </svg>
-      <div class="timer-number" id="timerNumber">60</div>
+      <div class="fragment-box">
+        <span class="fragment-lead" id="fragmentLabel">Fragmento</span>
+        <div id="fragmentText">—</div>
+      </div>
+
+      <div class="question-box">
+        <div class="question-text" id="questionText">—</div>
+        <ul class="options-list" id="optionsList"></ul>
+      </div>
+
+      <div class="feedback-bar" id="feedbackBar"></div>
+
+      <div class="action-row">
+        <button class="btn-next" id="btnNext" onclick="nextFragment()">Siguiente fragmento →</button>
+        <button class="btn-skip" id="btnSkip" onclick="skipFragment()">Saltar ↷</button>
+      </div>
     </div>
-    <div class="timer-label">segundos</div>
-  </div>
 
-  <div class="fragment-box">
-    <span class="fragment-lead" id="fragmentLabel">Fragmento</span>
-    <div id="fragmentText">—</div>
-  </div>
-
-  <div class="question-box">
-    <div class="question-text" id="questionText">—</div>
-    <ul class="options-list" id="optionsList"></ul>
-  </div>
-
-  <div class="feedback-bar" id="feedbackBar"></div>
-
-  <div class="action-row">
-    <button class="btn-next" id="btnNext" onclick="nextFragment()">Siguiente fragmento →</button>
-    <button class="btn-skip" id="btnSkip" onclick="skipFragment()">Saltar ↷</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════
      SCREEN 3: RESULTADOS
 ═══════════════════════════════════════════════ -->
-<div id="screen-results" class="screen">
-  <div class="app-header" style="padding:14px 16px 10px;">
-    <h1>Lector<span>Veloz</span></h1>
-  </div>
-  <div class="results-header">
-    <div class="score-circle">
-      <span class="score-num" id="scoreNum">0</span>
-      <span class="score-denom" id="scoreDenom">de 4</span>
+    <div id="screen-results" class="screen">
+      <div class="app-header" style="padding: 14px 16px 10px">
+        <h1>
+          Lector
+          <span>Veloz</span>
+        </h1>
+      </div>
+      <div class="results-header">
+        <div class="score-circle">
+          <span class="score-num" id="scoreNum">0</span>
+          <span class="score-denom" id="scoreDenom">de 4</span>
+        </div>
+        <div style="text-align: left">
+          <h2>¡Lectura completada!</h2>
+          <p id="scoreMsg" style="font-size: 0.88rem; color: var(--muted); margin-top: 2px"></p>
+        </div>
+      </div>
+      <div class="results-detail" id="resultsList"></div>
+      <div class="ppm-section" id="ppmSection"></div>
+      <div class="tecnicas-section">
+        <h3>🛠 Técnicas para mejorar tu velocidad</h3>
+        <table class="tecnicas-table">
+          <thead>
+            <tr>
+              <th>Técnica</th>
+              <th>Mecanismo de acción</th>
+              <th>Impacto esperado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Reducción de regresiones</td>
+              <td>Minimiza los saltos hacia atrás usando un marcapasos visual (cursor o dedo).</td>
+              <td>+20–30 PPM de inmediato al mantener el flujo constante.</td>
+            </tr>
+            <tr>
+              <td>Ampliación del campo visual</td>
+              <td>Entrena los ojos para captar grupos de palabras en lugar de términos individuales.</td>
+              <td>Pasa de lectura palabra-por-palabra a lectura de frases completas.</td>
+            </tr>
+            <tr>
+              <td>Eliminación de subvocalización</td>
+              <td>Desconecta la decodificación auditiva del reconocimiento visual directo.</td>
+              <td>Rompe la barrera de las 200 PPM hacia niveles universitarios.</td>
+            </tr>
+            <tr>
+              <td>Técnica "TIPP It!"</td>
+              <td>Activa el conocimiento previo y establece un propósito antes de la lectura formal.</td>
+              <td>Reduce el tiempo de relectura al saber qué información es relevante.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="message-box" style="padding: 12px 16px; margin-bottom: 16px" id="motivationMsg"></div>
+      <button class="btn-again" onclick="playAgain()">🔄 Repetir este texto</button>
+      <button class="btn-menu" onclick="goMenu()">← Elegir otro texto</button>
     </div>
-    <div style="text-align:left;">
-      <h2>¡Lectura completada!</h2>
-      <p id="scoreMsg" style="font-size:.88rem;color:var(--muted);margin-top:2px;"></p>
-    </div>
-  </div>
-  <div class="results-detail" id="resultsList"></div>
-  <div class="ppm-section" id="ppmSection"></div>
-  <div class="tecnicas-section">
-    <h3>🛠 Técnicas para mejorar tu velocidad</h3>
-    <table class="tecnicas-table">
-      <thead>
-        <tr>
-          <th>Técnica</th>
-          <th>Mecanismo de acción</th>
-          <th>Impacto esperado</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Reducción de regresiones</td>
-          <td>Minimiza los saltos hacia atrás usando un marcapasos visual (cursor o dedo).</td>
-          <td>+20–30 PPM de inmediato al mantener el flujo constante.</td>
-        </tr>
-        <tr>
-          <td>Ampliación del campo visual</td>
-          <td>Entrena los ojos para captar grupos de palabras en lugar de términos individuales.</td>
-          <td>Pasa de lectura palabra-por-palabra a lectura de frases completas.</td>
-        </tr>
-        <tr>
-          <td>Eliminación de subvocalización</td>
-          <td>Desconecta la decodificación auditiva del reconocimiento visual directo.</td>
-          <td>Rompe la barrera de las 200 PPM hacia niveles universitarios.</td>
-        </tr>
-        <tr>
-          <td>Técnica "TIPP It!"</td>
-          <td>Activa el conocimiento previo y establece un propósito antes de la lectura formal.</td>
-          <td>Reduce el tiempo de relectura al saber qué información es relevante.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="message-box" style="padding:12px 16px;margin-bottom:16px;" id="motivationMsg"></div>
-  <button class="btn-again" onclick="playAgain()">🔄 Repetir este texto</button>
-  <button class="btn-menu"  onclick="goMenu()">← Elegir otro texto</button>
-</div>
 
-<script>
-/* ════════════════════════════════════════════
+    <script>
+      /* ════════════════════════════════════════════
    TEXTOS CON FRAGMENTOS Y PREGUNTAS
 ════════════════════════════════════════════ */
-const TEXTS = [
-  {
-    id: 0,
-    icon: "🌍",
-    title: "El efecto invernadero",
-    subject: "Ciencias · Ciencias de la Tierra",
-    fragments: [
-      {
-        text: `La Tierra recibe energía del Sol en forma de luz visible. Gran parte de esa energía calienta la superficie del planeta. Sin embargo, no toda la energía escapa de nuevo al espacio: ciertos gases presentes en la atmósfera, como el dióxido de carbono (CO₂), el metano y el vapor de agua, atrapan parte del calor. Este proceso natural se llama <strong>efecto invernadero</strong> y es lo que mantiene la temperatura de la Tierra lo suficientemente cálida para que exista vida.`,
-        question: "¿Cuál es la función principal del efecto invernadero natural?",
-        options: ["Enfriar la superficie terrestre por las noches", "Mantener la temperatura de la Tierra en niveles que permiten la vida", "Reflejar la luz solar hacia el espacio exterior", "Producir oxígeno a partir del dióxido de carbono"],
-        correct: 1
-      },
-      {
-        text: `Desde la Revolución Industrial, la concentración de gases de efecto invernadero en la atmósfera ha aumentado significativamente debido a la quema de combustibles fósiles, la deforestación y la ganadería intensiva. Este incremento ha intensificado el efecto invernadero natural, provocando que la temperatura promedio global haya subido aproximadamente 1.1 °C desde el año 1880. Aunque este número parece pequeño, sus consecuencias son enormes: derriten los glaciares, elevan el nivel del mar y alteran los patrones climáticos en todo el mundo.`,
-        question: "¿Qué actividad humana contribuye al aumento de gases de efecto invernadero?",
-        options: ["La agricultura orgánica", "La energía solar", "La quema de combustibles fósiles", "La reforestación de bosques"],
-        correct: 2
-      },
-      {
-        text: `El cambio climático causado por el exceso de gases de efecto invernadero afecta de manera desigual a las distintas regiones del mundo. Las zonas costeras son vulnerables a la inundación por el aumento del nivel del mar. Las regiones áridas sufren sequías más intensas y prolongadas. Por otro lado, algunas zonas experimentan lluvias y tormentas más fuertes. Las comunidades más pobres y menos desarrolladas son, por lo general, las que tienen menos recursos para adaptarse a estos cambios, lo que convierte al cambio climático en un problema de justicia social además de ambiental.`,
-        question: "¿Por qué el cambio climático es considerado también un problema de justicia social?",
-        options: ["Porque afecta únicamente a los países ricos", "Porque las comunidades más pobres tienen menos recursos para adaptarse", "Porque solo perjudica las zonas costeras del mundo", "Porque el aumento del nivel del mar beneficia a las zonas áridas"],
-        correct: 1
-      },
-      {
-        text: `Para enfrentar el cambio climático, los gobiernos y organizaciones internacionales han propuesto varias estrategias. La transición hacia energías renovables —como la solar y la eólica— busca reducir las emisiones de CO₂. Los acuerdos internacionales, como el Acuerdo de París de 2015, establecen metas para limitar el calentamiento global. Además, la adaptación local, que incluye construir infraestructuras resistentes y proteger ecosistemas naturales, es fundamental para reducir los daños. La solución requiere tanto cambios individuales como políticas globales coordinadas.`,
-        question: "¿Cuál es el objetivo del Acuerdo de París de 2015?",
-        options: ["Eliminar completamente el uso de combustibles fósiles para el año 2020", "Establecer metas para limitar el calentamiento global", "Crear un fondo para los países afectados por inundaciones", "Prohibir la ganadería intensiva en Europa"],
-        correct: 1
-      }
-    ]
-  },
-  {
-    id: 1,
-    icon: "⚖️",
-    title: "César Chávez y los derechos laborales",
-    subject: "Estudios Sociales · Historia de EE. UU.",
-    fragments: [
-      {
-        text: `César Chávez nació el 31 de marzo de 1927 en Yuma, Arizona, en el seno de una familia de trabajadores agrícolas mexicoamericanos. Durante su infancia, su familia perdió su granja durante la Gran Depresión y tuvo que emigrar a California para trabajar como jornaleros migrantes. Chávez conoció de primera mano las condiciones inhumanas que enfrentaban los campesinos: largas jornadas bajo el sol, salarios miserables, falta de agua potable en los campos y ausencia total de protecciones laborales.`,
-        question: "¿Qué experiencia de la infancia de Chávez influyó en su activismo futuro?",
-        options: ["Estudiar leyes en una universidad de California", "Trabajar como jornalero migrante y sufrir condiciones laborales injustas", "Dirigir una cooperativa de alimentos en Arizona", "Participar en la Segunda Guerra Mundial como soldado"],
-        correct: 1
-      },
-      {
-        text: `En 1962, Chávez fundó la Asociación Nacional de Trabajadores del Campo (NFWA, por sus siglas en inglés), que más tarde se convertiría en los Trabajadores Agrícolas Unidos (UFW). Inspirado por las tácticas no violentas de Mahatma Gandhi y Martin Luther King Jr., organizó huelgas, marchas y boicots para presionar a los propietarios de los viñedos de California. La huelga de la uva de 1965, que duró cinco años, fue uno de los movimientos laborales más importantes del siglo XX en Estados Unidos.`,
-        question: "¿Qué táctica principal utilizó César Chávez en su movimiento?",
-        options: ["La confrontación armada contra los propietarios", "La acción no violenta, incluyendo huelgas y boicots", "La negociación privada con el gobierno federal", "El uso de los medios de comunicación para atacar a los agricultores"],
-        correct: 1
-      },
-      {
-        text: `Para llamar la atención nacional sobre la lucha de los campesinos, Chávez realizó varias huelgas de hambre. La más conocida fue en 1968, cuando ayunó durante 25 días para reafirmar el compromiso del movimiento con la no violencia. Su sacrificio personal atrajo cobertura mediática masiva y el apoyo de figuras como el senador Robert F. Kennedy, quien lo acompañó al romper el ayuno. El sufrimiento voluntario de Chávez se convirtió en un símbolo poderoso del movimiento por los derechos civiles de los trabajadores hispanos.`,
-        question: "¿Cuál fue el propósito de las huelgas de hambre de Chávez?",
-        options: ["Protestar contra las políticas de inmigración del gobierno", "Reafirmar el compromiso con la no violencia y atraer atención nacional", "Exigir la legalización de los trabajadores migrantes", "Presionar directamente a los supermercados para que subieran los precios"],
-        correct: 1
-      },
-      {
-        text: `El legado de César Chávez va mucho más allá de los contratos laborales que logró negociar. Su movimiento inspiró a generaciones de activistas latinos y demostró que la organización comunitaria puede cambiar leyes y estructuras de poder. En 1994, el presidente Bill Clinton le otorgó la Medalla Presidencial de la Libertad póstumamente. Cada 31 de marzo, el Día de César Chávez es celebrado como día festivo en varios estados, recordando su lema: <em>"Sí, se puede"</em>, que sigue siendo un grito de esperanza para millones de personas en todo el mundo.`,
-        question: "¿Cuál es el significado del legado de César Chávez según el texto?",
-        options: ["Logró que todos los campesinos se hicieran ciudadanos estadounidenses", "Inspiró a generaciones y demostró que la organización puede cambiar el poder", "Fue el primer latino en ganar la Medalla Presidencial de la Libertad", "Eliminó por completo la pobreza entre los trabajadores agrícolas de California"],
-        correct: 1
-      }
-    ]
-  },
-  {
-    id: 2,
-    icon: "🧬",
-    title: "El ADN y la herencia genética",
-    subject: "Ciencias · Biología",
-    fragments: [
-      {
-        text: `El ácido desoxirribonucleico, mejor conocido como ADN, es la molécula que contiene las instrucciones genéticas de todos los seres vivos. Se encuentra dentro del núcleo de cada célula y tiene la forma de una doble hélice: dos cadenas largas entrelazadas en espiral, como una escalera de caracol. El ADN está compuesto por unidades llamadas <strong>nucleótidos</strong>, cada uno de los cuales contiene una de cuatro bases nitrogenadas: adenina (A), timina (T), citosina (C) y guanina (G). El orden específico de estas bases constituye el "código genético".`,
-        question: "¿Qué forma tiene la molécula de ADN según el texto?",
-        options: ["Una cadena simple y lineal, similar a una cuerda", "Una doble hélice, como una escalera de caracol", "Un círculo cerrado sin extremos visibles", "Una pirámide de cuatro lados con bases nitrogenadas"],
-        correct: 1
-      },
-      {
-        text: `Los genes son segmentos específicos del ADN que contienen instrucciones para producir proteínas. Las proteínas son las moléculas que realizan casi todas las funciones en el organismo: forman tejidos, controlan reacciones químicas y transmiten señales entre células. Cada ser humano tiene aproximadamente 20,000 genes distribuidos en 23 pares de cromosomas. El conjunto completo de ADN de un organismo se llama <strong>genoma</strong>. El Proyecto Genoma Humano, completado en 2003, logró secuenciar por primera vez todo el ADN humano.`,
-        question: "¿Cuál es la función principal de los genes?",
-        options: ["Transportar oxígeno a través de la sangre", "Contener instrucciones para producir proteínas", "Regular la temperatura corporal del organismo", "Dividir las células durante el crecimiento"],
-        correct: 1
-      },
-      {
-        text: `La herencia genética es el proceso mediante el cual los rasgos pasan de padres a hijos a través de los genes. Cuando se forman los óvulos y los espermatozoides, se produce un proceso llamado <strong>meiosis</strong>, en el que los cromosomas se mezclan al azar. Por eso, los hijos heredan características de ambos padres pero no son idénticos a ninguno de ellos. Los rasgos pueden ser dominantes (se expresan aunque solo haya una copia del gen) o recesivos (necesitan dos copias para manifestarse). El grupo sanguíneo y el color de ojos son ejemplos de rasgos heredados.`,
-        question: "¿Qué diferencia existe entre un gen dominante y uno recesivo?",
-        options: ["Los dominantes se heredan del padre y los recesivos de la madre", "Los dominantes se expresan con una copia; los recesivos necesitan dos copias", "Los dominantes se encuentran en los cromosomas sexuales solamente", "Los recesivos se eliminan en la siguiente generación"],
-        correct: 1
-      },
-      {
-        text: `Las mutaciones son cambios en la secuencia del ADN que pueden ocurrir de forma espontánea o por exposición a agentes externos como radiación o ciertas sustancias químicas. La mayoría de las mutaciones son neutrales o son reparadas por la célula, pero algunas pueden causar enfermedades genéticas, como la fibrosis quística o la anemia de células falciformes. Sin embargo, las mutaciones también son el motor de la evolución: a lo largo de millones de años, los cambios en el ADN que resultaron beneficiosos permitieron la adaptación y diversificación de las especies.`,
-        question: "¿Qué papel positivo juegan las mutaciones en la naturaleza?",
-        options: ["Permiten que los organismos vivan más años sin enfermarse", "Son el motor de la evolución al favorecer la adaptación de las especies", "Eliminan los genes recesivos de la población con el tiempo", "Ayudan a las células a producir más proteínas eficientemente"],
-        correct: 1
-      }
-    ]
-  },
-  {
-    id: 3,
-    icon: "🗳️",
-    title: "La democracia y sus fundamentos",
-    subject: "Estudios Sociales · Educación Cívica",
-    fragments: [
-      {
-        text: `La democracia es un sistema de gobierno en el que el poder reside en el pueblo. La palabra proviene del griego <em>demos</em> (pueblo) y <em>kratos</em> (poder). En una democracia representativa, como la de Estados Unidos, los ciudadanos eligen a sus representantes para que tomen decisiones en su nombre. Los principios fundamentales de la democracia incluyen la igualdad ante la ley, la protección de los derechos individuales, la libertad de expresión y la celebración de elecciones libres y justas.`,
-        question: "¿Qué significa el término 'democracia' según su origen griego?",
-        options: ["Gobierno de los sabios", "Poder del pueblo", "Ley de la mayoría", "Autoridad del Estado"],
-        correct: 1
-      },
-      {
-        text: `La Constitución de Estados Unidos, adoptada en 1787, es uno de los documentos democráticos más influyentes de la historia. Establece la separación de poderes en tres ramas: el Poder Legislativo (el Congreso), que crea las leyes; el Poder Ejecutivo (el presidente), que las aplica; y el Poder Judicial (la Corte Suprema), que las interpreta. Este sistema de <strong>pesos y contrapesos</strong> fue diseñado para evitar que una sola persona o institución acumule demasiado poder, protegiendo así las libertades de los ciudadanos.`,
-        question: "¿Para qué fue diseñado el sistema de pesos y contrapesos en la Constitución?",
-        options: ["Para que el Congreso tenga más poder que el presidente", "Para evitar que una sola entidad acumule demasiado poder", "Para garantizar que los jueces sean electos por el pueblo", "Para establecer que las leyes se apliquen igual en todos los estados"],
-        correct: 1
-      },
-      {
-        text: `El derecho al voto —también llamado <strong>sufragio</strong>— es la piedra angular de la democracia. Sin embargo, en la historia de Estados Unidos, este derecho no siempre fue universal. Las mujeres no pudieron votar hasta 1920, gracias a la 19.ª Enmienda. Los ciudadanos afroamericanos enfrentaron barreras legales hasta la Ley de Derechos Electorales de 1965. Hoy, cualquier ciudadano estadounidense mayor de 18 años tiene derecho a votar, aunque las tasas de participación electoral siguen siendo un desafío para la salud de la democracia.`,
-        question: "¿Qué ley eliminó las barreras legales al voto de los ciudadanos afroamericanos?",
-        options: ["La Constitución original de 1787", "La 19.ª Enmienda de 1920", "La Ley de Derechos Electorales de 1965", "La Declaración de Independencia de 1776"],
-        correct: 2
-      },
-      {
-        text: `Una democracia saludable requiere ciudadanos informados y participativos. Votar en las elecciones es importante, pero la participación cívica va mucho más allá: incluye informarse sobre los problemas de la comunidad, contactar a los representantes electos, participar en organizaciones locales y defender los propios derechos. La libertad de prensa, la educación pública y el acceso a información confiable son pilares esenciales que permiten a los ciudadanos tomar decisiones conscientes y responsables sobre el futuro de su comunidad y su país.`,
-        question: "Según el texto, ¿qué significa participar cívicamente en una democracia?",
-        options: ["Solo votar en las elecciones presidenciales cada cuatro años", "Trabajar para el gobierno local o federal como empleado", "Votar, informarse, contactar representantes y defender los propios derechos", "Pagar impuestos y cumplir las leyes establecidas por el Estado"],
-        correct: 2
-      }
-    ]
-  },
-  {
-    id: 4,
-    icon: "✍️",
-    title: "Cómo construir un párrafo sólido",
-    subject: "Artes del Lenguaje · Escritura",
-    fragments: [
-      {
-        text: `Un párrafo bien construido es la unidad básica de todo texto escrito. Cada párrafo debe desarrollar una sola idea principal, que generalmente se expresa en la primera oración, llamada <strong>oración temática</strong>. Esta oración le indica al lector de qué trata el párrafo y actúa como una promesa: todo lo que sigue debe apoyarla y desarrollarla. Un párrafo sin oración temática clara es como una habitación sin puerta: el lector no sabe cómo entrar ni qué esperar.`,
-        question: "¿Cuál es la función de la oración temática en un párrafo?",
-        options: ["Resumir el argumento completo del texto", "Indicar al lector la idea principal del párrafo", "Presentar la evidencia más importante del escrito", "Conectar el párrafo con la conclusión del texto"],
-        correct: 1
-      },
-      {
-        text: `Después de la oración temática, el párrafo se desarrolla con <strong>oraciones de apoyo</strong>: datos, ejemplos, explicaciones o citas que demuestran o amplían la idea principal. Estas oraciones deben estar ordenadas de manera lógica, ya sea de lo general a lo específico, de causa a efecto, o en orden cronológico. La coherencia entre las oraciones es clave: cada una debe conectarse con la anterior para que el lector pueda seguir el hilo del pensamiento sin perderse.`,
-        question: "¿Qué función tienen las oraciones de apoyo en un párrafo?",
-        options: ["Introducir una nueva idea distinta a la temática", "Demostrar o ampliar la idea principal con datos y ejemplos", "Resumir el contenido del párrafo anterior", "Conectar el párrafo con la oración final del texto"],
-        correct: 1
-      },
-      {
-        text: `Las <strong>palabras de transición</strong> son herramientas esenciales para lograr la cohesión de un párrafo. Palabras como <em>además, sin embargo, por lo tanto, en consecuencia</em> y <em>por ejemplo</em> funcionan como puentes que conectan las ideas entre sí. Sin ellas, el texto parece una lista de oraciones desconectadas. Con ellas, el texto fluye con naturalidad y el lector puede entender la relación lógica entre los argumentos: si son causas y efectos, si se complementan o si se contradicen.`,
-        question: "¿Cuál es el propósito de las palabras de transición en un párrafo?",
-        options: ["Alargar el párrafo para cumplir con el número de palabras requerido", "Conectar ideas y mostrar la relación lógica entre ellas", "Introducir nuevos temas en el mismo párrafo", "Reemplazar la oración temática cuando no hay una idea clara"],
-        correct: 1
-      },
-      {
-        text: `Un buen párrafo termina con una <strong>oración de cierre</strong> que resume la idea o la refuerza, y a veces sirve de puente hacia el párrafo siguiente. Esta oración final le da al lector una sensación de conclusión y completitud, como el último acorde de una canción. Escribir párrafos bien estructurados —con oración temática, oraciones de apoyo y oración de cierre— es una habilidad fundamental para el examen de Escritura del GED y para comunicarse eficazmente en el trabajo y en la vida cotidiana.`,
-        question: "¿Qué función cumple la oración de cierre de un párrafo?",
-        options: ["Introduce una nueva idea que se desarrollará en el siguiente párrafo", "Resume o refuerza la idea principal y da sensación de conclusión", "Repite exactamente la oración temática con otras palabras", "Presenta la cita más importante del autor del texto"],
-        correct: 1
-      }
-    ]
-  }
-];
+      const TEXTS = [
+        {
+          id: 0,
+          icon: '🌍',
+          title: 'El efecto invernadero',
+          subject: 'Ciencias · Ciencias de la Tierra',
+          fragments: [
+            {
+              text: `La Tierra recibe energía del Sol en forma de luz visible. Gran parte de esa energía calienta la superficie del planeta. Sin embargo, no toda la energía escapa de nuevo al espacio: ciertos gases presentes en la atmósfera, como el dióxido de carbono (CO₂), el metano y el vapor de agua, atrapan parte del calor. Este proceso natural se llama <strong>efecto invernadero</strong> y es lo que mantiene la temperatura de la Tierra lo suficientemente cálida para que exista vida.`,
+              question: '¿Cuál es la función principal del efecto invernadero natural?',
+              options: [
+                'Enfriar la superficie terrestre por las noches',
+                'Mantener la temperatura de la Tierra en niveles que permiten la vida',
+                'Reflejar la luz solar hacia el espacio exterior',
+                'Producir oxígeno a partir del dióxido de carbono'
+              ],
+              correct: 1
+            },
+            {
+              text: `Desde la Revolución Industrial, la concentración de gases de efecto invernadero en la atmósfera ha aumentado significativamente debido a la quema de combustibles fósiles, la deforestación y la ganadería intensiva. Este incremento ha intensificado el efecto invernadero natural, provocando que la temperatura promedio global haya subido aproximadamente 1.1 °C desde el año 1880. Aunque este número parece pequeño, sus consecuencias son enormes: derriten los glaciares, elevan el nivel del mar y alteran los patrones climáticos en todo el mundo.`,
+              question: '¿Qué actividad humana contribuye al aumento de gases de efecto invernadero?',
+              options: ['La agricultura orgánica', 'La energía solar', 'La quema de combustibles fósiles', 'La reforestación de bosques'],
+              correct: 2
+            },
+            {
+              text: `El cambio climático causado por el exceso de gases de efecto invernadero afecta de manera desigual a las distintas regiones del mundo. Las zonas costeras son vulnerables a la inundación por el aumento del nivel del mar. Las regiones áridas sufren sequías más intensas y prolongadas. Por otro lado, algunas zonas experimentan lluvias y tormentas más fuertes. Las comunidades más pobres y menos desarrolladas son, por lo general, las que tienen menos recursos para adaptarse a estos cambios, lo que convierte al cambio climático en un problema de justicia social además de ambiental.`,
+              question: '¿Por qué el cambio climático es considerado también un problema de justicia social?',
+              options: [
+                'Porque afecta únicamente a los países ricos',
+                'Porque las comunidades más pobres tienen menos recursos para adaptarse',
+                'Porque solo perjudica las zonas costeras del mundo',
+                'Porque el aumento del nivel del mar beneficia a las zonas áridas'
+              ],
+              correct: 1
+            },
+            {
+              text: `Para enfrentar el cambio climático, los gobiernos y organizaciones internacionales han propuesto varias estrategias. La transición hacia energías renovables —como la solar y la eólica— busca reducir las emisiones de CO₂. Los acuerdos internacionales, como el Acuerdo de París de 2015, establecen metas para limitar el calentamiento global. Además, la adaptación local, que incluye construir infraestructuras resistentes y proteger ecosistemas naturales, es fundamental para reducir los daños. La solución requiere tanto cambios individuales como políticas globales coordinadas.`,
+              question: '¿Cuál es el objetivo del Acuerdo de París de 2015?',
+              options: [
+                'Eliminar completamente el uso de combustibles fósiles para el año 2020',
+                'Establecer metas para limitar el calentamiento global',
+                'Crear un fondo para los países afectados por inundaciones',
+                'Prohibir la ganadería intensiva en Europa'
+              ],
+              correct: 1
+            }
+          ]
+        },
+        {
+          id: 1,
+          icon: '⚖️',
+          title: 'César Chávez y los derechos laborales',
+          subject: 'Estudios Sociales · Historia de EE. UU.',
+          fragments: [
+            {
+              text: `César Chávez nació el 31 de marzo de 1927 en Yuma, Arizona, en el seno de una familia de trabajadores agrícolas mexicoamericanos. Durante su infancia, su familia perdió su granja durante la Gran Depresión y tuvo que emigrar a California para trabajar como jornaleros migrantes. Chávez conoció de primera mano las condiciones inhumanas que enfrentaban los campesinos: largas jornadas bajo el sol, salarios miserables, falta de agua potable en los campos y ausencia total de protecciones laborales.`,
+              question: '¿Qué experiencia de la infancia de Chávez influyó en su activismo futuro?',
+              options: [
+                'Estudiar leyes en una universidad de California',
+                'Trabajar como jornalero migrante y sufrir condiciones laborales injustas',
+                'Dirigir una cooperativa de alimentos en Arizona',
+                'Participar en la Segunda Guerra Mundial como soldado'
+              ],
+              correct: 1
+            },
+            {
+              text: `En 1962, Chávez fundó la Asociación Nacional de Trabajadores del Campo (NFWA, por sus siglas en inglés), que más tarde se convertiría en los Trabajadores Agrícolas Unidos (UFW). Inspirado por las tácticas no violentas de Mahatma Gandhi y Martin Luther King Jr., organizó huelgas, marchas y boicots para presionar a los propietarios de los viñedos de California. La huelga de la uva de 1965, que duró cinco años, fue uno de los movimientos laborales más importantes del siglo XX en Estados Unidos.`,
+              question: '¿Qué táctica principal utilizó César Chávez en su movimiento?',
+              options: [
+                'La confrontación armada contra los propietarios',
+                'La acción no violenta, incluyendo huelgas y boicots',
+                'La negociación privada con el gobierno federal',
+                'El uso de los medios de comunicación para atacar a los agricultores'
+              ],
+              correct: 1
+            },
+            {
+              text: `Para llamar la atención nacional sobre la lucha de los campesinos, Chávez realizó varias huelgas de hambre. La más conocida fue en 1968, cuando ayunó durante 25 días para reafirmar el compromiso del movimiento con la no violencia. Su sacrificio personal atrajo cobertura mediática masiva y el apoyo de figuras como el senador Robert F. Kennedy, quien lo acompañó al romper el ayuno. El sufrimiento voluntario de Chávez se convirtió en un símbolo poderoso del movimiento por los derechos civiles de los trabajadores hispanos.`,
+              question: '¿Cuál fue el propósito de las huelgas de hambre de Chávez?',
+              options: [
+                'Protestar contra las políticas de inmigración del gobierno',
+                'Reafirmar el compromiso con la no violencia y atraer atención nacional',
+                'Exigir la legalización de los trabajadores migrantes',
+                'Presionar directamente a los supermercados para que subieran los precios'
+              ],
+              correct: 1
+            },
+            {
+              text: `El legado de César Chávez va mucho más allá de los contratos laborales que logró negociar. Su movimiento inspiró a generaciones de activistas latinos y demostró que la organización comunitaria puede cambiar leyes y estructuras de poder. En 1994, el presidente Bill Clinton le otorgó la Medalla Presidencial de la Libertad póstumamente. Cada 31 de marzo, el Día de César Chávez es celebrado como día festivo en varios estados, recordando su lema: <em>"Sí, se puede"</em>, que sigue siendo un grito de esperanza para millones de personas en todo el mundo.`,
+              question: '¿Cuál es el significado del legado de César Chávez según el texto?',
+              options: [
+                'Logró que todos los campesinos se hicieran ciudadanos estadounidenses',
+                'Inspiró a generaciones y demostró que la organización puede cambiar el poder',
+                'Fue el primer latino en ganar la Medalla Presidencial de la Libertad',
+                'Eliminó por completo la pobreza entre los trabajadores agrícolas de California'
+              ],
+              correct: 1
+            }
+          ]
+        },
+        {
+          id: 2,
+          icon: '🧬',
+          title: 'El ADN y la herencia genética',
+          subject: 'Ciencias · Biología',
+          fragments: [
+            {
+              text: `El ácido desoxirribonucleico, mejor conocido como ADN, es la molécula que contiene las instrucciones genéticas de todos los seres vivos. Se encuentra dentro del núcleo de cada célula y tiene la forma de una doble hélice: dos cadenas largas entrelazadas en espiral, como una escalera de caracol. El ADN está compuesto por unidades llamadas <strong>nucleótidos</strong>, cada uno de los cuales contiene una de cuatro bases nitrogenadas: adenina (A), timina (T), citosina (C) y guanina (G). El orden específico de estas bases constituye el "código genético".`,
+              question: '¿Qué forma tiene la molécula de ADN según el texto?',
+              options: [
+                'Una cadena simple y lineal, similar a una cuerda',
+                'Una doble hélice, como una escalera de caracol',
+                'Un círculo cerrado sin extremos visibles',
+                'Una pirámide de cuatro lados con bases nitrogenadas'
+              ],
+              correct: 1
+            },
+            {
+              text: `Los genes son segmentos específicos del ADN que contienen instrucciones para producir proteínas. Las proteínas son las moléculas que realizan casi todas las funciones en el organismo: forman tejidos, controlan reacciones químicas y transmiten señales entre células. Cada ser humano tiene aproximadamente 20,000 genes distribuidos en 23 pares de cromosomas. El conjunto completo de ADN de un organismo se llama <strong>genoma</strong>. El Proyecto Genoma Humano, completado en 2003, logró secuenciar por primera vez todo el ADN humano.`,
+              question: '¿Cuál es la función principal de los genes?',
+              options: [
+                'Transportar oxígeno a través de la sangre',
+                'Contener instrucciones para producir proteínas',
+                'Regular la temperatura corporal del organismo',
+                'Dividir las células durante el crecimiento'
+              ],
+              correct: 1
+            },
+            {
+              text: `La herencia genética es el proceso mediante el cual los rasgos pasan de padres a hijos a través de los genes. Cuando se forman los óvulos y los espermatozoides, se produce un proceso llamado <strong>meiosis</strong>, en el que los cromosomas se mezclan al azar. Por eso, los hijos heredan características de ambos padres pero no son idénticos a ninguno de ellos. Los rasgos pueden ser dominantes (se expresan aunque solo haya una copia del gen) o recesivos (necesitan dos copias para manifestarse). El grupo sanguíneo y el color de ojos son ejemplos de rasgos heredados.`,
+              question: '¿Qué diferencia existe entre un gen dominante y uno recesivo?',
+              options: [
+                'Los dominantes se heredan del padre y los recesivos de la madre',
+                'Los dominantes se expresan con una copia; los recesivos necesitan dos copias',
+                'Los dominantes se encuentran en los cromosomas sexuales solamente',
+                'Los recesivos se eliminan en la siguiente generación'
+              ],
+              correct: 1
+            },
+            {
+              text: `Las mutaciones son cambios en la secuencia del ADN que pueden ocurrir de forma espontánea o por exposición a agentes externos como radiación o ciertas sustancias químicas. La mayoría de las mutaciones son neutrales o son reparadas por la célula, pero algunas pueden causar enfermedades genéticas, como la fibrosis quística o la anemia de células falciformes. Sin embargo, las mutaciones también son el motor de la evolución: a lo largo de millones de años, los cambios en el ADN que resultaron beneficiosos permitieron la adaptación y diversificación de las especies.`,
+              question: '¿Qué papel positivo juegan las mutaciones en la naturaleza?',
+              options: [
+                'Permiten que los organismos vivan más años sin enfermarse',
+                'Son el motor de la evolución al favorecer la adaptación de las especies',
+                'Eliminan los genes recesivos de la población con el tiempo',
+                'Ayudan a las células a producir más proteínas eficientemente'
+              ],
+              correct: 1
+            }
+          ]
+        },
+        {
+          id: 3,
+          icon: '🗳️',
+          title: 'La democracia y sus fundamentos',
+          subject: 'Estudios Sociales · Educación Cívica',
+          fragments: [
+            {
+              text: `La democracia es un sistema de gobierno en el que el poder reside en el pueblo. La palabra proviene del griego <em>demos</em> (pueblo) y <em>kratos</em> (poder). En una democracia representativa, como la de Estados Unidos, los ciudadanos eligen a sus representantes para que tomen decisiones en su nombre. Los principios fundamentales de la democracia incluyen la igualdad ante la ley, la protección de los derechos individuales, la libertad de expresión y la celebración de elecciones libres y justas.`,
+              question: "¿Qué significa el término 'democracia' según su origen griego?",
+              options: ['Gobierno de los sabios', 'Poder del pueblo', 'Ley de la mayoría', 'Autoridad del Estado'],
+              correct: 1
+            },
+            {
+              text: `La Constitución de Estados Unidos, adoptada en 1787, es uno de los documentos democráticos más influyentes de la historia. Establece la separación de poderes en tres ramas: el Poder Legislativo (el Congreso), que crea las leyes; el Poder Ejecutivo (el presidente), que las aplica; y el Poder Judicial (la Corte Suprema), que las interpreta. Este sistema de <strong>pesos y contrapesos</strong> fue diseñado para evitar que una sola persona o institución acumule demasiado poder, protegiendo así las libertades de los ciudadanos.`,
+              question: '¿Para qué fue diseñado el sistema de pesos y contrapesos en la Constitución?',
+              options: [
+                'Para que el Congreso tenga más poder que el presidente',
+                'Para evitar que una sola entidad acumule demasiado poder',
+                'Para garantizar que los jueces sean electos por el pueblo',
+                'Para establecer que las leyes se apliquen igual en todos los estados'
+              ],
+              correct: 1
+            },
+            {
+              text: `El derecho al voto —también llamado <strong>sufragio</strong>— es la piedra angular de la democracia. Sin embargo, en la historia de Estados Unidos, este derecho no siempre fue universal. Las mujeres no pudieron votar hasta 1920, gracias a la 19.ª Enmienda. Los ciudadanos afroamericanos enfrentaron barreras legales hasta la Ley de Derechos Electorales de 1965. Hoy, cualquier ciudadano estadounidense mayor de 18 años tiene derecho a votar, aunque las tasas de participación electoral siguen siendo un desafío para la salud de la democracia.`,
+              question: '¿Qué ley eliminó las barreras legales al voto de los ciudadanos afroamericanos?',
+              options: ['La Constitución original de 1787', 'La 19.ª Enmienda de 1920', 'La Ley de Derechos Electorales de 1965', 'La Declaración de Independencia de 1776'],
+              correct: 2
+            },
+            {
+              text: `Una democracia saludable requiere ciudadanos informados y participativos. Votar en las elecciones es importante, pero la participación cívica va mucho más allá: incluye informarse sobre los problemas de la comunidad, contactar a los representantes electos, participar en organizaciones locales y defender los propios derechos. La libertad de prensa, la educación pública y el acceso a información confiable son pilares esenciales que permiten a los ciudadanos tomar decisiones conscientes y responsables sobre el futuro de su comunidad y su país.`,
+              question: 'Según el texto, ¿qué significa participar cívicamente en una democracia?',
+              options: [
+                'Solo votar en las elecciones presidenciales cada cuatro años',
+                'Trabajar para el gobierno local o federal como empleado',
+                'Votar, informarse, contactar representantes y defender los propios derechos',
+                'Pagar impuestos y cumplir las leyes establecidas por el Estado'
+              ],
+              correct: 2
+            }
+          ]
+        },
+        {
+          id: 4,
+          icon: '✍️',
+          title: 'Cómo construir un párrafo sólido',
+          subject: 'Artes del Lenguaje · Escritura',
+          fragments: [
+            {
+              text: `Un párrafo bien construido es la unidad básica de todo texto escrito. Cada párrafo debe desarrollar una sola idea principal, que generalmente se expresa en la primera oración, llamada <strong>oración temática</strong>. Esta oración le indica al lector de qué trata el párrafo y actúa como una promesa: todo lo que sigue debe apoyarla y desarrollarla. Un párrafo sin oración temática clara es como una habitación sin puerta: el lector no sabe cómo entrar ni qué esperar.`,
+              question: '¿Cuál es la función de la oración temática en un párrafo?',
+              options: [
+                'Resumir el argumento completo del texto',
+                'Indicar al lector la idea principal del párrafo',
+                'Presentar la evidencia más importante del escrito',
+                'Conectar el párrafo con la conclusión del texto'
+              ],
+              correct: 1
+            },
+            {
+              text: `Después de la oración temática, el párrafo se desarrolla con <strong>oraciones de apoyo</strong>: datos, ejemplos, explicaciones o citas que demuestran o amplían la idea principal. Estas oraciones deben estar ordenadas de manera lógica, ya sea de lo general a lo específico, de causa a efecto, o en orden cronológico. La coherencia entre las oraciones es clave: cada una debe conectarse con la anterior para que el lector pueda seguir el hilo del pensamiento sin perderse.`,
+              question: '¿Qué función tienen las oraciones de apoyo en un párrafo?',
+              options: [
+                'Introducir una nueva idea distinta a la temática',
+                'Demostrar o ampliar la idea principal con datos y ejemplos',
+                'Resumir el contenido del párrafo anterior',
+                'Conectar el párrafo con la oración final del texto'
+              ],
+              correct: 1
+            },
+            {
+              text: `Las <strong>palabras de transición</strong> son herramientas esenciales para lograr la cohesión de un párrafo. Palabras como <em>además, sin embargo, por lo tanto, en consecuencia</em> y <em>por ejemplo</em> funcionan como puentes que conectan las ideas entre sí. Sin ellas, el texto parece una lista de oraciones desconectadas. Con ellas, el texto fluye con naturalidad y el lector puede entender la relación lógica entre los argumentos: si son causas y efectos, si se complementan o si se contradicen.`,
+              question: '¿Cuál es el propósito de las palabras de transición en un párrafo?',
+              options: [
+                'Alargar el párrafo para cumplir con el número de palabras requerido',
+                'Conectar ideas y mostrar la relación lógica entre ellas',
+                'Introducir nuevos temas en el mismo párrafo',
+                'Reemplazar la oración temática cuando no hay una idea clara'
+              ],
+              correct: 1
+            },
+            {
+              text: `Un buen párrafo termina con una <strong>oración de cierre</strong> que resume la idea o la refuerza, y a veces sirve de puente hacia el párrafo siguiente. Esta oración final le da al lector una sensación de conclusión y completitud, como el último acorde de una canción. Escribir párrafos bien estructurados —con oración temática, oraciones de apoyo y oración de cierre— es una habilidad fundamental para el examen de Escritura del GED y para comunicarse eficazmente en el trabajo y en la vida cotidiana.`,
+              question: '¿Qué función cumple la oración de cierre de un párrafo?',
+              options: [
+                'Introduce una nueva idea que se desarrollará en el siguiente párrafo',
+                'Resume o refuerza la idea principal y da sensación de conclusión',
+                'Repite exactamente la oración temática con otras palabras',
+                'Presenta la cita más importante del autor del texto'
+              ],
+              correct: 1
+            }
+          ]
+        }
+      ];
 
-/* ════════════════════════════════════════════
+      /* ════════════════════════════════════════════
    ESTADO GLOBAL
 ════════════════════════════════════════════ */
-let selectedTextId    = null;
-let timerSeconds      = 60;
-let currentPart       = 0;
-let answered          = false;
-let timerInterval     = null;
-let timeLeft          = 0;
-let fragmentStartTime = 0;   // timestamp when fragment loaded
-let currentWordCount  = 0;   // word count of active fragment
-let results           = [];  // { answered, correct, skipped, ppm, wordCount, timeUsed }
+      let selectedTextId = null;
+      let timerSeconds = 60;
+      let currentPart = 0;
+      let answered = false;
+      let timerInterval = null;
+      let timeLeft = 0;
+      let fragmentStartTime = 0; // timestamp when fragment loaded
+      let currentWordCount = 0; // word count of active fragment
+      let results = []; // { answered, correct, skipped, ppm, wordCount, timeUsed }
 
-const CIRC = 2 * Math.PI * 37; // stroke-dasharray ≈ 232.5
+      const CIRC = 2 * Math.PI * 25; // r=25 → ≈ 157
 
-/* ════════════════════════════════════════════
+      /* ════════════════════════════════════════════
    UTILIDADES
 ════════════════════════════════════════════ */
-function countWords(html) {
-  const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-  return text.split(' ').filter(w => w.length > 0).length;
-}
+      function countWords(html) {
+        const text = html
+          .replace(/<[^>]*>/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+        return text.split(' ').filter(w => w.length > 0).length;
+      }
 
-function getPPMLevel(ppm) {
-  if (ppm < 100)       return { label: 'Por debajo del umbral mínimo', cls: 'level-remedial',  comprension: '< 50%' };
-  if (ppm <= 150)      return { label: 'Lector Lento / Remedial',      cls: 'level-remedial',  comprension: '< 60%' };
-  if (ppm <= 200)      return { label: 'Lector Funcional',             cls: 'level-funcional', comprension: '60 – 75%' };
-  if (ppm <= 250)      return { label: 'Lector Óptimo (GED Standard)', cls: 'level-optimo',    comprension: '~80%' };
-  if (ppm <= 350)      return { label: 'Lector Avanzado (College Ready)', cls: 'level-avanzado', comprension: '85%+' };
-  return               { label: 'Skimming / Escaneo',                  cls: 'level-skimming',  comprension: '< 50%' };
-}
+      function getPPMLevel(ppm) {
+        if (ppm < 100) return {label: 'Por debajo del umbral mínimo', cls: 'level-remedial', comprension: '< 50%'};
+        if (ppm <= 150) return {label: 'Lector Lento / Remedial', cls: 'level-remedial', comprension: '< 60%'};
+        if (ppm <= 200) return {label: 'Lector Funcional', cls: 'level-funcional', comprension: '60 – 75%'};
+        if (ppm <= 250) return {label: 'Lector Óptimo (GED Standard)', cls: 'level-optimo', comprension: '~80%'};
+        if (ppm <= 350) return {label: 'Lector Avanzado (College Ready)', cls: 'level-avanzado', comprension: '85%+'};
+        return {label: 'Skimming / Escaneo', cls: 'level-skimming', comprension: '< 50%'};
+      }
 
-/* ════════════════════════════════════════════
+      /* ════════════════════════════════════════════
    MENÚ: CONSTRUCCIÓN DE TARJETAS
 ════════════════════════════════════════════ */
-function buildMenu() {
-  const grid = document.getElementById('textCards');
-  grid.innerHTML = '';
-  TEXTS.forEach(t => {
-    const card = document.createElement('div');
-    card.className = 'text-card';
-    card.dataset.id = t.id;
-    card.innerHTML = `
+      function buildMenu() {
+        const grid = document.getElementById('textCards');
+        grid.innerHTML = '';
+        TEXTS.forEach(t => {
+          const card = document.createElement('div');
+          card.className = 'text-card';
+          card.dataset.id = t.id;
+          card.innerHTML = `
       <div class="card-icon">${t.icon}</div>
       <div class="card-info">
         <h3>${t.title}</h3>
         <p>${t.subject} · ${t.fragments.length} fragmentos</p>
       </div>`;
-    card.addEventListener('click', () => selectText(t.id));
-    grid.appendChild(card);
-  });
-}
+          card.addEventListener('click', () => selectText(t.id));
+          grid.appendChild(card);
+        });
+      }
 
-function selectText(id) {
-  selectedTextId = id;
-  document.querySelectorAll('.text-card').forEach(c => c.classList.toggle('selected', parseInt(c.dataset.id) === id));
-  const btn = document.getElementById('btnStart');
-  btn.disabled = false;
-  btn.textContent = `▶ Comenzar: ${TEXTS[id].title}`;
-  btn.onclick = startReading;
-}
+      function selectText(id) {
+        selectedTextId = id;
+        document.querySelectorAll('.text-card').forEach(c => c.classList.toggle('selected', parseInt(c.dataset.id) === id));
+        const btn = document.getElementById('btnStart');
+        btn.disabled = false;
+        btn.textContent = `▶ Comenzar: ${TEXTS[id].title}`;
+        btn.onclick = startReading;
+      }
 
-/* ════════════════════════════════════════════
+      /* ════════════════════════════════════════════
    INICIAR LECTURA
 ════════════════════════════════════════════ */
-function startReading() {
-  currentPart = 0;
-  results = [];
-  showScreen('screen-reading');
-  loadFragment();
-}
+      function startReading() {
+        currentPart = 0;
+        results = [];
+        showScreen('screen-reading');
+        loadFragment();
+      }
 
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
-}
+      function showScreen(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo(0, 0);
+      }
 
-/* ════════════════════════════════════════════
+      /* ════════════════════════════════════════════
    CARGAR FRAGMENTO
 ════════════════════════════════════════════ */
-function loadFragment() {
-  answered = false;
-  const text = TEXTS[selectedTextId];
-  const frag = text.fragments[currentPart];
-  const total = text.fragments.length;
+      function loadFragment() {
+        answered = false;
+        const text = TEXTS[selectedTextId];
+        const frag = text.fragments[currentPart];
+        const total = text.fragments.length;
 
-  // Calcular palabras y tiempo (100 PPM = umbral mínimo del informe)
-  currentWordCount = countWords(frag.text);
-  timerSeconds = Math.ceil(currentWordCount / 100 * 60);
-  fragmentStartTime = Date.now();
+        // Calcular palabras y tiempo (100 PPM = umbral mínimo del informe)
+        currentWordCount = countWords(frag.text);
+        timerSeconds = Math.ceil((currentWordCount / 100) * 60);
+        fragmentStartTime = Date.now();
 
-  // Meta
-  document.getElementById('readingTitle').textContent = text.title;
-  document.getElementById('partBadge').textContent = `Parte ${currentPart + 1} / ${total}`;
+        // Meta
+        document.getElementById('readingTitle').textContent = text.title;
+        document.getElementById('partBadge').textContent = `Parte ${currentPart + 1} / ${total}`;
 
-  // Progreso
-  const pct = (currentPart / total) * 100;
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressLabel').textContent = `${currentPart} de ${total} completados · ${currentWordCount} palabras · ${timerSeconds}s disponibles`;
+        // Progreso
+        const pct = (currentPart / total) * 100;
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressLabel').textContent = `${currentPart} de ${total} completados · ${currentWordCount} palabras · ${timerSeconds}s disponibles`;
 
-  // Fragmento
-  document.getElementById('fragmentLabel').textContent = `Fragmento ${currentPart + 1} · ${currentWordCount} palabras`;
-  document.getElementById('fragmentText').innerHTML = frag.text;
+        // Fragmento
+        document.getElementById('fragmentLabel').textContent = `Fragmento ${currentPart + 1} · ${currentWordCount} palabras`;
+        document.getElementById('fragmentText').innerHTML = frag.text;
 
-  // Pregunta
-  document.getElementById('questionText').textContent = frag.question;
-  const list = document.getElementById('optionsList');
-  list.innerHTML = '';
-  const letters = ['A','B','C','D'];
-  frag.options.forEach((opt, i) => {
-    const li = document.createElement('li');
-    li.className = 'option-item';
-    li.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt}</span>`;
-    li.addEventListener('click', () => handleAnswer(i));
-    list.appendChild(li);
-  });
+        // Pregunta
+        document.getElementById('questionText').textContent = frag.question;
+        const list = document.getElementById('optionsList');
+        list.innerHTML = '';
+        const letters = ['A', 'B', 'C', 'D'];
+        frag.options.forEach((opt, i) => {
+          const li = document.createElement('li');
+          li.className = 'option-item';
+          li.innerHTML = `<span class="option-letter">${letters[i]}</span><span>${opt}</span>`;
+          li.addEventListener('click', () => handleAnswer(i));
+          list.appendChild(li);
+        });
 
-  // Feedback y botón
-  hideFeedback();
-  document.getElementById('btnNext').classList.remove('show');
-  document.getElementById('btnSkip').style.display = 'inline-block';
+        // Feedback y botón
+        hideFeedback();
+        document.getElementById('btnNext').classList.remove('show');
+        document.getElementById('btnSkip').style.display = 'inline-block';
 
-  // Timer
-  startTimer();
-}
+        // Timer
+        startTimer();
+      }
 
-/* ════════════════════════════════════════════
+      /* ════════════════════════════════════════════
    TIMER
 ════════════════════════════════════════════ */
-function startTimer() {
-  clearInterval(timerInterval);
-  timeLeft = timerSeconds;
-  updateTimerUI(timeLeft);
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    updateTimerUI(timeLeft);
-    if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      if (!answered) timeExpired();
-    }
-  }, 1000);
-}
+      function startTimer() {
+        clearInterval(timerInterval);
+        timeLeft = timerSeconds;
+        updateTimerUI(timeLeft);
+        timerInterval = setInterval(() => {
+          timeLeft--;
+          updateTimerUI(timeLeft);
+          if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            if (!answered) timeExpired();
+          }
+        }, 1000);
+      }
 
-function updateTimerUI(t) {
-  document.getElementById('timerNumber').textContent = t;
-  const ratio = t / timerSeconds;
-  const offset = CIRC * (1 - ratio);
-  const ring = document.getElementById('timerRing');
-  ring.style.strokeDashoffset = offset;
-  // Color de advertencia
-  if (t <= 10) ring.style.stroke = '#c0392b';
-  else if (t <= 20) ring.style.stroke = '#e67e22';
-  else ring.style.stroke = '#c8790a';
-}
+      function updateTimerUI(t) {
+        document.getElementById('timerNumber').innerHTML = `${t}<span style="font-size:.55em;font-weight:600;color:var(--muted);">s</span>`;
+        const ratio = t / timerSeconds;
+        const offset = CIRC * (1 - ratio);
+        const ring = document.getElementById('timerRing');
+        ring.style.strokeDashoffset = offset;
+        // Color de advertencia
+        if (t <= 10) ring.style.stroke = '#c0392b';
+        else if (t <= 20) ring.style.stroke = '#e67e22';
+        else ring.style.stroke = '#c8790a';
+      }
 
-function timeExpired() {
-  answered = true;
-  disableOptions();
-  revealCorrect();
-  const frag = TEXTS[selectedTextId].fragments[currentPart];
-  showFeedback('skip', `⏰ Tiempo agotado. La respuesta correcta era: <strong>${['A','B','C','D'][frag.correct]}. ${frag.options[frag.correct]}</strong>`);
-  const timeUsed = timerSeconds; // todo el tiempo fue consumido
-  const ppm = Math.round(currentWordCount / (timeUsed / 60));
-  results.push({ answered: false, correct: false, skipped: true, ppm, wordCount: currentWordCount, timeUsed });
-  document.getElementById('btnNext').classList.add('show');
-  document.getElementById('btnSkip').style.display = 'none';
-  setTimeout(() => { if (answered) nextFragment(); }, 4000);
-}
+      function timeExpired() {
+        answered = true;
+        disableOptions();
+        revealCorrect();
+        const frag = TEXTS[selectedTextId].fragments[currentPart];
+        showFeedback('skip', `⏰ Tiempo agotado. La respuesta correcta era: <strong>${['A', 'B', 'C', 'D'][frag.correct]}. ${frag.options[frag.correct]}</strong>`);
+        const timeUsed = timerSeconds; // todo el tiempo fue consumido
+        const ppm = Math.round(currentWordCount / (timeUsed / 60));
+        results.push({answered: false, correct: false, skipped: true, ppm, wordCount: currentWordCount, timeUsed});
+        document.getElementById('btnNext').classList.add('show');
+        document.getElementById('btnSkip').style.display = 'none';
+        setTimeout(() => {
+          if (answered) nextFragment();
+        }, 4000);
+      }
 
-/* ════════════════════════════════════════════
+      /* ════════════════════════════════════════════
    RESPUESTA
 ════════════════════════════════════════════ */
-function handleAnswer(chosen) {
-  if (answered) return;
-  answered = true;
-  clearInterval(timerInterval);
+      function handleAnswer(chosen) {
+        if (answered) return;
+        answered = true;
+        clearInterval(timerInterval);
 
-  const timeUsed = Math.max(1, Math.round((Date.now() - fragmentStartTime) / 1000));
-  const ppm = Math.round(currentWordCount / (timeUsed / 60));
+        const timeUsed = Math.max(1, Math.round((Date.now() - fragmentStartTime) / 1000));
+        const ppm = Math.round(currentWordCount / (timeUsed / 60));
 
-  const frag = TEXTS[selectedTextId].fragments[currentPart];
-  const items = document.querySelectorAll('.option-item');
-  items.forEach(it => it.classList.add('disabled'));
+        const frag = TEXTS[selectedTextId].fragments[currentPart];
+        const items = document.querySelectorAll('.option-item');
+        items.forEach(it => it.classList.add('disabled'));
 
-  const isCorrect = chosen === frag.correct;
-  items[chosen].classList.add(isCorrect ? 'correct' : 'wrong');
-  if (!isCorrect) items[frag.correct].classList.add('reveal-correct');
+        const isCorrect = chosen === frag.correct;
+        items[chosen].classList.add(isCorrect ? 'correct' : 'wrong');
+        if (!isCorrect) items[frag.correct].classList.add('reveal-correct');
 
-  results.push({ answered: true, correct: isCorrect, skipped: false, ppm, wordCount: currentWordCount, timeUsed });
+        results.push({answered: true, correct: isCorrect, skipped: false, ppm, wordCount: currentWordCount, timeUsed});
 
-  const ppmLabel = getPPMLevel(ppm).label;
-  if (isCorrect) {
-    showFeedback('ok', `✅ ¡Correcto! &nbsp;·&nbsp; <span style="font-size:.85rem;font-weight:400;">⚡ ~${ppm} PPM — ${ppmLabel}</span>`);
-  } else {
-    showFeedback('bad', `❌ Incorrecto. Correcta: <strong>${['A','B','C','D'][frag.correct]}. ${frag.options[frag.correct]}</strong> &nbsp;·&nbsp; <span style="font-size:.82rem;font-weight:400;">⚡ ~${ppm} PPM — ${ppmLabel}</span>`);
-  }
+        const ppmLabel = getPPMLevel(ppm).label;
+        if (isCorrect) {
+          showFeedback('ok', `✅ ¡Correcto! &nbsp;·&nbsp; <span style="font-size:.85rem;font-weight:400;">⚡ ~${ppm} PPM — ${ppmLabel}</span>`);
+        } else {
+          showFeedback(
+            'bad',
+            `❌ Incorrecto. Correcta: <strong>${['A', 'B', 'C', 'D'][frag.correct]}. ${frag.options[frag.correct]}</strong> &nbsp;·&nbsp; <span style="font-size:.82rem;font-weight:400;">⚡ ~${ppm} PPM — ${ppmLabel}</span>`
+          );
+        }
 
-  document.getElementById('btnNext').classList.add('show');
-  document.getElementById('btnSkip').style.display = 'none';
-}
+        document.getElementById('btnNext').classList.add('show');
+        document.getElementById('btnSkip').style.display = 'none';
+      }
 
-function skipFragment() {
-  if (answered) return;
-  clearInterval(timerInterval);
-  answered = true;
-  disableOptions();
-  revealCorrect();
-  const frag = TEXTS[selectedTextId].fragments[currentPart];
-  const timeUsed = Math.max(1, Math.round((Date.now() - fragmentStartTime) / 1000));
-  const ppm = Math.round(currentWordCount / (timeUsed / 60));
-  showFeedback('skip', `⏭ Fragmento omitido. Correcta: <strong>${['A','B','C','D'][frag.correct]}. ${frag.options[frag.correct]}</strong>`);
-  results.push({ answered: false, correct: false, skipped: true, ppm, wordCount: currentWordCount, timeUsed });
-  document.getElementById('btnNext').classList.add('show');
-  document.getElementById('btnSkip').style.display = 'none';
-}
+      function skipFragment() {
+        if (answered) return;
+        clearInterval(timerInterval);
+        answered = true;
+        disableOptions();
+        revealCorrect();
+        const frag = TEXTS[selectedTextId].fragments[currentPart];
+        const timeUsed = Math.max(1, Math.round((Date.now() - fragmentStartTime) / 1000));
+        const ppm = Math.round(currentWordCount / (timeUsed / 60));
+        showFeedback('skip', `⏭ Fragmento omitido. Correcta: <strong>${['A', 'B', 'C', 'D'][frag.correct]}. ${frag.options[frag.correct]}</strong>`);
+        results.push({answered: false, correct: false, skipped: true, ppm, wordCount: currentWordCount, timeUsed});
+        document.getElementById('btnNext').classList.add('show');
+        document.getElementById('btnSkip').style.display = 'none';
+      }
 
-function disableOptions() {
-  document.querySelectorAll('.option-item').forEach(it => it.classList.add('disabled'));
-}
+      function disableOptions() {
+        document.querySelectorAll('.option-item').forEach(it => it.classList.add('disabled'));
+      }
 
-function revealCorrect() {
-  const frag = TEXTS[selectedTextId].fragments[currentPart];
-  const items = document.querySelectorAll('.option-item');
-  if (items[frag.correct]) items[frag.correct].classList.add('reveal-correct');
-}
+      function revealCorrect() {
+        const frag = TEXTS[selectedTextId].fragments[currentPart];
+        const items = document.querySelectorAll('.option-item');
+        if (items[frag.correct]) items[frag.correct].classList.add('reveal-correct');
+      }
 
-/* ════════════════════════════════════════════
+      /* ════════════════════════════════════════════
    AVANZAR / RESULTADOS
 ════════════════════════════════════════════ */
-function nextFragment() {
-  clearInterval(timerInterval);
-  const total = TEXTS[selectedTextId].fragments.length;
-  currentPart++;
-  if (currentPart >= total) {
-    showResults();
-  } else {
-    loadFragment();
-  }
-}
+      function nextFragment() {
+        clearInterval(timerInterval);
+        const total = TEXTS[selectedTextId].fragments.length;
+        currentPart++;
+        if (currentPart >= total) {
+          showResults();
+        } else {
+          loadFragment();
+        }
+      }
 
-/* ════════════════════════════════════════════
+      /* ════════════════════════════════════════════
    FEEDBACK UI
 ════════════════════════════════════════════ */
-function showFeedback(type, html) {
-  const bar = document.getElementById('feedbackBar');
-  bar.className = `feedback-bar ${type} show`;
-  bar.innerHTML = html;
-}
-function hideFeedback() {
-  const bar = document.getElementById('feedbackBar');
-  bar.className = 'feedback-bar';
-  bar.innerHTML = '';
-}
+      function showFeedback(type, html) {
+        const bar = document.getElementById('feedbackBar');
+        bar.className = `feedback-bar ${type} show`;
+        bar.innerHTML = html;
+      }
+      function hideFeedback() {
+        const bar = document.getElementById('feedbackBar');
+        bar.className = 'feedback-bar';
+        bar.innerHTML = '';
+      }
 
-/* ════════════════════════════════════════════
+      /* ════════════════════════════════════════════
    PANTALLA DE RESULTADOS
 ════════════════════════════════════════════ */
-function showResults() {
-  const text  = TEXTS[selectedTextId];
-  const total = text.fragments.length;
-  const score = results.filter(r => r.correct).length;
+      function showResults() {
+        const text = TEXTS[selectedTextId];
+        const total = text.fragments.length;
+        const score = results.filter(r => r.correct).length;
 
-  document.getElementById('scoreNum').textContent   = score;
-  document.getElementById('scoreDenom').textContent = `de ${total}`;
+        document.getElementById('scoreNum').textContent = score;
+        document.getElementById('scoreDenom').textContent = `de ${total}`;
 
-  const pct = Math.round((score / total) * 100);
-  let msg = '';
-  if (pct === 100)    msg = '¡Lectura perfecta! Tu comprensión y velocidad son excelentes. 🌟';
-  else if (pct >= 75) msg = '¡Muy buen trabajo! Estás progresando en velocidad y comprensión. 👏';
-  else if (pct >= 50) msg = 'Buen intento. Con más práctica mejorarás tu ritmo de lectura. 💪';
-  else                msg = 'Sigue practicando. La velocidad lectora mejora con el tiempo. 📖';
-  document.getElementById('scoreMsg').textContent = msg;
+        const pct = Math.round((score / total) * 100);
+        let msg = '';
+        if (pct === 100) msg = '¡Lectura perfecta! Tu comprensión y velocidad son excelentes. 🌟';
+        else if (pct >= 75) msg = '¡Muy buen trabajo! Estás progresando en velocidad y comprensión. 👏';
+        else if (pct >= 50) msg = 'Buen intento. Con más práctica mejorarás tu ritmo de lectura. 💪';
+        else msg = 'Sigue practicando. La velocidad lectora mejora con el tiempo. 📖';
+        document.getElementById('scoreMsg').textContent = msg;
 
-  // ── DETALLE DE FRAGMENTOS ────────────────────────
-  const list = document.getElementById('resultsList');
-  list.innerHTML = '';
-  results.forEach((r, i) => {
-    const frag = text.fragments[i];
-    const row = document.createElement('div');
-    row.className = 'result-row';
-    const statusIcon = r.correct ? '✅' : (r.skipped ? '⏭' : '❌');
-    const ppmNote = r.ppm
-      ? `<span class="rr-skipped" style="color:var(--amber);font-style:normal;font-weight:600;">~${r.ppm} PPM</span>`
-      : '';
-    const statusNote = r.correct ? '' : (r.skipped ? '<span class="rr-skipped">omitido / tiempo agotado</span>' : '<span class="rr-skipped">respuesta incorrecta</span>');
-    row.innerHTML = `
-      <span class="rr-part">P${i+1}</span>
+        // ── DETALLE DE FRAGMENTOS ────────────────────────
+        const list = document.getElementById('resultsList');
+        list.innerHTML = '';
+        results.forEach((r, i) => {
+          const frag = text.fragments[i];
+          const row = document.createElement('div');
+          row.className = 'result-row';
+          const statusIcon = r.correct ? '✅' : r.skipped ? '⏭' : '❌';
+          const ppmNote = r.ppm ? `<span class="rr-skipped" style="color:var(--amber);font-style:normal;font-weight:600;">~${r.ppm} PPM</span>` : '';
+          const statusNote = r.correct ? '' : r.skipped ? '<span class="rr-skipped">omitido / tiempo agotado</span>' : '<span class="rr-skipped">respuesta incorrecta</span>';
+          row.innerHTML = `
+      <span class="rr-part">P${i + 1}</span>
       <span class="rr-q">${frag.question} ${statusNote}</span>
       <span class="rr-status" style="display:flex;flex-direction:column;align-items:center;gap:2px;">${statusIcon}${ppmNote}</span>`;
-    list.appendChild(row);
-  });
+          list.appendChild(row);
+        });
 
-  // ── SECCIÓN PPM ──────────────────────────────────
-  const validPPMs = results.filter(r => r.ppm && r.ppm > 0 && r.ppm < 800);
-  const avgPPM = validPPMs.length
-    ? Math.round(validPPMs.reduce((s, r) => s + r.ppm, 0) / validPPMs.length)
-    : 0;
-  const level = getPPMLevel(avgPPM);
+        // ── SECCIÓN PPM ──────────────────────────────────
+        const validPPMs = results.filter(r => r.ppm && r.ppm > 0 && r.ppm < 800);
+        const avgPPM = validPPMs.length ? Math.round(validPPMs.reduce((s, r) => s + r.ppm, 0) / validPPMs.length) : 0;
+        const level = getPPMLevel(avgPPM);
 
-  const ppmSection = document.getElementById('ppmSection');
-  ppmSection.innerHTML = `
+        const ppmSection = document.getElementById('ppmSection');
+        ppmSection.innerHTML = `
     <h3>📊 Tu velocidad lectora estimada</h3>
     <div class="ppm-avg-box">
       <div style="text-align:center;">
@@ -1137,18 +1438,21 @@ function showResults() {
       </thead>
       <tbody>
         ${[
-          ['Lector Lento / Remedial',       '100 – 150',  '< 60%  (decodificación)',  avgPPM >= 100 && avgPPM <= 150],
-          ['Lector Funcional',               '150 – 200',  '60 – 75%  (comprensión básica)', avgPPM > 150 && avgPPM <= 200],
-          ['Lector Óptimo (GED Standard)',   '200 – 250',  '~80%  (equilibrio velocidad/análisis)', avgPPM > 200 && avgPPM <= 250],
-          ['Lector Avanzado (College Ready)','250 – 350',  '85%+  (análisis crítico fluido)', avgPPM > 250 && avgPPM <= 350],
-          ['Skimming / Escaneo',             '> 400',      '< 50%  (búsqueda de hechos)', avgPPM > 400],
-        ].map(([name, range, comp, isMe]) =>
-          `<tr class="${isMe ? 'highlight-row' : ''}">
+          ['Lector Lento / Remedial', '100 – 150', '< 60%  (decodificación)', avgPPM >= 100 && avgPPM <= 150],
+          ['Lector Funcional', '150 – 200', '60 – 75%  (comprensión básica)', avgPPM > 150 && avgPPM <= 200],
+          ['Lector Óptimo (GED Standard)', '200 – 250', '~80%  (equilibrio velocidad/análisis)', avgPPM > 200 && avgPPM <= 250],
+          ['Lector Avanzado (College Ready)', '250 – 350', '85%+  (análisis crítico fluido)', avgPPM > 250 && avgPPM <= 350],
+          ['Skimming / Escaneo', '> 400', '< 50%  (búsqueda de hechos)', avgPPM > 400]
+        ]
+          .map(
+            ([name, range, comp, isMe]) =>
+              `<tr class="${isMe ? 'highlight-row' : ''}">
             <td>${isMe ? '👉 ' : ''}${name}</td>
             <td>${range}</td>
             <td>${comp}</td>
           </tr>`
-        ).join('')}
+          )
+          .join('')}
       </tbody>
     </table>
     <p style="font-size:.75rem;color:var(--muted);margin-top:8px;line-height:1.5;">
@@ -1157,44 +1461,44 @@ function showResults() {
       Meta recomendada para el GED: <strong>200 – 250 PPM</strong>.
     </p>`;
 
-  // ── MOTIVACIÓN ───────────────────────────────────
-  const skipped = results.filter(r => r.skipped).length;
-  let motiv = '';
-  if (avgPPM < 150) {
-    motiv = `Tu velocidad actual (${avgPPM} PPM) está en el rango <strong>remedial</strong>. El cerebro dedica demasiada energía a decodificar palabras individuales. Practica usando un dedo o el cursor para guiar tu vista línea a línea y reduce la subvocalización.`;
-  } else if (avgPPM <= 200) {
-    motiv = `Vas bien (${avgPPM} PPM — rango funcional), pero para el GED necesitas llegar a <strong>200–250 PPM</strong>. Trabaja en ampliar tu campo visual para captar grupos de palabras en lugar de una a la vez.`;
-  } else if (avgPPM <= 250) {
-    motiv = `¡Excelente! ${avgPPM} PPM es el rango <strong>óptimo para el GED</strong>. Esta velocidad garantiza tiempo suficiente para las 48 preguntas y el ensayo. Sigue practicando para mantener la consistencia.`;
-  } else if (avgPPM <= 350) {
-    motiv = `¡Impresionante! ${avgPPM} PPM — nivel <strong>College Ready</strong>. Tienes margen de tiempo suficiente para revisar respuestas y abordar las preguntas DOK 3. Considera la práctica con textos más complejos.`;
-  } else {
-    motiv = `Con ${avgPPM} PPM es posible que estés leyendo muy rápido sin procesar los detalles. Recuerda que el GED evalúa <em>inferencia y análisis crítico</em>, no solo velocidad.`;
-  }
-  if (skipped > 0) {
-    motiv += ` <strong>${skipped} fragmento(s)</strong> fueron omitidos o se agotó el tiempo.`;
-  }
-  document.getElementById('motivationMsg').innerHTML = motiv;
+        // ── MOTIVACIÓN ───────────────────────────────────
+        const skipped = results.filter(r => r.skipped).length;
+        let motiv = '';
+        if (avgPPM < 150) {
+          motiv = `Tu velocidad actual (${avgPPM} PPM) está en el rango <strong>remedial</strong>. El cerebro dedica demasiada energía a decodificar palabras individuales. Practica usando un dedo o el cursor para guiar tu vista línea a línea y reduce la subvocalización.`;
+        } else if (avgPPM <= 200) {
+          motiv = `Vas bien (${avgPPM} PPM — rango funcional), pero para el GED necesitas llegar a <strong>200–250 PPM</strong>. Trabaja en ampliar tu campo visual para captar grupos de palabras en lugar de una a la vez.`;
+        } else if (avgPPM <= 250) {
+          motiv = `¡Excelente! ${avgPPM} PPM es el rango <strong>óptimo para el GED</strong>. Esta velocidad garantiza tiempo suficiente para las 48 preguntas y el ensayo. Sigue practicando para mantener la consistencia.`;
+        } else if (avgPPM <= 350) {
+          motiv = `¡Impresionante! ${avgPPM} PPM — nivel <strong>College Ready</strong>. Tienes margen de tiempo suficiente para revisar respuestas y abordar las preguntas DOK 3. Considera la práctica con textos más complejos.`;
+        } else {
+          motiv = `Con ${avgPPM} PPM es posible que estés leyendo muy rápido sin procesar los detalles. Recuerda que el GED evalúa <em>inferencia y análisis crítico</em>, no solo velocidad.`;
+        }
+        if (skipped > 0) {
+          motiv += ` <strong>${skipped} fragmento(s)</strong> fueron omitidos o se agotó el tiempo.`;
+        }
+        document.getElementById('motivationMsg').innerHTML = motiv;
 
-  showScreen('screen-results');
-}
+        showScreen('screen-results');
+      }
 
-function playAgain() {
-  currentPart = 0;
-  results = [];
-  showScreen('screen-reading');
-  loadFragment();
-}
+      function playAgain() {
+        currentPart = 0;
+        results = [];
+        showScreen('screen-reading');
+        loadFragment();
+      }
 
-function goMenu() {
-  clearInterval(timerInterval);
-  showScreen('screen-menu');
-}
+      function goMenu() {
+        clearInterval(timerInterval);
+        showScreen('screen-menu');
+      }
 
-/* ════════════════════════════════════════════
+      /* ════════════════════════════════════════════
    INIT
 ════════════════════════════════════════════ */
-buildMenu();
-</script>
-</body>
+      buildMenu();
+    </script>
+  </body>
 </html>
