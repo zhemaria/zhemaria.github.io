@@ -1,0 +1,587 @@
+[
+  {
+    "id": "mrgl3az1ro7el",
+    "creado": 1783787618125,
+    "titulo": "linea svg",
+    "claves": "linea, svg",
+    "codigo": "<svg width=\"200\" height=\"100\">\n  <line x1=\"20\" y1=\"50\" x2=\"180\" y2=\"50\" stroke=\"blue\" stroke-width=\"4\" />\n  <line x1=\"20\" y1=\"50\" x2=\"190\" y2=\"20\" stroke=\"red\" stroke-width=\"8\" stroke-linecap=\"round\" />  \n</svg>",
+    "nota": "Traza una línea segú las coordendas, el grosor y el color",
+    "modificado": 1783787618125
+  },
+  {
+    "id": "mrgxjxs3upfh3",
+    "creado": 1783808549571,
+    "titulo": "tooltip corto",
+    "claves": "tooltip,ayuda",
+    "codigo": "<style>\n  .tt{ border-bottom:1px dotted #1e3a8a; color:#2D8402; cursor:help; position:relative; }\n  .tt::after{ content:\"ℹ️\"; font-size:.8em; vertical-align:super; color:#1e3a8a; margin-left:2px; font-weight:bold; }\n  .tt:hover::before, .tt:focus::before{\n    content:attr(data-tip);\n    position:absolute; left:0; bottom:130%;\n    width:max-content; max-width:240px; white-space:normal;\n    background:#2D8402; color:#fff;\n    padding:6px 9px; border-radius:6px;\n    font-size:14px; line-height:1.35; z-index:20;    \n  }\n</style>\n\n<span class=\"tt\" tabindex=\"0\" data-tip=\"TEXTO\"><b>PALABRA</b></span>\n",
+    "nota": "Usarlo en myOpenMath y Brightspace",
+    "modificado": 1783808549571
+  },
+  {
+    "id": "mrgxlwuzhmvhz",
+    "creado": 1783808641691,
+    "titulo": "caja",
+    "claves": "caja, box",
+    "codigo": "<p style= \"width: 80%;   margin-left: 5%;   background-color: rgba(202,216,240,0.20);   box-shadow: 2px 2px 4px #000;   border-radius: 7px;   padding: 15px;\"> AQUI VA EL TEXTO</p>",
+    "nota": "Puede usarse con <div> , <p>",
+    "modificado": 1783808641691
+  },
+  {
+    "id": "mrgxob6fdjz6h",
+    "creado": 1783808753559,
+    "titulo": "imange flotando",
+    "claves": "img, imagen, flotando",
+    "codigo": "<img \nsrc=\"https://files.myopenmath.com/qimages/reales_clasificacion.png\" \nalt=\"EXPLICACION DE LA IMAGEN\" \nstyle=\"float: left; width: 50%; padding: 5px;\">",
+    "nota": "Inserta imagene con texto corriendo por el lado",
+    "modificado": 1783808753559
+  },
+  {
+    "id": "mrgxr2dmqk9kv",
+    "creado": 1783808882122,
+    "titulo": "imagen con explicacion",
+    "claves": "imagen, figure, figcaption, img,",
+    "codigo": "<figure >\n<img src=\"/content/enforced/243522-1236_66268/illinois_capitales.jpg\" \nalt=\"Mapa mostrando las capitales que el estado de Illinois ha tenido hasta la fecha\" \ntitle=\"Mapa mostrando las capitales que el estado de Illinois ha tenido hasta la fecha\" \nwidth=\"183\" height=\"262\">\n<figcaption>Las capitales de Illinois <a href=\"https://proyectodescartes.org/iCartesiLibri/materiales_didacticos/Constitucion_EEUU/index.html?page=148\">Constitución de EE. UU.  </a>\n</figcaption>\n</figure>",
+    "nota": "Imagenes con texto explicativo",
+    "modificado": 1783808882122
+  },
+  {
+    "id": "mrgxumy1i5a01",
+    "creado": 1783809048745,
+    "titulo": "imagen ampliar",
+    "claves": "imagen, ampliar, img,",
+    "codigo": "<img \nsrc=\"/content/enforced/243522-1236_66268/calendario%20de%20los%20mayas.jpg\" \nwidth=\"150\" \nonclick=\"javascript:this.width=300\" \nondblclick=\"javascript:this.width=150;\">",
+    "nota": "Interpretación\n1) img src=\"cambiar_size_imagen.png\"\nEs el código que determina la imagen que aparece en la pantalla\n2)  width=\"50\"\nEs el tamaño que tendrá la imagen al abrirse la pantalla.\nAl fijarse el ancho, el alto queda determinado porque se mantienen las proporciones.\n3)  onclick=\"javascript:this.height=788;this.width=342\"\nEs el código JS que fija el tamaño de la imagen al hacer un click sobre ella.\n4)   ondblclick=\"javascript:this.width=50;this.height=115\"\nEs el código JS que fija el tamaño de la imagen al hacer doble click sobre ella.",
+    "modificado": 1783809117453
+  },
+  {
+    "id": "mrgycfz4dk86v",
+    "creado": 1783809879520,
+    "titulo": "acordeon",
+    "claves": "acordeon, details, summary,",
+    "codigo": "<details style=\"background-color:#E8F5E9;\">\n<summary style=\"background-color:#2D8402; color:#fafafa; padding:10px; border-radius: 12px;\">PISTA</summary>\n  <p> TEXTO</p>\n</details>",
+    "nota": "Cambiar el background-color en dependecia del nivel:\nNivel 1: Azul <details> #0057ad; <summary>\nNIvel 2: Marron <detail> #A61A1A;  <summary>\nNivel 3:  Verde <details> #E8F5E9; <summar>#2D8402;\nNivel 4:  Morado  <details>  <summar>",
+    "modificado": 1783809879520
+  },
+  {
+    "id": "mrgyujenmuvgk",
+    "titulo": "signos",
+    "claves": "signos, exponentes, subindices, relaciones,",
+    "codigo": "Espacio &nbsp;\nPi:  &#8508;\nExponentes    ⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹    ⁺ ⁻ ⁼   ⁽ ⁾\nSubíndices  ₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉   ₊ ₋ ₌   ₍ ₎\nMayor &gt;  Mayor = que\t&ge;  \nMenor &lt;  Menor = que &le;\n¼\t&#188;\tUn cuarto\tfrac14\n½\t&#189;\tUn medio\tfrac12\n¾\t&#190;\tTres cuartos\tfrac34\n⅛\t&#8539;\tUn octavo\t\n⅜\t&#8540;\tTres octavos\t\n⅝\t&#8541;\tCinco octavos\t\n⅞\t&#8542;\tSiete octavos\t\n■\t&#9632;\tCuadrado lleno\t\n□\t&#9633;\tCuadrado vacio\t\n▪\t&#9642;\tMini cuadrado lleno\t\n▫\t&#9643;\tMini cuadrado vacio\t\n●\t&#9679;\tPunto lleno\t\n○\t&#9675;\tPunto vacio\t\n◊\t&#9674;\tRombo vacio\t\n  &ang;   Ángulo\n  &#9651; triángulo\nbar() lado con raya superior",
+    "nota": "",
+    "creado": 1783810723775,
+    "modificado": 1784308125545
+  },
+  {
+    "id": "mrgyy0g6kxlg0",
+    "creado": 1783810885830,
+    "titulo": "nombres personas",
+    "claves": "nombre, name,",
+    "codigo": "$nombre = randfrom(\"Olga, Elizandro, Érika,   Víctor,  Paola, Iván, Lorena, Ángel, Gladys, Álvaro, Rina, René, Cristina, Alberto, Patricia, José \")\n$nombreh = randfrom(\"Olga,Érika, Paola, Lorena, Gladys, Rina, Cristina,Patricia\")\n$nombrev =randfrom(\"Elizandro, Víctor, Iván, Ángel, Álvaro, René, Alberto, José\")",
+    "nota": "Seleccionar un nombre hispano de una lista",
+    "modificado": 1783810885830
+  },
+  {
+    "id": "mrgyzc2k558vx",
+    "creado": 1783810947548,
+    "titulo": "terna pitagorica",
+    "claves": "pitagoras, terna",
+    "codigo": "$a, $b, $c = randpythag(2,45)",
+    "nota": "Función de myOpenMath que crea las ternas piagóricas.",
+    "modificado": 1783810947548
+  },
+  {
+    "id": "mrgz0od76gay4",
+    "creado": 1783811010139,
+    "titulo": "cita",
+    "claves": "cita, texto, margen,",
+    "codigo": "<p \nstyle=\"border-left: 2px solid; \nmargin-left: 20px; \npadding-left: 10px; \nfont-style: italic;\"></p>\n",
+    "nota": "Para poner citas con borde lateral y letra cursiva",
+    "modificado": 1783811010139
+  },
+  {
+    "id": "mrgz5kr9pydho",
+    "creado": 1783811238741,
+    "titulo": "flechas",
+    "claves": "flecha,",
+    "codigo": "↑\t&#8593;\tFlecha arriba\tuarr\n↓\t&#8595;\tFlecha abajo\tdarr\n←\t&#8592;\tFlecha izquierda\tlarr\n→\t&#8594;\tFlecha derecha\trarr\n↔\t&#8596;\tFlecha izq-der\tharr\n▲\t&#9650;\tFlecha arriba\t\n►\t&#9658;\tFlecha derecha\n▼\t&#9660;\tFlecha ababo\n◄\t&#9668;\tFlecha izquierda\t\n",
+    "nota": "",
+    "modificado": 1783811238741
+  },
+  {
+    "id": "mrgzab453f4cc",
+    "creado": 1783811459525,
+    "titulo": "tabla css",
+    "claves": "tabla, table,",
+    "codigo": ".tabla-elegante {\n    width: 100%;\n    max-width: 800px;\n    margin: 20px auto;\n    border-collapse: collapse; /* Une los bordes en una sola línea */\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); \n    border-radius: 8px; \n    overflow: hidden; \n    /* Borde exterior completo de la tabla */\n    border: 1px solid #dcdcdc; \n}\n\n/* Bordes en la cabecera */\n.tabla-elegante th {\n    background-color: #2c3e50; \n    color: #ffffff;\n    text-align: left;\n    padding: 15px;\n    font-weight: 600;\n    /* Línea sutil para separar las columnas de la cabecera */\n    border-right: 1px solid #34495e; \n}\n\n/* Eliminar el borde derecho de la última columna de la cabecera */\n.tabla-elegante th:last-child {\n    border-right: none;\n}\n\n/* Bordes en las celdas del cuerpo */\n.tabla-elegante td {\n    padding: 14px 15px;\n    color: #333333;\n    /* Crea la cuadrícula interna (abajo y derecha) */\n    border-bottom: 1px solid #e0e0e0; \n    border-right: 1px solid #e0e0e0; \n}\n\n/* Eliminar el borde derecho de la última columna del cuerpo */\n.tabla-elegante td:last-child {\n    border-right: none;\n}\n\n/* Eliminar el borde inferior de la última fila */\n.tabla-elegante tbody tr:last-child td {\n    border-bottom: none;\n}\n\n/* Efecto cebra para las filas */\n.tabla-elegante tbody tr:nth-child(even) {\n    background-color: #f9fbfd; \n}\n\n/* Efecto hover */\n.tabla-elegante tbody tr:hover {\n    background-color: #f1f5f9;\n    transition: background-color 0.2s ease;\n}\n\n.tabla-elegante td.alinear-derecha {\n    text-align: right;\n}",
+    "nota": "CSS para una tabla grande elegante",
+    "modificado": 1783811459525
+  },
+  {
+    "id": "mrgzfrnvr1qko",
+    "creado": 1783811714251,
+    "titulo": "resaltado",
+    "claves": "resaltado, palabra, destacada",
+    "codigo": "<span \nstyle=\"background-color:#2D8402; \ncolor:#fafafa;  \nborder-radius: 4px; \npadding: 4px;\nfont-weight:700;\">\nTEXTO\n</span>",
+    "nota": "Para resaltar palabra, cambiar background-color pot el color deseado",
+    "modificado": 1783878612603
+  },
+  {
+    "id": "mrgzkc1da5e9p",
+    "creado": 1783811927281,
+    "titulo": "encabezado ayuda ejercicio",
+    "claves": "formula, cabezal, ayuda, ejercicio",
+    "codigo": "<div \nstyle=\"width: 100%; text-align:center; display:inline-block; \nbackground:#f0f4ff; border:1px solid #93c5fd; \nborder-radius:6px; padding:0.2em 0.8em; \nfont-family:monospace; color:#1d4ed8; \nfont-size:1.2em; margin-bottom:.4em;\">\nFÓRMULA DEL ENCABEZAD\n</div>",
+    "nota": "Para colocar en la parte superior de los ejercicios de myOpenMath, como ayuda general para el alumno.",
+    "modificado": 1783833133862
+  },
+  {
+    "id": "mrh00g6la15x7",
+    "creado": 1783812679149,
+    "titulo": "explicacion",
+    "claves": "explicacion, ayuda,",
+    "codigo": "<div \nstyle=\"border-left: 4px solid #7A2E1B; \npadding-left: 20px;\">\n<p>TEXTO DE LA EXPLICACION</p>\n</div><br>",
+    "nota": "El color del borde de acuerdo al nivel, el <br> final es aumentar la separación entre la línea y el coantendio siguientes.",
+    "modificado": 1783812679149
+  },
+  {
+    "id": "mrh01cxy2bmnt",
+    "creado": 1783812721606,
+    "titulo": "linea divisoria",
+    "claves": "linea, separador",
+    "codigo": "<hr style=\"border: 2px solid #2D8402;\">",
+    "nota": "El color debe ser acorde con el nivel",
+    "modificado": 1783876624142
+  },
+  {
+    "id": "mrh05i4bd8edl",
+    "creado": 1783812914939,
+    "titulo": "svg pitagoras",
+    "claves": "triangulo, pitagoras, hipotenusa, cateto, svg,",
+    "codigo": "$m = rand(2,8);\n$n = rand(1,$m-1);\n\n// Asegurar que no sean iguales\nwhile ($m == $n) {\n  $n = rand(1,$m-1);\n}\n\n$a = $m*$m - $n*$n;\n$b = 2*$m*$n;\n$c = $m*$m + $n*$n;\n\n\n$h = rrand(2,14,2)\n$w = rand(5,13)\n$m = max($h,$w)\n\n$answer = $c\n$abstolerance = .005\n$answerboxsize = 6\n\n$tri = showasciisvg(\"initPicture(-3,$m+3,-3,$m+3);\npath([[0,0],[$w,0],[0,$h],[0,0]]);\ntext([0,$h/2],\\\"$a\\\",\\\"left\\\");\ntext([$w/2,0],\\\"$b\\\",\\\"below\\\")\")",
+    "nota": "Dibuja un triángulo rectángulo con los valores de los catetos. Siempre genera números enteros.",
+    "modificado": 1783812914939
+  },
+  {
+    "id": "mrh07pcqdgl2v",
+    "creado": 1783813017626,
+    "titulo": "svg angulos adyacentes",
+    "claves": "angulos, adyacentes, svg,",
+    "codigo": "// Ángulos adyacentes: hallar el ángulo desconocido\n\n$angTotal = rand(80, 170)\n$ang1 = rand(15, $angTotal - 15)\n$ang2 = $angTotal - $ang1\n$signo_t = \"+\"\n\n// 1. Conversión a radianes \n$pi = 3.14159265\n$rad1 = $ang1 * $pi / 180\n$radTotal = $angTotal * $pi / 180\n\n// 2. Coordenadas de las líneas (Vértice movido al centro: 160, 180) - Longitud = 140\n$xLine1 = round(160 + 140 * cos($rad1), 1)\n$yLine1 = round(180 - 140 * sin($rad1), 1)\n\n$xLineTotal = round(160 + 140 * cos($radTotal), 1)\n$yLineTotal = round(180 - 140 * sin($radTotal), 1)\n\n// 3. Coordenadas para el Arco 1 (Verde, Radio = 40)\n$xArc1 = round(160 + 40 * cos($rad1), 1)\n$yArc1 = round(180 - 40 * sin($rad1), 1)\n\n// 4. Coordenadas para el Arco 2 (Rojo, Radio = 55 para no cruzarse)\n$xArc2Start = round(160 + 55 * cos($rad1), 1)\n$yArc2Start = round(180 - 55 * sin($rad1), 1)\n$xArc2End = round(160 + 55 * cos($radTotal), 1)\n$yArc2End = round(180 - 55 * sin($radTotal), 1)\n\n// 5. Posicionamiento de los textos\n$xText1 = round(160 + 22 * cos($rad1 / 2), 1)\n$yText1 = round(180 - 22 * sin($rad1 / 2), 1)\n\n$radBisectriz2 = $rad1 + (($ang2 / 2) * $pi / 180)\n$xText2 = round(160 + 40 * cos($radBisectriz2), 1)\n$yText2 = round(180 - 40 * sin($radBisectriz2), 1)\n\n$answer = $ang2\n$answerboxsize = 5\n$showanswer = \"`$ang2`°\"\n\n// Hints\n$hints[1] = \"Dos ángulos adyacentes que comparten un vértice y un lado forman juntos un ángulo más grande. La suma de los dos ángulos es igual al ángulo total.\"\n$hints[2] = \"Usa la ecuación: ángulo desconocido = ángulo total − ángulo conocido. Es decir: `$angTotal - $ang1 = ?`\"\n\nHTML\n    <svg viewBox='0 0 320 230' width='320' height='230' style='max-width:340px;height:auto;display:block;margin:0 auto;' xmlns='http://www.w3.org/2000/svg'>\n      <text x='160' y='22' text-anchor='middle' font-size='15' fill='#1e3a8a' font-weight='bold'>Ángulos adyacentes</text>  \n      <line x1='160' y1='180' x2='300' y2='180' stroke='#374151' stroke-width='2.5'/>  \n      <line x1='160' y1='180' x2='$xLineTotal' y2='$yLineTotal' stroke='#374151' stroke-width='2.5'/>  \n      <line x1='160' y1='180' x2='$xLine1' y2='$yLine1' stroke='#1d4ed8' stroke-width='2.5'/>  \n      <path d='M 200 180 A 40 40 0 0 0 $xArc1 $yArc1' stroke='#16a34a' stroke-width='2' fill='none'/>  \n      <path d='M $xArc2Start $yArc2Start A 55 55 0 0 0 $xArc2End $yArc2End' stroke='#dc2626' stroke-width='2' fill='none'/>  \n      <text x='$xText1' y='$yText1' text-anchor='middle' font-size='12' fill='#16a34a' font-weight='bold'>$ang1 °</text>\n      <text x='$xText2' y='$yText2' text-anchor='middle' font-size='14' fill='#dc2626' font-weight='bold'>?</text>  \n      <text x='160' y='215' text-anchor='middle' font-size='13' fill='#374151'>Ángulo total: $angTotal °</text>\n    </svg>",
+    "nota": "",
+    "modificado": 1783813017626
+  },
+  {
+    "id": "mrh0ahdmnphhl",
+    "creado": 1783813147258,
+    "titulo": "svg angulo opuesto",
+    "claves": "svg, angulo, opuestos, vertice,",
+    "codigo": "$ang = rand(60,80)\n$adj = 180 - $ang\n$pi  = 3.14159265\n$cx = 160\n$cy = 120\n$r  = 120\n$rad = $ang*$pi/180\n// Recta horizontal\n$x1a = 40\n$y1a = $cy\n$x1b = 280\n$y1b = $cy\n// Recta inclinada (dos rayos desde el vértice)\n$x2a = round($cx + $r*cos($rad),1)\n$y2a = round($cy - $r*sin($rad),1)\n$x2b = round($cx - $r*cos($rad),1)\n$y2b = round($cy + $r*sin($rad),1)\n// Etiquetas: sobre la bisectriz de cada uno de los 4 ángulos (radio 62)\n$lr = 62\n$lax = round($cx + $lr*cos($ang/2*$pi/180),1)\n$lay = round($cy - $lr*sin($ang/2*$pi/180),1)\n$lbx = round($cx + $lr*cos((90+$ang/2)*$pi/180),1)\n$lby = round($cy - $lr*sin((90+$ang/2)*$pi/180),1)\n$lcx = round($cx + $lr*cos((180+$ang/2)*$pi/180),1)\n$lcy = round($cy - $lr*sin((180+$ang/2)*$pi/180),1)\n$ldx = round($cx + $lr*cos((270+$ang/2)*$pi/180),1)\n$ldy = round($cy - $lr*sin((270+$ang/2)*$pi/180),1)\n// Arcos (radio 30) que marcan el par de ángulos iguales\n$sxR = $cx + 30\n$sxL = $cx - 30\n$arA  = round($cx + 30*cos($rad),1)\n$aryA = round($cy - 30*sin($rad),1)\n$arC  = round($cx - 30*cos($rad),1)\n$aryC = round($cy + 30*sin($rad),1)\n$answer = $ang\n$answerboxsize =6\nHTML\n<svg viewBox='0 0 320 240' width='320' height='240'\n       style='max-width:340px;height:auto;display:block;margin:0 auto;'\n       xmlns='http://www.w3.org/2000/svg' role='img'\n       aria-label='Dos rectas se cruzan. El ángulo dado mide $ang grados; su opuesto por el vértice está marcado con signo de interrogación.'>\n    <title>Ángulos opuestos por el vértice</title>\n    <desc>Dos rectas se cruzan en un punto. Arriba a la derecha el ángulo mide $ang grados; su opuesto por el vértice, abajo a la izquierda, está marcado con signo de interrogación. Los dos ángulos adyacentes miden $adj grados.</desc>\n    <text x='160' y='25' text-anchor='middle' font-size='15' fill='#1e3a8a' font-weight='bold'>Ángulos opuestos por el vértice</text>\n    <line x1='$cx' y1='$cy' x2='$x1a' y2='$y1a' stroke='#1e3a8a' stroke-width='2.5'/>\n    <line x1='$cx' y1='$cy' x2='$x1b' y2='$y1b' stroke='#1e3a8a' stroke-width='2.5'/>\n    <line x1='$cx' y1='$cy' x2='$x2a' y2='$y2a' stroke='#1e3a8a' stroke-width='2.5'/>\n    <line x1='$cx' y1='$cy' x2='$x2b' y2='$y2b' stroke='#1e3a8a' stroke-width='2.5'/>\n    <path d='M $sxR,$cy A 30,30 0 0 0 $arA,$aryA' fill='none' stroke='#dc2626' stroke-width='2'/>\n    <path d='M $sxL,$cy A 30,30 0 0 0 $arC,$aryC' fill='none' stroke='#dc2626' stroke-width='2'/>\n    <circle cx='$cx' cy='$cy' r='4' fill='#1e3a8a'/>\n    <text x='$lax' y='$lay' text-anchor='middle' font-size='15' fill='#dc2626' font-weight='bold'>$ang °</text>\n    <text x='$lcx' y='$lcy' text-anchor='middle' font-size='15' fill='#dc2626' font-weight='bold'>λ °</text>\n    <text x='$lbx' y='$lby' text-anchor='middle' font-size='15' fill='#5C3900'>$adj °</text>\n    <text x='$ldx' y='$ldy' text-anchor='middle' font-size='15' fill='#5C3900'>$adj °</text>\n  </svg>",
+    "nota": "Crea dos líneas que se cruzan generando ángulos opuestos.",
+    "modificado": 1783813147258
+  },
+  {
+    "id": "seed00",
+    "titulo": "singleshuffle: barajar y extraer",
+    "claves": "shuffle, barajar, aleatorio, singleshuffle, array",
+    "codigo": "$arr = singleshuffle(array(2,3,5,7,11));\n$val = $arr[0];",
+    "nota": "singleshuffle() devuelve un ARRAY: extrae siempre con [0]. Usa singleshuffle(), no shuffle().",
+    "creado": 100000,
+    "modificado": 100000
+  },
+  {
+    "id": "seed01",
+    "titulo": "Índice maestro (variables relacionadas)",
+    "claves": "índice, maestro, aleatorio, singleshuffle, relacionadas, coherente",
+    "codigo": "$idx = singleshuffle(array(0,1,2));\n$i = $idx[0];\n$a = array(2,3,5)[$i];\n$b = array(4,9,25)[$i];",
+    "nota": "Un solo índice mantiene coherentes varias variables: cada $a va con su $b correcto.",
+    "creado": 99990,
+    "modificado": 99990
+  },
+  {
+    "id": "seed02",
+    "titulo": "Ternaria en vez de if/else",
+    "claves": "condicional, ternaria, if, else, decisión",
+    "codigo": "$a = ($x==1) ? 5 : (($x==2) ? 10 : 15);",
+    "nota": "Los bloques if/else con llaves {} generan error de sintaxis en IMathAS. Usa ternarias anidadas.",
+    "creado": 99980,
+    "modificado": 99980
+  },
+  {
+    "id": "seed03",
+    "titulo": "Bucle for (rango a..b)",
+    "claves": "for, bucle, ciclo, rango, loop, suma",
+    "codigo": "$suma = 0;\nfor($i=1..10){\n  $suma = $suma + $i;\n}",
+    "nota": "La sintaxis es for($i=a..b){}, no el for de C con ;. Evita $questions como nombre (reservado).",
+    "creado": 99970,
+    "modificado": 99970
+  },
+  {
+    "id": "seed04",
+    "titulo": "Tipo intervalo con oo",
+    "claves": "intervalo, interval, infinito, oo, desigualdad, answer",
+    "codigo": "loadlibrary(\"interval\");\n$answer = \"(-oo,$val)\";\n$answersize = 12;",
+    "nota": "Usa oo y -oo (nunca inf/-inf). loadlibrary(\"interval\") habilita forminterval(), linegraph() y joinarray().",
+    "creado": 99960,
+    "modificado": 99960
+  },
+  {
+    "id": "seed05",
+    "titulo": "Multipart: intervalo + recta (draw)",
+    "claves": "multipart, draw, recta, número, línea, number line, intervalo, desigualdad",
+    "codigo": "loadlibrary(\"interval\");\n$anstypes = array(\"interval\",\"draw\");\n$answer = array(\"(-oo,$val]\", intervalstodraw(\"(-oo,$val]\"));\n$drawoptions = array(\"snaptogrid\"=>1);",
+    "nota": "Fronteras enteras para snaptogrid=1. Usa intervalstodraw(). Añade una descripción textual accesible de la recta (DUA/Ally).",
+    "creado": 99950,
+    "modificado": 99950
+  },
+  {
+    "id": "seed06",
+    "titulo": "Respuesta única: solo $answer y $answersize",
+    "claves": "answer, answersize, única, single, common control, tipo, anstype",
+    "codigo": "$answer = $resultado;\n$answersize = 10;",
+    "nota": "En respuesta de una sola parte NO declares el tipo en el código: $anstypes dispara \"¿Multipart?\" y $anstype da \"unallowed var\". El tipo se elige en el desplegable \"Answer Type\".",
+    "creado": 99940,
+    "modificado": 99940
+  },
+  {
+    "id": "seed07",
+    "titulo": "joinarray (unir un array)",
+    "claves": "joinarray, implode, unir, texto, lista",
+    "codigo": "loadlibrary(\"interval\");\n$texto = joinarray($valores, \", \");",
+    "nota": "Usa joinarray(), no implode(). Requiere loadlibrary(\"interval\").",
+    "creado": 99930,
+    "modificado": 99930
+  },
+  {
+    "id": "seed08",
+    "titulo": "forminterval (mostrar intervalo)",
+    "claves": "forminterval, intervalo, mostrar, formato",
+    "codigo": "loadlibrary(\"interval\");\n$texto = forminterval(\"(-oo,$val)\");",
+    "nota": "Formatea un intervalo para mostrarlo en el enunciado. Requiere loadlibrary(\"interval\").",
+    "creado": 99920,
+    "modificado": 99920
+  },
+  {
+    "id": "seed09",
+    "titulo": "linegraph (recta numérica)",
+    "claves": "linegraph, recta, número, línea, gráfico, intervalo",
+    "codigo": "loadlibrary(\"interval\");\n$recta = linegraph(\"(-oo,$val]\");",
+    "nota": "Dibuja la recta numérica de un intervalo. Acompáñala siempre de una descripción textual accesible (DUA/Ally).",
+    "creado": 99910,
+    "modificado": 99910
+  },
+  {
+    "id": "seed10",
+    "titulo": "AsciiMath en el enunciado",
+    "claves": "asciimath, matemáticas, fórmula, notación, acento grave, raíz",
+    "codigo": "La solución es `x >= (-b)/(2a)`.",
+    "nota": "El AsciiMath va entre acentos graves ` `. Fracción a/b, raíz sqrt(x), potencia x^2, mayor o igual con >=.",
+    "creado": 99900,
+    "modificado": 99900
+  },
+  {
+    "id": "mrhan69difihc",
+    "titulo": "svg cuadrado",
+    "claves": "svg, cuadrado,",
+    "codigo": "<svg viewBox=\"0 0 200 200\" width=\"200\" height=\"200\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect \n    x=\"50\" \n    y=\"50\" \n    width=\"100\" \n    height=\"100\" \n    fill=\"#dbeafe\" \n    stroke=\"#3b82f6\" \n    stroke-width=\"3\"\n  />\n</svg>",
+    "nota": "Dibuja un cuadrado",
+    "creado": 1783830535537,
+    "modificado": 1783830535537
+  },
+  {
+    "id": "mrhanvisva7b6",
+    "titulo": "svg rectangulo",
+    "claves": "svg, rectangulo,",
+    "codigo": "<svg viewBox=\"0 0 240 160\" width=\"240\" height=\"160\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect \n    x=\"60\" \n    y=\"40\" \n    width=\"120\" \n    height=\"80\" \n    fill=\"#dbeafe\" \n    stroke=\"#3b82f6\" \n    stroke-width=\"3\"\n  />\n</svg>",
+    "nota": "Dibuja un rectangulo",
+    "creado": 1783830568276,
+    "modificado": 1783830568276
+  },
+  {
+    "id": "mrhaohvejhfp5",
+    "titulo": "svg trapecio",
+    "claves": "svg, trapecio,",
+    "codigo": "<svg viewBox=\"0 0 240 160\" width=\"240\" height=\"160\" xmlns=\"http://www.w3.org/2000/svg\">\n  <polygon \n    points=\"30,50 210,50 180,110 60,110\"\n    fill=\"#dbeafe\" \n    stroke=\"#3b82f6\" \n    stroke-width=\"3\"\n  />\n</svg>",
+    "nota": "Dibuja un trapecio",
+    "creado": 1783830597242,
+    "modificado": 1783830597242
+  },
+  {
+    "id": "mrhapy801yajv",
+    "titulo": "svg triangulo myOpenMath",
+    "claves": "",
+    "codigo": "$x = rand(1,3)\n$xl = $x/2\n$xr = $x + (4-$x)/2\n$y = rand(2,6)\n$yh = $y/2\n\n$m = rand(3,6)\n$b = 4*$m\n$sl = round(sqrt($x^2+$y^2)*$m,0)\n$sr = round(sqrt((4-$x)^2 + $y^2)*$m,0)\n\n//initPicture(-1,5,-1,5);\n//path([[0,0],[$x,$y],[4,0],[0,0]]);\n\n$triangulo = showasciisvg(\"initPicture(-1,\".(4*$m+1).\",-1,\".( $y*$m+1 ).\");\npath([[0,0],[$x*$m,$y*$m],[4*$m,0],[0,0]]);\ntext([$xl*$m,$yh*$m],'$sl','left');\ntext([$xr*$m,$yh*$m],'$sr','right');\ntext([2*$m,0],'$b','below');\")\n\n$answer = $b+$sl+$sr\n$abstolerance = .05",
+    "nota": "Dibuja un triángulo en myOpenMath",
+    "creado": 1783830665088,
+    "modificado": 1783830665088
+  },
+  {
+    "id": "mrhaw42ua9gkc",
+    "titulo": "parrafo letra pequeña",
+    "claves": "letra pequeña, fuente, credito,",
+    "codigo": " <p style=\"font-size:11px;\">\nFuente: \"These ancient ...\" \n<a href=\"https://www.nationalgeographic.com\" \ntarget=\"_blank\">National Geographic</a>\n</p>",
+    "nota": "Poner las fuentes de investigación u otra información en letra pequeña.",
+    "creado": 1783830952614,
+    "modificado": 1783830952614
+  },
+  {
+    "id": "mrhb6o6e1vpwt",
+    "titulo": "destacar palabra frase",
+    "claves": "destacar, frases, palabras,",
+    "codigo": "VERDE CLARO - LETRA NEGRA\n<span style=\"background-color: #F6FFF1; padding: 4px; font-weight: 700; border: 1px solid #000000;\">\nROJO - LETRA BLANCA\n<span style=\"background-color: #d4584a; color: #fafafa;padding: 2px;font-weight:700;border-radius: 4px;\"></span>\nCREMA - LETRA NEGRA - BORDE ROJO\n<span style=\"border: 2px solid #d4584a; border-radius: 8px; padding: 2px 2px; margin-bottom: 10px; background-color: #fffbeb;\"></span>\nAZUL CLARO-BORDE IZQUIEROD AZUL",
+    "nota": "Destacar palarbas, frases, párrafos. Poner notas destacadas.",
+    "creado": 1783831445222,
+    "modificado": 1784041049847
+  },
+  {
+    "id": "mrhb7vji8r1wa",
+    "titulo": "clase caja nota",
+    "claves": "caja, nota,",
+    "codigo": ".caja-nota {\n  background-color: #e7f3ff;\n  border-left: 5px solid #0d3b66;\n  border-right: 5px solid #0d3b66;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 12px;\n}",
+    "nota": "",
+    "creado": 1783831501422,
+    "modificado": 1783831501422
+  },
+  {
+    "id": "mrhb8jm43lc07",
+    "titulo": "clase caja ejemplo",
+    "claves": "caja, ejemplo, clase",
+    "codigo": ".caja-ejemplo {\n  background-color: #f0f9ff;\n  border: 2px dashed #2a6fa8;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 4px;\n}",
+    "nota": "",
+    "creado": 1783831532620,
+    "modificado": 1783831532620
+  },
+  {
+    "id": "mrhb9id9qbhih",
+    "titulo": "clase caja pasos",
+    "claves": "caja, pasos, clase",
+    "codigo": ".caja-pasos {\n  background-color: #f0fffa;\n  border: 2px dashed #2ea82a;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 4px;\n}\n\n.caja-pasos h3 {\n  color: #2ea82a;\n  font-size: 1.3em;\n  font-weight: 600;\n  margin-top: 1.3em;\n  margin-bottom: 0.6em;\n}",
+    "nota": "Para usar en texto que se describen por pasos",
+    "creado": 1783831577661,
+    "modificado": 1783831577661
+  },
+  {
+    "id": "mrhba5kjedye1",
+    "titulo": "clase caja importante",
+    "claves": "clase, caja, importante,",
+    "codigo": ".caja-importante {\n  background-color: #fae7ff;\n  border-left: 5px solid #660d5c;\n  border-right: 5px solid #630d66;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 20px;\n}",
+    "nota": "",
+    "creado": 1783831607731,
+    "modificado": 1783831607731
+  },
+  {
+    "id": "mrhbb1xp4kugo",
+    "titulo": "clase caja thatquiz",
+    "claves": "",
+    "codigo": ".caja-thatquiz {\n  background-color: #e6fff3;\n  border: 2px solid #07ff3d;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 4px;\n  text-align: center;\n}\n\n.caja-thatquiz h3 {\n  color: #048b21;\n}",
+    "nota": "Para colocar los enlaces a los ej4ercicios de tharquiz",
+    "creado": 1783831649677,
+    "modificado": 1783831649677
+  },
+  {
+    "id": "mrhbc07ldqtie",
+    "titulo": "clase caja practica",
+    "claves": "clase, caja, practica,",
+    "codigo": ".caja-practica {\n  background-color: #fff9e6;\n  border: 2px solid #ffc107;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 4px;\n}",
+    "nota": "",
+    "creado": 1783831694097,
+    "modificado": 1783831694097
+  },
+  {
+    "id": "mrhbcqf4vy4jz",
+    "titulo": "clase caja tarea",
+    "claves": "clase, caja, tarea",
+    "codigo": ".caja-tarea {\n  background-color: #fff9e6;\n  border: 2px solid #ffc107;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n}",
+    "nota": "Para las tareas asincrónicas",
+    "creado": 1783831728064,
+    "modificado": 1783831728064
+  },
+  {
+    "id": "mrhbh3s4ywgjn",
+    "titulo": "tarjeta interactiva",
+    "claves": "tarjeta, interactiva,",
+    "codigo": ".tarjeta-interactiva {\n  display: block;\n  text-decoration: none;\n  background: linear-gradient(135deg, #0a1f1a 0%, #073d2d 100%);\n  border: 2px solid var(--c-ciencias);\n  border-radius: 10px;\n  padding: 22px 24px;\n  margin: 22px 0;\n  position: relative;\n  overflow: hidden;\n  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;\n  color: #e5f4ee;\n}\n.tarjeta-interactiva:hover {\n  transform: translateY(-2px);\n  box-shadow: 0 12px 28px rgba(15, 122, 92, 0.25);\n  border-color: #6ee7b7;\n}\n.tarjeta-interactiva::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 140px;\n  height: 100%;\n  background:\n    radial-gradient(circle at 70% 30%, rgba(110, 231, 183, 0.18) 0%, transparent 60%),\n    radial-gradient(circle at 90% 70%, rgba(244, 114, 182, 0.12) 0%, transparent 50%);\n  pointer-events: none;\n}\n\n\n.tarjeta-interactiva .ti-descripcion strong { color: #6ee7b7; }\n.tarjeta-interactiva .ti-cta {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  background: #34d399;\n  color: #051410;\n  padding: 9px 18px;\n  border-radius: 6px;\n  font-weight: 700;\n  font-size: 14px;\n  letter-spacing: 0.02em;\n  transition: background 0.15s;\n  position: relative;\n}\n.tarjeta-interactiva:hover .ti-cta {\n  background: #6ee7b7;\n}\n.tarjeta-interactiva .ti-cta .flecha {\n  transition: transform 0.15s;\n}\n.tarjeta-interactiva:hover .ti-cta .flecha {\n  transform: translateX(3px);\n}\n.tarjeta-interactiva h4 {color: #fbbf24;}\n.tarjeta-interactiva .ti-icono {font-size: 1.6rem;}\n\n@media (max-width: 640px) {\n  .tarjeta-interactiva { padding: 18px 18px; }\n  .tarjeta-interactiva h4 { font-size: 17px; }\n  .tarjeta-interactiva .ti-descripcion { font-size: 14px; }\n}\n\nHTML\n<!-- ===== TARJETA INTERACTIVA:  Balanceo químico ===== -->\n  <a class=\"tarjeta-interactiva\" href=\"https://zhemaria.github.io/ciencias/balanceo_3d/\" target=\"_blank\" rel=\"noopener\">\n    <div class=\"ti-cabecera\">\n      <span class=\"ti-icono\">📎</span>\n      <span class=\"ti-eyebrow\">Recurso interactivo</span>\n    </div>\n    <h4><strong>🌋 Estructura y dinámica de la Tierra</strong></h4>\n    <p class=\"ti-descripcion\">\n      Explora las <strong>capas internas</strong> de la Tierra, las <strong>placas tectónicas</strong> y los <strong>volcanes</strong> de forma interactiva. Observa cómo son los tres tipos de movimientos de  las placas tectónicas y cómo la presión magmática hace que ocurran las erupciones..\n    </p>\n    <span class=\"ti-cta\">▶ Abrir el interactivo <span class=\"flecha\">→</span></span>\n  </a>",
+    "nota": "Para enlazar mediante tarjeta los interactivos alojados en GitHub",
+    "creado": 1783831932004,
+    "modificado": 1783831932004
+  },
+  {
+    "id": "mrhbjawb5nrq6",
+    "titulo": "CSS DUA",
+    "claves": "estilo, style, dua, css, brightspace,",
+    "codigo": "/* ========================================\n   PLANTILLA UNIFICADA - CSS\n   Matemáticas + Artes del Lenguaje\n   Diseño minimalista con colores DUA\n   Autor: Zhema - Truman College\n   Versión: 4.0 UNIFICADA FINAL\n   ======================================== */\n\n/* ============================================\n   1. ESTILOS BASE Y TIPOGRAFÍA\n   ============================================ */\n\nbody {\n  font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n  font-size: 19px;\n  line-height: 1.7;\n  color: #212529;\n  background-color: #ffffff;\n  padding: 20px;\n  max-width: 900px;\n  margin: 0 auto;\n}\n\n/* ============================================\n   2. ENCABEZADOS\n   ============================================ */\n\nh1 {\n  color: #0d3b66;\n  font-size: 2.2em;\n  font-weight: 700;\n  margin-top: 0;\n  margin-bottom: 0.8em;\n  padding-bottom: 0.4em;\n  border-bottom: 3px solid #0d3b66;\n}\n\nh2 {\n  color: #1a5490;\n  font-size: 1.7em;\n  font-weight: 600;\n  margin-top: 1.5em;\n  margin-bottom: 0.7em;\n  padding-left: 0.5em;\n  border-left: 5px solid #1a5490;\n  text-transform: uppercase;\n}\n\nh3 {\n  color: #2a6fa8;\n  font-size: 1.3em;\n  font-weight: 600;\n  margin-top: 1.3em;\n  margin-bottom: 0.6em;\n}\n\n.mayus {\n  text-transform: uppercase;\n}\n\n.bigtitle {\n  font-size: 1.2em;\n  font-weight: 700;\n}\n\n/* ============================================\n   3. PÁRRAFOS Y TEXTO\n   ============================================ */\n\np {\n  margin-bottom: 1em;\n}\n\n/* ============================================\n   4. LISTAS CON EMOJIS\n   ============================================ */\n\n/* Listas sin estilo base */\nul {\n  list-style: none;\n  padding-left: 0;\n  margin-left: 1.5em;\n}\n\nul li {\n  position: relative;\n  padding-left: 2em;\n  margin-bottom: 0.7em;\n}\n\n/* Emoji por defecto - ábaco para matemáticas */\nul li::before {\n  content: '🌎';\n  position: absolute;\n  left: 0;\n  font-size: 1.1em;\n}\n\n/* === LISTAS MATEMÁTICAS === */\nul.lista-datos li::before {\n  content: '📊';\n}\n\nul.lista-ejercicio li::before {\n  content: '🏋️';\n}\n\nul.lista-tablas li::before {\n  content: '📉';\n}\n\nul.lista-importante li::before {\n  content: '⚠️';\n}\n\nul.lista-porciento li::before {\n  content: '💯';\n}\n\n/* === LISTAS ARTES DEL LENGUAJE === */\nul.lista-libros li::before {\n  content: '📚';\n}\n\nul.lista-escritura li::before {\n  content: '✍️';\n}\n\nul.lista-lectura li::before {\n  content: '📖';\n}\n\nul.lista-conversacion li::before {\n  content: '💬';\n}\n\nul.lista-gramatica li::before {\n  content: '📝';\n}\n\nul.lista-vocabulario li::before {\n  content: '🔤';\n}\n\nul.lista-creatividad li::before {\n  content: '✨';\n}\n\n/* Listas ordenadas */\nol {\n  padding-left: 2em;\n  margin-bottom: 1.2em;\n}\n\nol li {\n  margin-bottom: 0.7em;\n  padding-left: 0.5em;\n}\n\n/* ============================================\n   5. EXPRESIONES MATEMÁTICAS\n   ============================================ */\n\n/* Inline */\n.math-inline {\n  font-family: 'Courier New', Courier, monospace;\n  background-color: #f0f4f8;\n  padding: 2px 8px;\n  border-radius: 4px;\n  color: #0d3b66;\n  font-weight: 600;\n  font-size: 1.05em;\n  white-space: nowrap;\n}\n\n/* Bloque */\n.math-block {\n  font-family: 'Courier New', Courier, monospace;\n  background-color: #f0f4f8;\n  border-left: 4px solid #0d3b66;\n  padding: 15px 20px;\n  margin: 1.5em 0;\n  border-radius: 4px;\n  color: #0d3b66;\n  font-weight: 600;\n  font-size: 1.15em;\n  text-align: center;\n  overflow-x: auto;\n}\n\n/* Fórmulas importantes */\n.formula-importante {\n  font-family: 'Courier New', Courier, monospace;\n  background-color: #e7f3ff;\n  border: 3px solid #1a5490;\n  padding: 20px;\n  margin: 1.5em 0;\n  border-radius: 8px;\n  color: #0d3b66;\n  font-weight: 700;\n  font-size: 1.2em;\n  text-align: center;\n}\n\n/* ============================================\n   6. TEXTO DESTACADO\n   ============================================ */\n\n.destacado {\n  background-color: #fff3cd;\n  padding: 2px 6px;\n  border-radius: 3px;\n  font-weight: 600;\n  color: #856404;\n}\n\n.importante {\n  background-color: #d4edda;\n  padding: 2px 6px;\n  border-radius: 3px;\n  font-weight: 600;\n  color: #155724;\n}\n\n.atencion {\n  background-color: #f8d7da;\n  padding: 2px 6px;\n  border-radius: 3px;\n  font-weight: 600;\n  color: #721c24;\n}\n\n.atencion p {\n  padding-left: 30px;\n  padding-right: 30px;\n}\n\n/* NUEVO: Clase para enlaces destacados */\n.enlace {\n  background-color: #cde9ff;\n  padding: 2px 6px;\n  border-radius: 3px;\n  font-weight: 600;\n  color: #041785;\n  text-decoration: underline;\n}\n\n/* ============================================\n   7. TOOLTIPS (pantalla + impresión)\n   ============================================ */\n\n/* === TOOLTIP EN PANTALLA === */\n.tooltip-palabra {\n  position: relative;\n  cursor: help;\n  color: #0d3b66;\n  border-bottom: 2px dotted #6ca0dc;\n  padding: 2px 4px;\n  border-radius: 3px;\n  background-color: #f8f9fa;\n  transition: all 0.3s ease;\n}\n\n.tooltip-palabra:hover,\n.tooltip-palabra:focus {\n  background-color: #e3f2fd;\n}\n\n.tooltip-texto {\n  visibility: hidden;\n  opacity: 0;\n  width: 280px;\n  background-color: #0d3b66;\n  color: #fff;\n  text-align: left;\n  border-radius: 8px;\n  padding: 12px 15px;\n  position: absolute;\n  z-index: 100;\n  bottom: 130%;\n  left: 50%;\n  margin-left: -140px;\n  font-size: 0.85em;\n  line-height: 1.5;\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);\n  transition: opacity 0.3s, visibility 0.3s;\n  font-weight: normal;\n  white-space: normal;\n  word-wrap: break-word;\n  pointer-events: none;\n}\n\n.tooltip-texto::after {\n  content: '';\n  position: absolute;\n  top: 100%;\n  left: 50%;\n  margin-left: -8px;\n  border-width: 8px;\n  border-style: solid;\n  border-color: #0d3b66 transparent transparent transparent;\n}\n\n.tooltip-palabra:hover .tooltip-texto,\n.tooltip-palabra:focus .tooltip-texto {\n  visibility: visible;\n  opacity: 1;\n}\n\n/* === NOTAS AL PIE (ocultas en pantalla) === */\n.nota-numero {\n  display: none;\n  font-size: 0.75em;\n  vertical-align: super;\n  color: #c62828;\n  font-weight: bold;\n  margin-left: 2px;\n}\n\n.notas-al-pie {\n  display: none;\n  margin-top: 40px;\n  padding-top: 20px;\n  border-top: 2px solid #333;\n}\n\n.notas-al-pie h3 {\n  margin-bottom: 15px;\n}\n\n.nota-item {\n  font-size: 0.9em;\n  margin-bottom: 10px;\n  padding-left: 35px;\n  text-indent: -35px;\n}\n\n.nota-item-numero {\n  font-weight: bold;\n  color: #c62828;\n}\n\n.nota-item-termino {\n  font-weight: bold;\n  color: #0d3b66;\n}\n\n/* Modo oscuro para tooltips */\n@media (prefers-color-scheme: dark) {\n  .tooltip-palabra {\n    color: #a4c8f0;\n    border-bottom-color: #a4c8f0;\n  }\n\n  .tooltip-palabra:hover,\n  .tooltip-palabra:focus {\n    color: #cbe0ff;\n    border-bottom-color: #cbe0ff;\n    background-color: #13294b;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);\n  }\n\n  .tooltip-texto {\n    background-color: #6ca0dc;\n    color: #0d3b66;\n  }\n\n  .tooltip-texto::after {\n    border-color: #6ca0dc transparent transparent transparent;\n  }\n}\n\n/* ============================================\n   8. ACORDEONES (DETAILS/SUMMARY)\n   ============================================ */\n\ndetails {\n  background-color: #f8f9fa;\n  border: 2px solid #0d3b66;\n  border-radius: 8px;\n  padding: 0;\n  margin-bottom: 1em;\n  overflow: hidden;\n  transition: all 0.3s ease;\n}\n\ndetails p {\n  padding-left: 20px;\n}\n\ndetails:hover {\n  box-shadow: 0 4px 8px rgba(13, 59, 102, 0.15);\n}\n\ndetails[open] {\n  background-color: #ffffff;\n}\n\nsummary {\n  background-color: #0d3b66;\n  color: #ffffff;\n  padding: 1em 1.5em;\n  cursor: pointer;\n  font-weight: 600;\n  font-size: 1.1em;\n  list-style: none;\n  transition: background-color 0.3s ease;\n  user-select: none;\n}\n\nsummary::-webkit-details-marker {\n  display: none;\n}\n\nsummary::before {\n  content: '▶ ';\n  display: inline-block;\n  transition: transform 0.3s ease;\n  margin-right: 0.5em;\n}\n\ndetails[open] summary::before {\n  transform: rotate(90deg);\n}\n\nsummary:hover {\n  background-color: #1a5490;\n}\n\n.details-contenido {\n  padding: 1.5em;\n  line-height: 1.7;\n}\n\n/* --- VARIANTE VERDE --- */\ndetails.details-verde {\n  border-color: #1a7d32;\n}\n\ndetails.details-verde:hover {\n  box-shadow: 0 4px 8px rgba(26, 125, 50, 0.15);\n}\n\ndetails.details-verde summary {\n  background-color: #1a7d32;\n}\n\ndetails.details-verde summary:hover {\n  background-color: #239e42;\n}\n\n/* ============================================\n   9. CAJAS DE CONTENIDO ESPECIAL\n   ============================================ */\n\n.caja-nota {\n  background-color: #e7f3ff;\n  border-left: 5px solid #0d3b66;\n  border-right: 5px solid #0d3b66;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 12px;\n}\n\n.caja-ejemplo {\n  background-color: #f0f9ff;\n  border: 2px dashed #2a6fa8;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 4px;\n}\n\n.caja-pasos {\n  background-color: #f0fffa;\n  border: 2px dashed #2ea82a;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 4px;\n}\n\n.caja-pasos h3 {\n  color: #2ea82a;\n  font-size: 1.3em;\n  font-weight: 600;\n  margin-top: 1.3em;\n  margin-bottom: 0.6em;\n}\n\n.caja-importante {\n  background-color: #fae7ff;\n  border-left: 5px solid #660d5c;\n  border-right: 5px solid #630d66;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 20px;\n}\n\n.caja-thatquiz {\n  background-color: #e6fff3;\n  border: 2px solid #07ff3d;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 4px;\n  text-align: center;\n}\n\n.caja-thatquiz h3 {\n  color: #048b21;\n}\n\n.caja-practica {\n  background-color: #fff9e6;\n  border: 2px solid #ffc107;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 4px;\n}\n\n/* NUEVO: Caja de tarea */\n.caja-tarea {\n  background-color: #fff9e6;\n  border: 2px solid #ffc107;\n  padding: 1em 1.2em;\n  margin: 1.5em 0;\n  border-radius: 4px;\n}\n\n/* ============================================\n   10. PASOS DE SOLUCIÓN Y CONCEPTOS\n   ============================================ */\n\n.paso {\n  background-color: #f8f9fa;\n  border-left: 4px solid #28a745;\n  padding: 1em 1.2em;\n  margin: 1em 0;\n  border-radius: 4px;\n}\n\n.paso-titulo {\n  font-weight: 700;\n  color: #28a745;\n  margin-bottom: 0.5em;\n}\n\n/* NUEVO: Clase concepto - Tonalidad salmón */\n.concepto {\n  background-color: #fff5f5;\n  border-left: 4px solid #ff8a80;\n  padding: 1em 1.2em;\n  margin: 1em 0;\n  border-radius: 4px;\n}\n\n.concepto-titulo {\n  font-weight: 700;\n  color: #d84315;\n  margin-bottom: 0.5em;\n}\n\n/* ============================================\n   11. ENLACES\n   ============================================ */\n\na {\n  color: #0d3b66;\n  text-decoration: none;\n  border-bottom: 1px solid #0d3b66;\n  transition: color 0.3s ease;\n}\n\na:hover {\n  color: #1a5490;\n  border-bottom-color: #1a5490;\n}\n\n/* ============================================\n   12. TABLAS RESPONSIVAS\n   ============================================ */\n\n.tabla-wrapper {\n  width: 100%;\n  overflow-x: auto;\n  overflow-y: visible;\n  margin: 1.5em 0;\n  border: 2px solid #0d3b66;\n  border-radius: 8px;\n  background-color: #ffffff;\n  -webkit-overflow-scrolling: touch;\n  position: relative;\n}\n\n.tabla-wrapper table {\n  width: 100%;\n  min-width: 600px;\n  border-collapse: collapse;\n  margin: 0;\n}\n\n.tabla-wrapper th,\n.tabla-wrapper td {\n  border: 2px solid #0d3b66;\n  padding: 12px;\n  text-align: center;\n  white-space: normal;\n  word-wrap: break-word;\n}\n\n.tabla-wrapper th {\n  background-color: #0d3b66;\n  color: #ffffff;\n  font-weight: 700;\n}\n\n.tabla-wrapper tr:nth-child(even) {\n  background-color: #f8f9fa;\n}\n\n/* Indicador de scroll - solo en móvil */\n.tabla-wrapper::after {\n  content: '← Desliza para ver más →';\n  display: none;\n  text-align: center;\n  font-size: 0.85em;\n  color: #6c757d;\n  font-style: italic;\n  padding: 8px;\n  background-color: #e7f3ff;\n  border-top: 1px solid #0d3b66;\n}\n\n/* Tablas pequeñas sin min-width */\n.tabla-wrapper.tabla-pequena table {\n  min-width: auto;\n  width: 100%;\n}\n\n/* Tablas sin wrapper (legacy) */\ntable {\n  width: 100%;\n  border-collapse: collapse;\n  margin: 1.5em 0;\n}\n\nth,\ntd {\n  border: 2px solid #0d3b66;\n  padding: 12px;\n  text-align: center;\n}\n\nth {\n  background-color: #0d3b66;\n  color: #ffffff;\n  font-weight: 700;\n}\n\ntr:nth-child(even) {\n  background-color: #f8f9fa;\n}\n\n/* ============================================\n   13. MULTIMEDIA - IMÁGENES\n   ============================================ */\n\n.img-container {\n  width: 100%;\n  max-width: 100%;\n  margin: 1.5em 0;\n  text-align: center;\n}\n\n.img-responsive {\n  max-width: 100%;\n  height: auto;\n  border-radius: 8px;\n  border: 3px solid transparent;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n  transition: transform 0.3s ease, box-shadow 0.3s ease;\n  display: block;\n  margin: 0 auto;\n}\n\n.img-responsive:hover {\n  transform: scale(1.02);\n  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);\n}\n\n.img-responsive2 {\n  max-width: 100%;\n  height: auto;\n  border: 3px solid #0d3b66;\n  border-radius: 14px;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n  transition: transform 0.3s ease;\n}\n\n.img-responsive2:hover {\n  transform: scale(1.02);\n}\n\n.img-caption {\n  font-size: 0.9em;\n  color: #6c757d;\n  font-style: italic;\n  margin-top: 0.5em;\n  text-align: center;\n}\n\n/* ============================================\n   14. MULTIMEDIA - VIDEOS\n   ============================================ */\n\n.video-container {\n  position: relative;\n  width: 100%;\n  padding-bottom: 56.25%; /* Ratio 16:9 */\n  height: 0;\n  overflow: hidden;\n  margin: 1.5em 0;\n  border-radius: 8px;\n  border: 3px solid #0d3b66;\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n}\n\n.video-container iframe,\n.video-container video {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border: none;\n  border-radius: 5px;\n}\n\n.video-caption {\n  font-size: 0.9em;\n  color: #6c757d;\n  font-style: italic;\n  margin-top: 0.5em;\n  text-align: center;\n}\n\n/* ============================================\n   15. MULTIMEDIA - IFRAMES\n   ============================================ */\n\n.iframe-container {\n  position: relative;\n  width: 100%;\n  margin: 1.5em 0;\n  border-radius: 8px;\n  border: 3px solid #0d3b66;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);\n  overflow: hidden;\n  background-color: #f8f9fa;\n}\n\n.iframe-responsive {\n  position: relative;\n  width: 100%;\n  padding-bottom: 75%; /* Ratio 4:3 por defecto */\n  height: 0;\n  overflow: hidden;\n}\n\n.iframe-responsive iframe {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  border: none;\n}\n\n/* ThatQuiz necesita más altura */\n.iframe-thatquiz .iframe-responsive {\n  padding-bottom: 120%;\n}\n\n/* PhET simulaciones */\n.iframe-phet .iframe-responsive {\n  padding-bottom: 85%;\n}\n\n.iframe-title {\n  background-color: #0d3b66;\n  color: #ffffff;\n  padding: 0.8em 1.2em;\n  font-weight: 600;\n  font-size: 1.05em;\n  margin: 0;\n  text-align: center;\n}\n\n.iframe-description {\n  font-size: 0.9em;\n  color: #6c757d;\n  padding: 0.8em 1.2em;\n  background-color: #e7f3ff;\n  font-style: italic;\n  text-align: center;\n  margin: 0;\n}\n\n/* ============================================\n   16. CÓDIGO DE EJEMPLO\n   ============================================ */\n\n.code-example {\n  background-color: #f8f9fa;\n  border: 2px solid #dee2e6;\n  border-radius: 6px;\n  padding: 1em;\n  margin: 1em 0;\n  overflow-x: auto;\n}\n\n.code-example pre {\n  margin: 0;\n  font-family: 'Courier New', Courier, monospace;\n  font-size: 0.9em;\n  line-height: 1.5;\n}\n\n/* ============================================\n   17. DIVISORES DE SECCIÓN\n   ============================================ */\n\n.section-divider {\n  border-top: 3px dashed #0d3b66;\n  margin: 2.5em 0;\n}\n\n/* ============================================\n   18. INTERACTIVOS - CONTENEDORES\n   ============================================ */\n\n.container {\n  width: 800px;\n  height: 950px;\n  margin: 0 auto;\n  padding: 20px;\n  background-color: white;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n}\n\n.container_caja {\n  width: 800px;\n  height: 950px;\n  margin: 0 auto;\n  padding: 20px;\n  background-color: white;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n}\n\n.container_caja h2 {\n  text-align: center;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n}\n\n.header {\n  text-align: center;\n  margin-bottom: 20px;\n  color: #0d3b66;\n}\n\n.header h1 {\n  font-size: 36px;\n}\n\n.explicacion {\n  font-size: 1.1em;\n}\n\n/* ============================================\n   19. INTERACTIVOS - TABS\n   ============================================ */\n\n.tab-container {\n  display: flex;\n  margin-bottom: 10px;\n}\n\n.tab {\n  flex: 1;\n  padding: 10px;\n  text-align: center;\n  background-color: #e0e0e0;\n  cursor: pointer;\n  border-radius: 5px 5px 0 0;\n  border: 1px solid #ccc;\n  font-weight: bold;\n  transition: all 0.3s ease;\n}\n\n.tab.active {\n  background-color: #0d3b66;\n  color: white;\n  border-bottom: none;\n}\n\n.content {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  border: 1px solid #ccc;\n  border-radius: 0 0 5px 5px;\n  padding: 20px;\n  background-color: white;\n  overflow: auto;\n}\n\n.tab-content {\n  display: none;\n  flex-direction: column;\n  flex: 1;\n}\n\n.tab-content.active {\n  display: flex;\n}\n\n/* ============================================\n   20. INTERACTIVOS - NÚMEROS Y DÍGITOS\n   ============================================ */\n\n.number-container {\n  display: flex;\n  justify-content: center;\n  margin: 20px 0 50px 0;\n  flex-wrap: wrap;\n}\n\n.digit-box {\n  width: 60px;\n  height: 70px;\n  border: 2px solid #ccc;\n  margin: 0 8px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  font-size: 24px;\n  font-weight: bold;\n  cursor: pointer;\n  border-radius: 5px;\n  transition: all 0.3s ease;\n  position: relative;\n}\n\n.digit-box:hover {\n  border-color: #ffc107;\n  transform: translateY(-5px);\n}\n\n.digit-box.selected {\n  border-color: #0d8abc;\n  background-color: #e7f3ff;\n}\n\n.position-label {\n  position: absolute;\n  bottom: -45px;\n  font-size: 12px;\n  color: #212529;\n  text-align: center;\n  width: 100%;\n  line-height: 1.2;\n  height: 40px;\n}\n\n/* ============================================\n   21. INTERACTIVOS - OPCIONES Y BOTONES\n   ============================================ */\n\n.options-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  margin: 30px 0;\n}\n\n.option-button {\n  padding: 15px 20px;\n  margin: 5px;\n  background-color: #0d8abc;\n  color: white;\n  border: none;\n  border-radius: 5px;\n  cursor: pointer;\n  font-size: 18px;\n  transition: all 0.3s ease;\n  min-width: 200px;\n}\n\n.option-button:hover {\n  background-color: #0b7dda;\n  transform: scale(1.05);\n}\n\n.check-button {\n  padding: 8px 15px;\n  background-color: #0d3b66;\n  color: white;\n  border: none;\n  border-radius: 5px;\n  cursor: pointer;\n  font-size: 16px;\n  margin-top: 10px;\n}\n\n.refresh-button {\n  padding: 8px 15px;\n  background-color: #ffc107;\n  color: white;\n  border: none;\n  border-radius: 5px;\n  cursor: pointer;\n  font-size: 16px;\n  margin-top: 10px;\n}\n\n.help-button {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n  background-color: #ffc107;\n  color: white;\n  border: none;\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  font-weight: bold;\n  cursor: pointer;\n}\n\n/* ============================================\n   22. INTERACTIVOS - RESULTADOS Y FEEDBACK\n   ============================================ */\n\n.result-container {\n  text-align: center;\n  margin-top: 20px;\n  padding: 15px;\n  border-radius: 5px;\n  font-size: 18px;\n  min-height: 60px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n\n.result-message {\n  font-weight: bold;\n  color: #0d3b66;\n  margin-bottom: 10px;\n}\n\n.value-info {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  margin-top: 10px;\n}\n\n.value-item {\n  margin: 5px 10px;\n  padding: 5px 10px;\n  background-color: #f0f0f0;\n  border-radius: 5px;\n  font-size: 16px;\n}\n\n.feedback {\n  margin-top: 15px;\n  font-weight: bold;\n}\n\n.correct {\n  color: #0d3b66;\n}\n\n.incorrect {\n  color: crimson;\n}\n\n.score-container {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 20px;\n  padding: 10px;\n  background-color: #f0f0f0;\n  border-radius: 5px;\n}\n\n.score-label {\n  font-weight: bold;\n}\n\n.score-value {\n  font-size: 18px;\n  font-weight: bold;\n  color: #0d3b66;\n}\n\n/* ============================================\n   23. INTERACTIVOS - INPUTS Y FORMULARIOS\n   ============================================ */\n\n.input-container {\n  display: flex;\n  justify-content: center;\n  margin: 20px 0;\n}\n\ninput {\n  width: 200px;\n  padding: 10px;\n  font-size: 18px;\n  text-align: center;\n  border: 2px solid #ccc;\n  border-radius: 5px;\n}\n\n/* ============================================\n   24. INTERACTIVOS - TABLAS Y TARJETAS\n   ============================================ */\n\n.position-table {\n  width: 100%;\n  border-collapse: collapse;\n  margin-top: 10px;\n}\n\n.position-table th {\n  background-color: #0d3b66;\n  color: white;\n  padding: 10px;\n  text-align: center;\n  font-size: 14px;\n}\n\n.position-table td {\n  border: 1px solid #ddd;\n  padding: 8px;\n  text-align: center;\n}\n\n.position-card {\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  border: 1px solid #ddd;\n  border-radius: 5px;\n  margin: 10px 0;\n  padding: 10px;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);\n}\n\n.position-card-header {\n  background-color: #0d3b66;\n  color: white;\n  padding: 10px;\n  border-radius: 5px 5px 0 0;\n  text-align: center;\n  font-weight: bold;\n}\n\n.position-card-body {\n  padding: 10px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n/* ============================================\n   25. INTERACTIVOS - OPERACIONES\n   ============================================ */\n\n.contenedor-operaciones {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n  gap: 15px;\n  max-width: 900px;\n  margin: 0 auto;\n}\n\n.tarjeta {\n  background-color: #ffffff;\n  border: 2px solid #cbd5ff;\n  border-radius: 10px;\n  padding: 5px;\n  text-align: center;\n  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);\n  transition: transform 0.2s ease, box-shadow 0.2s ease;\n}\n\n.tarjeta:hover {\n  transform: translateY(-5px);\n  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);\n}\n\n.numero {\n  font-size: 1.2em;\n  color: #555;\n}\n\n.resultado {\n  font-size: 1.5em;\n  color: #ffc107;\n  font-weight: bold;\n  margin-top: 8px;\n}\n\n/* ============================================\n   26. MODALES\n   ============================================ */\n\n.modal {\n  display: none;\n  position: fixed;\n  z-index: 1;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  background-color: rgba(0, 0, 0, 0.4);\n}\n\n.modal-content {\n  background-color: white;\n  margin: 15% auto;\n  padding: 20px;\n  border: 1px solid #888;\n  width: 80%;\n  max-width: 500px;\n  border-radius: 5px;\n  position: relative;\n}\n\n.close {\n  color: #aaa;\n  float: right;\n  font-size: 28px;\n  font-weight: bold;\n  cursor: pointer;\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}\n\n.close:hover {\n  color: black;\n}\n\n/* ============================================\n   27. RESPONSIVE - MÓVILES\n   ============================================ */\n\n@media (max-width: 768px) {\n  body {\n    padding: 15px;\n    font-size: 17px;\n  }\n\n  h1 {\n    font-size: 1.8em;\n  }\n\n  h2 {\n    font-size: 1.4em;\n  }\n\n  h3 {\n    font-size: 1.1em;\n  }\n\n  .tooltip-palabra .tooltip-texto {\n    width: 200px;\n    margin-left: -100px;\n  }\n\n  .math-block,\n  .formula-importante {\n    font-size: 1em;\n    padding: 12px;\n  }\n\n  /* Tablas responsive */\n  .tabla-wrapper {\n    border-width: 2px;\n  }\n\n  .tabla-wrapper table {\n    min-width: 500px;\n  }\n\n  .tabla-wrapper.tabla-pequena table {\n    min-width: auto;\n  }\n\n  .tabla-wrapper th,\n  .tabla-wrapper td {\n    padding: 8px;\n    font-size: 0.9em;\n  }\n\n  .tabla-wrapper::after {\n    display: block;\n    font-size: 0.8em;\n    padding: 6px;\n  }\n\n  .tabla-wrapper.tabla-pequena::after {\n    display: none;\n  }\n\n  /* Multimedia */\n  .img-responsive {\n    border-width: 2px;\n  }\n\n  .video-container {\n    border-width: 2px;\n  }\n\n  .iframe-container {\n    border-width: 2px;\n  }\n\n  .iframe-title {\n    font-size: 0.95em;\n    padding: 0.6em 1em;\n  }\n\n  .iframe-description {\n    font-size: 0.85em;\n    padding: 0.6em 1em;\n  }\n\n  .iframe-thatquiz .iframe-responsive {\n    padding-bottom: 140%;\n  }\n\n  .iframe-phet .iframe-responsive {\n    padding-bottom: 100%;\n  }\n\n  /* Interactivos */\n  .container {\n    width: 100%;\n    max-width: 100%;\n    height: auto;\n    min-height: 600px;\n  }\n\n  .container_caja {\n    width: 100%;\n    max-width: 100%;\n    height: auto;\n    min-height: 600px;\n  }\n\n  .header h1 {\n    font-size: 24px;\n  }\n\n  .digit-box {\n    width: 50px;\n    height: 60px;\n    font-size: 20px;\n    margin: 0 4px;\n  }\n\n  .option-button {\n    min-width: 150px;\n    font-size: 16px;\n    padding: 12px 16px;\n  }\n\n  .contenedor-operaciones {\n    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n    gap: 10px;\n  }\n}\n\n/* ============================================\n   28. RESPONSIVE - TABLETS\n   ============================================ */\n\n@media (min-width: 769px) and (max-width: 1024px) {\n  .iframe-thatquiz .iframe-responsive {\n    padding-bottom: 100%;\n  }\n\n  .container {\n    width: 90%;\n    max-width: 800px;\n  }\n\n  .container_caja {\n    width: 90%;\n    max-width: 800px;\n  }\n}\n\n/* ============================================\n   29. ESTILOS PARA IMPRESIÓN / PDF\n   ============================================ */\n\n@media print {\n  body {\n    font-size: 11pt;\n    line-height: 1.5;\n    padding: 0;\n    max-width: 100%;\n  }\n\n  /* Ocultar tooltips flotantes */\n  .tooltip-texto {\n    display: none !important;\n  }\n\n  /* Convertir tooltip-palabra a texto normal */\n  .tooltip-palabra {\n    border-bottom: none;\n    background-color: transparent;\n    cursor: default;\n    color: inherit;\n    padding: 0;\n  }\n\n  /* Mostrar números de notas al pie */\n  .nota-numero {\n    display: inline !important;\n  }\n\n  /* Mostrar glosario/notas al pie */\n  .notas-al-pie {\n    display: block !important;\n    page-break-inside: avoid;\n  }\n\n  /* Evitar cortes de página en elementos importantes */\n  .caja-nota,\n  .caja-ejemplo,\n  .caja-pasos,\n  .caja-importante,\n  .paso,\n  .concepto,\n  details {\n    page-break-inside: avoid;\n  }\n\n  /* Encabezados no se quedan solos al final de página */\n  h1, h2, h3 {\n    page-break-after: avoid;\n  }\n\n  /* Ocultar elementos interactivos */\n  .container,\n  .container_caja,\n  .iframe-container,\n  .video-container {\n    display: none !important;\n  }\n\n  /* Tablas legibles */\n  .tabla-wrapper {\n    overflow: visible;\n    border: 1px solid #333;\n    box-shadow: none;\n  }\n\n  .tabla-wrapper::after {\n    display: none !important;\n  }\n\n  .tabla-wrapper table {\n    min-width: auto;\n  }\n\n  /* Imágenes con borde sutil */\n  .img-responsive,\n  .img-responsive2 {\n    box-shadow: none;\n    border: 1px solid #ccc;\n  }\n\n  /* Enlaces visibles con URL */\n  a {\n    color: #000;\n    text-decoration: underline;\n  }\n\n  a[href^=\"http\"]::after {\n    content: \" (\" attr(href) \")\";\n    font-size: 0.8em;\n    color: #666;\n  }\n\n  /* Acordeones abiertos para impresión */\n  details {\n    border: 1px solid #333;\n  }\n\n  details[open] summary::before {\n    transform: none;\n  }\n\n  summary {\n    background-color: #f0f0f0 !important;\n    color: #000 !important;\n  }\n}\n",
+    "nota": "Los estilos que se usan en Brightspace que cumplen con dua",
+    "creado": 1783832034539,
+    "modificado": 1783832034539
+  },
+  {
+    "id": "mrhbokykg8bt0",
+    "titulo": "Combinar imagenes con arreglos",
+    "claves": "imagenes, arreglos,",
+    "codigo": "COMMON CODE\n$pic = array(\"$a\",\"$b\",\"$c\",\"$d\",\"$e\",\"$f\",\"$g\",\"$h\",\"$i\",\"$j\")\n$r = rand(0,9)\n$ans = array(\"9\",\"6\",\"7\",\"5\",\"24\",\"45\",\"20\",\"24\",\"8\",\"15\")\n$answer = $ans[$r]\n$answerboxsize = 2\nQUESTION TEXT\n<p>Halla el valor de la variable utilizando proporciones. ¡\nDebes mostrar el procedimiento completo en tu hoja de trabajo!</p>\n\n$pic[$r]\n\n`x=` $answerbox\n---------------\nCada imagen se sube (O ENLAZA) por separado\nVariable: $b\nVariable: $c\nVariable: $d\nVariable: $e\nVariable: $f\nVariable: $g\nVariable: $h\nVariable: $i\n Variable: $j\n Variable: $a\n",
+    "nota": "Para poder mostrar diferentes imágenes en ejercicios en myOpenMath",
+    "creado": 1783832280860,
+    "modificado": 1783832280860
+  },
+  {
+    "id": "mrhbqmyee58iq",
+    "titulo": "CSS GEOMETRIA",
+    "claves": "colores, sombras, geometría,css",
+    "codigo": ":root {\n        /* Colores principales con buen contraste */\n        --color-primary: #2563eb;\n        --color-primary-light: #60a5fa;\n        --color-primary-dark: #1e40af;\n\n        /* Colores secundarios */\n        --color-secondary: #7c3aed;\n        --color-secondary-light: #a78bfa;\n\n        /* Colores de acento */\n        --color-accent: #10b981;\n        --color-accent-light: #34d399;\n\n        /* Colores de superficie y fondo */\n        --color-background: #f8fafc;\n        --color-surface: #ffffff;\n        --color-surface-alt: #f1f5f9;\n\n        /* Colores de texto con alto contraste */\n        --color-text: #1e293b;\n        --color-text-muted: #475569;\n        --color-text-light: #64748b;\n\n        /* Colores funcionales */\n        --color-success: #059669;\n        --color-warning: #d97706;\n        --color-error: #dc2626;\n        --color-info: #0891b2;\n\n        /* Colores para cada sólido */\n        --color-cilindro: #6366f1;\n        --color-cono: #ec4899;\n        --color-esfera: #14b8a6;\n        --color-piramide: #f59e0b;\n        --color-prisma: #8b5cf6;\n\n        /* Tipografía */\n        --font-main: 'Segoe UI', 'Roboto', 'Helvetica Neue', system-ui, -apple-system, sans-serif;\n        --font-heading: 'Montserrat', var(--font-main);\n        --font-mono: 'Monaco', 'Consolas', 'Courier New', monospace;\n\n        /* Sombras */\n        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\n        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);\n        --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.05);\n        --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);\n\n        /* Bordes redondeados */\n        --radius-sm: 0.375rem;\n        --radius-md: 0.5rem;\n        --radius-lg: 0.75rem;\n        --radius-xl: 1rem;\n        --radius-full: 9999px;\n      }\n",
+    "nota": "",
+    "creado": 1783832376758,
+    "modificado": 1783832376758
+  },
+  {
+    "id": "mri5gq90psmam",
+    "creado": 1783882302948,
+    "titulo": "texto imagen",
+    "claves": "imagen, texto,",
+    "codigo": "$tri=textonimage($casa1,\n                     \"<span style='font-size:16px;color: blue;'>`$w `</span>\",255,240,                     \n                     \"<span style='font-size:16px;color: blue;'>`$c `</span>\",290,115)",
+    "nota": "Permite colocar textos en una imagen myOpenMath",
+    "modificado": 1783882302948
+  },
+  {
+    "id": "mrk1bicwmr7hv",
+    "creado": 1783996273328,
+    "titulo": "Tabla responsiva CSS",
+    "claves": "tabla, responsiva, css,",
+    "codigo": "  .tabla-scroll{\n    overflow-x:auto; overflow-y:hidden;\n    -webkit-overflow-scrolling:touch;\n    max-width:100%; margin:18px 0;\n    border:1px solid var(--linea); border-radius:8px;\n    background:var(--papel);\n  }\n  .tabla-scroll:focus, .tabla-scroll:focus-visible{\n    outline:3px solid var(--azul); outline-offset:2px;\n  }\n  .tabla-scroll > table{ margin:0; min-width:100%; }\n  .aviso-desliza{\n    margin:4px 0 18px; padding:8px 12px;\n    font-size:14px; font-weight:600; color:#5C3900;\n    background:#fdf3df; border-left:4px solid #5C3900;\n    border-radius:5px;\n  }\n  /* Caption oculto visualmente pero leído por lectores de pantalla */\n  .cap-oculto{\n    position:absolute; width:1px; height:1px; padding:0;\n    margin:-1px; overflow:hidden; clip:rect(0 0 0 0);\n    white-space:nowrap; border:0;\n  }\n  @media print{\n    .tabla-scroll{overflow:visible; border:0;}\n    .aviso-desliza{display:none;}\n  }",
+    "nota": "Este código va asociado a Tabla responsiva JS\nEn cada tabla incluir:\n<caption class=\"cap-oculto\"></caption>\nscope=\"col\" en los <th>",
+    "modificado": 1784000797153
+  },
+  {
+    "id": "mrk1ciagvfdam",
+    "creado": 1783996319896,
+    "titulo": "Tabla responsiva JS",
+    "claves": "tabla, responsiva, JS",
+    "codigo": "function(){\n    var TEXTO_AVISO = '\\u2194 Deslice la tabla horizontalmente para ver todas las columnas.';\n    var pares = [];\n\n    document.querySelectorAll('table').forEach(function(t){\n      if(t.parentNode.classList.contains('tabla-scroll')) return;\n\n      var cap = t.querySelector('caption');\n      var etiqueta = (cap ? cap.textContent.trim() : 'Tabla de datos') +\n                     ' (tabla desplazable horizontalmente)';\n\n      var caja = document.createElement('div');\n      caja.className = 'tabla-scroll';\n      caja.setAttribute('role','region');\n      caja.setAttribute('tabindex','0');\n      caja.setAttribute('aria-label', etiqueta);\n\n      t.parentNode.insertBefore(caja, t);\n      caja.appendChild(t);\n\n      var aviso = document.createElement('p');\n      aviso.className = 'aviso-desliza';\n      aviso.textContent = TEXTO_AVISO;\n      aviso.style.display = 'none';\n      caja.parentNode.insertBefore(aviso, caja.nextSibling);\n\n      pares.push({caja:caja, aviso:aviso});\n    });\n\n    function actualizar(){\n      pares.forEach(function(p){\n        p.aviso.style.display =\n          (p.caja.scrollWidth > p.caja.clientWidth + 2) ? 'block' : 'none';\n      });\n    }\n    actualizar();\n\n    var tm;\n    window.addEventListener('resize', function(){\n      clearTimeout(tm);\n      tm = setTimeout(actualizar, 150);\n    });\n  })();\n",
+    "nota": "Este código va asociado a Tabla responsiva CSS\nEn cada tabla incluir:\n<caption class=\"cap-oculto\"></caption>\nscope=\"col\" en los <th>",
+    "modificado": 1784000778457
+  },
+  {
+    "id": "mrk4flc1cknft",
+    "creado": 1784001502657,
+    "titulo": "paletas  colores",
+    "claves": "colors, paleta,",
+    "codigo": " /* MORADO */\n :root{\n    --azul:#6a1b9a; --azul-osc:#4a148c; --azul-cl:#f3e5f5;\n    --tinta:#1a2330; --gris:#5b6675; --linea:#dde3ea;\n    --crema:#f6f4ee; --papel:#ffffff;\n    --verde:#286b44; --verde-cl:#e7f4ec;\n    --ambar:#5c3900; --ambar-cl:#fdf3df;\n    --rojo:#c0392b; --rojo-cl:#fdecea;\n    --sombra:0 2px 10px rgba(74,20,140,.10);\n  }",
+    "nota": "Las paletas de ccolores para los nivels 1-4 de matematicas",
+    "modificado": 1784001502657
+  },
+  {
+    "id": "mrlkx0d45oavl",
+    "creado": 1784089655320,
+    "titulo": "angulo comlementario",
+    "claves": "angulo, complementario,",
+    "codigo": "<div style=\"text-align:center;\">  \n<svg viewBox=\"0 0 320 220\" width=\"320\" height=\"220\"\nxmlns=\"http://www.w3.org/2000/svg\">\n<text x=\"160\" y=\"20\" text-anchor=\"middle\" font-size=\"15\" fill=\"navy\" font-weight=\"bold\"> Ángulos Complementarios </text>\n<!-- Eje horizontal -->\n<line x1=\"$cx\" y1=\"$cy\" x2=\"260\" y2=\"$cy\" stroke=\"navy\" stroke-width=\"2\"/>  \n<!-- Eje vertical -->\n<line x1=\"160\" y1=\"160\" x2=\"160\" y2=\"60\" stroke=\"navy\" stroke-width=\"2\"/>\n<!-- Rayo rojo -->\n<line x1=\"$cx\" y1=\"$cy\" x2=\"$x_rojo\" y2=\"$y_rojo\" stroke=\"red\" stroke-width=\"2\"/>\n<!-- Arco azul -->\n<path d=\"M 205 160 A 45 45 0 0 0 $x_arc1 $y_arc1\" fill=\"none\" stroke=\"blue\" stroke-width=\"3\"/>\n<!-- Arco verde olivo -->\n<path d=\"M $x_arc1 $y_arc1 A 45 45 0 0 0 $x_arc2 $y_arc2\" fill=\"none\" stroke=\"orange\" stroke-width=\"3\"/>\n<text x=\"225\" y=\"155\" font-size=\"14\" fill=\"blue\"> x° </text>\n<text x=\"180\" y=\"115\" font-size=\"14\" fill=\"orange\">($coef x $sign $ver) ° </text>\n</svg>\n</div>",
+    "nota": "Angulo complementario que ajusta el arco dinamicanmentemedida",
+    "modificado": 1784089655320
+  },
+  {
+    "id": "mrll4hkx6yw3s",
+    "creado": 1784090004225,
+    "titulo": "terna para signos matematicos html",
+    "claves": "signos, terna, negativo,",
+    "codigo": "$sign = $add < 0 ? \"-\" : \"+\";",
+    "nota": "asigna a la variable $sing  - cuando $add es menor que cero, de los contrario +",
+    "modificado": 1784090004225
+  },
+  {
+    "id": "mrm6bqi6ufbht",
+    "titulo": "tabla corta",
+    "claves": "tabla,",
+    "codigo": "<table>\n  <tr>\n    <td></td>\n    <td></td>\n  </tr>\n</table>",
+    "nota": "Tabla de dos columnas para gráfico y su respuesta.",
+    "creado": 1784125614318,
+    "modificado": 1784125614318
+  },
+  {
+    "id": "mrm7attwwt32d",
+    "titulo": "svg paralelas transversal",
+    "claves": "paralela, transversal, svg,",
+    "codigo": "<svg width=\"500\" height=\"350\" viewBox=\"0 0 500 350\" xmlns=\"http://www.w3.org/2000/svg\">\n  <!-- Definición de flechas -->\n  <!-- Línea horizontal superior -->\n  <line x1=\"50\" y1=\"120\" x2=\"450\" y2=\"120\"\n        stroke=\"black\" stroke-width=\"4\"\n        marker-start=\"url(#arrow)\" marker-end=\"url(#arrow)\" />\n  <!-- Línea horizontal inferior -->\n  <line x1=\"50\" y1=\"250\" x2=\"450\" y2=\"250\"\n        stroke=\"black\" stroke-width=\"4\"\n        marker-start=\"url(#arrow)\" marker-end=\"url(#arrow)\" />\n  <!-- Línea transversal -->\n  <line x1=\"200\" y1=\"300\" x2=\"330\" y2=\"40\"\n        stroke=\"black\" stroke-width=\"4\"\n        marker-start=\"url(#arrow)\" marker-end=\"url(#arrow)\" />\n  <!-- Texto ángulo superior -->\n  <text x=\"285\" y=\"145\" font-size=\"24\" fill=\"black\" font-family=\"Arial\"> x° </text>\n  <!-- Texto ángulo inferior -->\n  <text x=\"230\" y=\"290\" font-size=\"24\" fill=\"red\" font-family=\"Arial\"> $a °</text>\n</svg>",
+    "nota": "Los valores de las variables se generan en Common Control\n$a=rand(110,179)\n$answer=$a\n$x = $a\n$answerboxsize=4",
+    "creado": 1784127251588,
+    "modificado": 1784127251588
+  },
+  {
+    "id": "mrm9v4odu86nk",
+    "titulo": "svg fraccion",
+    "claves": "svg, fraccion,",
+    "codigo": "<!DOCTYPE html>\n<!--\n  Ficha de Biblioteca: Fracción apilada en SVG — tabla de coordenadas (IMathAS/MyOpenMath)\n  © José M. Fernández — Licencia CC BY-NC-SA 4.0\n  https://creativecommons.org/licenses/by-nc-sa/4.0/\n-->\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <meta name=\"author\" content=\"José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago\">\n  <meta name=\"license\" content=\"CC BY-NC-SA 4.0\">\n  <link rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/\">\n  <title>Fracción apilada en SVG: tabla de coordenadas — Biblioteca (IMathAS)</title>\n  <style>\n    :root{\n      --indigo:#1e3a8a;\n      --indigo-soft:#dbeafe;\n      --ambar:#5C3900;\n      --tinta:#1f2937;\n      --gris:#555;\n      --linea:#d1d5db;\n      --code-bg:#f4f4f5;\n      --code-tinta:#1a202c;\n      --aviso-bg:#fff7ed;\n      --aviso-borde:#b45309;\n      --destacar:#eef2ff;\n    }\n    *{box-sizing:border-box;}\n    body{\n      font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;\n      color:var(--tinta);\n      background:#f9fafb;\n      line-height:1.6;\n      margin:0;\n      padding:0 1rem 3rem;\n    }\n    .lienzo{max-width:780px;margin:0 auto;}\n    header.ficha{\n      border-bottom:3px solid var(--indigo);\n      padding:1.6rem 0 1rem;\n      margin-bottom:1.4rem;\n    }\n    .etiqueta{\n      display:inline-block;\n      font-size:.78rem;\n      letter-spacing:.06em;\n      text-transform:uppercase;\n      color:#fff;\n      background:var(--indigo);\n      padding:.18rem .6rem;\n      border-radius:4px;\n      font-weight:600;\n    }\n    h1{font-size:1.5rem;color:var(--indigo);margin:.6rem 0 .2rem;line-height:1.25;}\n    .subtitulo{color:var(--gris);margin:0;font-size:1rem;}\n    h2{\n      font-size:1.15rem;color:var(--indigo);margin:2rem 0 .6rem;\n      padding-bottom:.3rem;border-bottom:1px solid var(--linea);\n    }\n    p{margin:.6rem 0;}\n    code.inl{\n      background:var(--code-bg);color:var(--code-tinta);\n      padding:.08em .35em;border-radius:4px;\n      font-family:\"SF Mono\",Consolas,Menlo,monospace;font-size:.92em;\n    }\n    /* Tabla */\n    table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.95rem;}\n    caption{text-align:left;font-weight:600;color:var(--gris);padding-bottom:.5rem;}\n    th,td{border:1px solid var(--linea);padding:.55rem .7rem;text-align:left;}\n    th[scope=\"col\"]{background:var(--indigo-soft);color:var(--indigo);}\n    tbody tr:nth-child(even){background:#fafafa;}\n    td.formula code,td.valor{font-family:\"SF Mono\",Consolas,Menlo,monospace;}\n    td.valor{font-weight:600;color:var(--indigo);}\n    td.formula code{background:var(--destacar);color:var(--indigo);padding:.05em .3em;border-radius:3px;}\n    /* Bloque de código */\n    .bloque{\n      position:relative;margin:1rem 0 1.4rem;border:1px solid var(--linea);\n      border-radius:8px;overflow:hidden;background:var(--code-bg);\n    }\n    .titulo-bloque{\n      display:flex;justify-content:space-between;align-items:center;\n      background:#e5e7eb;padding:.4rem .8rem;font-size:.82rem;font-weight:600;color:#374151;\n    }\n    .btn-copiar{\n      font-family:inherit;font-size:.78rem;font-weight:600;color:#fff;background:var(--indigo);\n      border:none;border-radius:5px;padding:.28rem .7rem;cursor:pointer;transition:background .15s ease;\n    }\n    .btn-copiar:hover{background:#1c327a;}\n    .btn-copiar:focus-visible{outline:3px solid var(--ambar);outline-offset:2px;}\n    .btn-copiar.ok{background:#15803d;}\n    pre{\n      margin:0;padding:.9rem 1rem;overflow-x:auto;\n      font-family:\"SF Mono\",Consolas,Menlo,monospace;font-size:.86rem;line-height:1.55;color:var(--code-tinta);\n    }\n    pre .cmt{color:#6b7280;font-style:italic;}\n    /* Vista previa */\n    .previa{\n      background:#fff;border:1px solid var(--linea);border-radius:8px;\n      padding:1rem;text-align:center;margin:1rem 0;\n    }\n    /* Aviso */\n    .aviso{\n      background:var(--aviso-bg);border-left:4px solid var(--aviso-borde);\n      border-radius:0 6px 6px 0;padding:.7rem 1rem;margin:1.2rem 0;font-size:.95rem;color:var(--ambar);\n    }\n    .aviso strong{color:var(--ambar);}\n    footer{\n      margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--linea);\n      font-size:.82rem;color:var(--gris);text-align:center;\n    }\n    footer a{color:var(--indigo);}\n  </style>\n</head>\n<body>\n<div class=\"lienzo\">\n\n  <header class=\"ficha\">\n    <span class=\"etiqueta\">Biblioteca · SVG</span>\n    <h1>Fracción apilada en SVG: tabla de coordenadas</h1>\n    <p class=\"subtitulo\">IMathAS / MyOpenMath — eliges dos números y las demás coordenadas salen solas</p>\n  </header>\n\n  <p>Para dibujar una fracción con raya horizontal solo decides <strong>dos valores</strong>:\n  el centro horizontal <code class=\"inl\">CX</code> y la altura de la raya <code class=\"inl\">BARY</code>.\n  Las otras cinco coordenadas se calculan con estas fórmulas.</p>\n\n  <h2>Tabla de coordenadas</h2>\n  <table>\n    <caption>Fórmulas del patrón y ejemplo resuelto con <code class=\"inl\">CX = 200</code> y <code class=\"inl\">BARY = 130</code></caption>\n    <thead>\n      <tr>\n        <th scope=\"col\">Elemento</th>\n        <th scope=\"col\">Atributo</th>\n        <th scope=\"col\">Fórmula</th>\n        <th scope=\"col\">Ejemplo</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td>Numerador</td><td><code class=\"inl\">y</code></td><td class=\"formula\"><code>BARY − 6</code></td><td class=\"valor\">124</td></tr>\n      <tr><td>Raya</td><td><code class=\"inl\">y1 = y2</code></td><td class=\"formula\"><code>BARY</code></td><td class=\"valor\">130</td></tr>\n      <tr><td>Denominador</td><td><code class=\"inl\">y</code></td><td class=\"formula\"><code>BARY + 14</code></td><td class=\"valor\">144</td></tr>\n      <tr><td>Raya (izq.)</td><td><code class=\"inl\">x1</code></td><td class=\"formula\"><code>CX − 9</code></td><td class=\"valor\">191</td></tr>\n      <tr><td>Raya (der.)</td><td><code class=\"inl\">x2</code></td><td class=\"formula\"><code>CX + 9</code></td><td class=\"valor\">209</td></tr>\n    </tbody>\n  </table>\n  <p>El numerador y el denominador comparten el mismo <code class=\"inl\">x = CX</code> con\n  <code class=\"inl\">text-anchor='middle'</code>, por eso quedan centrados uno sobre otro.</p>\n\n  <h2>Las tres líneas del patrón</h2>\n  <div class=\"bloque\">\n    <div class=\"titulo-bloque\">\n      <span>Dentro del &lt;svg&gt; (CX = 200, BARY = 130)</span>\n      <button class=\"btn-copiar\" data-target=\"snip\">Copiar</button>\n    </div>\n<pre id=\"snip\">&lt;text x='200' y='124' text-anchor='middle' font-size='14' fill='#1e3a8a'&gt;$num&lt;/text&gt;\n&lt;line x1='191' y1='130' x2='209' y2='130' stroke='#1e3a8a' stroke-width='1.3'/&gt;\n&lt;text x='200' y='144' text-anchor='middle' font-size='14' fill='#1e3a8a'&gt;$den&lt;/text&gt;</pre>\n  </div>\n\n  <div class=\"previa\">\n    <svg viewBox=\"0 0 120 90\" width=\"110\" height=\"82\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Ejemplo de fracción apilada con numerador, raya y denominador\">\n      <text x=\"60\" y=\"34\" text-anchor=\"middle\" font-size=\"20\" fill=\"#1e3a8a\">num</text>\n      <line x1=\"42\" y1=\"40\" x2=\"78\" y2=\"40\" stroke=\"#1e3a8a\" stroke-width=\"1.6\"/>\n      <text x=\"60\" y=\"66\" text-anchor=\"middle\" font-size=\"20\" fill=\"#1e3a8a\">den</text>\n    </svg>\n  </div>\n\n  <div class=\"aviso\">\n    <strong>Regla de oro:</strong> dentro del <code class=\"inl\">&lt;svg&gt;</code> las variables van\n    <strong>peladas</strong> (<code class=\"inl\">$num</code>, <code class=\"inl\">$den</code>) — los acentos\n    graves <code class=\"inl\">`…`</code> <strong>no</strong> evalúan aquí. Fuera del SVG (párrafos)\n    sí se usan: <code class=\"inl\">`$num/$den`</code>.\n  </div>\n\n  <div class=\"aviso\">\n    <strong>Números de 2+ cifras:</strong> ensancha la raya cambiando el 9 por 12\n    (<code class=\"inl\">CX − 12</code> … <code class=\"inl\">CX + 12</code>).\n  </div>\n\n  <footer>\n    <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago.</p>\n    <p>Licencia <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/\" rel=\"license\">CC BY-NC-SA 4.0</a> · Biblioteca — colección de fragmentos IMathAS.</p>\n  </footer>\n\n</div>\n\n<script>\n  document.querySelectorAll('.btn-copiar').forEach(function(btn){\n    btn.addEventListener('click', function(){\n      var pre = document.getElementById(btn.getAttribute('data-target'));\n      navigator.clipboard.writeText(pre.innerText).then(function(){\n        var original = btn.textContent;\n        btn.textContent = '¡Copiado!';\n        btn.classList.add('ok');\n        setTimeout(function(){ btn.textContent = original; btn.classList.remove('ok'); }, 1600);\n      }).catch(function(){ btn.textContent = 'Selecciona y copia'; });\n    });\n  });\n</script>\n</body>\n</html>\n\n",
+    "nota": "SVG no tiene formato para fracción, se resuelve con este  patrón reutilizable",
+    "creado": 1784131557997,
+    "modificado": 1784135849857
+  },
+  {
+    "id": "mrm9w2wh8zs0p",
+    "titulo": "svg fraccion ficha",
+    "claves": "svg, fraccion,",
+    "codigo": "<!DOCTYPE html>\n<!--\n  Ficha: Fracción con raya horizontal en SVG (IMathAS/MyOpenMath)\n  © José M. Fernández — Licencia CC BY-NC-SA 4.0\n  https://creativecommons.org/licenses/by-nc-sa/4.0/\n-->\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <meta name=\"author\" content=\"José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago\">\n  <meta name=\"license\" content=\"CC BY-NC-SA 4.0\">\n  <link rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/\">\n  <title>Fracción con raya horizontal en SVG — El fichero (IMathAS)</title>\n  <style>\n    :root{\n      --indigo:#1e3a8a;\n      --indigo-soft:#dbeafe;\n      --ambar:#5C3900;\n      --tinta:#1f2937;\n      --gris:#555;\n      --linea:#d1d5db;\n      --fondo:#ffffff;\n      --code-bg:#f4f4f5;\n      --code-tinta:#1a202c;\n      --aviso-bg:#fff7ed;\n      --aviso-borde:#b45309;\n    }\n    *{box-sizing:border-box;}\n    body{\n      font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;\n      color:var(--tinta);\n      background:#f9fafb;\n      line-height:1.6;\n      margin:0;\n      padding:0 1rem 3rem;\n    }\n    .lienzo{max-width:820px;margin:0 auto;}\n    header.ficha{\n      border-bottom:3px solid var(--indigo);\n      padding:1.6rem 0 1rem;\n      margin-bottom:1.4rem;\n    }\n    .etiqueta{\n      display:inline-block;\n      font-size:.78rem;\n      letter-spacing:.06em;\n      text-transform:uppercase;\n      color:#fff;\n      background:var(--indigo);\n      padding:.18rem .6rem;\n      border-radius:4px;\n      font-weight:600;\n    }\n    h1{\n      font-size:1.55rem;\n      color:var(--indigo);\n      margin:.6rem 0 .2rem;\n      line-height:1.25;\n    }\n    .subtitulo{color:var(--gris);margin:0;font-size:1rem;}\n    h2{\n      font-size:1.18rem;\n      color:var(--indigo);\n      margin:2rem 0 .6rem;\n      padding-bottom:.3rem;\n      border-bottom:1px solid var(--linea);\n    }\n    p{margin:.6rem 0;}\n    code.inl{\n      background:var(--code-bg);\n      color:var(--code-tinta);\n      padding:.08em .35em;\n      border-radius:4px;\n      font-family:\"SF Mono\",Consolas,Menlo,monospace;\n      font-size:.92em;\n    }\n    /* Bloques de código con botón copiar */\n    .bloque{\n      position:relative;\n      margin:1rem 0 1.4rem;\n      border:1px solid var(--linea);\n      border-radius:8px;\n      overflow:hidden;\n      background:var(--code-bg);\n    }\n    .bloque .titulo-bloque{\n      display:flex;\n      justify-content:space-between;\n      align-items:center;\n      background:#e5e7eb;\n      padding:.4rem .8rem;\n      font-size:.82rem;\n      font-weight:600;\n      color:#374151;\n      letter-spacing:.02em;\n    }\n    .btn-copiar{\n      font-family:inherit;\n      font-size:.78rem;\n      font-weight:600;\n      color:#fff;\n      background:var(--indigo);\n      border:none;\n      border-radius:5px;\n      padding:.28rem .7rem;\n      cursor:pointer;\n      transition:background .15s ease;\n    }\n    .btn-copiar:hover{background:#1c327a;}\n    .btn-copiar:focus-visible{outline:3px solid var(--ambar);outline-offset:2px;}\n    .btn-copiar.ok{background:#15803d;}\n    pre{\n      margin:0;\n      padding:.9rem 1rem;\n      overflow-x:auto;\n      font-family:\"SF Mono\",Consolas,Menlo,monospace;\n      font-size:.86rem;\n      line-height:1.55;\n      color:var(--code-tinta);\n      background:var(--code-bg);\n    }\n    pre .cmt{color:#6b7280;font-style:italic;}\n    /* Tabla de parámetros */\n    table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.94rem;}\n    caption{text-align:left;font-weight:600;color:var(--gris);padding-bottom:.4rem;}\n    th,td{border:1px solid var(--linea);padding:.5rem .7rem;text-align:left;vertical-align:top;}\n    th[scope=\"col\"]{background:var(--indigo-soft);color:var(--indigo);}\n    td code{background:#eef2ff;color:var(--indigo);padding:.05em .3em;border-radius:3px;font-family:\"SF Mono\",Consolas,Menlo,monospace;}\n    /* Vista previa */\n    .previa{\n      background:#fff;\n      border:1px solid var(--linea);\n      border-radius:8px;\n      padding:1rem;\n      text-align:center;\n      margin:1rem 0;\n    }\n    /* Aviso */\n    .aviso{\n      background:var(--aviso-bg);\n      border-left:4px solid var(--aviso-borde);\n      border-radius:0 6px 6px 0;\n      padding:.7rem 1rem;\n      margin:1.2rem 0;\n      font-size:.95rem;\n      color:var(--ambar);\n    }\n    .aviso strong{color:var(--ambar);}\n    footer{\n      margin-top:2.5rem;\n      padding-top:1.2rem;\n      border-top:1px solid var(--linea);\n      font-size:.82rem;\n      color:var(--gris);\n      text-align:center;\n    }\n    footer a{color:var(--indigo);}\n  </style>\n</head>\n<body>\n<div class=\"lienzo\">\n\n  <header class=\"ficha\">\n    <span class=\"etiqueta\">El fichero · SVG</span>\n    <h1>Fracción con raya horizontal en un SVG</h1>\n    <p class=\"subtitulo\">IMathAS / MyOpenMath — figura con fracción apilada (numerador · raya · denominador)</p>\n  </header>\n\n  <h2>¿Qué hace?</h2>\n  <p>SVG no tiene una etiqueta nativa de fracción. Esta plantilla dibuja la fracción con\n  <strong>tres piezas apiladas</strong> y centradas sobre el mismo eje horizontal:\n  un <code class=\"inl\">&lt;text&gt;</code> para el numerador, un <code class=\"inl\">&lt;line&gt;</code>\n  para la raya y otro <code class=\"inl\">&lt;text&gt;</code> para el denominador. Solo defines\n  el <strong>centro</strong> (<code class=\"inl\">$fx</code>) y la <strong>altura de la raya</strong>\n  (<code class=\"inl\">$barY</code>); las demás coordenadas se calculan solas.</p>\n\n  <h2>Parámetros</h2>\n  <table>\n    <caption>Variables de entrada de la plantilla</caption>\n    <thead>\n      <tr>\n        <th scope=\"col\">Variable</th>\n        <th scope=\"col\">Significado</th>\n        <th scope=\"col\">Valor típico</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td><code>$fx</code></td><td>Centro horizontal de la fracción</td><td>según la figura</td></tr>\n      <tr><td><code>$barY</code></td><td>Altura (y) de la raya horizontal</td><td>según la figura</td></tr>\n      <tr><td><code>$fnum</code></td><td>Numerador (número o variable)</td><td><code>$num_c</code></td></tr>\n      <tr><td><code>$fden</code></td><td>Denominador (número o variable)</td><td><code>$den_c</code></td></tr>\n      <tr><td><code>$fs</code></td><td>Tamaño de fuente</td><td><code>14</code></td></tr>\n      <tr><td><code>$hw</code></td><td>Medio-ancho de la raya (mitad del largo)</td><td><code>9</code> · usa <code>12</code> con 2 cifras</td></tr>\n    </tbody>\n  </table>\n\n  <h2>1 · COMMON CONTROL — parámetros y posiciones</h2>\n  <p>Coloca este bloque en <em>Common Control</em>. Las cuatro posiciones derivadas usan solo\n  aritmética simple (sin <code class=\"inl\">if{}</code>, respetando IMathAS).</p>\n\n  <div class=\"bloque\">\n    <div class=\"titulo-bloque\">\n      <span>Common Control</span>\n      <button class=\"btn-copiar\" data-target=\"cc\">Copiar</button>\n    </div>\n<pre id=\"cc\"><span class=\"cmt\">// --- Fracción SVG: parámetros ---</span>\n$fx   = 150      <span class=\"cmt\">// centro horizontal</span>\n$barY = 196      <span class=\"cmt\">// altura de la raya</span>\n$fnum = $num_c   <span class=\"cmt\">// numerador</span>\n$fden = $den_c   <span class=\"cmt\">// denominador</span>\n$fs   = 14       <span class=\"cmt\">// tamaño de fuente</span>\n$hw   = 9        <span class=\"cmt\">// medio-ancho de la raya (12 si hay 2 cifras)</span>\n\n<span class=\"cmt\">// --- posiciones derivadas (no editar) ---</span>\n$yNum = $barY - 6\n$yDen = $barY + $fs\n$x1   = $fx - $hw\n$x2   = $fx + $hw</pre>\n  </div>\n\n  <h2>2 · QUESTION TEXT — el fragmento SVG</h2>\n  <p>Pega estas tres líneas <strong>dentro</strong> de tu <code class=\"inl\">&lt;svg&gt;…&lt;/svg&gt;</code>,\n  en la posición donde iría la fracción.</p>\n\n  <div class=\"bloque\">\n    <div class=\"titulo-bloque\">\n      <span>Question Text (dentro del &lt;svg&gt;)</span>\n      <button class=\"btn-copiar\" data-target=\"qt\">Copiar</button>\n    </div>\n<pre id=\"qt\">&lt;text x='$fx' y='$yNum' text-anchor='middle' font-size='$fs' fill='#1e3a8a'&gt;$fnum&lt;/text&gt;\n&lt;line x1='$x1' y1='$barY' x2='$x2' y2='$barY' stroke='#1e3a8a' stroke-width='1.3'/&gt;\n&lt;text x='$fx' y='$yDen' text-anchor='middle' font-size='$fs' fill='#1e3a8a'&gt;$fden&lt;/text&gt;</pre>\n  </div>\n\n  <h2>Vista previa</h2>\n  <p>Así se ve una fracción <strong>3/4</strong> con esta plantilla (centro en 60, raya en 40):</p>\n  <div class=\"previa\">\n    <svg viewBox=\"0 0 120 90\" width=\"120\" height=\"90\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Fracción tres cuartos con raya horizontal\">\n      <text x=\"60\" y=\"34\" text-anchor=\"middle\" font-size=\"20\" fill=\"#1e3a8a\">3</text>\n      <line x1=\"48\" y1=\"40\" x2=\"72\" y2=\"40\" stroke=\"#1e3a8a\" stroke-width=\"1.6\"/>\n      <text x=\"60\" y=\"66\" text-anchor=\"middle\" font-size=\"20\" fill=\"#1e3a8a\">4</text>\n    </svg>\n  </div>\n\n  <div class=\"aviso\">\n    <strong>Números de 2 cifras:</strong> ensancha la raya poniendo <code class=\"inl\">$hw = 12</code>\n    (raya de 24 px). Para 3 cifras, sube a <code class=\"inl\">$hw = 16</code>.\n  </div>\n\n  <h2>Ejemplo real: dos fracciones en una figura</h2>\n  <p>Cuando hay varias fracciones en la misma figura, repite el bloque con\n  <strong>sufijos</strong> en las variables (por ejemplo <code class=\"inl\">_b</code> para la base\n  y <code class=\"inl\">_h</code> para la hipotenusa). Este es el caso de la figura de Pitágoras:</p>\n\n  <div class=\"bloque\">\n    <div class=\"titulo-bloque\">\n      <span>Common Control — dos fracciones</span>\n      <button class=\"btn-copiar\" data-target=\"cc2\">Copiar</button>\n    </div>\n<pre id=\"cc2\"><span class=\"cmt\">// Base (cateto conocido), centrada en x=150</span>\n$fx_b=150 $barY_b=196 $fs_b=14 $hw_b=9\n$yNum_b=$barY_b-6  $yDen_b=$barY_b+$fs_b\n$x1_b=$fx_b-$hw_b  $x2_b=$fx_b+$hw_b\n\n<span class=\"cmt\">// Hipotenusa, centrada en x=182</span>\n$fx_h=182 $barY_h=102 $fs_h=14 $hw_h=9\n$yNum_h=$barY_h-6  $yDen_h=$barY_h+$fs_h\n$x1_h=$fx_h-$hw_h  $x2_h=$fx_h+$hw_h</pre>\n  </div>\n\n  <div class=\"bloque\">\n    <div class=\"titulo-bloque\">\n      <span>Question Text — figura de Pitágoras completa</span>\n      <button class=\"btn-copiar\" data-target=\"qt2\">Copiar</button>\n    </div>\n<pre id=\"qt2\">&lt;svg viewBox='0 0 320 230' width='320' height='230'\n     style='max-width:340px;height:auto;display:block;margin:0 auto;'\n     xmlns='http://www.w3.org/2000/svg'&gt;\n  &lt;text x='160' y='22' text-anchor='middle' font-size='15' fill='#1e3a8a' font-weight='bold'&gt;Teorema de Pitágoras&lt;/text&gt;\n  &lt;polygon points='60,170 240,170 60,60' fill='#dbeafe' stroke='#3b82f6' stroke-width='2.5'/&gt;\n  &lt;rect x='60' y='155' width='15' height='15' fill='none' stroke='#3b82f6' stroke-width='1.5'/&gt;\n\n  <span class=\"cmt\">&lt;!-- Base: fracción $num_c/$den_c --&gt;</span>\n  &lt;text x='$fx_b' y='$yNum_b' text-anchor='middle' font-size='$fs_b' fill='#1e3a8a'&gt;$num_c&lt;/text&gt;\n  &lt;line x1='$x1_b' y1='$barY_b' x2='$x2_b' y2='$barY_b' stroke='#1e3a8a' stroke-width='1.3'/&gt;\n  &lt;text x='$fx_b' y='$yDen_b' text-anchor='middle' font-size='$fs_b' fill='#1e3a8a'&gt;$den_c&lt;/text&gt;\n\n  <span class=\"cmt\">&lt;!-- Cateto desconocido --&gt;</span>\n  &lt;text x='36' y='118' text-anchor='middle' font-size='16' fill='#b45309' font-weight='bold'&gt;?&lt;/text&gt;\n\n  <span class=\"cmt\">&lt;!-- Hipotenusa: fracción $num_h/$den_h --&gt;</span>\n  &lt;text x='$fx_h' y='$yNum_h' text-anchor='middle' font-size='$fs_h' fill='#1e3a8a'&gt;$num_h&lt;/text&gt;\n  &lt;line x1='$x1_h' y1='$barY_h' x2='$x2_h' y2='$barY_h' stroke='#1e3a8a' stroke-width='1.3'/&gt;\n  &lt;text x='$fx_h' y='$yDen_h' text-anchor='middle' font-size='$fs_h' fill='#1e3a8a'&gt;$den_h&lt;/text&gt;\n&lt;/svg&gt;</pre>\n  </div>\n\n  <div class=\"previa\">\n    <svg viewBox=\"0 0 320 230\" width=\"300\" height=\"216\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Triángulo rectángulo con hipotenusa y base como fracciones y cateto desconocido\">\n      <text x=\"160\" y=\"22\" text-anchor=\"middle\" font-size=\"15\" fill=\"#1e3a8a\" font-weight=\"bold\">Teorema de Pitágoras</text>\n      <polygon points=\"60,170 240,170 60,60\" fill=\"#dbeafe\" stroke=\"#3b82f6\" stroke-width=\"2.5\"/>\n      <rect x=\"60\" y=\"155\" width=\"15\" height=\"15\" fill=\"none\" stroke=\"#3b82f6\" stroke-width=\"1.5\"/>\n      <!-- base 2/5 -->\n      <text x=\"150\" y=\"190\" text-anchor=\"middle\" font-size=\"14\" fill=\"#1e3a8a\">2</text>\n      <line x1=\"141\" y1=\"196\" x2=\"159\" y2=\"196\" stroke=\"#1e3a8a\" stroke-width=\"1.3\"/>\n      <text x=\"150\" y=\"210\" text-anchor=\"middle\" font-size=\"14\" fill=\"#1e3a8a\">5</text>\n      <!-- cateto ? -->\n      <text x=\"36\" y=\"118\" text-anchor=\"middle\" font-size=\"16\" fill=\"#b45309\" font-weight=\"bold\">?</text>\n      <!-- hipotenusa 3/7 -->\n      <text x=\"182\" y=\"96\" text-anchor=\"middle\" font-size=\"14\" fill=\"#1e3a8a\">3</text>\n      <line x1=\"173\" y1=\"102\" x2=\"191\" y2=\"102\" stroke=\"#1e3a8a\" stroke-width=\"1.3\"/>\n      <text x=\"182\" y=\"116\" text-anchor=\"middle\" font-size=\"14\" fill=\"#1e3a8a\">7</text>\n    </svg>\n  </div>\n\n  <footer>\n    <p>José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago.</p>\n    <p>Licencia <a href=\"https://creativecommons.org/licenses/by-nc-sa/4.0/\" rel=\"license\">CC BY-NC-SA 4.0</a> · <em>El fichero</em> — biblioteca de fragmentos IMathAS.</p>\n  </footer>\n\n</div>\n\n<script>\n  document.querySelectorAll('.btn-copiar').forEach(function(btn){\n    btn.addEventListener('click', function(){\n      var pre = document.getElementById(btn.getAttribute('data-target'));\n      var texto = pre.innerText;\n      navigator.clipboard.writeText(texto).then(function(){\n        var original = btn.textContent;\n        btn.textContent = '¡Copiado!';\n        btn.classList.add('ok');\n        setTimeout(function(){\n          btn.textContent = original;\n          btn.classList.remove('ok');\n        }, 1600);\n      }).catch(function(){\n        btn.textContent = 'Selecciona y copia';\n      });\n    });\n  });\n</script>\n</body>\n</html>",
+    "nota": "Ficha de la fraccion en los SVG",
+    "creado": 1784131602353,
+    "modificado": 1784131602353
+  },
+  {
+    "id": "mrnrgr65g3sqg",
+    "titulo": "explicacion pregunta",
+    "claves": "explicacion, pregunta, encabezado,",
+    "codigo": "<div style=\"border-left: 4px solid #2D8402; padding-left: 20px;\">\n  <div style=\"display: flex; align-items: center;\">\n      <p></p> \n  </div>  \n</div>",
+    "nota": "TExto con barra lateral ixzquierda para exponer aspectos importantes a conocer sosbre el tema de la pregunta.",
+    "creado": 1784221586573,
+    "modificado": 1784221586573
+  },
+  {
+    "id": "mrntrx2q4smbz",
+    "titulo": "emojis recurrentes",
+    "claves": "emojis, signos, figuras",
+    "codigo": "Signos gramaticales ❓‼️⁉️❓❔❕❗\nSignos matemáticos ➕➖✖️➗🟰♾️\nNúmeros 0️⃣1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟\nSímbolos numéricos *️⃣#️⃣🔠🔡🔢🔣🔤\nFlechas ⬆️↗️➡️↘️⬇️↙️⬅️↖️↕️↔️↩️↪️⤴️⤵️🔃🔄\nFlechas otras 🔙🔚🔛🔜🔝\nAvisos ⚠️⛔🚫\nMarcas ⭕✅☑️✔️❌❎\nLibros 📔📕📖📗📘📙📚📓📒📃📜📄📰🗞️📑🔖🏷️\nCuadrados 🟥🟧🟨🟩🟦🟪🟫\nCirculos 🔴🟠🟡🟢🔵🟣🟤⚫⚪\nPequeños ⬛ ⬜ ◼️◻️ ◾ ◽▪️🔹🔺🔻🔸🔹💠\nOtros 🔶🔷🔘🔳🔲",
+    "nota": "Los emojis mas utilizados",
+    "creado": 1784225466674,
+    "modificado": 1784243843903
+  },
+  {
+    "id": "mrphjjicztklh",
+    "titulo": "svg prisma rectangular",
+    "claves": "svg, prisma,rectangular,",
+    "codigo": "<svg viewBox=\"0 0 360 230\" width=\"340\" xmlns=\"http://www.w3.org/2000/svg\"\n     role=\"img\" aria-label=\"Prisma rectangular de $largo metros de largo, $ancho metros de ancho y $altura metros de altura.\">\n  <polygon points=\"60,60 240,60 290,25 110,25\" fill=\"#dbeafe\" stroke=\"#1e3a8a\" stroke-width=\"2\"/>\n  <polygon points=\"240,60 240,180 290,145 290,25\" fill=\"#bfdbfe\" stroke=\"#1e3a8a\" stroke-width=\"2\"/>\n  <polygon points=\"60,60 240,60 240,180 60,180\" fill=\"#eff6ff\" stroke=\"#1e3a8a\" stroke-width=\"2\"/>\n  <polyline points=\"110,25 110,145 290,145\" fill=\"none\" stroke=\"#1e3a8a\" stroke-width=\"1\" stroke-dasharray=\"5 4\"/>\n  <line x1=\"110\" y1=\"145\" x2=\"60\" y2=\"180\" stroke=\"#1e3a8a\" stroke-width=\"1\" stroke-dasharray=\"5 4\"/>\n  <text x=\"150\" y=\"205\" text-anchor=\"middle\" font-size=\"17\" fill=\"#0f172a\" font-family=\"sans-serif\">$largo m</text>\n  <text x=\"42\" y=\"126\" text-anchor=\"middle\" font-size=\"17\" fill=\"#0f172a\" font-family=\"sans-serif\">$altura m</text>\n  <text x=\"300\" y=\"150\" text-anchor=\"middle\" font-size=\"17\" fill=\"#0f172a\" font-family=\"sans-serif\">$ancho m</text>\n</svg>",
+    "nota": "Tener en cuenta las variavles del SVG. Cumple con DUA.",
+    "creado": 1784325852804,
+    "modificado": 1784325852804
+  },
+  {
+    "id": "mrphkxgetriqn",
+    "titulo": "svg cilindro",
+    "claves": "svg, cilindro,",
+    "codigo": "<svg viewBox=\"0 0 320 260\" width=\"300\" xmlns=\"http://www.w3.org/2000/svg\"\n     role=\"img\" aria-label=\"Cilindro de $radio metros de radio y $altura metros de altura.\">\n  <path d=\"M 70 60 L 70 190 A 80 24 0 0 0 230 190 L 230 60 Z\" fill=\"#eff6ff\" stroke=\"none\"/>\n  <path d=\"M 70 190 A 80 24 0 0 1 230 190\" fill=\"none\" stroke=\"#1e3a8a\" stroke-width=\"1\" stroke-dasharray=\"5 4\"/>\n  <path d=\"M 70 190 A 80 24 0 0 0 230 190\" fill=\"none\" stroke=\"#1e3a8a\" stroke-width=\"2\"/>\n  <line x1=\"70\" y1=\"60\" x2=\"70\" y2=\"190\" stroke=\"#1e3a8a\" stroke-width=\"2\"/>\n  <line x1=\"230\" y1=\"60\" x2=\"230\" y2=\"190\" stroke=\"#1e3a8a\" stroke-width=\"2\"/>\n  <ellipse cx=\"150\" cy=\"60\" rx=\"80\" ry=\"24\" fill=\"#dbeafe\" stroke=\"#1e3a8a\" stroke-width=\"2\"/>\n  <line x1=\"150\" y1=\"60\" x2=\"230\" y2=\"60\" stroke=\"#b91c1c\" stroke-width=\"2\"/>\n  <circle cx=\"150\" cy=\"60\" r=\"3.5\" fill=\"#b91c1c\"/>\n  <text x=\"192\" y=\"50\" text-anchor=\"middle\" font-size=\"16\" fill=\"#b91c1c\" font-family=\"sans-serif\">$radio m</text>\n  <line x1=\"45\" y1=\"60\" x2=\"45\" y2=\"190\" stroke=\"#0f172a\" stroke-width=\"1.5\"/>\n  <line x1=\"40\" y1=\"60\" x2=\"50\" y2=\"60\" stroke=\"#0f172a\" stroke-width=\"1.5\"/>\n  <line x1=\"40\" y1=\"190\" x2=\"50\" y2=\"190\" stroke=\"#0f172a\" stroke-width=\"1.5\"/>\n  <text x=\"28\" y=\"125\" text-anchor=\"middle\" font-size=\"16\" fill=\"#0f172a\" font-family=\"sans-serif\" transform=\"rotate(-90 28 125)\">$altura m</text>\n</svg>\n",
+    "nota": "Tener en cuenta las variables que tiene el svg. Cumple con DUA.",
+    "creado": 1784325917534,
+    "modificado": 1784325917534
+  },
+  {
+    "id": "mrqg01e54rt6c",
+    "titulo": "tarea mom nivel 2",
+    "claves": "tarea, mom, nivel 2, brightspace,",
+    "codigo": "<div class=\"caja-tarea\">\n<h2>Tarea asincrónica</h2>\n<p>Estas actividades se realizan <strong>por su cuenta</strong>, dentro de las 2 horas asincrónicas de la lección.</p>\n<ul>\n<li><strong>myOpenMath &nbsp; |&nbsp; &nbsp; &nbsp;Brightspace-Quiz&nbsp; &nbsp; | &nbsp; &nbsp;Foro (discussion)</strong></li>\n</ul>\n</div>",
+    "nota": "Enlaces de la tarea asincronica mom",
+    "creado": 1784383729421,
+    "modificado": 1784384208215
+  },
+  {
+    "id": "mrqsltx920jjg",
+    "titulo": "colores",
+    "claves": "colores, color,",
+    "codigo": "NARANJA\n:root {\n    --tema:   #bf360c;\n    --tema-d: #8c2708;\n    --tema-bg:#fbe9e7;\n    --tema-bg2:#f7d9d3;\n    --acento: #1565c0;\n    --txt:    #222;\n    --bg:     #f5f7fa;\n  }\n\nVERDE 1\n:root {\n    --tema:   #1b5e20;\n    --tema-d: #14441a;\n    --tema-bg:#c8e6c9;\n    --tema-bg2:#b6dbb8;\n    --acento: #1565c0;\n    --txt:    #222;\n    --bg:     #f5f7fa;\n  }\n\nVERDE 2\n:root {\n    --tema:   #004d40;\n    --tema-d: #00352c;\n    --tema-bg:#e0f2f1;\n    --tema-bg2:#cce8e4;\n    --acento: #1565c0;\n    --txt:    #222;\n    --bg:     #f5f7fa;\n  }\n\nVERDE 3\n:root {\n    --tema:   #33691e;\n    --tema-d: #1a3d0c;\n    --tema-bg:#f1f8e9;\n    --tema-bg2:#dcedc8;\n    --tema-soft:#f5faf0;\n        --tema-in:#efe9f8;\n    --acento: #5e35b1;\n    --txt:    #222;\n    --bg:     #f5f7fa;\n  }\n\n\nAZUL 1\n:root {\n    --tema:   #0d47a1;\n    --tema-d: #08306b;\n    --tema-bg:#c5d8f0;\n    --tema-bg2:#b3cdec;\n    --acento: #1565c0;\n    --txt:    #222;\n    --bg:     #f5f7fa;\n  }\nAZUL 2\n:root {\n    --tema:   #1a237e;\n    --tema-d: #11164f;\n    --tema-bg:#e8eaf6;\n    --tema-bg2:#dde0f2;\n    --acento: #00695c;\n    --txt:    #222;\n    --bg:     #f5f7fa;\n  }\n\n\nNEGRO PIZARRA\n:root {\n    --tema:   #37474f;\n    --tema-d: #263238;\n    --tema-bg:#cfd8dc;\n    --tema-bg2:#b8c4ca;\n    --acento: #00838f;\n    --txt:    #222;\n    --bg:     #f5f7fa;\n  }\nMORADO\n:root {\n    --tema:   #4a148c;\n    --tema-d: #311b62;\n    --tema-bg:#ede7f6;\n    --tema-bg2:#ddd0ee;\n    --acento: #00838f;\n    --txt:    #222;\n    --bg:     #f5f7fa;\n  }\n\nROJO\n:root {\n        --tema: #880e4f;\n        --tema-d: #5d0935;\n        --tema-bg: #fce4ec;\n        --tema-bg2: #f9d6e2;\n        --acento: #00695c;\n        --txt: #222;\n        --bg: #f5f7fa;\n        --that: #ffe082;\n      }\nEquivalente en naranja\tDescripción azules\n#ea580c\tNaranja principal intenso (equivalente a #1d4ed8)\n#fed7aa\tNaranja claro suave (equivalente a #bfdbfe)\n#f97316\tNaranja vibrante/acento (equivalente a #7c3aed)\n#9a3412\tNaranja oscuro profundo (equivalente a #1e3a8a)",
+    "nota": "Para usar como variables de colores en CSS.\nCoinciden con los colores de las clases de matemáticas de Brightspace",
+    "creado": 1784404901565,
+    "modificado": 1784414739469
+  },
+  {
+    "id": "mrqwyh4x74mlv",
+    "titulo": "svg cuña prisma",
+    "claves": "",
+    "codigo": "common control\n// Volumen de un prisma triangular: tanque de agua en forma de cuña\n$base = rand(4,12)\n$alt_tri = rand(3,9)\n$largo = rand(10,25)\n$vol = round(0.5 * $base * $alt_tri * $largo, 1)\n$area_tri = round(0.5 * $base * $alt_tri, 1)\n\n// Escalas de dibujo (px por metro)\n$hsvg_b = round($base * 14, 0)\n$hsvg_h = round($alt_tri * 14, 0)\n$hsvg_l = round($largo * 6, 0)\n\n// Vertices de la figura\n$ox = 60\n$oy = 40\n$bx2 = $ox + $hsvg_b\n$by2 = $oy\n$tx = $ox\n$ty = $oy + $hsvg_h\n$ax = $ox + 30\n$ay = $oy + $hsvg_l\n$cx = $bx2 + 30\n$cy = $oy + $hsvg_l\n$dx = $tx + 30\n$dy = $ty + $hsvg_l\n\n// Anclas de etiquetas (se mueven con la figura)\n$lbx = round(($ox + $bx2)/2, 0)\n$lby = $oy - 8\n$lhx = $ox - 8\n$lhy = round(($oy + $ty)/2, 0)\n$lvx = round(($ax + $cx + $dx)/3, 0)\n$lvy = round(($ay + $cy + $dy)/3, 0)\n\n// Ancla del rotulo \"largo\" (a la derecha de la figura)\n$rx = $cx + 18\n$ry = round(($oy + $cy)/2, 0)\n$rlx = $rx + 6\n\n// Lienzo dinamico: siempre deja margen para los rotulos\n$vbw = $cx + 135\n$vbh = $dy + 28\n\n$answer = $vol\n$abstolerance = 0.1\n$answerboxsize = 9\n$showanswer = \"`$vol` m³\"\n\nQUESTION TEXT\n<div style=\"width: 100%; text-align: center;display:inline-block; background:#F6FFF1; border:1px solid #2D8402; border-radius:6px; padding:0.4em 1em; font-family:monospace; color:#2D8402; font-size:1em; margin-bottom:0.8em; text-align: center; font-weight:bold\">\n  <p>`text(Prisma) &nbsp; &nbsp; V = lwh` &nbsp; &nbsp; `text(Cilindro) &nbsp; &nbsp; V = pi r^2 h` &nbsp; &nbsp;`text(Círculo) &nbsp;&nbsp; A = pi r^2`  &nbsp; &nbsp;`text(Rectángulo) &nbsp; &nbsp; A =   l w`</p></div>\n<h1>Volumen del Prisma</h1>\n<p>Una empresa de acuicultura usa tanques en forma de <b>prisma triangular</b> (el triángulo es rectángulo) para criar peces. La sección transversal de cada tanque es un triángulo con base <b>$base m</b> y altura <b>$alt_tri m</b>. La longitud del tanque es de <b>$largo m</b>.</p><p>¿Cuál es el <b>volumen de agua</b> (en m³) que puede contener el tanque si se llena completamente? Redondea tu respuesta a un decimal si es necesario.</p>\n<table align=\"center\">\n  <tr>\n    <td>\n      <div style=\"text-align:center;margin:1em 0;\">\n        <svg viewBox='0 0 $vbw $vbh'\n     style='width:100%;max-width:420px;height:auto;display:block;margin:0 auto;'\n     xmlns='http://www.w3.org/2000/svg' role='img' aria-labelledby='figTit figDes'>\n  <title id='figTit'>Prisma triangular (cuña)</title>\n  <desc id='figDes'>Figura esquemática, no a escala. Base del triángulo: $base m, altura del triángulo: $alt_tri m, longitud del prisma: $largo m.</desc>\n  <!-- Cara trasera (más clara: profundidad) -->\n  <polygon points='$ax,$ay $cx,$cy $dx,$dy' fill='#d6e2f7' stroke='none'/>\n  <!-- Aristas OCULTAS (discontinuas): concurren en A' -->\n  <line x1='$ox' y1='$oy' x2='$ax' y2='$ay' stroke='#1d4ed8' stroke-width='2' stroke-dasharray='5,3'/>\n  <line x1='$ax' y1='$ay' x2='$cx' y2='$cy' stroke='#1d4ed8' stroke-width='2' stroke-dasharray='5,3'/>\n  <line x1='$ax' y1='$ay' x2='$dx' y2='$dy' stroke='#1d4ed8' stroke-width='2' stroke-dasharray='5,3'/>\n  <!-- Arista trasera VISIBLE (hipotenusa del fondo) -->\n  <line x1='$cx' y1='$cy' x2='$dx' y2='$dy' stroke='#1d4ed8' stroke-width='2.5'/>\n  <!-- Aristas de LONGITUD visibles -->\n  <line x1='$bx2' y1='$by2' x2='$cx' y2='$cy' stroke='#1d4ed8' stroke-width='2.5'/>\n  <line x1='$tx' y1='$ty' x2='$dx' y2='$dy' stroke='#1d4ed8' stroke-width='2.5'/>\n  <!-- Cara frontal (sección transversal) al frente -->\n  <polygon points='$ox,$oy $bx2,$by2 $tx,$ty' fill='#bfdbfe' stroke='#1e40af' stroke-width='2.5'/>\n  <!-- Indicador del \"largo\" -->\n  <line x1='$cx' y1='$cy' x2='$rx' y2='$ry' stroke='#7c3aed' stroke-width='1.5' stroke-dasharray='4,2'/>\n  <line x1='$dx' y1='$dy' x2='$rx' y2='$ry' stroke='#7c3aed' stroke-width='1.5' stroke-dasharray='4,2'/>\n  <!-- Etiquetas -->\n  <text x='$lbx' y='$lby' text-anchor='middle' font-size='14' fill='#1e3a8a' font-weight='bold'>$base m</text>\n  <text x='$lhx' y='$lhy' text-anchor='end' font-size='14' fill='#1e3a8a'>$alt_tri m</text>\n  <text x='$rlx' y='$ry' text-anchor='start' font-size='13' fill='#7c3aed'>largo = $largo m</text>\n  <text x='$lvx' y='$lvy' text-anchor='middle' font-size='13' fill='#1e3a8a'>Volumen = ?</text>\n</svg>\n      </div>\n    </td>\n    <td>Puedes contener<br> $answerbox m3 de agua</td>\n  </tr>\n</table>$hintloc",
+    "nota": "Crea un preisma triangular, la base es un triángulo rectanguio",
+    "creado": 1784412209985,
+    "modificado": 1784412209985
+  }
+]
