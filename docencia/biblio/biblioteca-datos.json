@@ -66,10 +66,10 @@
     "id": "mrgyujenmuvgk",
     "titulo": "signos",
     "claves": "signos, exponentes, subindices, relaciones,",
-    "codigo": "Espacio &nbsp;\nPi:  &#8508;\nExponentes    ⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹    ⁺ ⁻ ⁼   ⁽ ⁾\nSubíndices  ₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉   ₊ ₋ ₌   ₍ ₎\nMayor &gt;  Mayor = que\t&ge;  \nMenor &lt;  Menor = que &le;\n¼\t&#188;\tUn cuarto\tfrac14\n½\t&#189;\tUn medio\tfrac12\n¾\t&#190;\tTres cuartos\tfrac34\n⅛\t&#8539;\tUn octavo\t\n⅜\t&#8540;\tTres octavos\t\n⅝\t&#8541;\tCinco octavos\t\n⅞\t&#8542;\tSiete octavos\t\n■\t&#9632;\tCuadrado lleno\t\n□\t&#9633;\tCuadrado vacio\t\n▪\t&#9642;\tMini cuadrado lleno\t\n▫\t&#9643;\tMini cuadrado vacio\t\n●\t&#9679;\tPunto lleno\t\n○\t&#9675;\tPunto vacio\t\n◊\t&#9674;\tRombo vacio\t\n  &ang;   Ángulo\n  &#9651; triángulo\nbar() lado con raya superior",
+    "codigo": "Espacio &nbsp;\nPi:  &#8508;\nExponentes    ⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹    ⁺ ⁻ ⁼   ⁽ ⁾\nSubíndices  ₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉   ₊ ₋ ₌   ₍ ₎\nMayor &gt;  Mayor = que\t&ge;  \nMenor &lt;  Menor = que &le;\n¼\t&#188;\tUn cuarto\tfrac14\n½\t&#189;\tUn medio\tfrac12\n¾\t&#190;\tTres cuartos\tfrac34\n⅛\t&#8539;\tUn octavo\t\n⅜\t&#8540;\tTres octavos\t\n⅝\t&#8541;\tCinco octavos\t\n⅞\t&#8542;\tSiete octavos\t\n■\t&#9632;\tCuadrado lleno\t\n□\t&#9633;\tCuadrado vacio\t\n▪\t&#9642;\tMini cuadrado lleno\t\n▫\t&#9643;\tMini cuadrado vacio\t\n●\t&#9679;\tPunto lleno\t\n○\t&#9675;\tPunto vacio\t\n◊\t&#9674;\tRombo vacio\t\n  &ang;   Ángulo\n  &#9651; triángulo\nbar() lado con raya superior\n&cap; interseccion ",
     "nota": "",
     "creado": 1783810723775,
-    "modificado": 1784308125545
+    "modificado": 1784566025720
   },
   {
     "id": "mrgyy0g6kxlg0",
