@@ -583,5 +583,14 @@
     "nota": "Crea un preisma triangular, la base es un triángulo rectanguio",
     "creado": 1784412209985,
     "modificado": 1784412209985
+  },
+  {
+    "id": "mrtjqdhy5hpa9",
+    "creado": 1784571395542,
+    "titulo": "calculadora",
+    "claves": "",
+    "codigo": "<a href=\"#\" onclick=\"document.getElementById('qhiddeninfo$thisq').style.display='block';return false;\">\n  <img src=\"https://myopenmaths3.s3.amazonaws.com/qimages/calculadora4.ico\" style=\"float:right;  width:80px; height:80px;\" alt=\"Calculadora\" /></a>\n<div id=\"qhiddeninfo$thisq\" style=\"display:none;\">[EMBED: https://www.desmos.com/scientific,325,255]</div>",
+    "nota": "Calculadora cinetífica",
+    "modificado": 1784571395542
   }
 ]
