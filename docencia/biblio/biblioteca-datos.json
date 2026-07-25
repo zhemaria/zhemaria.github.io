@@ -1,185 +1,5 @@
 [
   {
-    "id": "mrgl3az1ro7el",
-    "creado": 1783787618125,
-    "titulo": "linea svg",
-    "claves": "linea, svg",
-    "codigo": "<svg width=\"200\" height=\"100\">\n  <line x1=\"20\" y1=\"50\" x2=\"180\" y2=\"50\" stroke=\"blue\" stroke-width=\"4\" />\n  <line x1=\"20\" y1=\"50\" x2=\"190\" y2=\"20\" stroke=\"red\" stroke-width=\"8\" stroke-linecap=\"round\" />  \n</svg>",
-    "nota": "Traza una línea segú las coordendas, el grosor y el color",
-    "modificado": 1783787618125
-  },
-  {
-    "id": "mrgxjxs3upfh3",
-    "creado": 1783808549571,
-    "titulo": "tooltip corto",
-    "claves": "tooltip,ayuda",
-    "codigo": "<style>\n  .tt{ border-bottom:1px dotted #1e3a8a; color:#2D8402; cursor:help; position:relative; }\n  .tt::after{ content:\"ℹ️\"; font-size:.8em; vertical-align:super; color:#1e3a8a; margin-left:2px; font-weight:bold; }\n  .tt:hover::before, .tt:focus::before{\n    content:attr(data-tip);\n    position:absolute; left:0; bottom:130%;\n    width:max-content; max-width:240px; white-space:normal;\n    background:#2D8402; color:#fff;\n    padding:6px 9px; border-radius:6px;\n    font-size:14px; line-height:1.35; z-index:20;    \n  }\n</style>\n\n<span class=\"tt\" tabindex=\"0\" data-tip=\"TEXTO\"><b>PALABRA</b></span>\n",
-    "nota": "Usarlo en myOpenMath y Brightspace",
-    "modificado": 1783808549571
-  },
-  {
-    "id": "mrgxlwuzhmvhz",
-    "creado": 1783808641691,
-    "titulo": "caja",
-    "claves": "caja, box",
-    "codigo": "<p style= \"width: 80%;   margin-left: 5%;   background-color: rgba(202,216,240,0.20);   box-shadow: 2px 2px 4px #000;   border-radius: 7px;   padding: 15px;\"> AQUI VA EL TEXTO</p>",
-    "nota": "Puede usarse con <div> , <p>",
-    "modificado": 1783808641691
-  },
-  {
-    "id": "mrgxob6fdjz6h",
-    "creado": 1783808753559,
-    "titulo": "imange flotando",
-    "claves": "img, imagen, flotando",
-    "codigo": "<img \nsrc=\"https://files.myopenmath.com/qimages/reales_clasificacion.png\" \nalt=\"EXPLICACION DE LA IMAGEN\" \nstyle=\"float: left; width: 50%; padding: 5px;\">",
-    "nota": "Inserta imagene con texto corriendo por el lado",
-    "modificado": 1783808753559
-  },
-  {
-    "id": "mrgxr2dmqk9kv",
-    "creado": 1783808882122,
-    "titulo": "imagen con explicacion",
-    "claves": "imagen, figure, figcaption, img,",
-    "codigo": "<figure >\n<img src=\"/content/enforced/243522-1236_66268/illinois_capitales.jpg\" \nalt=\"Mapa mostrando las capitales que el estado de Illinois ha tenido hasta la fecha\" \ntitle=\"Mapa mostrando las capitales que el estado de Illinois ha tenido hasta la fecha\" \nwidth=\"183\" height=\"262\">\n<figcaption>Las capitales de Illinois <a href=\"https://proyectodescartes.org/iCartesiLibri/materiales_didacticos/Constitucion_EEUU/index.html?page=148\">Constitución de EE. UU.  </a>\n</figcaption>\n</figure>",
-    "nota": "Imagenes con texto explicativo",
-    "modificado": 1783808882122
-  },
-  {
-    "id": "mrgxumy1i5a01",
-    "creado": 1783809048745,
-    "titulo": "imagen ampliar",
-    "claves": "imagen, ampliar, img,",
-    "codigo": "<img \nsrc=\"/content/enforced/243522-1236_66268/calendario%20de%20los%20mayas.jpg\" \nwidth=\"150\" \nonclick=\"javascript:this.width=300\" \nondblclick=\"javascript:this.width=150;\">",
-    "nota": "Interpretación\n1) img src=\"cambiar_size_imagen.png\"\nEs el código que determina la imagen que aparece en la pantalla\n2)  width=\"50\"\nEs el tamaño que tendrá la imagen al abrirse la pantalla.\nAl fijarse el ancho, el alto queda determinado porque se mantienen las proporciones.\n3)  onclick=\"javascript:this.height=788;this.width=342\"\nEs el código JS que fija el tamaño de la imagen al hacer un click sobre ella.\n4)   ondblclick=\"javascript:this.width=50;this.height=115\"\nEs el código JS que fija el tamaño de la imagen al hacer doble click sobre ella.",
-    "modificado": 1783809117453
-  },
-  {
-    "id": "mrgycfz4dk86v",
-    "creado": 1783809879520,
-    "titulo": "acordeon",
-    "claves": "acordeon, details, summary,",
-    "codigo": "<details style=\"background-color:#E8F5E9;\">\n<summary style=\"background-color:#2D8402; color:#fafafa; padding:10px; border-radius: 12px;\">PISTA</summary>\n  <p> TEXTO</p>\n</details>",
-    "nota": "Cambiar el background-color en dependecia del nivel:\nNivel 1: Azul <details> #0057ad; <summary>\nNIvel 2: Marron <detail> #A61A1A;  <summary>\nNivel 3:  Verde <details> #E8F5E9; <summar>#2D8402;\nNivel 4:  Morado  <details>  <summar>",
-    "modificado": 1783809879520
-  },
-  {
-    "id": "mrgyujenmuvgk",
-    "titulo": "signos",
-    "claves": "signos, exponentes, subindices, relaciones,",
-    "codigo": "Espacio &nbsp;\nPi:  &#8508;\nExponentes    ⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹    ⁺ ⁻ ⁼   ⁽ ⁾\nSubíndices  ₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉   ₊ ₋ ₌   ₍ ₎\nMayor &gt;  Mayor = que\t&ge;  \nMenor &lt;  Menor = que &le;\n¼\t&#188;\tUn cuarto\tfrac14\n½\t&#189;\tUn medio\tfrac12\n¾\t&#190;\tTres cuartos\tfrac34\n⅛\t&#8539;\tUn octavo\t\n⅜\t&#8540;\tTres octavos\t\n⅝\t&#8541;\tCinco octavos\t\n⅞\t&#8542;\tSiete octavos\t\n■\t&#9632;\tCuadrado lleno\t\n□\t&#9633;\tCuadrado vacio\t\n▪\t&#9642;\tMini cuadrado lleno\t\n▫\t&#9643;\tMini cuadrado vacio\t\n●\t&#9679;\tPunto lleno\t\n○\t&#9675;\tPunto vacio\t\n◊\t&#9674;\tRombo vacio\t\n  &ang;   Ángulo\n  &#9651; triángulo\nbar() lado con raya superior\n&cap; interseccion ",
-    "nota": "",
-    "creado": 1783810723775,
-    "modificado": 1784566025720
-  },
-  {
-    "id": "mrgyy0g6kxlg0",
-    "creado": 1783810885830,
-    "titulo": "nombres personas",
-    "claves": "nombre, name,",
-    "codigo": "$nombre = randfrom(\"Olga, Elizandro, Érika,   Víctor,  Paola, Iván, Lorena, Ángel, Gladys, Álvaro, Rina, René, Cristina, Alberto, Patricia, José \")\n$nombreh = randfrom(\"Olga,Érika, Paola, Lorena, Gladys, Rina, Cristina,Patricia\")\n$nombrev =randfrom(\"Elizandro, Víctor, Iván, Ángel, Álvaro, René, Alberto, José\")",
-    "nota": "Seleccionar un nombre hispano de una lista",
-    "modificado": 1783810885830
-  },
-  {
-    "id": "mrgyzc2k558vx",
-    "creado": 1783810947548,
-    "titulo": "terna pitagorica",
-    "claves": "pitagoras, terna",
-    "codigo": "$a, $b, $c = randpythag(2,45)",
-    "nota": "Función de myOpenMath que crea las ternas piagóricas.",
-    "modificado": 1783810947548
-  },
-  {
-    "id": "mrgz0od76gay4",
-    "creado": 1783811010139,
-    "titulo": "cita",
-    "claves": "cita, texto, margen,",
-    "codigo": "<p \nstyle=\"border-left: 2px solid; \nmargin-left: 20px; \npadding-left: 10px; \nfont-style: italic;\"></p>\n",
-    "nota": "Para poner citas con borde lateral y letra cursiva",
-    "modificado": 1783811010139
-  },
-  {
-    "id": "mrgz5kr9pydho",
-    "creado": 1783811238741,
-    "titulo": "flechas",
-    "claves": "flecha,",
-    "codigo": "↑\t&#8593;\tFlecha arriba\tuarr\n↓\t&#8595;\tFlecha abajo\tdarr\n←\t&#8592;\tFlecha izquierda\tlarr\n→\t&#8594;\tFlecha derecha\trarr\n↔\t&#8596;\tFlecha izq-der\tharr\n▲\t&#9650;\tFlecha arriba\t\n►\t&#9658;\tFlecha derecha\n▼\t&#9660;\tFlecha ababo\n◄\t&#9668;\tFlecha izquierda\t\n",
-    "nota": "",
-    "modificado": 1783811238741
-  },
-  {
-    "id": "mrgzab453f4cc",
-    "creado": 1783811459525,
-    "titulo": "tabla css",
-    "claves": "tabla, table,",
-    "codigo": ".tabla-elegante {\n    width: 100%;\n    max-width: 800px;\n    margin: 20px auto;\n    border-collapse: collapse; /* Une los bordes en una sola línea */\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); \n    border-radius: 8px; \n    overflow: hidden; \n    /* Borde exterior completo de la tabla */\n    border: 1px solid #dcdcdc; \n}\n\n/* Bordes en la cabecera */\n.tabla-elegante th {\n    background-color: #2c3e50; \n    color: #ffffff;\n    text-align: left;\n    padding: 15px;\n    font-weight: 600;\n    /* Línea sutil para separar las columnas de la cabecera */\n    border-right: 1px solid #34495e; \n}\n\n/* Eliminar el borde derecho de la última columna de la cabecera */\n.tabla-elegante th:last-child {\n    border-right: none;\n}\n\n/* Bordes en las celdas del cuerpo */\n.tabla-elegante td {\n    padding: 14px 15px;\n    color: #333333;\n    /* Crea la cuadrícula interna (abajo y derecha) */\n    border-bottom: 1px solid #e0e0e0; \n    border-right: 1px solid #e0e0e0; \n}\n\n/* Eliminar el borde derecho de la última columna del cuerpo */\n.tabla-elegante td:last-child {\n    border-right: none;\n}\n\n/* Eliminar el borde inferior de la última fila */\n.tabla-elegante tbody tr:last-child td {\n    border-bottom: none;\n}\n\n/* Efecto cebra para las filas */\n.tabla-elegante tbody tr:nth-child(even) {\n    background-color: #f9fbfd; \n}\n\n/* Efecto hover */\n.tabla-elegante tbody tr:hover {\n    background-color: #f1f5f9;\n    transition: background-color 0.2s ease;\n}\n\n.tabla-elegante td.alinear-derecha {\n    text-align: right;\n}",
-    "nota": "CSS para una tabla grande elegante",
-    "modificado": 1783811459525
-  },
-  {
-    "id": "mrgzfrnvr1qko",
-    "creado": 1783811714251,
-    "titulo": "resaltado",
-    "claves": "resaltado, palabra, destacada",
-    "codigo": "<span \nstyle=\"background-color:#2D8402; \ncolor:#fafafa;  \nborder-radius: 4px; \npadding: 4px;\nfont-weight:700;\">\nTEXTO\n</span>",
-    "nota": "Para resaltar palabra, cambiar background-color pot el color deseado",
-    "modificado": 1783878612603
-  },
-  {
-    "id": "mrgzkc1da5e9p",
-    "creado": 1783811927281,
-    "titulo": "encabezado ayuda ejercicio",
-    "claves": "formula, cabezal, ayuda, ejercicio",
-    "codigo": "<div \nstyle=\"width: 100%; text-align:center; display:inline-block; \nbackground:#f0f4ff; border:1px solid #93c5fd; \nborder-radius:6px; padding:0.2em 0.8em; \nfont-family:monospace; color:#1d4ed8; \nfont-size:1.2em; margin-bottom:.4em;\">\nFÓRMULA DEL ENCABEZAD\n</div>",
-    "nota": "Para colocar en la parte superior de los ejercicios de myOpenMath, como ayuda general para el alumno.",
-    "modificado": 1783833133862
-  },
-  {
-    "id": "mrh00g6la15x7",
-    "creado": 1783812679149,
-    "titulo": "explicacion",
-    "claves": "explicacion, ayuda,",
-    "codigo": "<div \nstyle=\"border-left: 4px solid #7A2E1B; \npadding-left: 20px;\">\n<p>TEXTO DE LA EXPLICACION</p>\n</div><br>",
-    "nota": "El color del borde de acuerdo al nivel, el <br> final es aumentar la separación entre la línea y el coantendio siguientes.",
-    "modificado": 1783812679149
-  },
-  {
-    "id": "mrh01cxy2bmnt",
-    "creado": 1783812721606,
-    "titulo": "linea divisoria",
-    "claves": "linea, separador",
-    "codigo": "<hr style=\"border: 2px solid #2D8402;\">",
-    "nota": "El color debe ser acorde con el nivel",
-    "modificado": 1783876624142
-  },
-  {
-    "id": "mrh05i4bd8edl",
-    "creado": 1783812914939,
-    "titulo": "svg pitagoras",
-    "claves": "triangulo, pitagoras, hipotenusa, cateto, svg,",
-    "codigo": "$m = rand(2,8);\n$n = rand(1,$m-1);\n\n// Asegurar que no sean iguales\nwhile ($m == $n) {\n  $n = rand(1,$m-1);\n}\n\n$a = $m*$m - $n*$n;\n$b = 2*$m*$n;\n$c = $m*$m + $n*$n;\n\n\n$h = rrand(2,14,2)\n$w = rand(5,13)\n$m = max($h,$w)\n\n$answer = $c\n$abstolerance = .005\n$answerboxsize = 6\n\n$tri = showasciisvg(\"initPicture(-3,$m+3,-3,$m+3);\npath([[0,0],[$w,0],[0,$h],[0,0]]);\ntext([0,$h/2],\\\"$a\\\",\\\"left\\\");\ntext([$w/2,0],\\\"$b\\\",\\\"below\\\")\")",
-    "nota": "Dibuja un triángulo rectángulo con los valores de los catetos. Siempre genera números enteros.",
-    "modificado": 1783812914939
-  },
-  {
-    "id": "mrh07pcqdgl2v",
-    "creado": 1783813017626,
-    "titulo": "svg angulos adyacentes",
-    "claves": "angulos, adyacentes, svg,",
-    "codigo": "// Ángulos adyacentes: hallar el ángulo desconocido\n\n$angTotal = rand(80, 170)\n$ang1 = rand(15, $angTotal - 15)\n$ang2 = $angTotal - $ang1\n$signo_t = \"+\"\n\n// 1. Conversión a radianes \n$pi = 3.14159265\n$rad1 = $ang1 * $pi / 180\n$radTotal = $angTotal * $pi / 180\n\n// 2. Coordenadas de las líneas (Vértice movido al centro: 160, 180) - Longitud = 140\n$xLine1 = round(160 + 140 * cos($rad1), 1)\n$yLine1 = round(180 - 140 * sin($rad1), 1)\n\n$xLineTotal = round(160 + 140 * cos($radTotal), 1)\n$yLineTotal = round(180 - 140 * sin($radTotal), 1)\n\n// 3. Coordenadas para el Arco 1 (Verde, Radio = 40)\n$xArc1 = round(160 + 40 * cos($rad1), 1)\n$yArc1 = round(180 - 40 * sin($rad1), 1)\n\n// 4. Coordenadas para el Arco 2 (Rojo, Radio = 55 para no cruzarse)\n$xArc2Start = round(160 + 55 * cos($rad1), 1)\n$yArc2Start = round(180 - 55 * sin($rad1), 1)\n$xArc2End = round(160 + 55 * cos($radTotal), 1)\n$yArc2End = round(180 - 55 * sin($radTotal), 1)\n\n// 5. Posicionamiento de los textos\n$xText1 = round(160 + 22 * cos($rad1 / 2), 1)\n$yText1 = round(180 - 22 * sin($rad1 / 2), 1)\n\n$radBisectriz2 = $rad1 + (($ang2 / 2) * $pi / 180)\n$xText2 = round(160 + 40 * cos($radBisectriz2), 1)\n$yText2 = round(180 - 40 * sin($radBisectriz2), 1)\n\n$answer = $ang2\n$answerboxsize = 5\n$showanswer = \"`$ang2`°\"\n\n// Hints\n$hints[1] = \"Dos ángulos adyacentes que comparten un vértice y un lado forman juntos un ángulo más grande. La suma de los dos ángulos es igual al ángulo total.\"\n$hints[2] = \"Usa la ecuación: ángulo desconocido = ángulo total − ángulo conocido. Es decir: `$angTotal - $ang1 = ?`\"\n\nHTML\n    <svg viewBox='0 0 320 230' width='320' height='230' style='max-width:340px;height:auto;display:block;margin:0 auto;' xmlns='http://www.w3.org/2000/svg'>\n      <text x='160' y='22' text-anchor='middle' font-size='15' fill='#1e3a8a' font-weight='bold'>Ángulos adyacentes</text>  \n      <line x1='160' y1='180' x2='300' y2='180' stroke='#374151' stroke-width='2.5'/>  \n      <line x1='160' y1='180' x2='$xLineTotal' y2='$yLineTotal' stroke='#374151' stroke-width='2.5'/>  \n      <line x1='160' y1='180' x2='$xLine1' y2='$yLine1' stroke='#1d4ed8' stroke-width='2.5'/>  \n      <path d='M 200 180 A 40 40 0 0 0 $xArc1 $yArc1' stroke='#16a34a' stroke-width='2' fill='none'/>  \n      <path d='M $xArc2Start $yArc2Start A 55 55 0 0 0 $xArc2End $yArc2End' stroke='#dc2626' stroke-width='2' fill='none'/>  \n      <text x='$xText1' y='$yText1' text-anchor='middle' font-size='12' fill='#16a34a' font-weight='bold'>$ang1 °</text>\n      <text x='$xText2' y='$yText2' text-anchor='middle' font-size='14' fill='#dc2626' font-weight='bold'>?</text>  \n      <text x='160' y='215' text-anchor='middle' font-size='13' fill='#374151'>Ángulo total: $angTotal °</text>\n    </svg>",
-    "nota": "",
-    "modificado": 1783813017626
-  },
-  {
-    "id": "mrh0ahdmnphhl",
-    "creado": 1783813147258,
-    "titulo": "svg angulo opuesto",
-    "claves": "svg, angulo, opuestos, vertice,",
-    "codigo": "$ang = rand(60,80)\n$adj = 180 - $ang\n$pi  = 3.14159265\n$cx = 160\n$cy = 120\n$r  = 120\n$rad = $ang*$pi/180\n// Recta horizontal\n$x1a = 40\n$y1a = $cy\n$x1b = 280\n$y1b = $cy\n// Recta inclinada (dos rayos desde el vértice)\n$x2a = round($cx + $r*cos($rad),1)\n$y2a = round($cy - $r*sin($rad),1)\n$x2b = round($cx - $r*cos($rad),1)\n$y2b = round($cy + $r*sin($rad),1)\n// Etiquetas: sobre la bisectriz de cada uno de los 4 ángulos (radio 62)\n$lr = 62\n$lax = round($cx + $lr*cos($ang/2*$pi/180),1)\n$lay = round($cy - $lr*sin($ang/2*$pi/180),1)\n$lbx = round($cx + $lr*cos((90+$ang/2)*$pi/180),1)\n$lby = round($cy - $lr*sin((90+$ang/2)*$pi/180),1)\n$lcx = round($cx + $lr*cos((180+$ang/2)*$pi/180),1)\n$lcy = round($cy - $lr*sin((180+$ang/2)*$pi/180),1)\n$ldx = round($cx + $lr*cos((270+$ang/2)*$pi/180),1)\n$ldy = round($cy - $lr*sin((270+$ang/2)*$pi/180),1)\n// Arcos (radio 30) que marcan el par de ángulos iguales\n$sxR = $cx + 30\n$sxL = $cx - 30\n$arA  = round($cx + 30*cos($rad),1)\n$aryA = round($cy - 30*sin($rad),1)\n$arC  = round($cx - 30*cos($rad),1)\n$aryC = round($cy + 30*sin($rad),1)\n$answer = $ang\n$answerboxsize =6\nHTML\n<svg viewBox='0 0 320 240' width='320' height='240'\n       style='max-width:340px;height:auto;display:block;margin:0 auto;'\n       xmlns='http://www.w3.org/2000/svg' role='img'\n       aria-label='Dos rectas se cruzan. El ángulo dado mide $ang grados; su opuesto por el vértice está marcado con signo de interrogación.'>\n    <title>Ángulos opuestos por el vértice</title>\n    <desc>Dos rectas se cruzan en un punto. Arriba a la derecha el ángulo mide $ang grados; su opuesto por el vértice, abajo a la izquierda, está marcado con signo de interrogación. Los dos ángulos adyacentes miden $adj grados.</desc>\n    <text x='160' y='25' text-anchor='middle' font-size='15' fill='#1e3a8a' font-weight='bold'>Ángulos opuestos por el vértice</text>\n    <line x1='$cx' y1='$cy' x2='$x1a' y2='$y1a' stroke='#1e3a8a' stroke-width='2.5'/>\n    <line x1='$cx' y1='$cy' x2='$x1b' y2='$y1b' stroke='#1e3a8a' stroke-width='2.5'/>\n    <line x1='$cx' y1='$cy' x2='$x2a' y2='$y2a' stroke='#1e3a8a' stroke-width='2.5'/>\n    <line x1='$cx' y1='$cy' x2='$x2b' y2='$y2b' stroke='#1e3a8a' stroke-width='2.5'/>\n    <path d='M $sxR,$cy A 30,30 0 0 0 $arA,$aryA' fill='none' stroke='#dc2626' stroke-width='2'/>\n    <path d='M $sxL,$cy A 30,30 0 0 0 $arC,$aryC' fill='none' stroke='#dc2626' stroke-width='2'/>\n    <circle cx='$cx' cy='$cy' r='4' fill='#1e3a8a'/>\n    <text x='$lax' y='$lay' text-anchor='middle' font-size='15' fill='#dc2626' font-weight='bold'>$ang °</text>\n    <text x='$lcx' y='$lcy' text-anchor='middle' font-size='15' fill='#dc2626' font-weight='bold'>λ °</text>\n    <text x='$lbx' y='$lby' text-anchor='middle' font-size='15' fill='#5C3900'>$adj °</text>\n    <text x='$ldx' y='$ldy' text-anchor='middle' font-size='15' fill='#5C3900'>$adj °</text>\n  </svg>",
-    "nota": "Crea dos líneas que se cruzan generando ángulos opuestos.",
-    "modificado": 1783813147258
-  },
-  {
     "id": "seed00",
     "titulo": "singleshuffle: barajar y extraer",
     "claves": "shuffle, barajar, aleatorio, singleshuffle, array",
@@ -432,6 +252,186 @@
     "modificado": 1783832376758
   },
   {
+    "id": "mrgl3az1ro7el",
+    "creado": 1783787618125,
+    "titulo": "linea svg",
+    "claves": "linea, svg",
+    "codigo": "<svg width=\"200\" height=\"100\">\n  <line x1=\"20\" y1=\"50\" x2=\"180\" y2=\"50\" stroke=\"blue\" stroke-width=\"4\" />\n  <line x1=\"20\" y1=\"50\" x2=\"190\" y2=\"20\" stroke=\"red\" stroke-width=\"8\" stroke-linecap=\"round\" />  \n</svg>",
+    "nota": "Traza una línea segú las coordendas, el grosor y el color",
+    "modificado": 1783787618125
+  },
+  {
+    "id": "mrgxjxs3upfh3",
+    "creado": 1783808549571,
+    "titulo": "tooltip corto",
+    "claves": "tooltip,ayuda",
+    "codigo": "<style>\n  .tt{ border-bottom:1px dotted #1e3a8a; color:#2D8402; cursor:help; position:relative; }\n  .tt::after{ content:\"ℹ️\"; font-size:.8em; vertical-align:super; color:#1e3a8a; margin-left:2px; font-weight:bold; }\n  .tt:hover::before, .tt:focus::before{\n    content:attr(data-tip);\n    position:absolute; left:0; bottom:130%;\n    width:max-content; max-width:240px; white-space:normal;\n    background:#2D8402; color:#fff;\n    padding:6px 9px; border-radius:6px;\n    font-size:14px; line-height:1.35; z-index:20;    \n  }\n</style>\n\n<span class=\"tt\" tabindex=\"0\" data-tip=\"TEXTO\"><b>PALABRA</b></span>\n",
+    "nota": "Usarlo en myOpenMath y Brightspace",
+    "modificado": 1783808549571
+  },
+  {
+    "id": "mrgxlwuzhmvhz",
+    "creado": 1783808641691,
+    "titulo": "caja",
+    "claves": "caja, box",
+    "codigo": "<p style= \"width: 80%;   margin-left: 5%;   background-color: rgba(202,216,240,0.20);   box-shadow: 2px 2px 4px #000;   border-radius: 7px;   padding: 15px;\"> AQUI VA EL TEXTO</p>",
+    "nota": "Puede usarse con <div> , <p>",
+    "modificado": 1783808641691
+  },
+  {
+    "id": "mrgxob6fdjz6h",
+    "creado": 1783808753559,
+    "titulo": "imange flotando",
+    "claves": "img, imagen, flotando",
+    "codigo": "<img \nsrc=\"https://files.myopenmath.com/qimages/reales_clasificacion.png\" \nalt=\"EXPLICACION DE LA IMAGEN\" \nstyle=\"float: left; width: 50%; padding: 5px;\">",
+    "nota": "Inserta imagene con texto corriendo por el lado",
+    "modificado": 1783808753559
+  },
+  {
+    "id": "mrgxr2dmqk9kv",
+    "creado": 1783808882122,
+    "titulo": "imagen con explicacion",
+    "claves": "imagen, figure, figcaption, img,",
+    "codigo": "<figure >\n<img src=\"/content/enforced/243522-1236_66268/illinois_capitales.jpg\" \nalt=\"Mapa mostrando las capitales que el estado de Illinois ha tenido hasta la fecha\" \ntitle=\"Mapa mostrando las capitales que el estado de Illinois ha tenido hasta la fecha\" \nwidth=\"183\" height=\"262\">\n<figcaption>Las capitales de Illinois <a href=\"https://proyectodescartes.org/iCartesiLibri/materiales_didacticos/Constitucion_EEUU/index.html?page=148\">Constitución de EE. UU.  </a>\n</figcaption>\n</figure>",
+    "nota": "Imagenes con texto explicativo",
+    "modificado": 1783808882122
+  },
+  {
+    "id": "mrgxumy1i5a01",
+    "creado": 1783809048745,
+    "titulo": "imagen ampliar",
+    "claves": "imagen, ampliar, img,",
+    "codigo": "<img \nsrc=\"/content/enforced/243522-1236_66268/calendario%20de%20los%20mayas.jpg\" \nwidth=\"150\" \nonclick=\"javascript:this.width=300\" \nondblclick=\"javascript:this.width=150;\">",
+    "nota": "Interpretación\n1) img src=\"cambiar_size_imagen.png\"\nEs el código que determina la imagen que aparece en la pantalla\n2)  width=\"50\"\nEs el tamaño que tendrá la imagen al abrirse la pantalla.\nAl fijarse el ancho, el alto queda determinado porque se mantienen las proporciones.\n3)  onclick=\"javascript:this.height=788;this.width=342\"\nEs el código JS que fija el tamaño de la imagen al hacer un click sobre ella.\n4)   ondblclick=\"javascript:this.width=50;this.height=115\"\nEs el código JS que fija el tamaño de la imagen al hacer doble click sobre ella.",
+    "modificado": 1783809117453
+  },
+  {
+    "id": "mrgycfz4dk86v",
+    "creado": 1783809879520,
+    "titulo": "acordeon",
+    "claves": "acordeon, details, summary,",
+    "codigo": "<details style=\"background-color:#E8F5E9;\">\n<summary style=\"background-color:#2D8402; color:#fafafa; padding:10px; border-radius: 12px;\">PISTA</summary>\n  <p> TEXTO</p>\n</details>",
+    "nota": "Cambiar el background-color en dependecia del nivel:\nNivel 1: Azul <details> #0057ad; <summary>\nNIvel 2: Marron <detail> #A61A1A;  <summary>\nNivel 3:  Verde <details> #E8F5E9; <summar>#2D8402;\nNivel 4:  Morado  <details>  <summar>",
+    "modificado": 1783809879520
+  },
+  {
+    "id": "mrgyujenmuvgk",
+    "titulo": "signos",
+    "claves": "signos, exponentes, subindices, relaciones,",
+    "codigo": "Espacio &nbsp;\nPi:  &#8508;\nExponentes    ⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹    ⁺ ⁻ ⁼   ⁽ ⁾\nSubíndices  ₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉   ₊ ₋ ₌   ₍ ₎\nMayor &gt;  Mayor = que\t&ge;  \nMenor &lt;  Menor = que &le;\n¼\t&#188;\tUn cuarto\tfrac14\n½\t&#189;\tUn medio\tfrac12\n¾\t&#190;\tTres cuartos\tfrac34\n⅛\t&#8539;\tUn octavo\t\n⅜\t&#8540;\tTres octavos\t\n⅝\t&#8541;\tCinco octavos\t\n⅞\t&#8542;\tSiete octavos\t\n■\t&#9632;\tCuadrado lleno\t\n□\t&#9633;\tCuadrado vacio\t\n▪\t&#9642;\tMini cuadrado lleno\t\n▫\t&#9643;\tMini cuadrado vacio\t\n●\t&#9679;\tPunto lleno\t\n○\t&#9675;\tPunto vacio\t\n◊\t&#9674;\tRombo vacio\t\n  &ang;   Ángulo\n  &#9651; triángulo\nbar() lado con raya superior\n&cap; interseccion ",
+    "nota": "",
+    "creado": 1783810723775,
+    "modificado": 1784566025720
+  },
+  {
+    "id": "mrgyy0g6kxlg0",
+    "creado": 1783810885830,
+    "titulo": "nombres personas",
+    "claves": "nombre, name,",
+    "codigo": "$nombre = randfrom(\"Olga, Elizandro, Érika,   Víctor,  Paola, Iván, Lorena, Ángel, Gladys, Álvaro, Rina, René, Cristina, Alberto, Patricia, José \")\n$nombreh = randfrom(\"Olga,Érika, Paola, Lorena, Gladys, Rina, Cristina,Patricia\")\n$nombrev =randfrom(\"Elizandro, Víctor, Iván, Ángel, Álvaro, René, Alberto, José\")",
+    "nota": "Seleccionar un nombre hispano de una lista",
+    "modificado": 1783810885830
+  },
+  {
+    "id": "mrgyzc2k558vx",
+    "creado": 1783810947548,
+    "titulo": "terna pitagorica",
+    "claves": "pitagoras, terna",
+    "codigo": "$a, $b, $c = randpythag(2,45)",
+    "nota": "Función de myOpenMath que crea las ternas piagóricas.",
+    "modificado": 1783810947548
+  },
+  {
+    "id": "mrgz0od76gay4",
+    "creado": 1783811010139,
+    "titulo": "cita",
+    "claves": "cita, texto, margen,",
+    "codigo": "<p \nstyle=\"border-left: 2px solid; \nmargin-left: 20px; \npadding-left: 10px; \nfont-style: italic;\"></p>\n",
+    "nota": "Para poner citas con borde lateral y letra cursiva",
+    "modificado": 1783811010139
+  },
+  {
+    "id": "mrgz5kr9pydho",
+    "creado": 1783811238741,
+    "titulo": "flechas",
+    "claves": "flecha,",
+    "codigo": "↑\t&#8593;\tFlecha arriba\tuarr\n↓\t&#8595;\tFlecha abajo\tdarr\n←\t&#8592;\tFlecha izquierda\tlarr\n→\t&#8594;\tFlecha derecha\trarr\n↔\t&#8596;\tFlecha izq-der\tharr\n▲\t&#9650;\tFlecha arriba\t\n►\t&#9658;\tFlecha derecha\n▼\t&#9660;\tFlecha ababo\n◄\t&#9668;\tFlecha izquierda\t\n",
+    "nota": "",
+    "modificado": 1783811238741
+  },
+  {
+    "id": "mrgzab453f4cc",
+    "creado": 1783811459525,
+    "titulo": "tabla css",
+    "claves": "tabla, table,",
+    "codigo": ".tabla-elegante {\n    width: 100%;\n    max-width: 800px;\n    margin: 20px auto;\n    border-collapse: collapse; /* Une los bordes en una sola línea */\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); \n    border-radius: 8px; \n    overflow: hidden; \n    /* Borde exterior completo de la tabla */\n    border: 1px solid #dcdcdc; \n}\n\n/* Bordes en la cabecera */\n.tabla-elegante th {\n    background-color: #2c3e50; \n    color: #ffffff;\n    text-align: left;\n    padding: 15px;\n    font-weight: 600;\n    /* Línea sutil para separar las columnas de la cabecera */\n    border-right: 1px solid #34495e; \n}\n\n/* Eliminar el borde derecho de la última columna de la cabecera */\n.tabla-elegante th:last-child {\n    border-right: none;\n}\n\n/* Bordes en las celdas del cuerpo */\n.tabla-elegante td {\n    padding: 14px 15px;\n    color: #333333;\n    /* Crea la cuadrícula interna (abajo y derecha) */\n    border-bottom: 1px solid #e0e0e0; \n    border-right: 1px solid #e0e0e0; \n}\n\n/* Eliminar el borde derecho de la última columna del cuerpo */\n.tabla-elegante td:last-child {\n    border-right: none;\n}\n\n/* Eliminar el borde inferior de la última fila */\n.tabla-elegante tbody tr:last-child td {\n    border-bottom: none;\n}\n\n/* Efecto cebra para las filas */\n.tabla-elegante tbody tr:nth-child(even) {\n    background-color: #f9fbfd; \n}\n\n/* Efecto hover */\n.tabla-elegante tbody tr:hover {\n    background-color: #f1f5f9;\n    transition: background-color 0.2s ease;\n}\n\n.tabla-elegante td.alinear-derecha {\n    text-align: right;\n}",
+    "nota": "CSS para una tabla grande elegante",
+    "modificado": 1783811459525
+  },
+  {
+    "id": "mrgzfrnvr1qko",
+    "creado": 1783811714251,
+    "titulo": "resaltado",
+    "claves": "resaltado, palabra, destacada",
+    "codigo": "<span \nstyle=\"background-color:#2D8402; \ncolor:#fafafa;  \nborder-radius: 4px; \npadding: 4px;\nfont-weight:700;\">\nTEXTO\n</span>",
+    "nota": "Para resaltar palabra, cambiar background-color pot el color deseado",
+    "modificado": 1783878612603
+  },
+  {
+    "id": "mrgzkc1da5e9p",
+    "creado": 1783811927281,
+    "titulo": "encabezado ayuda ejercicio",
+    "claves": "formula, cabezal, ayuda, ejercicio",
+    "codigo": "<div \nstyle=\"width: 100%; text-align:center; display:inline-block; \nbackground:#f0f4ff; border:1px solid #93c5fd; \nborder-radius:6px; padding:0.2em 0.8em; \nfont-family:monospace; color:#1d4ed8; \nfont-size:1.2em; margin-bottom:.4em;\">\nFÓRMULA DEL ENCABEZAD\n</div>",
+    "nota": "Para colocar en la parte superior de los ejercicios de myOpenMath, como ayuda general para el alumno.",
+    "modificado": 1783833133862
+  },
+  {
+    "id": "mrh00g6la15x7",
+    "creado": 1783812679149,
+    "titulo": "explicacion",
+    "claves": "explicacion, ayuda,",
+    "codigo": "<div \nstyle=\"border-left: 4px solid #7A2E1B; \npadding-left: 20px;\">\n<p>TEXTO DE LA EXPLICACION</p>\n</div><br>",
+    "nota": "El color del borde de acuerdo al nivel, el <br> final es aumentar la separación entre la línea y el coantendio siguientes.",
+    "modificado": 1783812679149
+  },
+  {
+    "id": "mrh01cxy2bmnt",
+    "creado": 1783812721606,
+    "titulo": "linea divisoria",
+    "claves": "linea, separador",
+    "codigo": "<hr style=\"border: 2px solid #2D8402;\">",
+    "nota": "El color debe ser acorde con el nivel",
+    "modificado": 1783876624142
+  },
+  {
+    "id": "mrh05i4bd8edl",
+    "creado": 1783812914939,
+    "titulo": "svg pitagoras",
+    "claves": "triangulo, pitagoras, hipotenusa, cateto, svg,",
+    "codigo": "$m = rand(2,8);\n$n = rand(1,$m-1);\n\n// Asegurar que no sean iguales\nwhile ($m == $n) {\n  $n = rand(1,$m-1);\n}\n\n$a = $m*$m - $n*$n;\n$b = 2*$m*$n;\n$c = $m*$m + $n*$n;\n\n\n$h = rrand(2,14,2)\n$w = rand(5,13)\n$m = max($h,$w)\n\n$answer = $c\n$abstolerance = .005\n$answerboxsize = 6\n\n$tri = showasciisvg(\"initPicture(-3,$m+3,-3,$m+3);\npath([[0,0],[$w,0],[0,$h],[0,0]]);\ntext([0,$h/2],\\\"$a\\\",\\\"left\\\");\ntext([$w/2,0],\\\"$b\\\",\\\"below\\\")\")",
+    "nota": "Dibuja un triángulo rectángulo con los valores de los catetos. Siempre genera números enteros.",
+    "modificado": 1783812914939
+  },
+  {
+    "id": "mrh07pcqdgl2v",
+    "creado": 1783813017626,
+    "titulo": "svg angulos adyacentes",
+    "claves": "angulos, adyacentes, svg,",
+    "codigo": "// Ángulos adyacentes: hallar el ángulo desconocido\n\n$angTotal = rand(80, 170)\n$ang1 = rand(15, $angTotal - 15)\n$ang2 = $angTotal - $ang1\n$signo_t = \"+\"\n\n// 1. Conversión a radianes \n$pi = 3.14159265\n$rad1 = $ang1 * $pi / 180\n$radTotal = $angTotal * $pi / 180\n\n// 2. Coordenadas de las líneas (Vértice movido al centro: 160, 180) - Longitud = 140\n$xLine1 = round(160 + 140 * cos($rad1), 1)\n$yLine1 = round(180 - 140 * sin($rad1), 1)\n\n$xLineTotal = round(160 + 140 * cos($radTotal), 1)\n$yLineTotal = round(180 - 140 * sin($radTotal), 1)\n\n// 3. Coordenadas para el Arco 1 (Verde, Radio = 40)\n$xArc1 = round(160 + 40 * cos($rad1), 1)\n$yArc1 = round(180 - 40 * sin($rad1), 1)\n\n// 4. Coordenadas para el Arco 2 (Rojo, Radio = 55 para no cruzarse)\n$xArc2Start = round(160 + 55 * cos($rad1), 1)\n$yArc2Start = round(180 - 55 * sin($rad1), 1)\n$xArc2End = round(160 + 55 * cos($radTotal), 1)\n$yArc2End = round(180 - 55 * sin($radTotal), 1)\n\n// 5. Posicionamiento de los textos\n$xText1 = round(160 + 22 * cos($rad1 / 2), 1)\n$yText1 = round(180 - 22 * sin($rad1 / 2), 1)\n\n$radBisectriz2 = $rad1 + (($ang2 / 2) * $pi / 180)\n$xText2 = round(160 + 40 * cos($radBisectriz2), 1)\n$yText2 = round(180 - 40 * sin($radBisectriz2), 1)\n\n$answer = $ang2\n$answerboxsize = 5\n$showanswer = \"`$ang2`°\"\n\n// Hints\n$hints[1] = \"Dos ángulos adyacentes que comparten un vértice y un lado forman juntos un ángulo más grande. La suma de los dos ángulos es igual al ángulo total.\"\n$hints[2] = \"Usa la ecuación: ángulo desconocido = ángulo total − ángulo conocido. Es decir: `$angTotal - $ang1 = ?`\"\n\nHTML\n    <svg viewBox='0 0 320 230' width='320' height='230' style='max-width:340px;height:auto;display:block;margin:0 auto;' xmlns='http://www.w3.org/2000/svg'>\n      <text x='160' y='22' text-anchor='middle' font-size='15' fill='#1e3a8a' font-weight='bold'>Ángulos adyacentes</text>  \n      <line x1='160' y1='180' x2='300' y2='180' stroke='#374151' stroke-width='2.5'/>  \n      <line x1='160' y1='180' x2='$xLineTotal' y2='$yLineTotal' stroke='#374151' stroke-width='2.5'/>  \n      <line x1='160' y1='180' x2='$xLine1' y2='$yLine1' stroke='#1d4ed8' stroke-width='2.5'/>  \n      <path d='M 200 180 A 40 40 0 0 0 $xArc1 $yArc1' stroke='#16a34a' stroke-width='2' fill='none'/>  \n      <path d='M $xArc2Start $yArc2Start A 55 55 0 0 0 $xArc2End $yArc2End' stroke='#dc2626' stroke-width='2' fill='none'/>  \n      <text x='$xText1' y='$yText1' text-anchor='middle' font-size='12' fill='#16a34a' font-weight='bold'>$ang1 °</text>\n      <text x='$xText2' y='$yText2' text-anchor='middle' font-size='14' fill='#dc2626' font-weight='bold'>?</text>  \n      <text x='160' y='215' text-anchor='middle' font-size='13' fill='#374151'>Ángulo total: $angTotal °</text>\n    </svg>",
+    "nota": "",
+    "modificado": 1783813017626
+  },
+  {
+    "id": "mrh0ahdmnphhl",
+    "creado": 1783813147258,
+    "titulo": "svg angulo opuesto",
+    "claves": "svg, angulo, opuestos, vertice,",
+    "codigo": "$ang = rand(60,80)\n$adj = 180 - $ang\n$pi  = 3.14159265\n$cx = 160\n$cy = 120\n$r  = 120\n$rad = $ang*$pi/180\n// Recta horizontal\n$x1a = 40\n$y1a = $cy\n$x1b = 280\n$y1b = $cy\n// Recta inclinada (dos rayos desde el vértice)\n$x2a = round($cx + $r*cos($rad),1)\n$y2a = round($cy - $r*sin($rad),1)\n$x2b = round($cx - $r*cos($rad),1)\n$y2b = round($cy + $r*sin($rad),1)\n// Etiquetas: sobre la bisectriz de cada uno de los 4 ángulos (radio 62)\n$lr = 62\n$lax = round($cx + $lr*cos($ang/2*$pi/180),1)\n$lay = round($cy - $lr*sin($ang/2*$pi/180),1)\n$lbx = round($cx + $lr*cos((90+$ang/2)*$pi/180),1)\n$lby = round($cy - $lr*sin((90+$ang/2)*$pi/180),1)\n$lcx = round($cx + $lr*cos((180+$ang/2)*$pi/180),1)\n$lcy = round($cy - $lr*sin((180+$ang/2)*$pi/180),1)\n$ldx = round($cx + $lr*cos((270+$ang/2)*$pi/180),1)\n$ldy = round($cy - $lr*sin((270+$ang/2)*$pi/180),1)\n// Arcos (radio 30) que marcan el par de ángulos iguales\n$sxR = $cx + 30\n$sxL = $cx - 30\n$arA  = round($cx + 30*cos($rad),1)\n$aryA = round($cy - 30*sin($rad),1)\n$arC  = round($cx - 30*cos($rad),1)\n$aryC = round($cy + 30*sin($rad),1)\n$answer = $ang\n$answerboxsize =6\nHTML\n<svg viewBox='0 0 320 240' width='320' height='240'\n       style='max-width:340px;height:auto;display:block;margin:0 auto;'\n       xmlns='http://www.w3.org/2000/svg' role='img'\n       aria-label='Dos rectas se cruzan. El ángulo dado mide $ang grados; su opuesto por el vértice está marcado con signo de interrogación.'>\n    <title>Ángulos opuestos por el vértice</title>\n    <desc>Dos rectas se cruzan en un punto. Arriba a la derecha el ángulo mide $ang grados; su opuesto por el vértice, abajo a la izquierda, está marcado con signo de interrogación. Los dos ángulos adyacentes miden $adj grados.</desc>\n    <text x='160' y='25' text-anchor='middle' font-size='15' fill='#1e3a8a' font-weight='bold'>Ángulos opuestos por el vértice</text>\n    <line x1='$cx' y1='$cy' x2='$x1a' y2='$y1a' stroke='#1e3a8a' stroke-width='2.5'/>\n    <line x1='$cx' y1='$cy' x2='$x1b' y2='$y1b' stroke='#1e3a8a' stroke-width='2.5'/>\n    <line x1='$cx' y1='$cy' x2='$x2a' y2='$y2a' stroke='#1e3a8a' stroke-width='2.5'/>\n    <line x1='$cx' y1='$cy' x2='$x2b' y2='$y2b' stroke='#1e3a8a' stroke-width='2.5'/>\n    <path d='M $sxR,$cy A 30,30 0 0 0 $arA,$aryA' fill='none' stroke='#dc2626' stroke-width='2'/>\n    <path d='M $sxL,$cy A 30,30 0 0 0 $arC,$aryC' fill='none' stroke='#dc2626' stroke-width='2'/>\n    <circle cx='$cx' cy='$cy' r='4' fill='#1e3a8a'/>\n    <text x='$lax' y='$lay' text-anchor='middle' font-size='15' fill='#dc2626' font-weight='bold'>$ang °</text>\n    <text x='$lcx' y='$lcy' text-anchor='middle' font-size='15' fill='#dc2626' font-weight='bold'>λ °</text>\n    <text x='$lbx' y='$lby' text-anchor='middle' font-size='15' fill='#5C3900'>$adj °</text>\n    <text x='$ldx' y='$ldy' text-anchor='middle' font-size='15' fill='#5C3900'>$adj °</text>\n  </svg>",
+    "nota": "Crea dos líneas que se cruzan generando ángulos opuestos.",
+    "modificado": 1783813147258
+  },
+  {
     "id": "mri5gq90psmam",
     "creado": 1783882302948,
     "titulo": "texto imagen",
@@ -583,6 +583,51 @@
     "nota": "Crea un preisma triangular, la base es un triángulo rectanguio",
     "creado": 1784412209985,
     "modificado": 1784412209985
+  },
+  {
+    "id": "mrs0vflrfm9io",
+    "creado": 1784479252671,
+    "titulo": "encabezado  formulas",
+    "claves": "",
+    "codigo": "CILINDRO / PRISMA\n<div style=\"width: 100%; text-align: center;display:inline-block; background:#F6FFF1; border:1px solid #2D8402; border-radius:6px; padding:0.4em 1em; font-family:monospace; color:#2D8402; font-size:1em; margin-bottom:0.8em; text-align: center; font-weight:bold\">\n  <p>`text(Prisma) &nbsp; &nbsp; V = lwh` &nbsp; &nbsp; `text(Cilindro) &nbsp; &nbsp; V = pi r^2 h` &nbsp; &nbsp;`text(Círculo) &nbsp;&nbsp; A = pi r^2`  &nbsp; &nbsp;`text(Rectángulo) &nbsp; &nbsp; A =   l w`</p></div>\n<h1>Volumen del Cilindro</h1>",
+    "nota": "Para poner en la parte superior de la Question Text las fórmulas asociadas a la pregunta del tema.",
+    "modificado": 1784479252671
+  },
+  {
+    "id": "mrs4yd94hp9lo",
+    "creado": 1784486108056,
+    "titulo": "svg cilindro dos caras",
+    "claves": "svg, cilindro,",
+    "codigo": "<svg viewBox=\"0 0 320 260\" width=\"300\" xmlns=\"http://www.w3.org/2000/svg\"\n     role=\"img\" aria-label=\"Cilindro de $radio metros de radio y $altura metros de altura.\">\n  <path d=\"M 70 60 L 70 190 A 80 24 0 0 0 230 190 L 230 60 Z\" fill=\"#eff6ff\" stroke=\"none\"/>\n  <path d=\"M 70 190 A 80 24 0 0 1 230 190\" fill=\"none\" stroke=\"#1e3a8a\" stroke-width=\"1\" stroke-dasharray=\"5 4\"/>\n  <path d=\"M 70 190 A 80 24 0 0 0 230 190\" fill=\"none\" stroke=\"#1e3a8a\" stroke-width=\"2\"/>\n  <line x1=\"70\" y1=\"60\" x2=\"70\" y2=\"190\" stroke=\"#1e3a8a\" stroke-width=\"2\"/>\n  <line x1=\"230\" y1=\"60\" x2=\"230\" y2=\"190\" stroke=\"#1e3a8a\" stroke-width=\"2\"/>\n  <ellipse cx=\"150\" cy=\"60\" rx=\"80\" ry=\"24\" fill=\"#dbeafe\" stroke=\"#1e3a8a\" stroke-width=\"2\"/>\n  <line x1=\"150\" y1=\"60\" x2=\"230\" y2=\"60\" stroke=\"#b91c1c\" stroke-width=\"2\"/>\n  <circle cx=\"150\" cy=\"60\" r=\"3.5\" fill=\"#b91c1c\"/>\n       <text x=\"182\" y=\"55\" text-anchor=\"middle\" font-size=\"16\" fill=\"#b91c1c\" font-family=\"sans-serif\">$radio m</text>\n  <line x1=\"45\" y1=\"60\" x2=\"45\" y2=\"190\" stroke=\"#b91c1c\" stroke-width=\"1.5\"/>\n  <line x1=\"40\" y1=\"60\" x2=\"50\" y2=\"60\" stroke=\"#b91c1c\" stroke-width=\"1.5\"/>\n  <line x1=\"40\" y1=\"190\" x2=\"50\" y2=\"190\" stroke=\"#b91c1c\" stroke-width=\"1.5\"/>\n  <text x=\"28\" y=\"125\" text-anchor=\"middle\" font-size=\"16\" fill=\"#b91c1c\" font-family=\"sans-serif\" transform=\"rotate(-90 28 125)\">$altura m</text>\n</svg>",
+    "nota": "El cilindro tiene la base con linea discontiua al fondo",
+    "modificado": 1784486108056
+  },
+  {
+    "id": "mrs64hjl2ikcp",
+    "creado": 1784488073169,
+    "titulo": "calculadora cientifica",
+    "claves": "calculadora, calculo,",
+    "codigo": "<a href=\"#\" onclick=\"document.getElementById('qhiddeninfo$thisq').style.display='block';return false;\"><img src=\"https://myopenmaths3.s3.amazonaws.com/qimages/calculadora1.png\" alt=\"Calculadora\" /></a>\n<div id=\"qhiddeninfo$thisq\" style=\"display:none;\">[EMBED: https://www.desmos.com/scientific,325,255]</div>",
+    "nota": "Calculadora científica",
+    "modificado": 1784488073169
+  },
+  {
+    "id": "mrs68d8udf8ip",
+    "creado": 1784488254222,
+    "titulo": "svg cilindro mostrando volumen",
+    "claves": "svg, cilindro, volumen",
+    "codigo": "<div style=\"text-align:center;margin:1em 0;\">\n      <svg viewBox='0 0 320 240' width='320' height='240' style='max-width:340px;height:auto;display:block;margin:0 auto;' xmlns='http://www.w3.org/2000/svg' role='img' aria-labelledby='figTit figDes'>\n        <title id='figTit'>Cilindro con radio y volumen conocidos</title>\n        <desc id='figDes'>Figura esquemática, no a escala. Radio = $r cm, Volumen = $vol cm³, altura desconocida.</desc>\n        <ellipse cx='160' cy='60' rx='80' ry='22' fill='#bfdbfe' stroke='#3b82f6' stroke-width='2'/>\n        <rect x='80' y='60' width='160' height='120' fill='#dbeafe' stroke='#3b82f6' stroke-width='2'/>\n        <ellipse cx='160' cy='180' rx='80' ry='22' fill='#93c5fd' stroke='#3b82f6' stroke-width='2'/>\n        <line x1='160' y1='178' x2='240' y2='178' stroke='#1e40af' stroke-width='1.5' stroke-dasharray='4,3'/>\n        <text x='190' y='172' text-anchor='middle' font-size='14' fill='#1e3a8a' font-weight='bold'>r = $r cm</text>\n        <line x1='248' y1='60' x2='248' y2='180' stroke='#dc2626' stroke-width='2' stroke-dasharray='5,3'/>\n        <text x='270' y='120' text-anchor='start' font-size='15' fill='#dc2626' font-weight='bold'>h = ?</text>\n        <text x='160' y='126' text-anchor='middle' font-size='14' font-weight='bold' fill='#1e3a8a'>V = $vol cm³</text>\n        <ellipse cx='160' cy='60' rx='80' ry='22' fill='#bfdbfe' stroke='#1e40af' stroke-width='4'/>\n      </svg>\n      </div>",
+    "nota": "Pide el volumen y muestra  la altura  y el radio de la base",
+    "modificado": 1784488254222
+  },
+  {
+    "id": "mrsdjrpqqnn5s",
+    "creado": 1784500543502,
+    "titulo": "color barras estadistica mom",
+    "claves": "mom, barras, estadistica, color",
+    "codigo": "$options = array();\n$options['fill'] = '#2D8402';\n\n$plot = fdbargraph($lbl, $v, \"Numero de hijos\", 350, 300, $options);",
+    "nota": "Funciona en la Macro Library Stats",
+    "modificado": 1784500543502
   },
   {
     "id": "mrtjqdhy5hpa9",
