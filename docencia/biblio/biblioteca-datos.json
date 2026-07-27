@@ -489,10 +489,10 @@
     "id": "mrm6bqi6ufbht",
     "titulo": "tabla corta",
     "claves": "tabla,",
-    "codigo": "<table>\n  <tr>\n    <td></td>\n    <td></td>\n  </tr>\n</table>",
+    "codigo": "<table align=\"center\">\n  <tr>\n    <td></td>\n    <td></td>\n  </tr>\n</table>",
     "nota": "Tabla de dos columnas para gráfico y su respuesta.",
     "creado": 1784125614318,
-    "modificado": 1784125614318
+    "modificado": 1785119750802
   },
   {
     "id": "mrm7attwwt32d",
