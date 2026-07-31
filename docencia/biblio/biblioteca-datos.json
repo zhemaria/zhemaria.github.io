@@ -691,5 +691,14 @@
     "codigo": "$hist = fdhistogram($freq,\"Indice de Masa Corporal (IMC)\",15,5, [\n    'width' => 300,\n    'height' => 300,\n    'showgrid' => true,\n    'fill' => 'green',\n    'stroke' => 'white'\n]);",
     "nota": "fdhistogram(freqarray, label, start, cw, [labelstart, upper, width, height, showgrid, fill, stroke])\n\nMacro de visualización. Crea un histograma a partir de una matriz de frecuencias.\n\nfreqarray : matriz de frecuencias.\netiqueta : nombre de los valores de datos.\ninicio : primer límite inferior de la clase.\nancho de clase : ancho de las clases.\nlabelstart (opcional): valor en el que se inicia el etiquetado de los ejes. Por defecto, se establece en start.\nsuperior (opcional): primer límite superior de la clase. Por defecto es inicio + ancho de clase.\nancho, alto (opcional): ancho y alto en píxeles del gráfico.\nshowgrid (opcional): las líneas de la cuadrícula horizontal; por defecto es true para mostrarlas; establezca false para ocultarlas.\nfill (opcional) = el color de relleno de los contenedores; el valor predeterminado es azul.\ntrazo (opcional) = el color de la línea de los contenedores; por defecto es negro.\nPara rellenar solo algunos parámetros opcionales, el quinto argumento puede ser una matriz asociativa de valores, como ['width'=>500, 'fill'=>'blue']. De esta forma, 'vertlabel' se puede usar para cambiar la etiqueta del eje vertical, y 'valuelabels'=>true se puede usar para añadir etiquetas de frecuencia encima de las barras.",
     "modificado": 1785432221939
+  },
+  {
+    "id": "ms8ba4nea4ey4",
+    "creado": 1785464193290,
+    "titulo": "colores niveles contraste",
+    "claves": "color, nivel, contraste,",
+    "codigo": "Ahí están los cuatro. Cada botón lleva el tono oscuro de su nivel, así que se integra a la barra sin llamar la atención:\n\nNivel\t              Barra\t      botón PDF\t     Contraste\n1\tverde           #0c8a4a\t       #06532c\t      9.2:1\n2\tazul            #0089cd\t       #005b8a\t      7.5:1\n3\tvioleta         #7c3aed\t        #4c1d95\t      11.0:1\n4\támbar           #d97706\t        #92400e      \t7.1:1",
+    "nota": "Estos son los colores oficiales de cada nivel. Se han usado en el encabezaado de los syllabus.",
+    "modificado": 1785464193290
   }
 ]
