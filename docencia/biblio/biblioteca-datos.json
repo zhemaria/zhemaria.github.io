@@ -697,8 +697,8 @@
     "creado": 1785464193290,
     "titulo": "colores niveles contraste",
     "claves": "color, nivel, contraste,",
-    "codigo": "Ahí están los cuatro. Cada botón lleva el tono oscuro de su nivel, así que se integra a la barra sin llamar la atención:\n\nNivel\t              Barra\t      botón PDF\t     Contraste\n1\tverde           #0c8a4a\t       #06532c\t      9.2:1\n2\tazul            #0089cd\t       #005b8a\t      7.5:1\n3\tvioleta         #7c3aed\t        #4c1d95\t      11.0:1\n4\támbar           #d97706\t        #92400e      \t7.1:1",
+    "codigo": "Ahí están los cuatro. Cada botón lleva el tono oscuro de su nivel, así que se integra a la barra sin llamar la atención:\n\nNivel\t              Barra\t      botón PDF\t     Contraste\n1\tverde           #06532c\t       #044726\t      9.20:1\t — 10.86:1\n2\tazul            #005b8a\t       #00405f\t      7.33:1\t — 11.06:1\n3\tvioleta         #7c3aed\t        #4c1d95 \t    5.70:1\t— 10.95:1\n4\támbar           #92400e\t        #5C3900      \t7.09:1\t — 10.29:1",
     "nota": "Estos son los colores oficiales de cada nivel. Se han usado en el encabezaado de los syllabus.",
-    "modificado": 1785464193290
+    "modificado": 1785466229194
   }
 ]
