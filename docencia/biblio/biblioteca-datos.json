@@ -525,10 +525,10 @@
     "id": "mrnrgr65g3sqg",
     "titulo": "explicacion pregunta",
     "claves": "explicacion, pregunta, encabezado,",
-    "codigo": "<div style=\"border-left: 4px solid #2D8402; padding-left: 20px;\">\n  <div style=\"display: flex; align-items: center;\">\n      <p></p> \n  </div>  \n</div>",
+    "codigo": "<div style=\"border-left: 4px solid #2D8402; padding-left: 20px;\">\n        <p></p> \n</div>",
     "nota": "TExto con barra lateral ixzquierda para exponer aspectos importantes a conocer sosbre el tema de la pregunta.",
     "creado": 1784221586573,
-    "modificado": 1784221586573
+    "modificado": 1785861791697
   },
   {
     "id": "mrntrx2q4smbz",
