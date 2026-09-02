@@ -745,5 +745,14 @@
     "codigo": "<link rel=\"icon\" href=\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20fill%3D%22%23ffffff%22%2F%3E%3Crect%20x%3D%223%22%20y%3D%223%22%20width%3D%2294%22%20height%3D%2294%22%20fill%3D%22none%22%20stroke%3D%22%23002060%22%20stroke-width%3D%226%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2250%22%20fill%3D%22%23002060%22%20font-family%3D%22Georgia%2Cserif%22%20font-weight%3D%22700%22%20font-size%3D%2278%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22central%22%3E%26%23209%3B%3C%2Ftext%3E%3C%2Fsvg%3E\">\n<meta name=\"author\" content=\"José M. Fernández, ABE/ASE Math Master Teacher, Harry S. Truman College — City Colleges of Chicago\">",
     "nota": "Pegar debajo de <title>",
     "modificado": 1787422946765
+  },
+  {
+    "id": "mtjkqjb0yuay8",
+    "creado": 1788321985596,
+    "titulo": "gramatica nuevos ejercicios",
+    "claves": "gramatica, ejercicios,",
+    "codigo": "      <!-- ============================================================\n         PLANTILLA para agregar nuevos ejercicios:\n\n    <a class=\"ejercicio-card\"\n       href=\"URL_EN_GITHUB\"\n       target=\"_blank\"\n       data-tema=\"concordancia\"\n       data-nivel=\"intermedio\"\n       data-formato=\"corregir\">\n        <div class=\"card-franja concordancia\"></div>\n        <div class=\"card-inner\">\n            <div class=\"card-top\">\n                <span class=\"card-icon\">🔴</span>\n                <span class=\"card-titulo\">Título del ejercicio</span>\n                <span class=\"badge-formato corregir\">🔴 Corregir</span>\n            </div>\n            <p class=\"card-descripcion\">Breve descripción.</p>\n            <div class=\"card-meta\">\n                <span class=\"tag tag-concordancia\">🔴 Concordancia</span>\n                <span class=\"tag tag-intermedio\">📘 Intermedio</span>\n            </div>\n        </div>\n        <div class=\"card-footer\">\n            <span class=\"card-fecha\">📅 YYYY-MM-DD</span>\n            <span class=\"card-abrir\">Abrir →</span>\n        </div>\n    </a>",
+    "nota": "Formato para nuevos ejercicios en https://www.gedparahispanos.com/artes-del-lenguaje/edici%C3%B3n-de-textos/ejercicios-de-gram%C3%A1tica",
+    "modificado": 1788321985596
   }
 ]
