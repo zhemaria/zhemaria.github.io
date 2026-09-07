@@ -763,5 +763,14 @@
     "codigo": ".function-box::before {\n  /* Pegando los caracteres Unicode directamente: */\n  content: 'f₍ₓ₎'; \n  \n  /* O usando los códigos de escape CSS: */\n  /* content: 'f\\208D\\2093\\208E'; */\n  \n  position: absolute;\n  top: 8px;\n  left: 12px;\n  font-size: 0.65rem;\n  font-weight: 800;\n  color: #d97706;\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  opacity: 0.6;\n}",
     "nota": "Para mostrar (x) como subíndice (subscript) dentro de la propiedad content de CSS, no puedes utilizar etiquetas HTML como <sub>. En su lugar, debes usar caracteres Unicode.\n\nTienes dos formas de hacerlo: copiando directamente los símbolos Unicode o usando sus secuencias de escape.",
     "modificado": 1788726823836
+  },
+  {
+    "id": "mtrj2tyrxe5th",
+    "creado": 1788802929459,
+    "titulo": "paleta root verde-mango",
+    "claves": "color, paleta, mango, verde",
+    "codigo": "      :root {\n        --primary-color: #0d5c46; /* Verde selva profundo - Dominante, elegante y de altísima accesibilidad */\n        --secondary-color: #ba4738; /* Coral tierra oscuro - Aporta calidez tropical, pasa pruebas de contraste */\n        --accent-color: #e27b45; /* Mango/Papaya - Alegre y vibrante para botones o detalles */\n        --warning-color: #d49a37; /* Mostaza dorado - Tropical pero serio para advertencias */\n        --success-color: #2e7d32; /* Verde oscuro (mantenido) - Funciona perfecto y es accesible */\n        --background-color: #faf7f2; /* Arena muy claro - Elimina la frialdad del gris anterior */\n        --text-color: #2b2724; /* Cacao oscuro - Un tono casi negro pero más cálido y orgánico */\n        --white: #ffffff;\n        --border-color: #dcd7cf; /* Arena oscuro - Para bordes sutiles que combinan con el fondo */\n        --hover-color: #e8f0ec; /* Brisa de menta - Un verde/agua muuuuy pálido para interacciones */\n      }",
+    "nota": "",
+    "modificado": 1788802929459
   }
 ]
