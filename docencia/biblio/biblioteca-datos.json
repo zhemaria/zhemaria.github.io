@@ -772,5 +772,14 @@
     "codigo": "      :root {\n        --primary-color: #0d5c46; /* Verde selva profundo - Dominante, elegante y de altísima accesibilidad */\n        --secondary-color: #ba4738; /* Coral tierra oscuro - Aporta calidez tropical, pasa pruebas de contraste */\n        --accent-color: #e27b45; /* Mango/Papaya - Alegre y vibrante para botones o detalles */\n        --warning-color: #d49a37; /* Mostaza dorado - Tropical pero serio para advertencias */\n        --success-color: #2e7d32; /* Verde oscuro (mantenido) - Funciona perfecto y es accesible */\n        --background-color: #faf7f2; /* Arena muy claro - Elimina la frialdad del gris anterior */\n        --text-color: #2b2724; /* Cacao oscuro - Un tono casi negro pero más cálido y orgánico */\n        --white: #ffffff;\n        --border-color: #dcd7cf; /* Arena oscuro - Para bordes sutiles que combinan con el fondo */\n        --hover-color: #e8f0ec; /* Brisa de menta - Un verde/agua muuuuy pálido para interacciones */\n      }",
     "nota": "",
     "modificado": 1788802929459
+  },
+  {
+    "id": "mtrj80tcqc4cs",
+    "creado": 1788803171616,
+    "titulo": "paleta root verde",
+    "claves": "",
+    "codigo": "no cruzar colores opuestos en los gradientes\n:root {\n  --primary-color: #0d5c46; /* Verde selva profundo */\n  --primary-light: #168a69; /* NUEVO: Verde tropical claro (evita el lodo en gradientes) */\n  --secondary-color: #e68a00; /* Mango maduro - Naranja dorado vibrante y alegre */\n  --accent-color: #ffb347; /* Pulpa de mango claro - Excelente para detalles luminosos */\n  --warning-color: #d49a37; /* Mostaza dorado */\n  --success-color: #2e7d32; /* Verde oscuro */\n  --background-color: #faf7f2; /* Arena muy claro */\n  --text-color: #2b2724; /* Cacao oscuro */\n  --white: #ffffff;\n  --border-color: #dcd7cf; /* Arena oscuro */\n  --hover-color: #fff3e0; /* Un tono mango muy suave para los hovers */\n}",
+    "nota": "",
+    "modificado": 1788803171616
   }
 ]
